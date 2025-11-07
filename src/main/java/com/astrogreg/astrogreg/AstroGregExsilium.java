@@ -1,7 +1,9 @@
 package com.astrogreg.astrogreg;
 
+import com.astrogreg.astrogreg.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -18,10 +20,12 @@ import org.slf4j.Logger;
 @Mod(AstroGregExsilium.MOD_ID)
 public class AstroGregExsilium {
     public static final String MOD_ID = "astrogreg";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public AstroGregExsilium(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
+
+        ModItems.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -36,7 +40,18 @@ public class AstroGregExsilium {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.ULVUNICIRC);
+            event.accept(ModItems.LVUNICIRC);
+            event.accept(ModItems.MVUNICIRC);
+            event.accept(ModItems.HVUNICIRC);
+            event.accept(ModItems.EVUNICIRC);
+            event.accept(ModItems.IVUNICIRC);
+            event.accept(ModItems.LUVUNICIRC);
+            event.accept(ModItems.ZPMUNICIRC);
+            event.accept(ModItems.UVUNICIRC);
+            event.accept(ModItems.UHVUNICIRC);
+        }
     }
 
     @SubscribeEvent
