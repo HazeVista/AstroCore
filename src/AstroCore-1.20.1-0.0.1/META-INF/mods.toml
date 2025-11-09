@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "${mod_license}"
+
+[[mods]]
+modId = "astrogreg"
+version = "0.0.1"
+displayName = "AstroCore"
+authors = "HazeVista"
+description = "Core mod for the AstroGreg:Exsilium modpack"
+logoFile ="logo.png"
+displayURL = "https://github.com/HazeVista/AstroCore"
+
+[[dependencies.astrogreg]]
+modId = "forge"
+mandatory = true
+versionRange = "${forge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.astrogreg]]
+modId = "gtceu"
+mandatory = true
+versionRange = "[1.20.1-7.2.1,)"
+ordering = "NONE"
+side = "BOTH"

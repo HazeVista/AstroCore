@@ -1,0 +1,14 @@
+{
+  "item.astrogreg.ulvunicircuit": "ULV Universal Circuit",
+  "item.astrogreg.lvunicircuit": "LV Universal Circuit",
+  "item.astrogreg.mvunicircuit": "MV Universal Circuit",
+  "item.astrogreg.hvunicircuit": "HV Universal Circuit",
+  "item.astrogreg.evunicircuit": "EV Universal Circuit",
+  "item.astrogreg.ivunicircuit": "IV Universal Circuit",
+  "item.astrogreg.luvunicircuit": "LuV Universal Circuit",
+  "item.astrogreg.zpmunicircuit": "ZPM Universal Circuit",
+  "item.astrogreg.uvunicircuit": "UV Universal Circuit",
+  "item.astrogreg.uhvunicircuit": "UHV Universal Circuit",
+
+  "creativetab.astrogreg_tab": "AstroGreg:Exsilium"
+}
