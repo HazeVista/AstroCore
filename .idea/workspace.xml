@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="795db576-27b0-4334-94e2-0451dfc1ce92" name="Changes" comment="0.0.1 11-7-25 Haze unicircuits">
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/lang/en_us.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/lvunicircuit.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/mvunicircuit.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/uhvunicircuit.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/ulvunicircuit.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/uvunicircuit.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/zpmunicircuit.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/com/astrogregcore/astrogreg/ModCreativeTabs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/com/astrogregcore/astrogreg/block/ModBlocks.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/astrogreg/astrogreg/AstroGregExsilium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/com/astrogregcore/astrogreg/AstroGregExsilium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/astrogreg/astrogreg/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/com/astrogregcore/astrogreg/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/astrogreg/astrogreg/item/ModItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/com/astrogregcore/astrogreg/item/ModItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/mods.toml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/META-INF/mods.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/lang/en_us.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/evunicirc.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/evunicircuit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/hvunicirc.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/hvunicircuit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/ivunicirc.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/ivunicircuit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/luvunicirc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/lvunicirc.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/models/item/luvunicircuit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/mvunicirc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/uhvunicirc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/ulvunicirc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/uvunicirc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/models/item/unicirc/zpmunicirc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/evunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/evunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/hvunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/hvunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/ivunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/ivunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/luvunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/luvunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/lvunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/lvunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/mvunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/mvunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/uhvunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/uhvunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/ulvunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/ulvunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/uvunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/uvunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/astrogreg/textures/item/zpmunicirc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/assets/astrogreg/textures/item/zpmunicirc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pack.mcmeta" beforeDir="false" afterPath="$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/pack.mcmeta" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AstroCore" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AstroCore" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AstroCore" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="forgegradle runs" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;HazeVista&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/HazeVista/AstroCore.git&quot;,
+    &quot;accountId&quot;: &quot;0daf16e1-1f1a-446c-b273-a1b8a9d8997e&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="357OBddlQsLYjMlX2qIc80x0eth" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.AstroCore [createMcpToSrg].executor": "Run",
+    "Gradle.AstroCore [runClient].executor": "Run",
+    "Gradle.C:/Users/user/curseforge/minecraft/Forge/AstroCore [createMcpToSrg].executor": "Run",
+    "Gradle.forge-1.20.1-47.4.10-mdk [createMcpToSrg].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/user/curseforge/minecraft/Forge/AstroCore/src/main/resources/assets/astrogreg/models/item/unicirc",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.general"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\curseforge\minecraft\Forge\AstroCore\src\main\resources\assets\astrogreg\models\item\unicirc" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\curseforge\minecraft\Forge\AstroCore\src\AstroCore-1.20.1-0.0.1\com\astrogregcore\astrogreg\config" />
+      <recent name="C:\Users\user\curseforge\minecraft\Forge\AstroCore\src" />
+      <recent name="C:\Users\user\curseforge\minecraft\Forge\AstroCore\src\AstroCore-1.20.1-0.0.1" />
+      <recent name="C:\Users\user\curseforge\minecraft\Forge\AstroCore\src\main\resources\assets\astrogreg\models\item" />
+      <recent name="C:\Users\user\curseforge\minecraft\Forge\AstroCore\src\main\resources\assets\astrogreg\textures\item" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.AstroCore [runClient]">
+    <configuration name="AstroCore [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runClient" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="AstroCore-1.20.1-0.0.1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="AstroCore-1.20.1-0.0.1" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.AstroCore [runClient]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="795db576-27b0-4334-94e2-0451dfc1ce92" name="Changes" comment="" />
+      <created>1762457509499</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762457509499</updated>
+    </task>
+    <task id="LOCAL-00001" summary="0.0.1 11-7-25 Haze unicircuits">
+      <option name="closed" value="true" />
+      <created>1762557339732</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762557339732</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="0.0.1 11-7-25 Haze unicircuits" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.1 11-7-25 Haze unicircuits" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/AstroCore-1.20.1-0.0.1/com/astrogregcore/astrogreg/ExampleMod.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
