@@ -1,5 +1,6 @@
 package com.astro.core;
 
+import com.astro.core.common.data.block.AstroBlocks;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -8,6 +9,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 
 import com.astro.core.common.data.AstroMachineRecipes;
 import com.astro.core.common.data.materials.AstroElements;
+import com.astro.core.common.registry.AstroRegistry;
 
 import java.util.function.Consumer;
 
@@ -19,11 +21,13 @@ public class AstroGregGTAddon implements IGTAddon {
 
     @Override
     public GTRegistrate getRegistrate() {
-        return AstroCore.ASTRO_REGISTRATE;
+        return AstroRegistry.REGISTRATE;
     }
 
     @Override
-    public void initializeAddon() {}
+    public void initializeAddon() {
+        AstroBlocks.init();
+    }
 
     @Override
     public String addonModId() {

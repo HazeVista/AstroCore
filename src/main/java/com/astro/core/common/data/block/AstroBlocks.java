@@ -18,12 +18,12 @@ import com.tterrag.registrate.util.nullness.NonNullBiFunction;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
+import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 
+@SuppressWarnings("unused")
 public class AstroBlocks {
 
-    public static void init() {
-    }
+    public static void init() {}
 
     static {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
@@ -59,7 +59,7 @@ public class AstroBlocks {
             AstroCore.id("block/generators/machine_casing_firebox_manasteel")      // side texture (the animated one)
     );
 
-    private static BlockEntry<ActiveBlock> createFireboxCasing(BoilerFireboxType type) {
+    private static BlockEntry<ActiveBlock> createFireboxCasing(@SuppressWarnings("SameParameterValue") BoilerFireboxType type) {
         var block = REGISTRATE
                 .block("%s_casing".formatted(type.name()), ActiveBlock::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -76,5 +76,4 @@ public class AstroBlocks {
 
     public static final Map<BoilerFireboxType, BlockEntry<ActiveBlock>> ALL_FIREBOXES = new HashMap<>();
     public static final BlockEntry<ActiveBlock> FIREBOX_ALFSTEEL = createFireboxCasing(MANASTEEL_FIREBOX);
-
 }

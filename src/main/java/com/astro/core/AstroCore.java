@@ -6,7 +6,6 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEv
 import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.api.sound.SoundEntry;
 import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
 
@@ -29,7 +28,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
+import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 
 @SuppressWarnings("removal")
 @Mod(AstroCore.MOD_ID)
@@ -38,15 +37,15 @@ public class AstroCore {
 
     public static final String MOD_ID = "astrogreg";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static GTRegistrate ASTRO_REGISTRATE = GTRegistrate.create(AstroCore.MOD_ID);
     public static RegistryEntry<CreativeModeTab> ASTRO_CREATIVE_TAB = REGISTRATE
             .defaultCreativeTab(AstroCore.MOD_ID,
                     builder -> builder
                             .displayItems(new GTCreativeModeTabs.RegistrateDisplayItemsGenerator(AstroCore.MOD_ID,
                                     REGISTRATE))
-                            .title(REGISTRATE.addLang("itemGroup", AstroCore.id("block/generators/machine_casing_turbine_alfsteel"),
+                            .title(REGISTRATE.addLang("itemGroup",
+                                    AstroCore.id("creative_tab"),
                                     "AstroGreg"))
-//                             .icon(Class.ITEM_NAME::asStack)
+                            .icon(AstroBlocks.FIREBOX_ALFSTEEL::asStack)
                             .build())
             .register();
 
@@ -78,7 +77,7 @@ public class AstroCore {
         // we need to register our object like this!
         MinecraftForge.EVENT_BUS.register(this);
 
-        ASTRO_REGISTRATE.registerRegistrate();
+        REGISTRATE.registerRegistrate();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

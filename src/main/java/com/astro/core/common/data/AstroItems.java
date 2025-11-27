@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
 import static com.astro.core.AstroCore.ASTRO_CREATIVE_TAB;
-import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
+import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 
 public class AstroItems {
 
@@ -24,10 +24,8 @@ public class AstroItems {
             .register();
     public static ItemEntry<Item> basic_fuel_rod = REGISTRATE
             .item("basic_fuel_rod", Item::new)
-            .model((ctx, prov) -> {
-                prov.withExistingParent(ctx.getName(), prov.mcLoc("item/generated"))
-                        .texture("layer0", prov.modLoc("item/" + ctx.getName()));
-            })
+            .model((ctx, prov) -> prov.withExistingParent(ctx.getName(), prov.mcLoc("item/generated"))
+                    .texture("layer0", prov.modLoc("item/" + ctx.getName())))
             .register();
 
     public static void init() {}

@@ -5,7 +5,6 @@ import com.tterrag.registrate.providers.ProviderType;
 
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 
-
 public class AstroDatagen {
 
     public static void init() {
