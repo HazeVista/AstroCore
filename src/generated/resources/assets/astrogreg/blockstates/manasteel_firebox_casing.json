@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "astrogreg:block/manasteel_firebox_casing"
+    },
+    "active=true": {
+      "model": "astrogreg:block/manasteel_firebox_casing_active"
+    }
+  }
+}

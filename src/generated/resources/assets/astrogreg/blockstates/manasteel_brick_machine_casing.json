@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/manasteel_brick_machine_casing"
+    }
+  }
+}

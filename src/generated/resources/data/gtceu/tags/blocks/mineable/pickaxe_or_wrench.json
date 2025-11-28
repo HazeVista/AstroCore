@@ -1,0 +1,14 @@
+{
+  "values": [
+    "astrogreg:solid_alfsteel_machine_casing",
+    "astrogreg:alfsteel_pipe_casing",
+    "astrogreg:alfsteel_gearbox_casing",
+    "astrogreg:solid_terrasteel_machine_casing",
+    "astrogreg:terrasteel_pipe_casing",
+    "astrogreg:manasteel_brick_machine_casing",
+    "astrogreg:manasteel_pipe_casing",
+    "astrogreg:manasteel_firebox_casing",
+    "astrogreg:terrasteel_firebox_casing",
+    "astrogreg:alfsteel_firebox_casing"
+  ]
+}

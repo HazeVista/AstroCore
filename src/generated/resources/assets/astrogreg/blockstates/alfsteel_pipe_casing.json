@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/alfsteel_pipe_casing"
+    }
+  }
+}

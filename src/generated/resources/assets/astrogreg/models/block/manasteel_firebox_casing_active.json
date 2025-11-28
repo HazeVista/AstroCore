@@ -1,0 +1,8 @@
+{
+  "parent": "gtceu:block/fire_box_active",
+  "textures": {
+    "bottom": "astrogreg:block/generators/machine_casing_manasteel_plated_bricks",
+    "side": "astrogreg:block/generators/machine_casing_firebox_manasteel",
+    "top": "astrogreg:block/generators/machine_casing_manasteel_plated_bricks"
+  }
+}
