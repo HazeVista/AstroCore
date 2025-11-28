@@ -1,6 +1,7 @@
 package com.astro.core;
 
 import com.astro.core.common.data.AstroRecipeTypes;
+import com.astro.core.common.machine.multiblock.generator.AetherEngine;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -130,7 +131,7 @@ public class AstroCore {
      * @param event
      */
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        // CustomMachines.init();
+        AetherEngine.init();
     }
 
     /**
