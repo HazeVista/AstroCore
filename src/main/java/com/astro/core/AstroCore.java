@@ -25,6 +25,7 @@ import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.common.data.materials.AstroMaterialFlags;
 import com.astro.core.common.machine.multiblock.generator.AetherEngine;
+import com.astro.core.common.machine.multiblock.generator.ManaBoilers;
 import com.astro.core.datagen.AstroDatagen;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.apache.logging.log4j.LogManager;
@@ -128,6 +129,13 @@ public class AstroCore {
      * @param event
      */
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
+        // Ensure configs are initialized
+        if (AstroConfigs.INSTANCE == null) {
+            AstroConfigs.init();
+        }
+
+        // Now it's safe to register machines
+        ManaBoilers.init();
         AetherEngine.init();
     }
 

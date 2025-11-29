@@ -1,7 +1,6 @@
 package com.astro.core.common.machine.multiblock.generator;
 
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
-import com.gregtechceu.gtceu.common.block.BoilerFireboxType;
 
 import com.astro.core.AstroCore;
 import com.astro.core.common.data.block.AstroBlocks;
