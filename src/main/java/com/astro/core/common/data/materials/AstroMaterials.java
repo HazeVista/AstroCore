@@ -19,7 +19,7 @@ public class AstroMaterials {
                 .ingot()
                 .ore()
                 .dust()
-                .color(0xde9337).iconSet(MaterialIconSet.METALLIC)
+                .color(0xd88c4e).iconSet(MaterialIconSet.METALLIC)
                 .buildAndRegister();
 
         OSTRUM = new Material.Builder(

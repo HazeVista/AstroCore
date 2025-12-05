@@ -13,5 +13,8 @@
   "block.astrogreg.terrasteel_firebox_casing": "§2Terrasteel§r Firebox Casing",
   "block.astrogreg.terrasteel_mana_large_boiler": "Large §2Terrasteel§r Mana Boiler",
   "block.astrogreg.terrasteel_pipe_casing": "§2Terrasteel§r Pipe Casing",
-  "itemGroup.astrogreg.creative_tab": "AstroGreg"
+  "itemGroup.astrogreg.creative_tab": "AstroGreg",
+  "material.astrogreg.calorite": "Calorite",
+  "material.astrogreg.desh": "Desh",
+  "material.astrogreg.ostrum": "Ostrum"
 }
