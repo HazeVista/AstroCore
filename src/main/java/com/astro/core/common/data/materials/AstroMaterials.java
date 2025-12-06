@@ -17,6 +17,7 @@ public class AstroMaterials {
     public static void register() {
         DESH = new Material.Builder(
                 AstroCore.id("desh"))
+                .langValue("Desh")
                 .ingot()
                 .ore()
                 .dust()
@@ -25,6 +26,7 @@ public class AstroMaterials {
 
         OSTRUM = new Material.Builder(
                 AstroCore.id("ostrum"))
+                .langValue("Ostrum")
                 .ingot()
                 .dust()
                 .ore()
@@ -33,6 +35,7 @@ public class AstroMaterials {
 
         CALORITE = new Material.Builder(
                 AstroCore.id("calorite"))
+                .langValue("Calorite")
                 .ingot()
                 .ore()
                 .dust()
