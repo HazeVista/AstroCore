@@ -23,9 +23,15 @@ sourceSets {
 }
 
 repositories {
+
     mavenLocal()
+
     mavenCentral()
-    maven {
+
+        flatDir {
+            dir 'libs'
+    }
+        maven {
         name = 'GTCEu Maven'
         url = 'https://maven.gtceu.com'
         content {
@@ -52,7 +58,6 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
     maven {
-        // Curse Forge File
         url "https://cursemaven.com/"
         content {
             includeGroup "curse.maven"
@@ -161,6 +166,7 @@ dependencies {
     modImplementation("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${rlib_version}")
     modImplementation("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${rconfig_version}")
     modImplementation("earth.terrarium.botarium:botarium-forge-${minecraft_version}:${botarium_version}")
+    modImplementation("com.drd.ad_extendra:ad_extendra-forge-${minecraft_version}:${ad_extendra_version}")
 
     // JEI, EMI, Jade
     modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
