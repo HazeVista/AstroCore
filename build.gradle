@@ -189,6 +189,10 @@ dependencies {
     modImplementation("curse.maven:Applied_energesitics-223794:${ae_version}")
     modImplementation("curse.maven:gudieme-1173950:${guide_version}")
 
+    //Powah!
+    modImplementation("curse.maven:Powah-633483:${powah_version}")
+    modImplementation("curse.maven:ClothAPI-348521:${cloth_version}")
+
 }
 
 // See com.example.examplemod.mixin.DummyMixin for information about mixins
