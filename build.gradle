@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+
         mavenCentral()
     }
     dependencies {
@@ -178,11 +179,16 @@ dependencies {
     //KubeJS
     modImplementation("dev.latvian.mods:kubejs-forge:${kubejs_version}")
     modImplementation("dev.latvian.mods:rhino-forge:${rhino_version}")
-    modImplementation "dev.architectury:architectury-forge:${architectury_version}"
+    modImplementation("dev.architectury:architectury-forge:${architectury_version}")
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    //AE2
+    modImplementation("curse.maven:Applied_energesitics-223794:${ae_version}")
+    modImplementation("curse.maven:gudieme-1173950:${guide_version}")
+
 }
 
 // See com.example.examplemod.mixin.DummyMixin for information about mixins
