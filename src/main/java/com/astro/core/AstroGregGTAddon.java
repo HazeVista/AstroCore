@@ -1,5 +1,7 @@
 package com.astro.core;
 
+import com.astro.core.common.data.recipe.generated.AstroWireRecipeHandler;
+import com.astro.core.common.data.recipe.run.AstroWireRecipeRunner;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -40,6 +42,7 @@ public class AstroGregGTAddon implements IGTAddon {
     @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
         AstroMachineRecipes.init(provider);
+        AstroWireRecipeRunner.init(provider);
     }
 
     @Override

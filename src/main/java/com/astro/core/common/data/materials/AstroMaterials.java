@@ -29,20 +29,9 @@ public class AstroMaterials {
     public static Material ENERGIZED_STEEL;
     public static Material SKY_STONE;
     public static Material FUTURA_ALLOY;
-    public static Material POLYAMIDE_IMIDE;
 
     public static void register() {
-        // GT Progression
-        POLYAMIDE_IMIDE = new Material.Builder(
-                AstroCore.id("polyamide_imide"))
-                .langValue("Polyamid-Imide")
-                .polymer()
-                .fluid()
-                .dust()
-                .ingot()
-                .color(0xd9ac37).secondaryColor(0x54301a).iconSet(MaterialIconSet.DULL)
-                // .components().formula()
-                .buildAndRegister();
+
         // Ad Astra/Extendra Materials
         DESH = new Material.Builder(
                 AstroCore.id("desh"))

@@ -210,11 +210,9 @@ dependencies {
     modImplementation("vazkii.botania:Botania:${minecraft_version}-${botania_version}-FORGE")
     modImplementation("curios:Curios:forge-${curios_version}+${minecraft_version}")
     modImplementation("patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE")
-    //Manafluid
     modImplementation("manafluid:manafluid:${minecraft_version}-${manafluid_version}")
-    //Botanic additions and dependencies
     modImplementation("botanicadds:BotanicAdditions:${minecraft_version}-${botanicadditions_version}")
-    modImplementation("hammerlib:HammerLib:${minecraft_version}-${hammerlib_version}")
+    modImplementation("hammerlib:HammerLib-${minecraft_version}-${hammerlib_version}")
 
 
 }
