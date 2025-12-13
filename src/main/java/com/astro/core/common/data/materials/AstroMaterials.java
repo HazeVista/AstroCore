@@ -29,8 +29,20 @@ public class AstroMaterials {
     public static Material ENERGIZED_STEEL;
     public static Material SKY_STONE;
     public static Material FUTURA_ALLOY;
+    public static Material POLYAMIDE_IMIDE;
 
     public static void register() {
+        // GT Progression
+        POLYAMIDE_IMIDE = new Material.Builder(
+                AstroCore.id("polyamide_imide"))
+                .langValue("Polyamid-Imide")
+                .polymer()
+                .fluid()
+                .dust()
+                .ingot()
+                .color(0xd9ac37).secondaryColor(0x54301a).iconSet(MaterialIconSet.DULL)
+                // .components().formula()
+                .buildAndRegister();
         // Ad Astra/Extendra Materials
         DESH = new Material.Builder(
                 AstroCore.id("desh"))
@@ -150,7 +162,7 @@ public class AstroMaterials {
                 .langValue("Sky Stone")
                 .dust()
                 .element(AstroElements.SS).formula("✨")
-                .color(0x000000).iconSet(MaterialIconSet.ROUGH)
+                .color(0xffffff).iconSet(MaterialIconSet.ROUGH)
                 .buildAndRegister();
 
         FUTURA_ALLOY = new Material.Builder(
@@ -160,12 +172,14 @@ public class AstroMaterials {
                 .ingot()
                 .fluid()
                 .blastTemp(1700, BlastProperty.GasTier.LOW, 400, 1200)
-                .flags(MaterialFlags.GENERATE_FRAME, MaterialFlags.GENERATE_DENSE,
+                .flags(MaterialFlags.GENERATE_FRAME, MaterialFlags.GENERATE_DENSE, MaterialFlags.DISABLE_ALLOY_BLAST,
                         MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD, MaterialFlags.MORTAR_GRINDABLE)
-                .color(0xebb7ea).secondaryColor(0x000000).iconSet(MaterialIconSet.BRIGHT)
+                .color(0xebb7ea).secondaryColor(0x000000).iconSet(MaterialIconSet.SHINY)
                 .components(AstroMaterials.SKY_STONE, 1, GTMaterials.StainlessSteel, 4)
                 .formula("(Fe6CrMnNi)4✨")
                 .buildAndRegister();
+
+        // Botania
     }
 
     public static void init() {
