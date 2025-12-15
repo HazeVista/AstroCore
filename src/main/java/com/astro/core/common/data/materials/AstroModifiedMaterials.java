@@ -23,7 +23,7 @@ public class AstroModifiedMaterials {
                         true,
                         true,
                         true,
-                        false)
+                        true)
         );
         GTMaterials.Darmstadtium.setProperty(PropertyKey.FLUID_PIPE,
                 new FluidPipeProperties(50000,
@@ -31,7 +31,7 @@ public class AstroModifiedMaterials {
                         true,
                         true,
                         true,
-                        false)
+                        true)
         );
 
 
