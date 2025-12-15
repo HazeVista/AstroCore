@@ -3,6 +3,7 @@ package com.astro.core.common.machine.crates;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialEntry;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
+
 import net.minecraft.data.recipes.FinishedRecipe;
 
 import java.util.function.Consumer;
@@ -12,19 +13,20 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.rodLong;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 
 public class AstroCrateRecipes {
-    public static final void init(Consumer<FinishedRecipe> provider){
+
+    public static final void init(Consumer<FinishedRecipe> provider) {
         register(provider);
     }
-    public static void register(Consumer<FinishedRecipe> provider){
 
-        VanillaRecipeHelper.addShapedRecipe(provider,true,
+    public static void register(Consumer<FinishedRecipe> provider) {
+        VanillaRecipeHelper.addShapedRecipe(provider, true,
                 "rhodium_plated_palladium_crate",
                 AstroCrates.RHODIUM_PLATED_PALLADIUM_CRATE.asStack(),
                 "RPR",
                 "PhP",
                 "RPR",
-                'P', new MaterialEntry(plate,GTMaterials.RhodiumPlatedPalladium),
-                'R', new MaterialEntry(rodLong,GTMaterials.RhodiumPlatedPalladium)
+                'P', new MaterialEntry(plate, GTMaterials.RhodiumPlatedPalladium),
+                'R', new MaterialEntry(rodLong, GTMaterials.RhodiumPlatedPalladium)
 
         );
 
@@ -38,14 +40,14 @@ public class AstroCrateRecipes {
                 .addMaterialInfo(true)
                 .save(provider);
 
-        VanillaRecipeHelper.addShapedRecipe(provider,true,
+        VanillaRecipeHelper.addShapedRecipe(provider, true,
                 "naquadah_alloy_crate",
                 AstroCrates.NAQUADAH_ALLOY_CRATE.asStack(),
                 "RPR",
                 "PhP",
                 "RPR",
-                'P', new MaterialEntry(plate,GTMaterials.NaquadahAlloy),
-                'R', new MaterialEntry(rodLong,GTMaterials.NaquadahAlloy)
+                'P', new MaterialEntry(plate, GTMaterials.NaquadahAlloy),
+                'R', new MaterialEntry(rodLong, GTMaterials.NaquadahAlloy)
 
         );
 
@@ -59,14 +61,14 @@ public class AstroCrateRecipes {
                 .addMaterialInfo(true)
                 .save(provider);
 
-        VanillaRecipeHelper.addShapedRecipe(provider,true,
+        VanillaRecipeHelper.addShapedRecipe(provider, true,
                 "darmstadtium_crate",
                 AstroCrates.DARMSTADTIUM_CRATE.asStack(),
                 "RPR",
                 "PhP",
                 "RPR",
-                'P', new MaterialEntry(plate,GTMaterials.Darmstadtium),
-                'R', new MaterialEntry(rodLong,GTMaterials.Darmstadtium)
+                'P', new MaterialEntry(plate, GTMaterials.Darmstadtium),
+                'R', new MaterialEntry(rodLong, GTMaterials.Darmstadtium)
 
         );
 
@@ -80,14 +82,14 @@ public class AstroCrateRecipes {
                 .addMaterialInfo(true)
                 .save(provider);
 
-        VanillaRecipeHelper.addShapedRecipe(provider,true,
+        VanillaRecipeHelper.addShapedRecipe(provider, true,
                 "neutronium_crate",
                 AstroCrates.NEUTRONIUM_CRATE.asStack(),
                 "RPR",
                 "PhP",
                 "RPR",
-                'P', new MaterialEntry(plate,GTMaterials.Neutronium),
-                'R', new MaterialEntry(rodLong,GTMaterials.Neutronium)
+                'P', new MaterialEntry(plate, GTMaterials.Neutronium),
+                'R', new MaterialEntry(rodLong, GTMaterials.Neutronium)
 
         );
 
@@ -100,6 +102,5 @@ public class AstroCrateRecipes {
                 .circuitMeta(1)
                 .addMaterialInfo(true)
                 .save(provider);
-
     }
 }

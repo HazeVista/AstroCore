@@ -4,8 +4,6 @@ import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty;
-import com.gregtechceu.gtceu.api.data.chemical.material.properties.ToolProperty;
-import com.gregtechceu.gtceu.api.item.tool.GTToolType;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 
 import appeng.core.definitions.AEBlocks;
@@ -61,8 +59,8 @@ public class AstroMaterials {
                 .ingot()
                 .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_FRAME,
                         MaterialFlags.GENERATE_FOIL)
-//                .toolStats(new ToolProperty(10.0F, 10.0F, 4096, 5,
-//                        new GTToolType[] {GTToolType.SOFT_MALLET, GTToolType.PLUNGER}))
+                // .toolStats(new ToolProperty(10.0F, 10.0F, 4096, 5,
+                // new GTToolType[] {GTToolType.SOFT_MALLET, GTToolType.PLUNGER}))
                 .fluidPipeProperties(1400, 1000, true, true, true, true)
                 .color(0xd9ac37).secondaryColor(0x54301a).iconSet(MaterialIconSet.DULL)
                 // .components().formula()

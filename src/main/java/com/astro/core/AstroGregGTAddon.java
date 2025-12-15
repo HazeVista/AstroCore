@@ -1,8 +1,5 @@
 package com.astro.core;
 
-import com.astro.core.common.machine.crates.AstroCrateRecipes;
-import com.astro.core.common.machine.crates.AstroCrates;
-import com.astro.core.common.machine.drums.AstroDrumRecipes;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -13,6 +10,8 @@ import com.astro.core.common.data.AstroMachineRecipes;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.materials.AstroElements;
 import com.astro.core.common.data.recipe.run.AstroWireRecipeRunner;
+import com.astro.core.common.machine.crates.AstroCrateRecipes;
+import com.astro.core.common.machine.drums.AstroDrumRecipes;
 import com.astro.core.common.registry.AstroRegistry;
 
 import java.util.function.Consumer;
