@@ -18,7 +18,7 @@ public class AstroCrateRecipes {
         register(provider);
     }
 
-    public static void register(Consumer<FinishedRecipe> provider) {
+    private static void register(Consumer<FinishedRecipe> provider) {
         VanillaRecipeHelper.addShapedRecipe(provider, true,
                 "rhodium_plated_palladium_crate",
                 AstroCrates.RHODIUM_PLATED_PALLADIUM_CRATE.asStack(),
