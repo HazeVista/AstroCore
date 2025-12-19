@@ -1,5 +1,6 @@
 package com.astro.core;
 
+import com.astro.core.common.machine.parallels.AstroParallelHatches;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -145,6 +146,7 @@ public class AstroCore {
         AetherEngine.init();
         AstroDrums.register();
         AstroCrates.register();
+        AstroParallelHatches.init();
     }
 
     /**
