@@ -10,13 +10,12 @@ import com.astro.core.common.data.AstroMachineRecipes;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.materials.AstroElements;
 import com.astro.core.common.data.recipe.run.AstroWireRecipeRunner;
+import com.astro.core.common.machine.AstroHatchesAndBuses;
 import com.astro.core.common.machine.crates.AstroCrateRecipes;
 import com.astro.core.common.machine.drums.AstroDrumRecipes;
 import com.astro.core.common.registry.AstroRegistry;
 
 import java.util.function.Consumer;
-
-import static com.ibm.icu.impl.CurrencyData.provider;
 
 @SuppressWarnings("unused")
 @GTAddon
@@ -46,6 +45,7 @@ public class AstroGregGTAddon implements IGTAddon {
         AstroWireRecipeRunner.init(provider);
         AstroDrumRecipes.init(provider);
         AstroCrateRecipes.init(provider);
+        AstroHatchesAndBuses.init(provider);
     }
 
     @Override
