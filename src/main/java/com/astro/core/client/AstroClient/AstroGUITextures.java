@@ -14,4 +14,19 @@ public class AstroGUITextures {
             "astrogreg:textures/gui/progress_bar/progress_bar_rune.png");
     public static final ResourceTexture PROGRESS_BAR_BEVERAGE = new ResourceTexture(
             "astrogreg:textures/gui/progress_bar/progress_bar_beverage.png");
+    public static final ResourceTexture PROGRESS_BAR_SAPLING = new ResourceTexture(
+            "astrogreg:textures/gui/progress_bar/progress_bar_sapling.png");
+    public static final ResourceTexture PROGRESS_BAR_FLOWER = new ResourceTexture(
+            "astrogreg:textures/gui/progress_bar/progress_bar_flower.png");
+    public static final ResourceTexture PROGRESS_BAR_CROP = new ResourceTexture(
+            "astrogreg:textures/gui/progress_bar/progress_bar_crop.png");
+
+    public static final ResourceTexture CATALYST_OVERLAY = new ResourceTexture(
+            "astrogreg:textures/gui/overlay/catalyst_overlay.png");
+    public static final ResourceTexture CUP_OVERLAY = new ResourceTexture(
+            "astrogreg:textures/gui/overlay/cup_overlay.png");
+    public static final ResourceTexture FLOWER_OVERLAY = new ResourceTexture(
+            "astrogreg:textures/gui/overlay/flower_overlay.png");
+    public static final ResourceTexture SHIMMER_OVERLAY = new ResourceTexture(
+            "astrogreg:textures/gui/overlay/shimmer_overlay.png");
 }
