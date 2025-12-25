@@ -24,7 +24,9 @@ public class AstroModifiedMaterials {
             { "red_alloy", new MaterialFlag[] { GENERATE_RING } },
             { "zinc", new MaterialFlag[] { GENERATE_BOLT_SCREW } },
             { "nickel", new MaterialFlag[] { GENERATE_FOIL, GENERATE_RING, GENERATE_ROD, GENERATE_BOLT_SCREW } },
-            { "netherite", new MaterialFlag[] { GENERATE_BOLT_SCREW, GENERATE_ROUND, GENERATE_DENSE, GENERATE_ROD, GENERATE_PLATE, GENERATE_GEAR, DISABLE_DECOMPOSITION } }
+            { "netherite",
+                    new MaterialFlag[] { GENERATE_BOLT_SCREW, GENERATE_ROUND, GENERATE_DENSE, GENERATE_ROD,
+                            GENERATE_PLATE, GENERATE_GEAR, DISABLE_DECOMPOSITION } }
     };
 
     private static void applyFluidPipeProperties() {
@@ -95,8 +97,8 @@ public class AstroModifiedMaterials {
 
     private static final Object[][] PERIODIC_ELEMENTS = {
             { "neptunium", new String[] { "ingot", "fluid" } },
-            { "selenium", new String[] {"dust"}},
-            { "netherite", new String[] { "fluid"}}
+            { "selenium", new String[] { "dust" } },
+            { "netherite", new String[] { "fluid" } }
     };
 
     private static void modifyPeriodicElements() {

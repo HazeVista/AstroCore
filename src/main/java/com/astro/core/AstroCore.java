@@ -1,7 +1,5 @@
 package com.astro.core;
 
-import com.astro.core.common.data.materials.*;
-import com.astro.core.common.machine.multiblock.AGEMultiMachines;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -25,9 +23,11 @@ import com.astro.core.common.data.AstroItems;
 import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
+import com.astro.core.common.data.materials.*;
 import com.astro.core.common.machine.crates.AstroCrates;
 import com.astro.core.common.machine.drums.AstroDrums;
 import com.astro.core.common.machine.hatches.AstroParallelHatches;
+import com.astro.core.common.machine.multiblock.AGEMultiMachines;
 import com.astro.core.common.machine.multiblock.generator.AetherEngine;
 import com.astro.core.common.machine.multiblock.generator.ManaBoilers;
 import com.astro.core.datagen.AstroDatagen;
@@ -106,7 +106,7 @@ public class AstroCore {
     }
 
     private void modifyMaterials(PostMaterialEvent event) {
-//        Netherite.setElements(AstroElements.NH);
+        // Netherite.setElements(AstroElements.NH);
         GraniteRed.setMaterialARGB(0xb84a3b);
         Blackstone.setMaterialARGB(0x383c42);
         AstroMaterialFlagAddition.register();

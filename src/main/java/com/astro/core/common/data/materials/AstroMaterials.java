@@ -5,18 +5,19 @@ import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty;
+import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
+
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import com.astro.core.AstroCore;
 import com.astro.core.common.GTVoltage;
 import com.drd.ad_extendra.common.registry.ModBlocks;
-import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import earth.terrarium.adastra.common.registry.ModItems;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import org.zeith.botanicadds.init.BlocksBA;
 import org.zeith.botanicadds.init.ItemsBA;
 import owmii.powah.block.Blcks;
@@ -24,9 +25,8 @@ import owmii.powah.item.Itms;
 import vazkii.botania.common.block.BotaniaBlocks;
 import vazkii.botania.common.item.BotaniaItems;
 
-import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
-
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 
@@ -84,6 +84,7 @@ public class AstroMaterials {
     public static Material LIVINGROCK;
     public static Material LIVINGCLAY;
     public static Material ACORN;
+
     public static void register() {
         // Misc
         UNKNOWN = new Material.Builder(
@@ -361,7 +362,8 @@ public class AstroMaterials {
                 .ingot()
                 .fluid()
                 .blastTemp(7100, BlastProperty.GasTier.HIGH, (int) GTVoltage.VA.ZPM, 2400)
-                .flags(GENERATE_FRAME, GENERATE_GEAR, DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_ROD, DISABLE_ALLOY_BLAST)
+                .flags(GENERATE_FRAME, GENERATE_GEAR, DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_ROD,
+                        DISABLE_ALLOY_BLAST)
                 .fluidPipeProperties(3776, 400, true, true, true, true)
                 .color(0x8c2929).iconSet(BRIGHT)
                 // .components().formula()
@@ -443,7 +445,7 @@ public class AstroMaterials {
     }
 
     public static void init() {
-        //vanilla
+        // vanilla
         block.setIgnored(Netherite, Blocks.NETHERITE_BLOCK);
 
         rawOreBlock.setIgnored(ANCIENT_DEBRIS, Blocks.ANCIENT_DEBRIS);

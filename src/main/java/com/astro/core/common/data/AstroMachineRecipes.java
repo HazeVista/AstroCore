@@ -19,5 +19,4 @@ import static com.gregtechceu.gtceu.data.recipe.GTCraftingComponents.*;
 public class AstroMachineRecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {}
-
 }

@@ -10,7 +10,9 @@ import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
 @SuppressWarnings("all")
 public class AstroItems {
 
-    static {REGISTRATE.creativeModeTab(() -> ASTRO_CREATIVE_TAB);}
+    static {
+        REGISTRATE.creativeModeTab(() -> ASTRO_CREATIVE_TAB);
+    }
 
     public static ItemEntry<Item> createBasicItem = REGISTRATE
             .item("manasteel_firebox_casing", Item::new)
@@ -21,5 +23,4 @@ public class AstroItems {
             .register();
 
     public static void init() {}
-
 }
