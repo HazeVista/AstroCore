@@ -220,9 +220,9 @@ public class AstroMaterials {
                 .ingot()
                 // .plasma(11656)
                 .liquid(4556)
-                .flags(GENERATE_FINE_WIRE, GENERATE_ROUND, GENERATE_LONG_ROD,
-                        GENERATE_ROTOR, GENERATE_RING)
+                .flags(GENERATE_FINE_WIRE, GENERATE_ROUND, GENERATE_LONG_ROD, GENERATE_RING)
                 .cableProperties(2097152, 128, 0, true)
+                .rotorStats(3200, 720, 3, 100000 )
                 .color(0xfad64a).secondaryColor(0x752802).iconSet(SHINY)
                 .element(AstroElements.E).formula("⚡")
                 .buildAndRegister();
@@ -365,8 +365,7 @@ public class AstroMaterials {
                         GENERATE_ROD, DISABLE_ALLOY_BLAST, DISABLE_ALLOY_PROPERTY)
                 .fluidPipeProperties(2142, 225, true, false, false, false)
                 .color(0x159e1e).iconSet(BRIGHT)
-                .components(Steel, 1, Beryllium, 1, Aluminium, 1,
-                        MANA, 1)
+                .components(Steel, 1, Beryllium, 1, Aluminium, 1, MANA, 1)
                 .formula("FeBeAl✨")
                 .buildAndRegister();
 
@@ -408,6 +407,7 @@ public class AstroMaterials {
                         GENERATE_FOIL, GENERATE_RING)
                 // .toolStats(new ToolProperty(10.0F, 10.0F, 4096, 5,
                 // new GTToolType[] {GTToolType.SOFT_MALLET, GTToolType.PLUNGER}))
+                .components(Carbon, 22, Hydrogen , 14, Nitrogen, 2, Oxygen, 3)
                 .fluidPipeProperties(1400, 1000, true, true, true, true)
                 .color(0xd9ac37).secondaryColor(0x54301a).iconSet(DULL)
                 // .components().formula()

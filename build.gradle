@@ -205,6 +205,7 @@ dependencies {
     modImplementation("com.lowdragmc.ldlib:ldlib-forge-${minecraft_version}:${ldlib_version}") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modImplementation("dev.toma.configuration:configuration-forge-${minecraft_version}:${configuration_version}")
+    modImplementation("com.rubenverg.gtmoldraw:gtmoldraw-${gtmoldraw_version}")
 
     //KubeJS
     modImplementation("dev.latvian.mods:kubejs-forge:${kubejs_version}")
