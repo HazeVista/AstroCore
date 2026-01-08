@@ -1,5 +1,17 @@
 package com.astro.core.common.machine.multiblock;
 
+import com.astro.core.common.machine.multiblock.steam.LargeSteamBlastFurnace;
+import com.astro.core.common.registry.AstroRegistry;
+import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.data.RotationState;
+import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
+import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
+import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
+import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.utils.GTUtil;
+
 @SuppressWarnings("all")
 public class AGEMultiMachines {
 
@@ -47,6 +59,31 @@ public class AGEMultiMachines {
     // GTCEu.id("block/casings/solid/machine_casing_inert_ptfe"),
     // GTCEu.id("block/multiblock/central_monitor")))
     // .register();
+
+    public static final MultiblockMachineDefinition LARGE_STEAM_BLAST_FURNACE = AstroRegistry.REGISTRATE.multiblock("large_steam_blast_furnace", LargeSteamBlastFurnace::new)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.PRIMITIVE_BLAST_FURNACE_RECIPES)
+            .recipeModifier(LargeSteamBlastFurnace::recipeModifier)
+            .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("FFF", "XXX", "XXX", "XXX")
+                    .aisle("FFF", "X&X", "X#X", "XMX")
+                    .aisle("FFF", "X@X", "XXX", "XXX")
+                    .where('@', Predicates.controller(Predicates.blocks(definition.getBlock())))
+                    .where('X', Predicates.blocks(GTBlocks.CASING_BRONZE_BRICKS.get()).setMinGlobalLimited(6)
+                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
+                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)))
+                    .where('F', Predicates.blocks(GTBlocks.FIREBOX_BRONZE.get())
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
+                    .where('M', Predicates.abilities(PartAbility.MUFFLER).setExactLimit(1))
+                    .where('#', Predicates.air())
+                    .where('&', Predicates.air()
+                            .or(Predicates.custom(bws -> GTUtil.isBlockSnow(bws.getBlockState()), null)))
+                    .build())
+            .workableCasingModel(
+                    GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
+                    GTCEu.id("block/multiblock/primitive_blast_furnace"))
+            .register();
 
     public static void init() {}
 }
