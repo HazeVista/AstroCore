@@ -21,12 +21,12 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class LargeSteamBlastFurnace extends SteamMultiMachineBase {
+public class SteamBlastFurnace extends SteamMultiMachineBase {
 
     @Persisted
     private int targetParallel = ConfigHolder.INSTANCE.machines.steamMultiParallelAmount; // Default to 8 parallels / Predeterminado a 8 paralelos
 
-    public LargeSteamBlastFurnace(IMachineBlockEntity holder, Object... args) {
+    public SteamBlastFurnace(IMachineBlockEntity holder, Object... args) {
         super(holder, false, args);
     }
 
@@ -37,7 +37,7 @@ public class LargeSteamBlastFurnace extends SteamMultiMachineBase {
 
     @Nullable
     public static ModifierFunction recipeModifier(MetaMachine machine, @Nonnull GTRecipe recipe) {
-        if (!(machine instanceof LargeSteamBlastFurnace steamMachine)) {
+        if (!(machine instanceof SteamBlastFurnace steamMachine)) {
             return ModifierFunction.NULL;
         }
         if (recipe.getType() != GTRecipeTypes.PRIMITIVE_BLAST_FURNACE_RECIPES) {

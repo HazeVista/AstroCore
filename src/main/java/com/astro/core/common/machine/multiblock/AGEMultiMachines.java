@@ -1,11 +1,9 @@
 package com.astro.core.common.machine.multiblock;
 
-import com.astro.core.AstroCore;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
-import com.astro.core.common.machine.multiblock.steam.LargeSteamBlastFurnace;
-import com.astro.core.common.registry.AstroRegistry;
+import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
@@ -79,10 +77,10 @@ public class AGEMultiMachines {
     // GTCEu.id("block/multiblock/central_monitor")))
     // .register();
 
-    public static final MultiblockMachineDefinition LARGE_STEAM_BLAST_FURNACE = REGISTRATE.multiblock("large_steam_blast_furnace", LargeSteamBlastFurnace::new)
+    public static final MultiblockMachineDefinition STEAM_BLAST_FURNACE = REGISTRATE.multiblock("steam_blast_furnace", SteamBlastFurnace::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTRecipeTypes.PRIMITIVE_BLAST_FURNACE_RECIPES)
-            .recipeModifier(LargeSteamBlastFurnace::recipeModifier)
+            .recipeModifier(SteamBlastFurnace::recipeModifier)
             .appearanceBlock(CASING_BRONZE_BRICKS)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("FFF", "XXX", "XXX", "XXX")

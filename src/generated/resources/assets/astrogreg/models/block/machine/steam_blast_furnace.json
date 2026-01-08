@@ -21,7 +21,7 @@
     }
   ],
   "loader": "gtceu:machine",
-  "machine": "astrogreg:large_steam_blast_furnace",
+  "machine": "astrogreg:steam_blast_furnace",
   "texture_overrides": {
     "all": "gtceu:block/casings/solid/machine_casing_bronze_plated_bricks"
   },
