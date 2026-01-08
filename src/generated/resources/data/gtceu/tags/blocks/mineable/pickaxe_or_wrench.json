@@ -11,6 +11,7 @@
     "astrogreg:solid_alfsteel_machine_casing",
     "astrogreg:alfsteel_pipe_casing",
     "astrogreg:alfsteel_gearbox_casing",
-    "astrogreg:alfsteel_firebox_casing"
+    "astrogreg:alfsteel_firebox_casing",
+    "astrogreg:solar_cell"
   ]
 }

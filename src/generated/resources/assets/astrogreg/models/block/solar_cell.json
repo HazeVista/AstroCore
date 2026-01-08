@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "astrogreg:block/casings/solar_cell",
+    "east": "astrogreg:block/casings/solar_cell",
+    "north": "astrogreg:block/casings/solar_cell",
+    "south": "astrogreg:block/casings/solar_cell",
+    "up": "astrogreg:block/generators/solar_cell",
+    "west": "astrogreg:block/casings/solar_cell"
+  }
+}

@@ -1,16 +1,20 @@
 package com.astro.core.common.data.block;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
+import com.gregtechceu.gtceu.api.item.tool.GTToolType;
 import com.gregtechceu.gtceu.common.block.BoilerFireboxType;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.models.GTModels;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
@@ -18,7 +22,10 @@ import com.astro.core.AstroCore;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiFunction;
 
+import java.util.function.Supplier;
+
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.createCasingBlock;
 
 @SuppressWarnings("all")
 public class AstroBlocks {
@@ -132,6 +139,35 @@ public class AstroBlocks {
             AstroCore.id("block/generators/machine_casing_firebox_alfsteel"));
     public static final BlockEntry<ActiveBlock> FIREBOX_ALFSTEEL = createFireboxCasing(ALFSTEEL_FIREBOX,
             "§dAlfsteel§r Firebox Casing");
+
+    public static final BlockEntry<Block> SOLAR_CELL = createSolarCasingBlock("solar_cell");
+
+
+    private static BlockEntry<Block> createSolarCasingBlock(String name) {
+        return REGISTRATE.block(name, Block::new)
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .properties(p -> p
+                        .mapColor(MapColor.METAL)
+                        .strength(5.0f, 6.0f)
+                        .sound(SoundType.METAL)
+                        .requiresCorrectToolForDrops()
+                        .isValidSpawn((state, level, pos, ent) -> false))
+                .addLayer(() -> RenderType::solid)
+                .blockstate((ctx, prov) -> {
+                    prov.simpleBlock(ctx.get(), prov.models().cube(ctx.getName(),
+                            prov.modLoc("block/casings/" + name),
+                            prov.modLoc("block/generators/solar_cell"),
+                            prov.modLoc("block/casings/" + name),
+                            prov.modLoc("block/casings/" + name),
+                            prov.modLoc("block/casings/" + name),
+                            prov.modLoc("block/casings/" + name)
+                    ));
+                })
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new)
+                .build()
+                .register();
+    }
 
     public static void init() {}
 }
