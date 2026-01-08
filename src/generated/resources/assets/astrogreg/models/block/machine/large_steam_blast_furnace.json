@@ -1,5 +1,25 @@
 {
   "parent": "minecraft:block/block",
+  "dynamic_renders": [
+    {
+      "type": "gtceu:boiler_multi_parts",
+      "casing_block": {
+        "Name": "gtceu:steam_machine_casing"
+      },
+      "firebox_active": {
+        "Name": "gtceu:bronze_firebox_casing",
+        "Properties": {
+          "active": "true"
+        }
+      },
+      "firebox_idle": {
+        "Name": "gtceu:bronze_firebox_casing",
+        "Properties": {
+          "active": "false"
+        }
+      }
+    }
+  ],
   "loader": "gtceu:machine",
   "machine": "astrogreg:large_steam_blast_furnace",
   "texture_overrides": {

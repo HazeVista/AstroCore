@@ -1,6 +1,7 @@
 package com.astro.core.common.machine.multiblock.generator;
 
 import com.astro.core.common.data.block.AstroBlocks;
+import com.astro.core.common.data.configs.AstroConfigs;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
@@ -143,7 +144,7 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         return count;
     }
     private GTRecipe createSolarRecipe() {
-        long steamOutLong = (long) sunlit * 500;
+        long steamOutLong = (long) sunlit * AstroConfigs.INSTANCE.features.solarSpeed;
         int steamOut = (int) steamOutLong;
         int waterIn = (int) Math.ceil((double) steamOut / ConfigHolder.INSTANCE.machines.largeBoilers.steamPerWater);
         lastSteamOutput = steamOutLong * 20;

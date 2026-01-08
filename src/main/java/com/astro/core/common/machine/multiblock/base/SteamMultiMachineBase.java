@@ -31,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class SteamMultiMachineBase extends WorkableMultiblockMachine implements IDisplayUIMachine {
+
     public static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             SteamMultiMachineBase.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
@@ -50,7 +51,7 @@ public abstract class SteamMultiMachineBase extends WorkableMultiblockMachine im
     }
 
     protected double getConversionRate() {
-        return 1.0;
+        return 2.0;
     }
     @Override
     public void onStructureFormed() {
@@ -74,6 +75,7 @@ public abstract class SteamMultiMachineBase extends WorkableMultiblockMachine im
             onStructureInvalid();
         }
     }
+
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();

@@ -1,5 +1,6 @@
 package com.astro.core.common.machine.multiblock.steam;
 
+import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.common.machine.multiblock.base.SteamMultiMachineBase;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
@@ -8,6 +9,7 @@ import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.lowdragmc.lowdraglib.gui.util.ClickData;
 import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
@@ -22,7 +24,7 @@ import java.util.List;
 public class LargeSteamBlastFurnace extends SteamMultiMachineBase {
 
     @Persisted
-    private int targetParallel = 16; // Default to 16 parallels / Predeterminado a 16 paralelos
+    private int targetParallel = ConfigHolder.INSTANCE.machines.steamMultiParallelAmount; // Default to 8 parallels / Predeterminado a 8 paralelos
 
     public LargeSteamBlastFurnace(IMachineBlockEntity holder, Object... args) {
         super(holder, false, args);
@@ -49,7 +51,7 @@ public class LargeSteamBlastFurnace extends SteamMultiMachineBase {
 
         // English: Set to 1.0 for speed default. Lower values make it faster.
         // Español: Establecido en 1.0 para velocidad estándar. Valores más bajos lo hacen más rápido.
-        double durationMultiplier = 1.0;
+        double durationMultiplier = AstroConfigs.INSTANCE.features.SBFRecipeSpeed;
 
         return ModifierFunction.builder()
                 .modifyAllContents(ContentModifier.multiplier(parallels))

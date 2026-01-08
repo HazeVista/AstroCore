@@ -19,6 +19,7 @@
   "block.astrogreg.neutronium_drum": "Neutronium Drum",
   "block.astrogreg.rhodium_plated_palladium_crate": "Rhodium Plated Palladium Crate",
   "block.astrogreg.rhodium_plated_palladium_drum": "Rhodium Plated Palladium Drum",
+  "block.astrogreg.solar_boiler_array": "Solar Boiler Array",
   "block.astrogreg.solar_cell": "Solar Cell",
   "block.astrogreg.solid_alfsteel_machine_casing": "§dAlfsteel§r Engine Casing",
   "block.astrogreg.solid_terrasteel_machine_casing": "§2Terrasteel§r Machine Casing",
@@ -100,6 +101,5 @@
   "material.astrogreg.uranus_air": "Uranian Air",
   "material.astrogreg.uranus_stone": "Uranus Stone",
   "material.astrogreg.venus_air": "Venusian Air",
-  "material.astrogreg.venus_stone": "Venus Stone",
-  "astrocore.multiblock.parallel_amount": "Parallel Amount: %s"
+  "material.astrogreg.venus_stone": "Venus Stone"
 }
