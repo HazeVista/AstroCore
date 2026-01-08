@@ -8,6 +8,7 @@
   "block.astrogreg.darmstadtium_crate": "Darmstadtium Crate",
   "block.astrogreg.darmstadtium_drum": "Darmstadtium Drum",
   "block.astrogreg.hard_asteroid_stone": "Hard Asteroid Stone",
+  "block.astrogreg.large_steam_blast_furnace": "Large Steam Blast Furnace",
   "block.astrogreg.manasteel_brick_machine_casing": "§9Manasteel§r-Plated Brick Casing",
   "block.astrogreg.manasteel_firebox_casing": "§9Manasteel§r Firebox Casing",
   "block.astrogreg.manasteel_mana_large_boiler": "Large §9Manasteel§r Mana Boiler",
@@ -98,5 +99,6 @@
   "material.astrogreg.uranus_air": "Uranian Air",
   "material.astrogreg.uranus_stone": "Uranus Stone",
   "material.astrogreg.venus_air": "Venusian Air",
-  "material.astrogreg.venus_stone": "Venus Stone"
+  "material.astrogreg.venus_stone": "Venus Stone",
+  "astrocore.multiblock.parallel_amount": "Parallel Amount: %s"
 }
