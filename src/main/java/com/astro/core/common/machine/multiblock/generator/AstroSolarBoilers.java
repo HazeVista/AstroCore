@@ -170,17 +170,17 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         var cfg = AstroConfigs.INSTANCE.features;
 
         return switch (path) {
-            case "moon" -> cfg.moonBoost;
-            case "venus" -> cfg.venusPenalty;
-            case "mercury" -> cfg.mercuryBoost;
-            case "mars" -> cfg.marsPenalty;
-            case "ceres" -> cfg.ceresPenalty;
-            case "jupiter" -> cfg.jupiterPenalty;
-            case "saturn" -> cfg.saturnPenalty;
-            case "uranus" -> cfg.uranusPenalty;
-            case "neptune" -> cfg.neptunePenalty;
-            case "pluto" -> cfg.plutoPenalty;
-            case "kuiper_belt" -> cfg.kuiperBeltPenalty;
+            case "moon" -> cfg.moonMultiplier;
+            case "venus" -> cfg.venusMultiplier;
+            case "mercury" -> cfg.mercuryMultiplier;
+            case "mars" -> cfg.marsMultiplier;
+            case "ceres" -> cfg.ceresMultiplier;
+            case "jupiter" -> cfg.jupiterMultiplier;
+            case "saturn" -> cfg.saturnMultiplier;
+            case "uranus" -> cfg.uranusMultiplier;
+            case "neptune" -> cfg.neptuneMultiplier;
+            case "pluto" -> cfg.plutoMultiplier;
+            case "kuiper_belt" -> cfg.kuiperBeltMultiplier;
             default -> 1.0;
         };
     }

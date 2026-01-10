@@ -47,7 +47,7 @@ public class AstroConfigs {
         @Configurable.Comment({ "The base speed multiplier for the Steam Blast Furnace. (works inversely, 0.5 would be 2x as fast)" })
         public double SBFRecipeSpeed = 1.0;
 
-
+        // Solar Boiler Array
         @Configurable
         @Configurable.Comment({ "The steam per tick per cell production rate of the Solar Boiler Array in mB" })
         public int solarSpeed = 90;
@@ -61,26 +61,37 @@ public class AstroConfigs {
         @Configurable.Comment({ "The base temperature in Kelvin gained per second when sunlit." })
         public int baseHeatRate = 2;
         @Configurable
-        public double moonBoost = 1.2;
+        @Configurable.Comment({ "The multiplier applied to the Moon dimension" })
+        public double moonMultiplier = 1.2;
         @Configurable
-        public double venusPenalty = 0.5;
+        @Configurable.Comment({ "The multiplier applied to the Venus dimension" })
+        public double venusMultiplier = 0.5;
         @Configurable
-        public double mercuryBoost = 2.5;
+        @Configurable.Comment({ "The multiplier applied to the Mercury dimension" })
+        public double mercuryMultiplier = 2.5;
         @Configurable
-        public double marsPenalty = 0.8;
+        @Configurable.Comment({ "The multiplier applied to the Mars dimension" })
+        public double marsMultiplier = 0.8;
         @Configurable
-        public double ceresPenalty = 0.7;
+        @Configurable.Comment({ "The multiplier applied to the Ceres dimension" })
+        public double ceresMultiplier = 0.7;
         @Configurable
-        public double jupiterPenalty = 0.25;
+        @Configurable.Comment({ "The multiplier applied to the Jupiter dimension" })
+        public double jupiterMultiplier = 0.25;
         @Configurable
-        public double saturnPenalty = 0.2;
+        @Configurable.Comment({ "The multiplier applied to the Saturn dimension" })
+        public double saturnMultiplier = 0.2;
         @Configurable
-        public double uranusPenalty = 0.15;
+        @Configurable.Comment({ "The multiplier applied to the Uranus dimension" })
+        public double uranusMultiplier = 0.15;
         @Configurable
-        public double neptunePenalty = 0.1;
+        @Configurable.Comment({ "The multiplier applied to the Neptune dimension" })
+        public double neptuneMultiplier = 0.1;
         @Configurable
-        public double plutoPenalty = 0.05;
+        @Configurable.Comment({ "The multiplier applied to the Pluto dimension" })
+        public double plutoMultiplier = 0.05;
         @Configurable
-        public double kuiperBeltPenalty = 0.02;
+        @Configurable.Comment({ "The multiplier applied to the Kuiper Belt dimension" })
+        public double kuiperBeltMultiplier = 0.02;
     }
 }
