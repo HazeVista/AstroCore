@@ -1,6 +1,7 @@
 package com.astro.core.common.machine.multiblock;
 
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
@@ -84,6 +85,7 @@ public class AGEMultiMachines {
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTRecipeTypes.PRIMITIVE_BLAST_FURNACE_RECIPES)
             .recipeModifier(SteamBlastFurnace::recipeModifier)
+            .addOutputLimit(ItemRecipeCapability.CAP, 1)
             .appearanceBlock(CASING_BRONZE_BRICKS)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("FFF", "XXX", "XXX", "XXX")
@@ -119,41 +121,28 @@ public class AGEMultiMachines {
                     .aisle("A@A")
                     .where('@', controller(blocks(definition.get())))
                     .where('A', blocks(GTBlocks.CASING_STEEL_SOLID.get())
-                            .or(abilities(IMPORT_FLUIDS))
-                            .or(abilities(EXPORT_FLUIDS)))
+                            .or(abilities(IMPORT_FLUIDS)).setMaxGlobalLimited(2)
+                            .or(abilities(EXPORT_FLUIDS)).setMaxGlobalLimited(2))
                     .where('B', blocks(AstroBlocks.SOLAR_CELL.get()))
                     .build())
-            .shapeInfos(definition -> {
-                var minShape = MultiblockShapeInfo.builder()
-                        .aisle("AAAAA")
-                        .aisle("ABBBA")
-                        .aisle("ABBBA")
-                        .aisle("ABBBA")
-                        .aisle("AA@AA")
-                        .where('@', definition, Direction.SOUTH)
-                        .where('A', GTBlocks.CASING_STEEL_SOLID.get())
-                        .where('B', AstroBlocks.SOLAR_CELL.get())
-                        .build();
-                return List.of(minShape);
-            })
+//            .multiblockPreviewRenderer()
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
                     GTCEu.id("block/multiblock/blast_furnace"))
-            .tooltips(
-                    Component
-                            .translatable("astrogreg.tooltip.mega_solar.desc",
-                                    "An expandable array for solar-powered steam production.")
-                            .withStyle(ChatFormatting.GRAY),
-                    Component
-                            .translatable("astrogreg.tooltip.mega_solar.sunlight",
-                                    "The entire structure must be exposed to direct sunlight to produce steam.")
-                            .withStyle(ChatFormatting.WHITE),
-                    Component
-                            .translatable("astrogreg.tooltip.mega_solar.production",
-                                    "Production: " + AstroConfigs.INSTANCE.features.solarSpeed +
-                                            " mB/t of Steam per active block")
-                            .withStyle(ChatFormatting.WHITE),
-                    Component.translatable("astrogreg.tooltip.mega_solar.max_size", "Max Cell Count: 33 x 33")
-                            .withStyle(ChatFormatting.GRAY))
+            .tooltipBuilder((stack, tooltip) -> {
+//                if (GTUtil.isShiftDown()) {
+                    tooltip.add(Component
+                            .literal("Cells must be exposed to direct sunlight to work properly.")
+                            .withStyle(ChatFormatting.WHITE));
+                    tooltip.add(Component
+                            .literal("Heating speed scales with distance from the Sun.")
+                            .withStyle(ChatFormatting.WHITE));
+                    tooltip.add(Component
+                            .literal("Heat scaling: §e−1 K/s per Cell below 40 or +1% heating speed per sunlit Cell above 40")
+                            .withStyle(ChatFormatting.AQUA));
+                    tooltip.add(Component.literal("Max Cell Count: §e33 x 33 (1089 Cells)")
+                            .withStyle(ChatFormatting.AQUA));
+//                }
+            })
             .register();
 
     public static void init() {}
