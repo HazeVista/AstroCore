@@ -44,10 +44,20 @@ public class AstroConfigs {
         @Configurable.Comment({ "The heat speed of the Large Alfsteel Mana Boiler" })
         public int alfsteelBoilerHeatSpeed = 3;
         @Configurable
-        @Configurable.Comment({ "The base speed multiplier for the Steam Blast Furnace. (works inversely, 0.5 would be 2x as fast)" })
+        @Configurable.Comment({
+                "The base speed multiplier for the Steam Blast Furnace. (works inversely, 0.5 would be 2x as fast)" })
         public double SBFRecipeSpeed = 1.0;
 
         // Solar Boiler Array
+        @Configurable
+        @Configurable.Comment({ "The base heat capacity (seconds per degree drop) when the boiler is small." })
+        public int solarBaseCapacity = 1;
+        @Configurable
+        @Configurable.Comment({ "How many solar cells are required to increase the heat capacity by 1 second." })
+        public int cellsPerCapacityPoint = 40;
+        @Configurable
+        @Configurable.Comment({ "The multiplier added to heat speed for every sunlit cell. (e.g. 0.01 = 1% faster per cell)" })
+        public double heatSpeedPerCell = 0.01;
         @Configurable
         @Configurable.Comment({ "The steam per tick per cell production rate of the Solar Boiler Array in mB" })
         public int solarSpeed = 90;
