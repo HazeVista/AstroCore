@@ -46,16 +46,20 @@ public class AstroConfigs {
 
         // Solar Boiler Array
         @Configurable
-        @Configurable.Comment({ "The base heat capacity (seconds per degree drop) when the boiler is smaller than the capacity point. Default: 1" })
+        @Configurable.Comment({
+                "The base heat capacity (seconds per degree drop) when the boiler is smaller than the capacity point. Default: 1" })
         public int solarBaseCapacity = 1;
         @Configurable
-        @Configurable.Comment({ "The amount of solar cells required to increase the heat capacity by 1 second. Default: 40" })
+        @Configurable.Comment({
+                "The amount of solar cells required to increase the heat capacity by 1 second. Default: 40" })
         public int cellsPerCapacityPoint = 40;
         @Configurable
-        @Configurable.Comment({ "The multiplier added to heat speed for every sunlit cell. (e.g. 0.01 = 1% faster per cell) Default: 0.01" })
+        @Configurable.Comment({
+                "The multiplier added to heat speed for every sunlit cell. (e.g. 0.01 = 1% faster per cell) Default: 0.01" })
         public double heatSpeedPerCell = 0.01;
         @Configurable
-        @Configurable.Comment({ "The base steam per tick per cell production rate of the Solar Boiler Array in mB. Default: 1" })
+        @Configurable.Comment({
+                "The base steam per tick per cell production rate of the Solar Boiler Array in mB. Default: 1" })
         public int solarSpeed = 1;
         @Configurable
         @Configurable.Comment({ "The amount of Steam produced per 1mB of Water. Default: 1.0" })

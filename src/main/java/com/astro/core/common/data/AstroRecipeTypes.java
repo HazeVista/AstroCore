@@ -7,7 +7,13 @@ import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 
 import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+
 import com.astro.core.client.AstroClient.AstroGUITextures;
+import com.astro.core.client.AstroClient.AstroSoundEntries;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.DOWN_TO_UP;
@@ -17,6 +23,7 @@ public class AstroRecipeTypes {
     public static GTRecipeType AETHER_ENGINE_RECIPES;
     public static GTRecipeType MANA_BOILER_RECIPES;
     public static GTRecipeType DEIONIZATION_RECIPES;
+    public static GTRecipeType RUNE_INSCRIPTION_RECIPES;
 
     public static void init() {
         AETHER_ENGINE_RECIPES = register("aether_engine", MULTIBLOCK)
@@ -37,5 +44,21 @@ public class AstroRecipeTypes {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.BATH)
                 .setEUIO(IO.IN);
+
+        RUNE_INSCRIPTION_RECIPES = register("rune_inscription", MULTIBLOCK) // Bgame was Here
+                .setEUIO(IO.IN)
+                .setMaxIOSize(9, 1, 3, 0)
+                .setProgressBar(AstroGUITextures.PROGRESS_BAR_RUNE, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setSound(AstroSoundEntries.RUNE_ENGRAVER)
+                .setIconSupplier(() -> {
+                    try {
+                        return BuiltInRegistries.ITEM
+                                .getOptional(ResourceLocation.fromNamespaceAndPath("botania", "gregorious_rune"))
+                                .map(ItemStack::new)
+                                .orElse(new ItemStack(Items.PAPER));
+                    } catch (Exception e) {
+                        return new ItemStack(Items.PAPER);
+                    }
+                });
     }
 }
