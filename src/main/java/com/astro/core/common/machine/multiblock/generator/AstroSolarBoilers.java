@@ -26,9 +26,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.EXPORT_FLUIDS;
-import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.IMPORT_FLUIDS;
+import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 
+@SuppressWarnings("all")
 public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDisplayUIMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
@@ -39,12 +39,18 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
     private static final int MAX_TEMP = 1000;
     private static final int EXPLOSION_THRESHOLD = 600;
 
-    @Persisted private int lDist, rDist, bDist;
-    @Persisted private boolean formed;
-    @Persisted private int sunlit;
-    @Persisted private int temperature;
-    @Persisted private long lastSteamOutput;
-    @Persisted private boolean hasNoWater;
+    @Persisted
+    private int lDist, rDist, bDist;
+    @Persisted
+    private boolean formed;
+    @Persisted
+    private int sunlit;
+    @Persisted
+    private int temperature;
+    @Persisted
+    private long lastSteamOutput;
+    @Persisted
+    private boolean hasNoWater;
 
     public AstroSolarBoilers(IMachineBlockEntity holder) {
         super(holder);
@@ -55,14 +61,23 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         return MANAGED_FIELD_HOLDER;
     }
 
+    @Persisted
+    private int loadDelay = 20;
+
     @Override
     public void onLoad() {
         super.onLoad();
+        this.loadDelay = 20;
         if (!isRemote()) subscribeServerTick(this::updateSolarLogic);
     }
 
     private void updateSolarLogic() {
         if (getLevel() == null || isRemote()) return;
+
+        if (loadDelay > 0) {
+            loadDelay--;
+            return;
+        }
 
         if (getOffsetTimer() % 100 == 0) updateStructureDimensions();
 
@@ -96,7 +111,6 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
             }
         }
 
-
         boolean waterIsPresent = canSeeWater();
 
         if (waterIsPresent) {
@@ -106,12 +120,11 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                 return;
             }
 
-
             this.hasNoWater = false;
 
             if (temperature > cfg.boilingPoint && sunlit > 0) {
                 double efficiency = (double) (temperature - cfg.boilingPoint) / (MAX_TEMP - cfg.boilingPoint);
-                long steamTarget = (long) (sunlit * cfg.solarSpeed * efficiency * getDimensionMultiplier() / 150);
+                long steamTarget = (long) ( sunlit * cfg.solarSpeed * efficiency * getDimensionMultiplier() / 4 );
 
                 if (steamTarget > 0) {
                     int waterNeeded = (int) Math.ceil(steamTarget / cfg.steamRatio);
@@ -173,7 +186,9 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                 .where('~', Predicates.controller(Predicates.blocks(getDefinition().get())))
                 .where('A', Predicates.blocks(GTBlocks.CASING_STEEL_SOLID.get())
                         .or(Predicates.abilities(IMPORT_FLUIDS).setPreviewCount(1))
-                        .or(Predicates.abilities(EXPORT_FLUIDS).setPreviewCount(1)))
+                        .or(Predicates.abilities(EXPORT_FLUIDS).setPreviewCount(1))
+                        .or(Predicates.abilities(MAINTENANCE).setExactLimit(1))
+                )
                 .where('B', Predicates.blocks(AstroBlocks.SOLAR_CELL.get())).build();
     }
 
@@ -206,7 +221,8 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
             BlockPos rowPos = getPos().relative(back, b);
             if (getLevel().canSeeSky(rowPos.above())) count++;
             for (int l = 1; l <= lDist; l++) if (getLevel().canSeeSky(rowPos.relative(left, l).above())) count++;
-            for (int r = 1; r <= rDist; r++) if (getLevel().canSeeSky(rowPos.relative(left.getOpposite(), r).above())) count++;
+            for (int r = 1; r <= rDist; r++)
+                if (getLevel().canSeeSky(rowPos.relative(left.getOpposite(), r).above())) count++;
         }
         return count;
     }
@@ -228,6 +244,7 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
             case "neptune" -> cfg.neptuneMultiplier;
             case "pluto" -> cfg.plutoMultiplier;
             case "kuiper_belt" -> cfg.kuiperBeltMultiplier;
+            case "the_end" -> 0;
             default -> 1.0;
         };
     }
@@ -249,10 +266,10 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         textList.add(Component.literal(String.format("§bThermal Efficiency: %.1f%%", currentEff)));
 
         textList.add(Component.literal("§eSunlit Cells: " + sunlit));
-        textList.add(Component.literal("§bSteam Output: " + (lastSteamOutput * 20) + " mB/s"));
+        textList.add(Component.literal("§bSteam Output: " + lastSteamOutput + " mB/t"));
 
         if (temperature >= EXPLOSION_THRESHOLD) {
-            textList.add(Component.literal("§4§nDANGER: MAX TEMPERATURE"));
+            textList.add(Component.literal("§4§nCRITICAL TEMPERATURE"));
             if (lastSteamOutput == 0) {
                 textList.add(Component.literal("§4§nDO NOT ADD WATER!"));
                 textList.add(Component.literal("§4Wait for the array to cool first."));
@@ -260,5 +277,8 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         }
     }
 
-    @Override protected RecipeLogic createRecipeLogic(Object... args) { return new RecipeLogic(this); }
+    @Override
+    protected RecipeLogic createRecipeLogic(Object... args) {
+        return new RecipeLogic(this);
+    }
 }

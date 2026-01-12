@@ -127,21 +127,24 @@ public class AGEMultiMachines {
                     .where('A', blocks(GTBlocks.CASING_STEEL_SOLID.get())
                                     .or(abilities(IMPORT_FLUIDS)).setMaxGlobalLimited(2)
                                     .or(abilities(EXPORT_FLUIDS)).setMaxGlobalLimited(2)
-//                            .or(abilities(MAINTENANCE)).setExactLimit(1)
+                            .or(abilities(MAINTENANCE)).setExactLimit(1)
                     )
                     .where('B', blocks(AstroBlocks.SOLAR_CELL.get()))
                     .build())
             .shapeInfos(definition -> {
                 var minShape = MultiblockShapeInfo.builder()
-                        .aisle("D@C")
-                        .aisle("EBA")
+//                        .aisle("AA@CD") // no maintenance version
+                        .aisle("AE@CD") // maintenance version
+                        .aisle("ABBBA")
+                        .aisle("ABBBA")
+                        .aisle("ABBBA")
                         .aisle("AAA")
                         .where('@', definition, Direction.NORTH)
                         .where('A', GTBlocks.CASING_STEEL_SOLID)
                         .where('B', AstroBlocks.SOLAR_CELL.get())
                         .where('C', GTMachines.FLUID_EXPORT_HATCH[GTValues.LV], Direction.NORTH)
                         .where('D', GTMachines.FLUID_IMPORT_HATCH[GTValues.LV], Direction.NORTH)
-//                        .where('E', GTMachines.MAINTENANCE_HATCH, Direction.WEST)
+                        .where('E', GTMachines.MAINTENANCE_HATCH, Direction.WEST)
                         .build();
                 return List.of(minShape);
             })
