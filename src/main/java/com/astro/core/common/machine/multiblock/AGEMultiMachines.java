@@ -25,8 +25,6 @@ import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 
-import java.util.List;
-
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
@@ -90,15 +88,15 @@ public class AGEMultiMachines {
             .appearanceBlock(CASING_BRONZE_BRICKS)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("FFF", "XXX", "XXX", "XXX")
-                    .aisle("FFF", "X&X", "X#X", "XMX")
+                    .aisle("FFF", "X&X", "X#X", "X#X")
                     .aisle("FFF", "X@X", "XXX", "XXX")
                     .where('@', controller(blocks(definition.getBlock())))
                     .where('X', blocks(CASING_BRONZE_BRICKS.get()).setMinGlobalLimited(6)
                             .or(abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
-                            .or(abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)))
+                            .or(abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.MUFFLER).setExactLimit(1)))
                     .where('F', blocks(GTBlocks.FIREBOX_BRONZE.get())
                             .or(abilities(PartAbility.STEAM).setExactLimit(1)))
-                    .where('M', abilities(PartAbility.MUFFLER).setExactLimit(1))
                     .where('#', Predicates.air())
                     .where('&', Predicates.air()
                             .or(Predicates.custom(bws -> GTUtil.isBlockSnow(bws.getBlockState()), null)))
@@ -125,24 +123,18 @@ public class AGEMultiMachines {
                             .or(abilities(IMPORT_FLUIDS)).setMaxGlobalLimited(2)
                             .or(abilities(EXPORT_FLUIDS)).setMaxGlobalLimited(2)
                             .or(abilities(MAINTENANCE)).setExactLimit(1))
-                    .where('B', blocks(AstroBlocks.SOLAR_CELL.get()))
+                    .where('B', blocks(AstroBlocks.SOLAR_CELL.get())
+                            .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_ETRIUM.get()))
+                            .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_VESNIUM.get())))
                     .build())
             .shapeInfos(definition -> {
-                var minShape = MultiblockShapeInfo.builder()
-                        // .aisle("AA@CD") // no maintenance version
-                        .aisle("AE@CD") // maintenance version
-                        .aisle("ABBBA")
-                        .aisle("ABBBA")
-                        .aisle("ABBBA")
-                        .aisle("AAA")
-                        .where('@', definition, Direction.NORTH)
-                        .where('A', GTBlocks.CASING_STEEL_SOLID)
-                        .where('B', AstroBlocks.SOLAR_CELL.get())
-                        .where('C', GTMachines.FLUID_EXPORT_HATCH[GTValues.LV], Direction.NORTH)
-                        .where('D', GTMachines.FLUID_IMPORT_HATCH[GTValues.LV], Direction.NORTH)
-                        .where('E', GTMachines.MAINTENANCE_HATCH, Direction.WEST)
-                        .build();
-                return List.of(minShape);
+                var shapes = new java.util.ArrayList<MultiblockShapeInfo>();
+
+                for (int size = 5; size <= 35; size += 2) {
+                    shapes.add(createSolarBoilerShape(definition, size));
+                }
+
+                return shapes;
             })
             .allowFlip(false)
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
@@ -162,6 +154,38 @@ public class AGEMultiMachines {
                         .withStyle(ChatFormatting.AQUA));
             })
             .register();
+
+    private static MultiblockShapeInfo createSolarBoilerShape(MultiblockMachineDefinition definition, int size) {
+        var builder = MultiblockShapeInfo.builder();
+        int center = size / 2;
+
+        for (int z = 0; z < size; z++) {
+            var layer = new StringBuilder();
+            for (int x = 0; x < size; x++) {
+                if (z == 0) {
+                    if (x == center - 1) layer.append('D');
+                    else if (x == center) layer.append('@');
+                    else if (x == center + 1) layer.append('C');
+                    else if (x == 0) layer.append('E');
+                    else layer.append('A');
+                } else if (z == size - 1 || x == 0 || x == size - 1) {
+                    layer.append('A');
+                } else {
+                    layer.append('B');
+                }
+            }
+            builder.aisle(layer.toString());
+        }
+
+        return builder
+                .where('@', definition, Direction.NORTH)
+                .where('A', GTBlocks.CASING_STEEL_SOLID.getDefaultState())
+                .where('B', AstroBlocks.SOLAR_CELL.get().defaultBlockState())
+                .where('C', GTMachines.FLUID_EXPORT_HATCH[GTValues.LV], Direction.NORTH)
+                .where('D', GTMachines.FLUID_IMPORT_HATCH[GTValues.LV], Direction.NORTH)
+                .where('E', GTMachines.MAINTENANCE_HATCH, Direction.NORTH)
+                .build();
+    }
 
     public static void init() {}
 }

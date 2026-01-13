@@ -22,15 +22,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 
+// this multiblock is a courtest Raishxn's GT:NA project with a lot of work from Phoenixvine and Haze Vista
 @SuppressWarnings("all")
 public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDisplayUIMachine {
 
@@ -54,6 +58,8 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
     private long lastSteamOutput;
     @Persisted
     private boolean hasNoWater;
+    @Persisted
+    private double cellMultiplier;
 
     public AstroSolarBoilers(IMachineBlockEntity holder) {
         super(holder);
@@ -91,7 +97,7 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
             return;
         }
 
-        var cfg = AstroConfigs.INSTANCE.features;
+        var cfg = AstroConfigs.INSTANCE.Steam;
 
         if (getOffsetTimer() % 20 == 0) {
             boolean canSeeSun = GTUtil.canSeeSunClearly(getLevel(), getPos().above()) && isWorkingEnabled();
@@ -102,6 +108,8 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                     double heatMult = 1.0 + (sunlit * cfg.heatSpeedPerCell);
                     int heatGain = (int) (cfg.baseHeatRate * getDimensionMultiplier() * heatMult);
                     temperature = Math.min(MAX_TEMP, temperature + Math.max(1, heatGain));
+                } else if (sunlit == 0 && temperature > 0) {
+                    temperature = Math.max(0, temperature - 20);
                 }
             } else {
                 sunlit = 0;
@@ -127,7 +135,9 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
 
             if (temperature > cfg.boilingPoint && sunlit > 0) {
                 double efficiency = (double) (temperature - cfg.boilingPoint) / (MAX_TEMP - cfg.boilingPoint);
-                long steamTarget = (long) (sunlit * cfg.solarSpeed * efficiency * getDimensionMultiplier() / 4);
+
+                long steamTarget = (long) (sunlit * cfg.baseSolarSpeed * efficiency * getDimensionMultiplier() *
+                        cellMultiplier);
 
                 if (steamTarget > 0) {
                     int waterNeeded = (int) Math.ceil(steamTarget / cfg.steamRatio);
@@ -193,7 +203,10 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                         .or(Predicates.abilities(IMPORT_FLUIDS).setPreviewCount(1))
                         .or(Predicates.abilities(EXPORT_FLUIDS).setPreviewCount(1))
                         .or(Predicates.abilities(MAINTENANCE).setExactLimit(1)))
-                .where('B', Predicates.blocks(AstroBlocks.SOLAR_CELL.get())).build();
+                .where('B', Predicates.blocks(AstroBlocks.SOLAR_CELL.get())
+                        .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_ETRIUM.get()))
+                        .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_VESNIUM.get())))
+                .build();
     }
 
     private void updateStructureDimensions() {
@@ -205,6 +218,12 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                 MAX_LR_DIST);
         this.rDist = calculateDistance(world, getPos().relative(back), getFrontFacing().getClockWise(), MAX_LR_DIST);
         this.formed = bDist >= 3 && lDist >= 1 && rDist >= 1;
+
+        if (formed) {
+            this.cellMultiplier = calculateAverageCellMultiplier();
+        } else {
+            this.cellMultiplier = 1.0;
+        }
     }
 
     private int calculateDistance(Level world, BlockPos start, Direction dir, int max) {
@@ -212,10 +231,51 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         BlockPos.MutableBlockPos pos = start.mutable();
         for (int i = 1; i <= max; i++) {
             pos.move(dir);
-            if (world.getBlockState(pos).is(AstroBlocks.SOLAR_CELL.get())) dist = i;
-            else break;
+            Block block = world.getBlockState(pos).getBlock();
+            if (block == AstroBlocks.SOLAR_CELL.get() ||
+                    block == AstroBlocks.SOLAR_CELL_ETRIUM.get() ||
+                    block == AstroBlocks.SOLAR_CELL_VESNIUM.get()) {
+                dist = i;
+            } else break;
         }
         return dist;
+    }
+
+    private double calculateAverageCellMultiplier() {
+        Map<Block, Integer> cellCounts = new HashMap<>();
+        cellCounts.put(AstroBlocks.SOLAR_CELL.get(), 0);
+        cellCounts.put(AstroBlocks.SOLAR_CELL_ETRIUM.get(), 0);
+        cellCounts.put(AstroBlocks.SOLAR_CELL_VESNIUM.get(), 0);
+
+        Direction back = getFrontFacing().getOpposite();
+        Direction left = getFrontFacing().getCounterClockWise();
+
+        for (int b = 1; b <= bDist; b++) {
+            BlockPos rowPos = getPos().relative(back, b);
+            Block block = getLevel().getBlockState(rowPos).getBlock();
+            cellCounts.merge(block, 1, Integer::sum);
+
+            for (int l = 1; l <= lDist; l++) {
+                block = getLevel().getBlockState(rowPos.relative(left, l)).getBlock();
+                cellCounts.merge(block, 1, Integer::sum);
+            }
+
+            for (int r = 1; r <= rDist; r++) {
+                block = getLevel().getBlockState(rowPos.relative(left.getOpposite(), r)).getBlock();
+                cellCounts.merge(block, 1, Integer::sum);
+            }
+        }
+
+        int basicCells = cellCounts.get(AstroBlocks.SOLAR_CELL.get());
+        int etriumCells = cellCounts.get(AstroBlocks.SOLAR_CELL_ETRIUM.get());
+        int vesniumCells = cellCounts.get(AstroBlocks.SOLAR_CELL_VESNIUM.get());
+        int totalCells = basicCells + etriumCells + vesniumCells;
+
+        if (totalCells == 0) return 1.0;
+
+        double totalMultiplier = (basicCells * 1.0) + (etriumCells * AstroConfigs.INSTANCE.Steam.etriumSolarSpeed) +
+                (vesniumCells * AstroConfigs.INSTANCE.Steam.vesniumSolarSpeed);
+        return totalMultiplier / totalCells;
     }
 
     private int calculateSunlitArea() {
@@ -235,7 +295,7 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
     private double getDimensionMultiplier() {
         if (getLevel() == null) return 1.0;
         String path = getLevel().dimension().location().getPath();
-        var cfg = AstroConfigs.INSTANCE.features;
+        var cfg = AstroConfigs.INSTANCE.Steam;
 
         return switch (path) {
             case "moon" -> cfg.moonMultiplier;
@@ -266,18 +326,20 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         String color = temperature >= EXPLOSION_THRESHOLD ? "§4" : temperature > 400 ? "§6" : "§e";
         textList.add(Component.literal(color + "Temperature: " + temperature + "°C"));
 
-        int startTemp = AstroConfigs.INSTANCE.features.boilingPoint;
+        int startTemp = AstroConfigs.INSTANCE.Steam.boilingPoint;
         double currentEff = temperature <= startTemp ? 0 :
                 (double) (temperature - startTemp) / (MAX_TEMP - startTemp) * 100;
         textList.add(Component.literal(String.format("§bThermal Efficiency: %.1f%%", currentEff)));
+
+        textList.add(Component.literal(String.format("§dCell Quality: %.2fx", cellMultiplier)));
 
         textList.add(Component.literal("§eSunlit Cells: " + sunlit));
         textList.add(Component.literal("§bSteam Output: " + lastSteamOutput + " mB/t"));
 
         if (temperature >= EXPLOSION_THRESHOLD) {
-            textList.add(Component.literal("§4§nCRITICAL TEMPERATURE"));
             if (lastSteamOutput == 0) {
-                textList.add(Component.literal("§4§nDO NOT ADD WATER!"));
+                textList.add(Component.literal("§4§nDANGER: EXPLOSIVE!"));
+                textList.add(Component.literal("§4DO NOT ADD WATER!"));
                 textList.add(Component.literal("§4Wait for the array to cool first."));
             }
         }

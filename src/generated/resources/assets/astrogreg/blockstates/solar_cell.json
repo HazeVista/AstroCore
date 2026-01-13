@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "": {
-      "model": "astrogreg:block/solar_cell"
-    }
-  }
-}

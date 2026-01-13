@@ -1,0 +1,5 @@
+{
+  "ldlib": {
+    "connection": "astrogreg:block/generators/solar_cell_silver_ctm"
+  }
+}

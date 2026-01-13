@@ -18,8 +18,8 @@ public class ManaBoilers {
             AstroBlocks.FIREBOX_MANASTEEL,
             AstroCore.id("block/generators/machine_casing_manasteel_plated_bricks"),
             AstroBlocks.MANASTEEL_FIREBOX,
-            AstroConfigs.INSTANCE.features.manasteelBoilerMaxTemperature,
-            AstroConfigs.INSTANCE.features.manasteelBoilerHeatSpeed);
+            AstroConfigs.INSTANCE.Steam.manasteelBoilerMaxTemperature,
+            AstroConfigs.INSTANCE.Steam.manasteelBoilerHeatSpeed);
 
     public static final MultiblockMachineDefinition TERRASTEEL_MANA_BOILER = registerAstroBoiler(
             "terrasteel_mana",
@@ -29,8 +29,8 @@ public class ManaBoilers {
             AstroBlocks.FIREBOX_TERRASTEEL,
             AstroCore.id("block/generators/terrasteel_casing"),
             AstroBlocks.TERRASTEEL_FIREBOX,
-            AstroConfigs.INSTANCE.features.terrasteelBoilerMaxTemperature,
-            AstroConfigs.INSTANCE.features.terrasteelBoilerHeatSpeed);
+            AstroConfigs.INSTANCE.Steam.terrasteelBoilerMaxTemperature,
+            AstroConfigs.INSTANCE.Steam.terrasteelBoilerHeatSpeed);
 
     public static final MultiblockMachineDefinition ALFSTEEL_MANA_BOILER = registerAstroBoiler(
             "alfsteel_mana",
@@ -40,8 +40,8 @@ public class ManaBoilers {
             AstroBlocks.FIREBOX_ALFSTEEL,
             AstroCore.id("block/generators/machine_casing_turbine_alfsteel"),
             AstroBlocks.ALFSTEEL_FIREBOX,
-            AstroConfigs.INSTANCE.features.alfsteelBoilerMaxTemperature,
-            AstroConfigs.INSTANCE.features.alfsteelBoilerHeatSpeed);
+            AstroConfigs.INSTANCE.Steam.alfsteelBoilerMaxTemperature,
+            AstroConfigs.INSTANCE.Steam.alfsteelBoilerHeatSpeed);
 
     public static void init() {}
 }

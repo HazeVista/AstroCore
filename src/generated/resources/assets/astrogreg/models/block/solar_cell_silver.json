@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "gtceu:block/casings/solid/machine_casing_solid_steel",
+    "east": "gtceu:block/casings/solid/machine_casing_solid_steel",
+    "north": "gtceu:block/casings/solid/machine_casing_solid_steel",
+    "particle": "gtceu:block/casings/solid/machine_casing_solid_steel",
+    "south": "gtceu:block/casings/solid/machine_casing_solid_steel",
+    "up": "astrogreg:block/generators/solar_cell_silver",
+    "west": "gtceu:block/casings/solid/machine_casing_solid_steel"
+  }
+}

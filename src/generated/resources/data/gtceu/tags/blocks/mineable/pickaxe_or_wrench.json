@@ -12,6 +12,8 @@
     "astrogreg:alfsteel_pipe_casing",
     "astrogreg:alfsteel_gearbox_casing",
     "astrogreg:alfsteel_firebox_casing",
-    "astrogreg:solar_cell"
+    "astrogreg:solar_cell_silver",
+    "astrogreg:solar_cell_etrium",
+    "astrogreg:solar_cell_vesnium"
   ]
 }

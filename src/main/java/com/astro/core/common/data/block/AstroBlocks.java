@@ -27,6 +27,7 @@ public class AstroBlocks {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
     }
 
+    // builders
     private static BlockEntry<Block> createSidedCasingBlock(String name, String id, String texture,
                                                             NonNullBiFunction<Block, Item.Properties, ? extends BlockItem> func) {
         return REGISTRATE
@@ -78,11 +79,38 @@ public class AstroBlocks {
                 .register();
     }
 
+    private static BlockEntry<Block> createSolarCasingBlock(String id, String name) {
+        return REGISTRATE.block(id, Block::new)
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .properties(p -> p
+                        .mapColor(MapColor.METAL)
+                        .strength(2.0f, 1.0f)
+                        .sound(SoundType.METAL)
+                        .requiresCorrectToolForDrops()
+                        .isValidSpawn((state, level, pos, ent) -> false))
+                .addLayer(() -> RenderType::solid)
+                .blockstate((ctx, prov) -> {
+                    prov.simpleBlock(ctx.get(), prov.models().cube(ctx.getName(),
+                            prov.mcLoc("gtceu:block/casings/solid/machine_casing_solid_steel"),
+                            prov.modLoc("block/generators/" + id),
+                            prov.mcLoc("gtceu:block/casings/solid/machine_casing_solid_steel"),
+                            prov.mcLoc("gtceu:block/casings/solid/machine_casing_solid_steel"),
+                            prov.mcLoc("gtceu:block/casings/solid/machine_casing_solid_steel"),
+                            prov.mcLoc("gtceu:block/casings/solid/machine_casing_solid_steel"))
+                            .texture("particle", prov.mcLoc("gtceu:block/casings/solid/machine_casing_solid_steel")));
+                })
+                .lang(name)
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new)
+                .build()
+                .register();
+    }
+
+    // Block Entries
     // Asteroid Stones
     public static final BlockEntry<Block> ASTEROID_STONE = createStoneBlock(
             "asteroid_stone", "Asteroid Stone", "rocks/asteroid_stone",
             MapColor.TERRACOTTA_PURPLE, 2.0F, 2.0F);
-
     public static final BlockEntry<Block> HARD_ASTEROID_STONE = createStoneBlock(
             "hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
             MapColor.TERRACOTTA_PURPLE, 3.0F, 3.0F);
@@ -133,32 +161,12 @@ public class AstroBlocks {
     public static final BlockEntry<ActiveBlock> FIREBOX_ALFSTEEL = createFireboxCasing(ALFSTEEL_FIREBOX,
             "§dAlfsteel§r Firebox Casing");
 
-    public static final BlockEntry<Block> SOLAR_CELL = createSolarCasingBlock("solar_cell");
-
-    private static BlockEntry<Block> createSolarCasingBlock(String name) {
-        return REGISTRATE.block(name, Block::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
-                .properties(p -> p
-                        .mapColor(MapColor.METAL)
-                        .strength(5.0f, 6.0f)
-                        .sound(SoundType.METAL)
-                        .requiresCorrectToolForDrops()
-                        .isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::solid)
-                .blockstate((ctx, prov) -> {
-                    prov.simpleBlock(ctx.get(), prov.models().cube(ctx.getName(),
-                            prov.modLoc("block/casings/" + name),
-                            prov.modLoc("block/generators/solar_cell"),
-                            prov.modLoc("block/casings/" + name),
-                            prov.modLoc("block/casings/" + name),
-                            prov.modLoc("block/casings/" + name),
-                            prov.modLoc("block/casings/" + name)));
-                })
-                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
-                .item(BlockItem::new)
-                .build()
-                .register();
-    }
+    // Solar Cells
+    public static final BlockEntry<Block> SOLAR_CELL = createSolarCasingBlock("solar_cell_silver", "Solar Cell MK I");
+    public static final BlockEntry<Block> SOLAR_CELL_ETRIUM = createSolarCasingBlock("solar_cell_etrium",
+            "Solar Cell MK II");
+    public static final BlockEntry<Block> SOLAR_CELL_VESNIUM = createSolarCasingBlock("solar_cell_vesnium",
+            "Solar Cell MK III");
 
     public static void init() {}
 }

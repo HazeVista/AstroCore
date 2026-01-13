@@ -45,6 +45,7 @@ public class AstroMaterials {
     public static Material DESH;
     public static Material CALORITE;
     public static Material OSTRUM;
+    public static Material VESNIUM;
     public static Material ETRIUM;
     public static Material JUPERIUM;
     public static Material SATURLYTE;
@@ -176,6 +177,17 @@ public class AstroMaterials {
                 .components(OSTRUM, 3, Electrum, 2).formula("AgAuOt3")
                 .cableProperties(128, 2, 2, false)
                 .color(0x82dbbb).iconSet(BRIGHT)
+                .buildAndRegister();
+
+        VESNIUM = new Material.Builder(
+                AstroCore.id("vesnium"))
+                .langValue("Vesnium")
+                .ingot()
+                .liquid(1565)
+                .flags(GENERATE_FOIL, GENERATE_FINE_WIRE)
+                .components(RedSteel, 4, MolybdenumDisilicide, 3, TungstenCarbide, 1)
+                .cableProperties(8192, 4, 0, false)
+                .color(0xf77b68).secondaryColor(0xcb4e4f).iconSet(BRIGHT)
                 .buildAndRegister();
 
         SATURLYTE = new Material.Builder(
@@ -393,7 +405,7 @@ public class AstroMaterials {
                         DISABLE_ALLOY_BLAST)
                 .fluidPipeProperties(3776, 400, true, true, true, true)
                 .color(0x8c2929).iconSet(BRIGHT)
-                // .components().formula()
+                // .components(VESNIUM, )
                 .buildAndRegister();
 
         // GregTech

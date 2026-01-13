@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "astrogreg:solar_cell"
+          "name": "astrogreg:solar_cell_silver"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "astrogreg:blocks/solar_cell"
+  "random_sequence": "astrogreg:blocks/solar_cell_silver"
 }

@@ -19,7 +19,9 @@
   "block.astrogreg.rhodium_plated_palladium_crate": "ǝʇɐɹƆ ɯnıpɐןןɐԀ pǝʇɐןԀ ɯnıpoɥᴚ",
   "block.astrogreg.rhodium_plated_palladium_drum": "ɯnɹᗡ ɯnıpɐןןɐԀ pǝʇɐןԀ ɯnıpoɥᴚ",
   "block.astrogreg.solar_boiler_array": "ʎɐɹɹⱯ ɹǝןıoᗺ ɹɐןoS",
-  "block.astrogreg.solar_cell": "ןןǝƆ ɹɐןoS",
+  "block.astrogreg.solar_cell_etrium": "II ʞW ןןǝƆ ɹɐןoS",
+  "block.astrogreg.solar_cell_silver": "I ʞW ןןǝƆ ɹɐןoS",
+  "block.astrogreg.solar_cell_vesnium": "III ʞW ןןǝƆ ɹɐןoS",
   "block.astrogreg.solid_alfsteel_machine_casing": "buısɐƆ ǝuıbuƎ ɹ§ןǝǝʇsɟןⱯp§",
   "block.astrogreg.solid_terrasteel_machine_casing": "buısɐƆ ǝuıɥɔɐW ɹ§ןǝǝʇsɐɹɹǝ⟘ᄅ§",
   "block.astrogreg.steam_blast_furnace": "ǝɔɐuɹnℲ ʇsɐןᗺ ɯɐǝʇS",
@@ -101,5 +103,6 @@
   "material.astrogreg.uranus_air": "ɹıⱯ uɐıuɐɹ∩",
   "material.astrogreg.uranus_stone": "ǝuoʇS snuɐɹ∩",
   "material.astrogreg.venus_air": "ɹıⱯ uɐısnuǝΛ",
-  "material.astrogreg.venus_stone": "ǝuoʇS snuǝΛ"
+  "material.astrogreg.venus_stone": "ǝuoʇS snuǝΛ",
+  "material.astrogreg.vesnium": "ɯnıusǝΛ"
 }
