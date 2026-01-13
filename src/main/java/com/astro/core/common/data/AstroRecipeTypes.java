@@ -24,6 +24,7 @@ public class AstroRecipeTypes {
     public static GTRecipeType MANA_BOILER_RECIPES;
     public static GTRecipeType DEIONIZATION_RECIPES;
     public static GTRecipeType RUNE_INSCRIPTION_RECIPES;
+    public static GTRecipeType STEAM_BLAST_FURNACE_RECIPES;
 
     public static void init() {
         AETHER_ENGINE_RECIPES = register("aether_engine", MULTIBLOCK)
@@ -60,5 +61,12 @@ public class AstroRecipeTypes {
                         return new ItemStack(Items.PAPER);
                     }
                 });
+
+        STEAM_BLAST_FURNACE_RECIPES = register("steam_blast_furnace", MULTIBLOCK) // Bgame was also Here
+                .setMaxIOSize(1, 1, 0, 0)
+                .setProgressBar(GuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR,
+                        ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setSound(GTSoundEntries.FURNACE)
+                .setEUIO(IO.IN);
     }
 }

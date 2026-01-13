@@ -20,6 +20,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 
+import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
@@ -81,7 +82,7 @@ public class AGEMultiMachines {
     public static final MultiblockMachineDefinition STEAM_BLAST_FURNACE = REGISTRATE
             .multiblock("steam_blast_furnace", SteamBlastFurnace::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(GTRecipeTypes.PRIMITIVE_BLAST_FURNACE_RECIPES)
+            .recipeType(AstroRecipeTypes.STEAM_BLAST_FURNACE_RECIPES)
             .recipeModifier(SteamBlastFurnace::recipeModifier)
             .addOutputLimit(ItemRecipeCapability.CAP, 1)
             .appearanceBlock(CASING_BRONZE_BRICKS)

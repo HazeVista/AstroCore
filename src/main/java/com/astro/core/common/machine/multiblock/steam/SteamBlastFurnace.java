@@ -56,7 +56,7 @@ public class SteamBlastFurnace extends SteamMultiMachineBase {
 
         // English: Set to 1.0 for speed default. Lower values make it faster.
         // Español: Establecido en 1.0 para velocidad estándar. Valores más bajos lo hacen más rápido.
-        double durationMultiplier = AstroConfigs.INSTANCE.Steam.SBFRecipeSpeed;
+        double durationMultiplier = AstroConfigs.INSTANCE.features.SBFRecipeSpeed;
 
         return ModifierFunction.builder()
                 .modifyAllContents(ContentModifier.multiplier(parallels))
