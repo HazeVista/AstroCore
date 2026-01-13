@@ -32,8 +32,7 @@ import java.util.List;
 
 public abstract class SteamMultiMachineBase extends WorkableMultiblockMachine implements IDisplayUIMachine {
 
-    public static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            SteamMultiMachineBase.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
+    private static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(SteamMultiMachineBase.class);
 
     private final boolean isSteel;
 
