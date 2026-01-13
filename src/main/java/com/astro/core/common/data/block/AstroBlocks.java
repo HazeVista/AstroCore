@@ -27,7 +27,7 @@ public class AstroBlocks {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
     }
 
-    //builders
+    // builders
     private static BlockEntry<Block> createSidedCasingBlock(String name, String id, String texture,
                                                             NonNullBiFunction<Block, Item.Properties, ? extends BlockItem> func) {
         return REGISTRATE
@@ -115,7 +115,6 @@ public class AstroBlocks {
             "hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
             MapColor.TERRACOTTA_PURPLE, 3.0F, 3.0F);
 
-
     // Generator Casings
     public static final BlockEntry<Block> MANASTEEL_MACHINE_CASING = createSidedCasingBlock(
             "§9Manasteel§r-Plated Brick Casing", "manasteel_brick_machine_casing",
@@ -162,11 +161,12 @@ public class AstroBlocks {
     public static final BlockEntry<ActiveBlock> FIREBOX_ALFSTEEL = createFireboxCasing(ALFSTEEL_FIREBOX,
             "§dAlfsteel§r Firebox Casing");
 
-
     // Solar Cells
     public static final BlockEntry<Block> SOLAR_CELL = createSolarCasingBlock("solar_cell_silver", "Solar Cell MK I");
-    public static final BlockEntry<Block> SOLAR_CELL_ETRIUM = createSolarCasingBlock("solar_cell_etrium", "Solar Cell MK II");
-    public static final BlockEntry<Block> SOLAR_CELL_VESNIUM = createSolarCasingBlock("solar_cell_vesnium", "Solar Cell MK III");
+    public static final BlockEntry<Block> SOLAR_CELL_ETRIUM = createSolarCasingBlock("solar_cell_etrium",
+            "Solar Cell MK II");
+    public static final BlockEntry<Block> SOLAR_CELL_VESNIUM = createSolarCasingBlock("solar_cell_vesnium",
+            "Solar Cell MK III");
 
     public static void init() {}
 }

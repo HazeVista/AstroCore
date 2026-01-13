@@ -28,12 +28,11 @@ import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
-
 
 // this multiblock is a courtest Raishxn's GT:NA project with a lot of work from Phoenixvine and Haze Vista
 @SuppressWarnings("all")
@@ -137,7 +136,8 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
             if (temperature > cfg.boilingPoint && sunlit > 0) {
                 double efficiency = (double) (temperature - cfg.boilingPoint) / (MAX_TEMP - cfg.boilingPoint);
 
-                long steamTarget = (long) (sunlit * cfg.baseSolarSpeed * efficiency * getDimensionMultiplier() * cellMultiplier);
+                long steamTarget = (long) (sunlit * cfg.baseSolarSpeed * efficiency * getDimensionMultiplier() *
+                        cellMultiplier);
 
                 if (steamTarget > 0) {
                     int waterNeeded = (int) Math.ceil(steamTarget / cfg.steamRatio);
@@ -205,7 +205,8 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                         .or(Predicates.abilities(MAINTENANCE).setExactLimit(1)))
                 .where('B', Predicates.blocks(AstroBlocks.SOLAR_CELL.get())
                         .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_ETRIUM.get()))
-                        .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_VESNIUM.get()))).build();
+                        .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_VESNIUM.get())))
+                .build();
     }
 
     private void updateStructureDimensions() {
@@ -272,7 +273,8 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
 
         if (totalCells == 0) return 1.0;
 
-        double totalMultiplier = (basicCells * 1.0) + (etriumCells * AstroConfigs.INSTANCE.Steam.etriumSolarSpeed) + (vesniumCells * AstroConfigs.INSTANCE.Steam.vesniumSolarSpeed);
+        double totalMultiplier = (basicCells * 1.0) + (etriumCells * AstroConfigs.INSTANCE.Steam.etriumSolarSpeed) +
+                (vesniumCells * AstroConfigs.INSTANCE.Steam.vesniumSolarSpeed);
         return totalMultiplier / totalCells;
     }
 

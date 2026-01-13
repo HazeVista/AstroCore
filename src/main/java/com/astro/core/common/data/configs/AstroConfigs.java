@@ -47,7 +47,8 @@ public class AstroConfigs {
         // Solar Boiler Array
         @Configurable
         @Configurable.Comment({
-                "The base heat capacity (seconds per degree drop) when the boiler is smaller than the capacity point.", " Default: 1" })
+                "The base heat capacity (seconds per degree drop) when the boiler is smaller than the capacity point.",
+                " Default: 1" })
         public int solarBaseCapacity = 1;
         @Configurable
         @Configurable.Comment({
@@ -55,7 +56,8 @@ public class AstroConfigs {
         public int cellsPerCapacityPoint = 40;
         @Configurable
         @Configurable.Comment({
-                "The multiplier added to heat speed for every sunlit cell. (e.g. 0.01 = 1% faster per cell)", "Default: 0.01" })
+                "The multiplier added to heat speed for every sunlit cell. (e.g. 0.01 = 1% faster per cell)",
+                "Default: 0.01" })
         public double heatSpeedPerCell = 0.01;
         @Configurable
         @Configurable.Comment({
@@ -63,17 +65,20 @@ public class AstroConfigs {
         public double baseSolarSpeed = 80.0;
         @Configurable
         @Configurable.Comment({
-                "The steam output multiplier applied to the Solar Boiler Array with MKII Solar Cells.", "Default: 2.0" })
+                "The steam output multiplier applied to the Solar Boiler Array with MKII Solar Cells.",
+                "Default: 2.0" })
         public double etriumSolarSpeed = 2.0;
         @Configurable
         @Configurable.Comment({
-                "The steam output multiplier applied to the Solar Boiler Array with MKII Solar Cells.", "Default: 3.0" })
+                "The steam output multiplier applied to the Solar Boiler Array with MKII Solar Cells.",
+                "Default: 3.0" })
         public double vesniumSolarSpeed = 3.0;
         @Configurable
         @Configurable.Comment({ "The amount of Steam produced per 1mB of Water.", "Default: 1.0" })
         public double steamRatio = 1.0;
         @Configurable
-        @Configurable.Comment({ "The temperature at which the Solar Boiler Array starts producing steam.", "Default: 50" })
+        @Configurable.Comment({ "The temperature at which the Solar Boiler Array starts producing steam.",
+                "Default: 50" })
         public int boilingPoint = 50;
         @Configurable
         @Configurable.Comment({ "The base temperature in Kelvin gained per second when sunlit.", "Default: 2" })
@@ -115,7 +120,8 @@ public class AstroConfigs {
         // Other Steam Configs
         @Configurable
         @Configurable.Comment({
-                "The base speed multiplier for the Steam Blast Furnace.", "Works Inversely (e.g. 0.5 = 2x speed)", "Default: 1.0" })
+                "The base speed multiplier for the Steam Blast Furnace.", "Works Inversely (e.g. 0.5 = 2x speed)",
+                "Default: 1.0" })
         public double SBFRecipeSpeed = 2.0;
     }
 }

@@ -7,5 +7,4 @@ import com.astro.core.AstroCore;
 public class AstroRegistry {
 
     public static final GTRegistrate REGISTRATE = GTRegistrate.create(AstroCore.MOD_ID);
-
 }

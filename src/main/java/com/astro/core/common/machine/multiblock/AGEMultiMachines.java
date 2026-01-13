@@ -24,8 +24,6 @@ import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 
-import java.util.List;
-
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
@@ -169,11 +167,9 @@ public class AGEMultiMachines {
                     else if (x == center + 1) layer.append('C');
                     else if (x == 0) layer.append('E');
                     else layer.append('A');
-                }
-                else if (z == size - 1 || x == 0 || x == size - 1) {
+                } else if (z == size - 1 || x == 0 || x == size - 1) {
                     layer.append('A');
-                }
-                else {
+                } else {
                     layer.append('B');
                 }
             }
@@ -190,7 +186,5 @@ public class AGEMultiMachines {
                 .build();
     }
 
-
     public static void init() {}
-
 }
