@@ -51,7 +51,7 @@ public class CokeOvenMachine extends PrimitiveWorkableMachine implements IUIMach
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             CokeOvenMachine.class, PrimitiveWorkableMachine.MANAGED_FIELD_HOLDER);
 
-    private static final int BASE_SIZE = 3;
+    private static final int BASE_SIZE = 2;
     private static final int MAX_PARALLELS = 16;
 
     @Persisted
@@ -119,20 +119,34 @@ public class CokeOvenMachine extends PrimitiveWorkableMachine implements IUIMach
                     }
                 }
             }
+
+            if (!isRemote() && (edgeBlocks > 0 || centerBlocks > 0)) {
+            }
+
+            if (edgeBlocks == 8 && centerBlocks == 1) {
+                layerCount++;
+                break;
+            } else if (edgeBlocks == 8 && centerBlocks == 0) {
+                layerCount++;
+            } else {
+                break;
+            }
         }
 
         structureDepth = layerCount;
 
+        if (!isRemote()) {
+        }
     }
 
     public int getCurrentParallels() {
         if (!isFormed()) {
             return 1;
         }
-        if (structureDepth <= 3) {
+        if (structureDepth <= 2) {
             return 1;
         }
-        int parallels = Math.min(MAX_PARALLELS, structureDepth - 2);
+        int parallels = Math.min(MAX_PARALLELS, structureDepth - 1);
         return parallels;
     }
 
