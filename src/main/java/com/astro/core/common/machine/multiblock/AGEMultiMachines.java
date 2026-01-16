@@ -19,65 +19,28 @@ import com.gregtechceu.gtceu.utils.GTUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.Blocks;
 
 import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
+import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_BRONZE_BRICKS;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_COKE_BRICKS;
+import static com.gregtechceu.gtceu.common.data.GTMachines.COKE_OVEN_HATCH;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.COKE_OVEN_RECIPES;
 import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWorkableCasingMachineModel;
 
 @SuppressWarnings("all")
 public class AGEMultiMachines {
-
-    // public static final MultiblockMachineDefinition FILTRATION_PLANT = REGISTRATE
-    // .multiblock("filtration_plant", WorkableElectricMultiblockMachine::new)
-    // .langValue("Filtration Plant")
-    // .rotationState(RotationState.NON_Y_AXIS)
-    // .recipeTypes(AstroRecipeTypes.DEIONIZATION_RECIPES, GTRecipeTypes.DISTILLERY_RECIPES)
-    // .recipeModifiers(GTRecipeModifiers.OC_NON_PERFECT_SUBTICK, GTRecipeModifiers.BATCH_MODE,
-    // GTRecipeModifiers.PARALLEL_HATCH)
-    // .appearanceBlock(CASING_PTFE_INERT)
-    // .partAppearance((controller, part, side) -> {
-    // if(part instanceof ItemBusPartMachine itemBus && itemBus.getInventory().canCapOutput()) {
-    // return CASING_STAINLESS_CLEAN.getDefaultState();
-    // }
-    // if(part instanceof FluidHatchPartMachine fluidHatch && fluidHatch.getIO().supports(IO.IN)) {
-    // return CASING_STAINLESS_CLEAN.getDefaultState();
-    // }
-    // return CASING_PTFE_INERT.getDefaultState();
-    // })
-    // .pattern(definition -> {
-    // var pcasing = blocks(CASING_PTFE_INERT.get());
-    // var scasing = blocks(CASING_STAINLESS_CLEAN.get());
-    // return FactoryBlockPattern.start()
-    // .aisle("SSSFFF", "SGSCCC", "SGSCCC", "SSSCCC", "###CCC")
-    // .aisle("SSSFFF", "GHGPPC", "GHGCPC", "SSSCPC", "###CCC")
-    // .aisle("SSSFFF", "SGSC@C", "SGSCCC", "SSSCCC", "###CCC")
-    // .where('@', Predicates.controller(blocks(definition.getBlock())))
-    // .where('#', Predicates.any())
-    // .where('S', scasing
-    // .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setExactLimit(1))
-    // .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setMaxGlobalLimited(2)))
-    // .where('C', pcasing
-    // .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS)).setMinGlobalLimited(1).setMaxGlobalLimited(2)
-    // .or(Predicates.abilities(PartAbility.EXPORT_ITEMS)).setMaxGlobalLimited(1)
-    // .or(Predicates.abilities(PartAbility.MAINTENANCE)).setExactLimit(1)
-    // .or(Predicates.abilities(PartAbility.INPUT_ENERGY)).setExactLimit(1))
-    // .where('P', blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get()))
-    // .where('F', blocks(GTBlocks.FIREBOX_TUNGSTENSTEEL.get()))
-    // .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
-    // .where('H', blocks(GTBlocks.HERMETIC_CASING_IV.get()))
-    // .build();
-    // })
-    // .model(GTMachineModels.createWorkableCasingMachineModel(
-    // GTCEu.id("block/casings/solid/machine_casing_inert_ptfe"),
-    // GTCEu.id("block/multiblock/central_monitor")))
-    // .register();
 
     public static final MultiblockMachineDefinition STEAM_BLAST_FURNACE = REGISTRATE
             .multiblock("steam_blast_furnace", SteamBlastFurnace::new)
@@ -88,18 +51,18 @@ public class AGEMultiMachines {
             .appearanceBlock(CASING_BRONZE_BRICKS)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("FFF", "XXX", "XXX", "XXX")
-                    .aisle("FFF", "X&X", "X#X", "X#X")
+                    .aisle("FFF", "X&X", "X#X", "XMX")
                     .aisle("FFF", "X@X", "XXX", "XXX")
                     .where('@', controller(blocks(definition.getBlock())))
                     .where('X', blocks(CASING_BRONZE_BRICKS.get()).setMinGlobalLimited(6)
                             .or(abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
                             .or(abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)))
                     .where('F', blocks(GTBlocks.FIREBOX_BRONZE.get())
-                            .or(abilities(PartAbility.STEAM).setExactLimit(1))
-                            .or(abilities(PartAbility.MUFFLER).setExactLimit(1)))
+                            .or(abilities(PartAbility.STEAM).setExactLimit(1)))
                     .where('#', Predicates.air())
                     .where('&', Predicates.air()
                             .or(Predicates.custom(bws -> GTUtil.isBlockSnow(bws.getBlockState()), null)))
+                    .where('M', Predicates.abilities(PartAbility.MUFFLER).setExactLimit(1))
                     .build())
             .model(createWorkableCasingMachineModel(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
                     GTCEu.id("block/multiblock/primitive_blast_furnace"))
@@ -129,7 +92,6 @@ public class AGEMultiMachines {
                     .build())
             .shapeInfos(definition -> {
                 var shapes = new java.util.ArrayList<MultiblockShapeInfo>();
-
                 for (int size = 5; size <= 35; size += 2) {
                     shapes.add(createSolarBoilerShape(definition, size));
                 }
@@ -138,7 +100,7 @@ public class AGEMultiMachines {
             })
             .allowFlip(false)
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
-                    GTCEu.id("block/multiblock/blast_furnace"))
+                    GTCEu.id("block/multiblock/generator/large_steel_boiler"))
             .tooltipBuilder((stack, tooltip) -> {
                 tooltip.add(Component
                         .literal("Cells must be exposed to direct sunlight to work properly.")
@@ -153,6 +115,51 @@ public class AGEMultiMachines {
                 tooltip.add(Component.literal("Max Cell Count: §e33 x 33 (1089 Cells)")
                         .withStyle(ChatFormatting.AQUA));
             })
+            .register();
+
+    public static final MultiblockMachineDefinition COKE_OVEN = REGISTRATE
+            .multiblock("coke_oven", CokeOvenMachine::new)
+            .rotationState(RotationState.ALL)
+            .recipeType(COKE_OVEN_RECIPES)
+            .appearanceBlock(CASING_COKE_BRICKS)
+            .recipeModifier(CokeOvenMachine::recipeModifier)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("AAA", "AAA", "AAA")
+                    .aisle("AAA", "A#A", "AAA").setRepeatable(1, 16)
+                    .aisle("AAA", "A@A", "AAA")
+                    .where("@", controller(blocks(definition.get())))
+                    .where("A", blocks(CASING_COKE_BRICKS.get())
+                            .or(blocks(COKE_OVEN_HATCH.get())))
+                    .where("#", Predicates.air())
+                    .build())
+            .shapeInfos(definition -> {
+                List<MultiblockShapeInfo> shapeInfos = new ArrayList<>();
+                var builder = MultiblockShapeInfo.builder()
+                        .where('C', definition, Direction.NORTH)
+                        .where('B', CASING_COKE_BRICKS.getDefaultState())
+                        .where('#', Blocks.AIR.defaultBlockState());
+                for (int height = 3; height <= 18; height++) {
+                    List<String[]> aisles = new ArrayList<>();
+                    aisles.add(new String[] { "BBB", "BCB", "BBB" });
+                    for (int i = 1; i < height - 1; i++) {
+                        aisles.add(new String[] { "BBB", "B#B", "BBB" });
+                    }
+                    aisles.add(new String[] { "BBB", "BBB", "BBB" });
+                    var copy = builder.shallowCopy();
+                    for (String[] aisle : aisles) {
+                        copy.aisle(aisle);
+                    }
+                    shapeInfos.add(copy.build());
+                }
+                return shapeInfos;
+            })
+            .tooltipBuilder((stack, tooltip) -> {
+                tooltip.add(Component.literal("Making better fuels for Steel and Power"));
+                tooltip.add(Component
+                        .literal("Gains Parallels for each layer in length added for up to 16 Parallels total"));
+            })
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_coke_bricks"),
+                    GTCEu.id("block/multiblock/coke_oven"))
             .register();
 
     private static MultiblockShapeInfo createSolarBoilerShape(MultiblockMachineDefinition definition, int size) {

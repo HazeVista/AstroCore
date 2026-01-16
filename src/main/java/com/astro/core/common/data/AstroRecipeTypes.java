@@ -44,7 +44,17 @@ public class AstroRecipeTypes {
                 .setMaxIOSize(2, 0, 1, 1)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.BATH)
-                .setEUIO(IO.IN);
+                .setEUIO(IO.IN)
+                .setIconSupplier(() -> {
+                    try {
+                        return BuiltInRegistries.ITEM
+                                .getOptional(ResourceLocation.fromNamespaceAndPath("astrogreg", "filter_cartridge"))
+                                .map(ItemStack::new)
+                                .orElse(new ItemStack(Items.PAPER));
+                    } catch (Exception e) {
+                        return new ItemStack(Items.PAPER);
+                    }
+                });
 
         RUNE_INSCRIPTION_RECIPES = register("rune_inscription", MULTIBLOCK) // Bgame was Here
                 .setEUIO(IO.IN)

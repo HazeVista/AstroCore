@@ -174,6 +174,7 @@ public class AstroMaterials {
                 .components(RedSteel, 4, MolybdenumDisilicide, 3, TungstenCarbide, 1)
                 .cableProperties(8192, 4, 0, false)
                 .color(0xf77b68).secondaryColor(0xcb4e4f).iconSet(BRIGHT)
+                .blastTemp(3000, BlastProperty.GasTier.MID, VA[GTValues.IV])
                 .buildAndRegister();
 
         SATURLYTE = new Material.Builder(
