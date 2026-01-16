@@ -51,7 +51,7 @@ public class CokeOvenMachine extends PrimitiveWorkableMachine implements IUIMach
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             CokeOvenMachine.class, PrimitiveWorkableMachine.MANAGED_FIELD_HOLDER);
 
-    private static final int BASE_SIZE = 2;
+    private static final int BASE_SIZE = 3;
     private static final int MAX_PARALLELS = 16;
 
     @Persisted
@@ -119,41 +119,20 @@ public class CokeOvenMachine extends PrimitiveWorkableMachine implements IUIMach
                     }
                 }
             }
-
-            if (!isRemote() && (edgeBlocks > 0 || centerBlocks > 0)) {
-                System.out.println("Offset " + actualOffset + ": edge=" + edgeBlocks + ", center=" + centerBlocks);
-            }
-
-            if (edgeBlocks == 8 && centerBlocks == 1) {
-                layerCount++;
-                if (!isRemote()) System.out.println("Found end cap at offset " + actualOffset);
-                break;
-            } else if (edgeBlocks == 8 && centerBlocks == 0) {
-                layerCount++;
-                if (!isRemote()) System.out.println("Found hollow layer at offset " + actualOffset);
-            } else {
-                if (!isRemote()) System.out.println("Invalid layer at offset " + actualOffset + ", stopping");
-                break;
-            }
         }
 
         structureDepth = layerCount;
 
-        if (!isRemote()) {
-            System.out.println("Coke Oven formed - Facing: " + facing);
-            System.out.println("Complete layers found: " + structureDepth);
-            System.out.println("Parallels: " + getCurrentParallels());
-        }
     }
 
     public int getCurrentParallels() {
         if (!isFormed()) {
             return 1;
         }
-        if (structureDepth <= 2) {
+        if (structureDepth <= 3) {
             return 1;
         }
-        int parallels = Math.min(MAX_PARALLELS, structureDepth - 1);
+        int parallels = Math.min(MAX_PARALLELS, structureDepth - 2);
         return parallels;
     }
 
