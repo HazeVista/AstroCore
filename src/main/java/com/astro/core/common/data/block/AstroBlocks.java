@@ -161,25 +161,12 @@ public class AstroBlocks {
     public static final BlockEntry<ActiveBlock> FIREBOX_ALFSTEEL = createFireboxCasing(ALFSTEEL_FIREBOX,
             "§dAlfsteel§r Firebox Casing");
 
-    // Machine Casings
-    public static final BlockEntry<Block> MACHINE_CASING_PAI = createSidedCasingBlock( "Thermochemically Stable PAI Machine Casing", "machine_casing_super_inert_pai", "machine_casing_super_inert_pai", BlockItem::new);
-    public static final BlockEntry<Block> PIPE_CASING_PAI = createSidedCasingBlock( "Thermochemically Stable PAI Pipe Casing", "pipe_casing_super_inert_pai", "pipe_casing_super_inert_pai", BlockItem::new);
-    public static final BlockEntry<Block> MACHINE_CASING_RHODIUM_PLATED_PALLADIUM = createSidedCasingBlock( "Pristine Rhodium Plated Palladium Machine Casing", "machine_casing_pristine_rhodium_plated_palladium", "machine_casing_pristine_rhodium_plated_palladium", BlockItem::new);
-//    public static final BlockEntry<Block> PIPE_CASING_RHODIUM_PLATED_PALLADIUM = createSidedCasingBlock( "Rhodium Plated Palladium Pipe Casing", "pipe_casing_rhodium_plated_palladium", "pipe_casing_rhodium_plated_palladium", BlockItem::new);
-//    public static final BlockEntry<Block> GEARBOX_CASING_RHODIUM_PLATED_PALLADIUM = createSidedCasingBlock( "Rhodium Plated Palladium Gearbox Casing", "gearbox_casing_rhodium_plated_palladium", "gearbox_casing_rhodium_plated_palladium", BlockItem::new);
-//    public static final BlockEntry<Block> MACHINE_CASING_NAQUADAH_ALLOY = createSidedCasingBlock( "Invariant Naquadah Alloy Machine Casing", "machine_casing_invariant_naquadah_alloy", "machine_casing_invariant_naquadah_alloy", BlockItem::new);
-//    public static final BlockEntry<Block> PIPE_CASING_NAQUADAH_ALLOY = createSidedCasingBlock( "Naquadah Alloy Pipe Casing", "pipe_casing_invariant_naquadah_alloy", "pipe_casing_invariant_naquadah_alloy", BlockItem::new);
-//    public static final BlockEntry<Block> GEARBOX_CASING_NAQUADAH_ALLOY = createSidedCasingBlock( "Naquadah Alloy Gearbox Casing", "gearbox_casing_invariant_naquadah_alloy", "gearbox_casing_invariant_naquadah_alloy", BlockItem::new);
-//    public static final BlockEntry<Block> = createSidedCasingBlock( "", "", "", BlockItem::new);
-
     // Solar Cells
     public static final BlockEntry<Block> SOLAR_CELL = createSolarCasingBlock("solar_cell_silver", "Solar Cell MK I");
     public static final BlockEntry<Block> SOLAR_CELL_ETRIUM = createSolarCasingBlock("solar_cell_etrium",
             "Solar Cell MK II");
     public static final BlockEntry<Block> SOLAR_CELL_VESNIUM = createSolarCasingBlock("solar_cell_vesnium",
             "Solar Cell MK III");
-    public static final BlockEntry<Block> SOLAR_CELL_NAQ = createSolarCasingBlock("solar_cell_enriched_naquadah",
-            "Solar Cell MK IV");
 
     public static void init() {}
 }

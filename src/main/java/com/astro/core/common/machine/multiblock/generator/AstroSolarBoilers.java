@@ -24,6 +24,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
+import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.astro.core.common.data.block.AstroBlocks.*;
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 
 // this multiblock is a courtest Raishxn's GT:NA project with a lot of work from Phoenixvine and Haze Vista
@@ -203,10 +203,9 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                         .or(Predicates.abilities(IMPORT_FLUIDS).setPreviewCount(1))
                         .or(Predicates.abilities(EXPORT_FLUIDS).setPreviewCount(1))
                         .or(Predicates.abilities(MAINTENANCE).setExactLimit(1)))
-                .where('B', Predicates.blocks(SOLAR_CELL.get())
-                        .or(Predicates.blocks(SOLAR_CELL_ETRIUM.get()))
-                        .or(Predicates.blocks(SOLAR_CELL_VESNIUM.get()))
-                        .or(Predicates.blocks(SOLAR_CELL_NAQ.get())))
+                .where('B', Predicates.blocks(AstroBlocks.SOLAR_CELL.get())
+                        .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_ETRIUM.get()))
+                        .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_VESNIUM.get())))
                 .build();
     }
 
@@ -233,10 +232,9 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         for (int i = 1; i <= max; i++) {
             pos.move(dir);
             Block block = world.getBlockState(pos).getBlock();
-            if (block == SOLAR_CELL.get() ||
-                    block == SOLAR_CELL_ETRIUM.get() ||
-                    block == SOLAR_CELL_VESNIUM.get() ||
-                    block == SOLAR_CELL_NAQ.get()) {
+            if (block == AstroBlocks.SOLAR_CELL.get() ||
+                    block == AstroBlocks.SOLAR_CELL_ETRIUM.get() ||
+                    block == AstroBlocks.SOLAR_CELL_VESNIUM.get()) {
                 dist = i;
             } else break;
         }
@@ -245,10 +243,9 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
 
     private double calculateAverageCellMultiplier() {
         Map<Block, Integer> cellCounts = new HashMap<>();
-        cellCounts.put(SOLAR_CELL.get(), 0);
-        cellCounts.put(SOLAR_CELL_ETRIUM.get(), 0);
-        cellCounts.put(SOLAR_CELL_VESNIUM.get(), 0);
-        cellCounts.put(SOLAR_CELL_NAQ.get(), 0);
+        cellCounts.put(AstroBlocks.SOLAR_CELL.get(), 0);
+        cellCounts.put(AstroBlocks.SOLAR_CELL_ETRIUM.get(), 0);
+        cellCounts.put(AstroBlocks.SOLAR_CELL_VESNIUM.get(), 0);
 
         Direction back = getFrontFacing().getOpposite();
         Direction left = getFrontFacing().getCounterClockWise();
@@ -269,17 +266,15 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
             }
         }
 
-        int basicCells = cellCounts.get(SOLAR_CELL.get());
-        int etriumCells = cellCounts.get(SOLAR_CELL_ETRIUM.get());
-        int vesniumCells = cellCounts.get(SOLAR_CELL_VESNIUM.get());
-        int naqCells = cellCounts.get(SOLAR_CELL_NAQ.get());
-        int totalCells = basicCells + etriumCells + vesniumCells + naqCells;
+        int basicCells = cellCounts.get(AstroBlocks.SOLAR_CELL.get());
+        int etriumCells = cellCounts.get(AstroBlocks.SOLAR_CELL_ETRIUM.get());
+        int vesniumCells = cellCounts.get(AstroBlocks.SOLAR_CELL_VESNIUM.get());
+        int totalCells = basicCells + etriumCells + vesniumCells;
 
         if (totalCells == 0) return 1.0;
 
         double totalMultiplier = (basicCells * 1.0) + (etriumCells * AstroConfigs.INSTANCE.Steam.etriumSolarSpeed) +
-                (vesniumCells * AstroConfigs.INSTANCE.Steam.vesniumSolarSpeed) +
-                (naqCells * AstroConfigs.INSTANCE.Steam.naqSolarSpeed);
+                (vesniumCells * AstroConfigs.INSTANCE.Steam.vesniumSolarSpeed);
         return totalMultiplier / totalCells;
     }
 
