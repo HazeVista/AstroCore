@@ -70,9 +70,13 @@ public class AstroConfigs {
         public double etriumSolarSpeed = 2.0;
         @Configurable
         @Configurable.Comment({
-                "The steam output multiplier applied to the Solar Boiler Array with MKII Solar Cells.",
+                "The steam output multiplier applied to the Solar Boiler Array with MKIII Solar Cells.",
                 "Default: 3.0" })
         public double vesniumSolarSpeed = 3.0;
+        @Configurable.Comment({
+                "The steam output multiplier applied to the Solar Boiler Array with MKIV Solar Cells.",
+                "Default: 4.0" })
+        public double naqSolarSpeed = 4.0;
         @Configurable
         @Configurable.Comment({ "The amount of Steam produced per 1mB of Water.", "Default: 1.0" })
         public double steamRatio = 1.0;

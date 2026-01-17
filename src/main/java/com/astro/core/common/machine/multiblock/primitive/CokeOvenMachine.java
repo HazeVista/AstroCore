@@ -15,6 +15,7 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.common.machine.multiblock.primitive.PrimitiveWorkableMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
+
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
 import com.lowdragmc.lowdraglib.gui.texture.GuiTextureGroup;
 import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture;
@@ -22,6 +23,7 @@ import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 import com.lowdragmc.lowdraglib.gui.widget.ProgressWidget;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,6 +38,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidUtil;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -120,8 +123,7 @@ public class CokeOvenMachine extends PrimitiveWorkableMachine implements IUIMach
                 }
             }
 
-            if (!isRemote() && (edgeBlocks > 0 || centerBlocks > 0)) {
-            }
+            if (!isRemote() && (edgeBlocks > 0 || centerBlocks > 0)) {}
 
             if (edgeBlocks == 8 && centerBlocks == 1) {
                 layerCount++;
@@ -135,8 +137,7 @@ public class CokeOvenMachine extends PrimitiveWorkableMachine implements IUIMach
 
         structureDepth = layerCount;
 
-        if (!isRemote()) {
-        }
+        if (!isRemote()) {}
     }
 
     public int getCurrentParallels() {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "astrogreg:solar_cell_enriched_naquadah"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "astrogreg:blocks/solar_cell_enriched_naquadah"
+}
