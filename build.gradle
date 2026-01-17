@@ -187,6 +187,8 @@ dependencies {
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.4.1")
     modImplementation("io.github.llamalad7:mixinextras-forge:0.4.1")
+    modImplementation("curse.maven:ex-pattern-provider-892005:7248944")
+    modImplementation("curse.maven:glodium-957920:5226922")
 
     //Ad Astra and dependencies
     modImplementation("earth.terrarium.adastra:ad_astra-forge-${minecraft_version}:${ad_astra_version}")
