@@ -3,7 +3,7 @@
 
 ### What does this mod do?
 This mod adds features specifically intended for the AstroGreg:Exsilium mod pack, 
-mostly for our high quality Botania integration.
+mostly for our high quality inter-mod integration.
 
 ### Is it compatible with other projects?
 It isn't advisable, but with some of your own KubeJS work to give the casings and other items their
