@@ -34,7 +34,8 @@ public class AstroModifiedMaterials {
             { "rtan", new MaterialFlag[] { GENERATE_FINE_WIRE } },
             { "kanthal", new MaterialFlag[] { GENERATE_FINE_WIRE } },
             { "uranium_triplatinum", new MaterialFlag[] { GENERATE_FINE_WIRE } },
-            { "siao", new MaterialFlag[] { GENERATE_FINE_WIRE } }
+            { "siao", new MaterialFlag[] { GENERATE_FINE_WIRE } },
+            { "rpp", new MaterialFlag[] { GENERATE_FRAME, GENERATE_GEAR } }
 
     };
 
@@ -100,6 +101,7 @@ public class AstroModifiedMaterials {
             case "kanthal" -> GTMaterials.Kanthal;
             case "uranium_triplatinum" -> GTMaterials.UraniumTriplatinum;
             case "siao" -> GTMaterials.SamariumIronArsenicOxide;
+            case "rpp" -> GTMaterials.RhodiumPlatedPalladium;
             default -> null;
         };
     }
