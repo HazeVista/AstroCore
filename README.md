@@ -3,7 +3,7 @@
 
 ### What does this mod do?
 This mod adds features specifically intended for the AstroGreg:Exsilium mod pack, 
-mostly for our high quality Botania integration.
+mostly for our high quality inter-mod integration.
 
 ### Is it compatible with other projects?
 It isn't advisable, but with some of your own KubeJS work to give the casings and other items their
@@ -15,8 +15,6 @@ it from our team for consideration.
 ### Credits
 Written by the collective AstroGreg Team. This mod currently contains examples from [Screcret](https://github.com/screret)
 and [JuiceyBean](https://github.com/JuiceyBeans)'s [GT Addon Template](https://github.com/GregTechCEu/GregTech-Addon-Template?tab=readme-ov-file).
-
-The expandable multiblocks are a courtesy of [Raishxn](https://github.com/Raishxn)'s [GT:NA](https://github.com/Raishxn/GregTech-Nexus-Addon) project.
 
 Mod would not be possible without heavily referencing [PhoenixVine](https://github.com/Phoenixvine32908)'s [PhoenixCore](https://github.com/Phoenixvine32908/PhoenixCore/) for  file structure.
 
