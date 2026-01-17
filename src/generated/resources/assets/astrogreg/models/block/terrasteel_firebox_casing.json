@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "bottom": "astrogreg:block/generators/machine_casing_solid_terrasteel",
+    "bottom": "astrogreg:block/generators/terrasteel_casing",
     "side": "astrogreg:block/generators/machine_casing_firebox_terrasteel",
-    "top": "astrogreg:block/generators/machine_casing_solid_terrasteel"
+    "top": "astrogreg:block/generators/terrasteel_casing"
   }
 }

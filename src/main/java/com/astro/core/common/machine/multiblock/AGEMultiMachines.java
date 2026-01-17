@@ -88,8 +88,7 @@ public class AGEMultiMachines {
                             .or(abilities(MAINTENANCE)).setExactLimit(1))
                     .where('B', blocks(AstroBlocks.SOLAR_CELL.get())
                             .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_ETRIUM.get()))
-                            .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_VESNIUM.get()))
-                            .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_NAQ.get())))
+                            .or(Predicates.blocks(AstroBlocks.SOLAR_CELL_VESNIUM.get())))
                     .build())
             .shapeInfos(definition -> {
                 var shapes = new java.util.ArrayList<MultiblockShapeInfo>();

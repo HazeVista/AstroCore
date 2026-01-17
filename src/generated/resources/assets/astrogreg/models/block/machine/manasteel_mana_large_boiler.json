@@ -1,25 +1,5 @@
 {
   "parent": "minecraft:block/block",
-  "dynamic_renders": [
-    {
-      "type": "gtceu:boiler_multi_parts",
-      "casing_block": {
-        "Name": "astrogreg:manasteel_brick_machine_casing"
-      },
-      "firebox_active": {
-        "Name": "astrogreg:manasteel_firebox_casing",
-        "Properties": {
-          "active": "true"
-        }
-      },
-      "firebox_idle": {
-        "Name": "astrogreg:manasteel_firebox_casing",
-        "Properties": {
-          "active": "false"
-        }
-      }
-    }
-  ],
   "loader": "gtceu:machine",
   "machine": "astrogreg:manasteel_mana_large_boiler",
   "texture_overrides": {

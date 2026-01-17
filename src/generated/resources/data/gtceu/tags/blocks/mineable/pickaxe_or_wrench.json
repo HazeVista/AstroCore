@@ -14,7 +14,6 @@
     "astrogreg:alfsteel_firebox_casing",
     "astrogreg:solar_cell_silver",
     "astrogreg:solar_cell_etrium",
-    "astrogreg:solar_cell_vesnium",
-    "astrogreg:solar_cell_enriched_naquadah"
+    "astrogreg:solar_cell_vesnium"
   ]
 }

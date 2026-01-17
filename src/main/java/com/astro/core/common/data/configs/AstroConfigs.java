@@ -121,6 +121,11 @@ public class AstroConfigs {
         @Configurable.Comment({ "The multiplier applied to the Kuiper Belt dimension.", "Default: 0.1" })
         public double kuiperBeltMultiplier = 0.1;
 
+        // Machine Configs
+        @Configurable
+        @Configurable.Comment({ "Whether the AE2 related machines are on (Expanded buffer/proxy and ME tag inputs)" })
+        public boolean aeMachines = true;
+
         // Other Steam Configs
         @Configurable
         @Configurable.Comment({

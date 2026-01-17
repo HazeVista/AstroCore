@@ -28,12 +28,11 @@ import com.astro.core.common.data.materials.*;
 import com.astro.core.common.machine.crates.AstroCrates;
 import com.astro.core.common.machine.drums.AstroDrums;
 import com.astro.core.common.machine.hatches.AstroParallelHatches;
+import com.astro.core.common.machine.integration.AstroAEMachines;
 import com.astro.core.common.machine.multiblock.AGEMultiMachines;
 import com.astro.core.common.machine.multiblock.generator.AetherEngine;
 import com.astro.core.common.machine.multiblock.generator.ManaBoilers;
 import com.astro.core.datagen.AstroDatagen;
-import com.astro.core.datagen.lang.AstroLangHandler;
-import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,47 +45,43 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 public class AstroCore {
 
     public static final String MOD_ID = "astrogreg";
-    public static GTRegistrate ASTRO_REGISTRATE = GTRegistrate.create(MOD_ID);
     public static final Logger LOGGER = LogManager.getLogger();
-    static {
-        REGISTRATE.addDataGenerator(ProviderType.LANG, AstroLangHandler::init);
-    }
+    public static GTRegistrate ASTRO_REGISTRATE = GTRegistrate.create(MOD_ID);
     public static RegistryEntry<CreativeModeTab> ASTRO_CREATIVE_TAB = REGISTRATE
             .defaultCreativeTab(AstroCore.MOD_ID,
                     builder -> builder
                             .displayItems(new GTCreativeModeTabs.RegistrateDisplayItemsGenerator(AstroCore.MOD_ID,
                                     REGISTRATE))
-                            .title(REGISTRATE.addLang("itemGroup", AstroCore.id("creative_tab"), "AstroGreg"))
-                            .icon(AstroBlocks.FIREBOX_MANASTEEL::asStack)
+                            .title(REGISTRATE.addLang("itemGroup", AstroCore.id("creative_tab"),
+                                    "AstroCore"))
+                            .icon(AGEMultiMachines.COKE_OVEN::asStack)
                             .build())
             .register();
 
-    public static void init() {
-        AstroConfigs.init();
-        AstroBlocks.init();
-        AstroItems.init();
-        AstroMaterialFlags.init();
-    }
-
     public AstroCore() {
-        AstroDatagen.init();
-
+        init();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
+        modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
+        modEventBus.addGenericListener(SoundEntry.class, this::registerSounds);
+        modEventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
 
         modEventBus.addListener(this::addMaterialRegistries);
         modEventBus.addListener(this::addMaterials);
         modEventBus.addListener(this::modifyMaterials);
 
-        modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
-        modEventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
-        modEventBus.addGenericListener(SoundEntry.class, this::registerSounds);
-
         MinecraftForge.EVENT_BUS.register(this);
+    }
 
+    public static void init() {
+        AstroConfigs.init();
         REGISTRATE.registerRegistrate();
+        AstroBlocks.init();
+        AstroItems.init();
+        AstroMaterialFlags.init();
+        AstroDatagen.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {}
@@ -128,6 +123,7 @@ public class AstroCore {
         AstroCrates.register();
         AstroParallelHatches.init();
         AGEMultiMachines.init();
+        AstroAEMachines.init();
     }
 
     public void registerSounds(GTCEuAPI.RegisterEvent<ResourceLocation, SoundEntry> event) {

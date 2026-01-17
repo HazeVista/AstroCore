@@ -15,8 +15,6 @@ plugins {
     id "maven-publish"
     id 'net.neoforged.moddev.legacyforge' version '2.0.91'
     id 'com.diffplug.spotless' version '7.0.2'
-//    id 'net.minecraftforge.gradle' version '5.1.+'
-//    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 sourceSets {
@@ -165,11 +163,13 @@ legacyForge {
         }
     }
 }
-//jar {
-//    manifest.attributes([
-//            "MixinConfigs": "astrocore.mixins.json"
-//    ])
-//}
+jar {
+    manifest.attributes([
+            "MixinConfigs": "astrocore.mixins.json" // Update this to match your resource file
+    ])
+}
+
+
 
 apply from: "$rootDir/gradle/scripts/spotless.gradle"
 
@@ -177,7 +177,7 @@ dependencies {
     compileOnly("org.jetbrains:annotations:26.0.1")
 
     // Mixin
-//    annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
+    annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
 
     //Create and dependencies
     modImplementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
@@ -201,6 +201,7 @@ dependencies {
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     modRuntimeOnly("dev.emi:emi-forge:${emi_version}+${minecraft_version}")
     modRuntimeOnly("curse.maven:jade-324717:5390389")
+    modImplementation("dev.emi:emi-forge:${emi_version}+${minecraft_version}")
 
     // GregTech and dependencies
     modImplementation("com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gtceu_version}:slim") { transitive = false }
@@ -214,6 +215,8 @@ dependencies {
     modImplementation("dev.latvian.mods:rhino-forge:${rhino_version}")
     modImplementation("dev.architectury:architectury-forge:${architectury_version}")
 
+    compileOnly("curse.maven:ex-pattern-provider-892005:7248944")
+    compileOnly("curse.maven:glodium-957920:5226922")
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
@@ -228,14 +231,14 @@ dependencies {
 
 
 //    Apply Mixin AP
-//    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 // See com.example.examplemod.mixin.DummyMixin for information about mixins
-//mixin {
-//    add sourceSets.main, "mixins.${mod_id}.refmap.json"
-//    config "${mod_id}.mixins.json"
-//}
+mixin {
+    add sourceSets.main, 'mixins.astrocore.refmap.json'
+    config 'astrocore.mixins.json'
+}
 
 tasks.named('processResources', ProcessResources).configure {
     var properties = [

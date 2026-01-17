@@ -4,7 +4,9 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 public class AstroLangHandler {
 
-    public static void init(RegistrateLangProvider provider) {}
+    public static void init(RegistrateLangProvider provider) {
+        provider.add("example.blah", "hahahah");
+    }
 
     protected static void multiLang(RegistrateLangProvider provider, String key, String... values) {
         for (var i = 0; i < values.length; i++) {
