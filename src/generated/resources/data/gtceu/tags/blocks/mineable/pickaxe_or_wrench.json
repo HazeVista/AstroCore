@@ -1,19 +1,14 @@
 {
   "values": [
-    "astrogreg:asteroid_stone",
-    "astrogreg:hard_asteroid_stone",
     "astrogreg:manasteel_brick_machine_casing",
-    "astrogreg:manasteel_pipe_casing",
-    "astrogreg:manasteel_firebox_casing",
     "astrogreg:solid_terrasteel_machine_casing",
-    "astrogreg:terrasteel_pipe_casing",
-    "astrogreg:terrasteel_firebox_casing",
     "astrogreg:solid_alfsteel_machine_casing",
-    "astrogreg:alfsteel_pipe_casing",
     "astrogreg:alfsteel_gearbox_casing",
-    "astrogreg:alfsteel_firebox_casing",
-    "astrogreg:solar_cell_silver",
-    "astrogreg:solar_cell_etrium",
-    "astrogreg:solar_cell_vesnium"
+    "astrogreg:manasteel_pipe_casing",
+    "astrogreg:terrasteel_pipe_casing",
+    "astrogreg:alfsteel_pipe_casing",
+    "astrogreg:manasteel_firebox_casing",
+    "astrogreg:terrasteel_firebox_casing",
+    "astrogreg:alfsteel_firebox_casing"
   ]
 }
