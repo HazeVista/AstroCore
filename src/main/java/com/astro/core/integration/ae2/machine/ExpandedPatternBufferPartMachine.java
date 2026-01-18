@@ -1,5 +1,22 @@
 package com.astro.core.integration.ae2.machine;
 
+import appeng.api.crafting.IPatternDetails;
+import appeng.api.crafting.PatternDetailsHelper;
+import appeng.api.implementations.blockentities.PatternContainerGroup;
+import appeng.api.inventories.InternalInventory;
+import appeng.api.networking.IGrid;
+import appeng.api.networking.IGridNodeListener;
+import appeng.api.networking.crafting.ICraftingProvider;
+import appeng.api.stacks.*;
+import appeng.api.storage.MEStorage;
+import appeng.api.storage.StorageHelper;
+import appeng.crafting.pattern.EncodedPatternItem;
+import appeng.crafting.pattern.ProcessingPatternItem;
+import appeng.helpers.patternprovider.PatternContainer;
+import com.astro.core.api.CustomNameAccess;
+import com.astro.core.integration.ae2.machine.trait.ExpandedInternalSlotRecipeHandler;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.gui.fancy.ConfiguratorPanel;
@@ -26,7 +43,6 @@ import com.gregtechceu.gtceu.integration.ae2.gui.widget.slot.AEPatternViewSlotWi
 import com.gregtechceu.gtceu.integration.ae2.machine.MEBusPartMachine;
 import com.gregtechceu.gtceu.utils.GTMath;
 import com.gregtechceu.gtceu.utils.ItemStackHashStrategy;
-
 import com.lowdragmc.lowdraglib.gui.texture.GuiTextureGroup;
 import com.lowdragmc.lowdraglib.gui.util.ClickData;
 import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
@@ -37,7 +53,9 @@ import com.lowdragmc.lowdraglib.syncdata.ITagSerializable;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-
+import it.unimi.dsi.fastutil.objects.*;
+import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -52,37 +70,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
-
-import appeng.api.crafting.IPatternDetails;
-import appeng.api.crafting.PatternDetailsHelper;
-import appeng.api.implementations.blockentities.PatternContainerGroup;
-import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.IGrid;
-import appeng.api.networking.IGridNodeListener;
-import appeng.api.networking.crafting.ICraftingProvider;
-import appeng.api.stacks.*;
-import appeng.api.storage.MEStorage;
-import appeng.api.storage.StorageHelper;
-import appeng.crafting.pattern.EncodedPatternItem;
-import appeng.crafting.pattern.ProcessingPatternItem;
-import appeng.helpers.patternprovider.PatternContainer;
-import com.astro.core.integration.ae2.machine.trait.ExpandedInternalSlotRecipeHandler;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import it.unimi.dsi.fastutil.objects.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 
-import java.util.*;
-
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ExpandedPatternBufferPartMachine extends MEBusPartMachine
-                                              implements ICraftingProvider, PatternContainer, IDataStickInteractable {
+                                              implements ICraftingProvider, PatternContainer, IDataStickInteractable, CustomNameAccess {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             ExpandedPatternBufferPartMachine.class, MEBusPartMachine.MANAGED_FIELD_HOLDER);
@@ -130,7 +127,6 @@ public class ExpandedPatternBufferPartMachine extends MEBusPartMachine
 
     @DescSynced
     @Persisted
-    @Setter
     private String customName = "";
 
     private boolean needPatternSync;
@@ -390,6 +386,19 @@ public class ExpandedPatternBufferPartMachine extends MEBusPartMachine
                             GTAEMachines.ME_PATTERN_BUFFER.get().getDefinition().getItem().getDescription() :
                             Component.literal(customName),
                     Collections.emptyList());
+        }
+    }
+
+    @Override
+    public String astro$getCustomName() {
+        return this.customName;
+    }
+
+    public void setCustomName(String name) {
+        this.customName = (name == null) ? "" : name;
+        this.markDirty();
+        if (getMainNode().isOnline()) {
+            ICraftingProvider.requestUpdate(getMainNode());
         }
     }
 

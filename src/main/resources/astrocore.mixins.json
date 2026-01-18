@@ -8,6 +8,7 @@
     "MixinContainerRenamer",
     "MixinCutterHook",
     "MixinMEPatternBufferCustomName",
+    "MixinMEPatternBufferPartMachine",
     "MultiblockInfoEmiCategoryMixin"
   ],
   "injectors": {

@@ -1,5 +1,7 @@
 package com.astro.core.integration.ae2.machine.trait;
 
+import com.astro.core.integration.ae2.machine.ExpandedPatternBufferPartMachine;
+import com.astro.core.integration.ae2.machine.ExpandedPatternBufferProxyPartMachine;
 import com.gregtechceu.gtceu.api.capability.recipe.*;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.trait.IRecipeHandlerTrait;
@@ -8,14 +10,10 @@ import com.gregtechceu.gtceu.api.machine.trait.RecipeHandlerGroupDistinctness;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeHandlerList;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.ingredient.FluidIngredient;
-
 import com.lowdragmc.lowdraglib.syncdata.ISubscription;
-
+import lombok.Getter;
 import net.minecraft.world.item.crafting.Ingredient;
 
-import com.astro.core.integration.ae2.machine.ExpandedPatternBufferPartMachine;
-import com.astro.core.integration.ae2.machine.ExpandedPatternBufferProxyPartMachine;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -38,8 +36,7 @@ public final class ExpandedProxySlotRecipeHandler {
         var slotHandlers = patternBuffer.getInternalRecipeHandler().getSlotHandlers();
         for (int i = 0; i < proxySlotHandlers.size(); ++i) {
             ProxyRHL proxyRHL = (ProxyRHL) proxySlotHandlers.get(i);
-            ExpandedInternalSlotRecipeHandler.SlotRHL slotRHL = (ExpandedInternalSlotRecipeHandler.SlotRHL) slotHandlers
-                    .get(i);
+            ExpandedInternalSlotRecipeHandler.SlotRHL slotRHL = (ExpandedInternalSlotRecipeHandler.SlotRHL) slotHandlers.get(i);
             proxyRHL.setBuffer(patternBuffer, slotRHL);
         }
     }
@@ -69,8 +66,7 @@ public final class ExpandedProxySlotRecipeHandler {
             this.setGroup(RecipeHandlerGroupDistinctness.BUS_DISTINCT);
         }
 
-        public void setBuffer(ExpandedPatternBufferPartMachine buffer,
-                              ExpandedInternalSlotRecipeHandler.SlotRHL slotRHL) {
+        public void setBuffer(ExpandedPatternBufferPartMachine buffer, ExpandedInternalSlotRecipeHandler.SlotRHL slotRHL) {
             circuit.setProxy(buffer.getCircuitInventory());
             sharedItem.setProxy(buffer.getShareInventory());
             sharedFluid.setProxy(buffer.getShareTank());

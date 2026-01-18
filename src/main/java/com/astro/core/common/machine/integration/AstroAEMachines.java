@@ -1,5 +1,7 @@
 package com.astro.core.common.machine.integration;
 
+import com.astro.core.integration.ae2.machine.ExpandedPatternBufferPartMachine;
+import com.astro.core.integration.ae2.machine.ExpandedPatternBufferProxyPartMachine;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
@@ -11,8 +13,6 @@ import com.astro.core.AstroCore;
 import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.integration.ae2.METagInputBusPartMachine;
 import com.astro.core.integration.ae2.METagInputHatchPartMachine;
-import com.astro.core.integration.ae2.machine.ExpandedPatternBufferPartMachine;
-import com.astro.core.integration.ae2.machine.ExpandedPatternBufferProxyPartMachine;
 
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.GTValues.UHV;

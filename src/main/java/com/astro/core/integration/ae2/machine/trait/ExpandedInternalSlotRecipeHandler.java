@@ -1,18 +1,16 @@
 package com.astro.core.integration.ae2.machine.trait;
 
+import com.astro.core.integration.ae2.machine.ExpandedPatternBufferPartMachine;
 import com.gregtechceu.gtceu.api.capability.recipe.*;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableRecipeHandlerTrait;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeHandlerGroupDistinctness;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeHandlerList;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.ingredient.FluidIngredient;
-
+import lombok.Getter;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
-
-import com.astro.core.integration.ae2.machine.ExpandedPatternBufferPartMachine;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -23,8 +21,7 @@ public final class ExpandedInternalSlotRecipeHandler {
     @Getter
     private final List<RecipeHandlerList> slotHandlers;
 
-    public ExpandedInternalSlotRecipeHandler(ExpandedPatternBufferPartMachine buffer,
-                                             ExpandedPatternBufferPartMachine.InternalSlot[] slots) {
+    public ExpandedInternalSlotRecipeHandler(ExpandedPatternBufferPartMachine buffer, ExpandedPatternBufferPartMachine.InternalSlot[] slots) {
         this.slotHandlers = new ArrayList<>(slots.length);
         for (int i = 0; i < slots.length; i++) {
             var rhl = new SlotRHL(buffer, slots[i], i);
@@ -38,8 +35,7 @@ public final class ExpandedInternalSlotRecipeHandler {
         private final SlotItemRecipeHandler itemRecipeHandler;
         private final SlotFluidRecipeHandler fluidRecipeHandler;
 
-        public SlotRHL(ExpandedPatternBufferPartMachine buffer, ExpandedPatternBufferPartMachine.InternalSlot slot,
-                       int idx) {
+        public SlotRHL(ExpandedPatternBufferPartMachine buffer, ExpandedPatternBufferPartMachine.InternalSlot slot, int idx) {
             super(IO.IN);
             itemRecipeHandler = new SlotItemRecipeHandler(buffer, slot, idx);
             fluidRecipeHandler = new SlotFluidRecipeHandler(buffer, slot, idx);
@@ -67,8 +63,7 @@ public final class ExpandedInternalSlotRecipeHandler {
         private final IO handlerIO = IO.IN;
         private final boolean isDistinct = true;
 
-        private SlotItemRecipeHandler(ExpandedPatternBufferPartMachine buffer,
-                                      ExpandedPatternBufferPartMachine.InternalSlot slot, int index) {
+        private SlotItemRecipeHandler(ExpandedPatternBufferPartMachine buffer, ExpandedPatternBufferPartMachine.InternalSlot slot, int index) {
             super(buffer);
             this.slot = slot;
             this.priority = IFilteredHandler.HIGH + index + 1;
@@ -102,8 +97,7 @@ public final class ExpandedInternalSlotRecipeHandler {
         private final IO handlerIO = IO.IN;
         private final boolean isDistinct = true;
 
-        private SlotFluidRecipeHandler(ExpandedPatternBufferPartMachine buffer,
-                                       ExpandedPatternBufferPartMachine.InternalSlot slot, int index) {
+        private SlotFluidRecipeHandler(ExpandedPatternBufferPartMachine buffer, ExpandedPatternBufferPartMachine.InternalSlot slot, int index) {
             super(buffer);
             this.slot = slot;
             this.priority = IFilteredHandler.HIGH + index + 1;

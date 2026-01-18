@@ -1,11 +1,9 @@
 package com.astro.core.mixin;
 
-import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
-
-import net.minecraft.network.chat.Component;
-
 import com.astro.core.api.CustomNameAccess;
 import com.glodblock.github.extendedae.container.ContainerRenamer;
+import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
