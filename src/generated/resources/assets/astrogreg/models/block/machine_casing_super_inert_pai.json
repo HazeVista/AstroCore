@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "astrogreg:block/casings/machine_casing_super_inert_pai"
+  }
+}

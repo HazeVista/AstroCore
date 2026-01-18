@@ -27,10 +27,10 @@ public abstract class MixinContainerRenamer {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void astrocore$init(
-                               int id,
-                               net.minecraft.world.entity.player.Inventory inv,
-                               Object host,
-                               CallbackInfo ci) {
+                                int id,
+                                net.minecraft.world.entity.player.Inventory inv,
+                                Object host,
+                                CallbackInfo ci) {
         Object target = astroCore$resolveTarget(host, inv.player);
         if (!(target instanceof IMachineBlockEntity holder)) {
             return;

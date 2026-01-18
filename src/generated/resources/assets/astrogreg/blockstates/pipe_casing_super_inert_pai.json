@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/pipe_casing_super_inert_pai"
+    }
+  }
+}

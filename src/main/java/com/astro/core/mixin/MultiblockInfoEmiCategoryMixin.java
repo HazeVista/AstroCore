@@ -23,11 +23,12 @@ public class MultiblockInfoEmiCategoryMixin {
     @Unique
     private final static List<ResourceLocation> astro$excludedMultis = List.of(
             GTCEu.id("coke_oven"),
-            GTCEu.id("bedrock_miner"),
-            GTCEu.id("advanced_bedrock_miner"));
+            GTCEu.id("mv_bedrock_ore_miner"),
+            GTCEu.id("hv_bedrock_ore_miner"),
+            GTCEu.id("ev_bedrock_ore_miner"));
 
     @Inject(method = "registerDisplays", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    private static void astro$registerDisplays(EmiRegistry registry, CallbackInfo ci) {
+    private static void setAstro$excludedMultis$registerDisplays(EmiRegistry registry, CallbackInfo ci) {
         GTRegistries.MACHINES.values().stream()
                 .filter(MultiblockMachineDefinition.class::isInstance)
                 .map(MultiblockMachineDefinition.class::cast)
@@ -35,6 +36,7 @@ public class MultiblockInfoEmiCategoryMixin {
                 .map(MultiblockInfoEmiRecipe::new)
                 .filter(multi -> !astro$excludedMultis.contains(multi.getId()))
                 .forEach(registry::addRecipe);
+
         ci.cancel();
     }
 }
