@@ -9,6 +9,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import com.astro.core.common.data.AstroMachineRecipes;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.materials.AstroElements;
+import com.astro.core.common.data.recipe.AstroRecipes;
 import com.astro.core.common.data.recipe.run.AstroSleeveRecipeRunner;
 import com.astro.core.common.data.recipe.run.AstroWireRecipeRunner;
 import com.astro.core.common.data.tag.AstroTagPrefix;
@@ -51,6 +52,7 @@ public class AstroGregGTAddon implements IGTAddon {
         AstroDrumRecipes.init(provider);
         AstroCrateRecipes.init(provider);
         AstroHatchesAndBuses.init(provider);
+        AstroRecipes.init(provider);
     }
 
     @Override
