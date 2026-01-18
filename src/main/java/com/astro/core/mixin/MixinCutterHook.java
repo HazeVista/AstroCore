@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinCutterHook {
 
     @Inject(method = "onPlayerUseBlock", at = @At("HEAD"), cancellable = true)
-    private void monilabs$onPlayerUseBlock(Player player, Level level, InteractionHand hand,
+    private void astrocore$onPlayerUseBlock(Player player, Level level, InteractionHand hand,
                                            BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         if (player.isSpectator() || hand != InteractionHand.MAIN_HAND) return;
 
