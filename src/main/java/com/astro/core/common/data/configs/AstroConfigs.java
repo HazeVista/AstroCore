@@ -131,6 +131,6 @@ public class AstroConfigs {
         @Configurable.Comment({
                 "The base speed multiplier for the Steam Blast Furnace.", "Works Inversely (e.g. 0.5 = 2x speed)",
                 "Default: 1.0" })
-        public double SBFRecipeSpeed = 2.0;
+        public double SBFRecipeSpeed = 1.0;
     }
 }

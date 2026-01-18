@@ -53,6 +53,21 @@ public abstract class SteamMultiMachineBase extends WorkableMultiblockMachine im
         return 2.0;
     }
 
+    /**
+     * Whether to include GTCEu's default "Using ... EU/t" line in the display text.
+     * Override to false if you want to show steam consumption instead.
+     */
+    protected boolean showDefaultEnergyInfoLine() {
+        return true;
+    }
+
+    /**
+     * Hook for subclasses to inject additional lines into the display panel (Jade/Probe/UI).
+     */
+    protected void addCustomDisplayText(List<Component> textList) {
+        // no-op
+    }
+
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
@@ -107,13 +122,17 @@ public abstract class SteamMultiMachineBase extends WorkableMultiblockMachine im
 
     @Override
     public void addDisplayText(List<Component> textList) {
-        IDisplayUIMachine.super.addDisplayText(textList);
+        if (showDefaultEnergyInfoLine()) {
+            IDisplayUIMachine.super.addDisplayText(textList);
+        }
         if (isFormed()) {
             if (steamEnergy != null && steamEnergy.getCapacity() > 0) {
                 long steamStored = steamEnergy.getStored();
                 textList.add(Component.translatable("gtceu.multiblock.steam.steam_stored", steamStored,
                         steamEnergy.getCapacity()));
             }
+
+            addCustomDisplayText(textList);
 
             if (!isWorkingEnabled()) {
                 textList.add(Component.translatable("gtceu.multiblock.work_paused"));
