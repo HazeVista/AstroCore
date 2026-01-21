@@ -117,8 +117,9 @@ public class AstroBlocks {
                 AstroCore.id("block/generators/machine_casing_turbine_alfsteel"),
                 AstroCore.id("block/generators/machine_casing_firebox_alfsteel")), "§dAlfsteel§r Firebox Casing");
 
-        //5. Functional Casings
-        BRONZE_CRUSHING_WHEELS = createFunctionalCasing("bronze_crushing_wheels", "gcym/industrial_steam_casing", "Bronze Crushing Wheels");
+        // 5. Functional Casings
+        BRONZE_CRUSHING_WHEELS = createFunctionalCasing("bronze_crushing_wheels", "gcym/industrial_steam_casing",
+                "Bronze Crushing Wheels");
 
         // 6. Solar Cells
         SOLAR_CELL = createSolar("solar_cell_silver", "Solar Cell MK I");
@@ -140,7 +141,8 @@ public class AstroBlocks {
                 .item(func).build().register();
     }
 
-    private static BlockEntry<Block> createStone(String id, String name, String texture, MapColor color, float strength) {
+    private static BlockEntry<Block> createStone(String id, String name, String texture, MapColor color,
+                                                 float strength) {
         return REGISTRATE.block(id, Block::new)
                 .initialProperties(() -> Blocks.STONE)
                 .properties(
@@ -189,10 +191,13 @@ public class AstroBlocks {
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .blockstate((ctx, prov) -> {
                     ModelFile inactive = prov.models()
-                            .cube(ctx.getName(), side, AstroCore.id("block/casings/functional_casings/" + id), side, side, side, side)
+                            .cube(ctx.getName(), side, AstroCore.id("block/casings/functional_casings/" + id), side,
+                                    side, side, side)
                             .texture("particle", side);
                     ModelFile active = prov.models()
-                            .cube(ctx.getName() + "_active", side, AstroCore.id("block/casings/functional_casings/" + id + "_active"), side, side, side, side)
+                            .cube(ctx.getName() + "_active", side,
+                                    AstroCore.id("block/casings/functional_casings/" + id + "_active"), side, side,
+                                    side, side)
                             .texture("particle", side);
                     prov.getVariantBuilder(ctx.getEntry())
                             .partialState().with(GTBlockStateProperties.ACTIVE, false).modelForState()

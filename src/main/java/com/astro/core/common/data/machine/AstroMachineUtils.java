@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
+
 import it.unimi.dsi.fastutil.Pair;
 
 import java.util.Locale;
@@ -20,24 +21,23 @@ public class AstroMachineUtils {
      * Register a pair of steam machines (low pressure and high pressure)
      * in the AstroCore namespace with proper datagen support.
      *
-     * @param name The base name for the machine (e.g., "steam_centrifuge")
+     * @param name    The base name for the machine (e.g., "steam_centrifuge")
      * @param factory Factory function to create the machine instance
      * @param builder Builder function to configure the machine
      * @return Pair of low pressure and high pressure machine definitions
      */
     public static Pair<MachineDefinition, MachineDefinition> registerSteamMachines(
-            String name,
-            BiFunction<IMachineBlockEntity, Boolean, MetaMachine> factory,
-            BiFunction<Boolean, MachineBuilder<MachineDefinition>, MachineDefinition> builder) {
+                                                                                   String name,
+                                                                                   BiFunction<IMachineBlockEntity, Boolean, MetaMachine> factory,
+                                                                                   BiFunction<Boolean, MachineBuilder<MachineDefinition>, MachineDefinition> builder) {
         return registerSteamMachines(REGISTRATE, name, factory, builder);
     }
 
     public static Pair<MachineDefinition, MachineDefinition> registerSteamMachines(
-            GTRegistrate registrate,
-            String name,
-            BiFunction<IMachineBlockEntity, Boolean, MetaMachine> factory,
-            BiFunction<Boolean, MachineBuilder<MachineDefinition>, MachineDefinition> builder) {
-
+                                                                                   GTRegistrate registrate,
+                                                                                   String name,
+                                                                                   BiFunction<IMachineBlockEntity, Boolean, MetaMachine> factory,
+                                                                                   BiFunction<Boolean, MachineBuilder<MachineDefinition>, MachineDefinition> builder) {
         MachineDefinition lowTier = builder.apply(false,
                 registrate.machine("lp_%s".formatted(name), holder -> factory.apply(holder, false))
                         .langValue("Low Pressure " + FormattingUtil.toEnglishName(name))
@@ -52,20 +52,19 @@ public class AstroMachineUtils {
     }
 
     public static MachineDefinition[] registerTieredMachines(
-            String name,
-            BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
-            BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
-            int... tiers) {
+                                                             String name,
+                                                             BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
+                                                             BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
+                                                             int... tiers) {
         return registerTieredMachines(REGISTRATE, name, factory, builder, tiers);
     }
 
     public static MachineDefinition[] registerTieredMachines(
-            GTRegistrate registrate,
-            String name,
-            BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
-            BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
-            int... tiers) {
-
+                                                             GTRegistrate registrate,
+                                                             String name,
+                                                             BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
+                                                             BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
+                                                             int... tiers) {
         MachineDefinition[] definitions = new MachineDefinition[GTValues.TIER_COUNT];
 
         for (int tier : tiers) {
@@ -79,6 +78,5 @@ public class AstroMachineUtils {
         return definitions;
     }
 
-    public static void init() {
-    }
+    public static void init() {}
 }

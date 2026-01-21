@@ -1,7 +1,5 @@
 package com.astro.core.common.machine.singleblocks;
 
-import com.astro.core.AstroCore;
-import com.astro.core.common.machine.trait.AstroSimpleSteamMachine;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
@@ -9,6 +7,8 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+
+import com.astro.core.common.machine.trait.AstroSimpleSteamMachine;
 import it.unimi.dsi.fastutil.Pair;
 
 import static com.astro.core.common.data.machine.AstroMachineUtils.registerSteamMachines;
@@ -39,6 +39,5 @@ public class AstroSteamMachines {
                     .workableSteamHullModel(pressure, GTCEu.id("block/machines/mixer"))
                     .register());
 
-    public static void init() {
-    }
+    public static void init() {}
 }

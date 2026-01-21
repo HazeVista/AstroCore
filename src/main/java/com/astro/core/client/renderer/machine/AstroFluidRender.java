@@ -43,8 +43,7 @@ public class AstroFluidRender extends DynamicRender<IFluidRenderMulti, AstroFlui
 
         this.drawFaces = List.of(
                 RelativeDirection.DOWN,
-                RelativeDirection.UP
-        );
+                RelativeDirection.UP);
     }
 
     @Override
@@ -112,5 +111,4 @@ public class AstroFluidRender extends DynamicRender<IFluidRenderMulti, AstroFlui
     public @NotNull AABB getRenderBoundingBox(IFluidRenderMulti machine) {
         return new AABB(machine.self().getPos()).inflate(32);
     }
-
 }

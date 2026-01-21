@@ -14,7 +14,9 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
+
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -25,13 +27,15 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("all")
 @ParametersAreNonnullByDefault
@@ -105,7 +109,8 @@ public class SteamGrinder extends SteamParallelMultiblockMachine {
         crushingWheelPositions.clear();
         for (int x = -1; x <= 1; x++) {
             for (int z = 1; z <= 3; z++) {
-                BlockPos pos = RelativeDirection.offsetPos(getPos(), getFrontFacing(), getUpwardsFacing(), isFlipped(), x, 0, -z);
+                BlockPos pos = RelativeDirection.offsetPos(getPos(), getFrontFacing(), getUpwardsFacing(), isFlipped(),
+                        x, 0, -z);
                 crushingWheelPositions.add(pos);
             }
         }
@@ -170,7 +175,8 @@ public class SteamGrinder extends SteamParallelMultiblockMachine {
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (RecipeHelper.getRecipeEUtTier(recipe) > GTValues.LV) return ModifierFunction.IDENTITY;
-        int parallel = ParallelLogic.getParallelAmount(machine, recipe, ConfigHolder.INSTANCE.machines.steamMultiParallelAmount);
+        int parallel = ParallelLogic.getParallelAmount(machine, recipe,
+                ConfigHolder.INSTANCE.machines.steamMultiParallelAmount);
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(parallel))
                 .outputModifier(ContentModifier.multiplier(parallel))

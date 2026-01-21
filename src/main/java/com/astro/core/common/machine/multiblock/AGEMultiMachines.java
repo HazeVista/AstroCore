@@ -1,8 +1,5 @@
 package com.astro.core.common.machine.multiblock;
 
-import com.astro.core.AstroCore;
-import com.astro.core.common.machine.multiblock.steam.SteamGrinder;
-import com.astro.core.common.machine.multiblock.steam.SteamWasher;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -26,11 +23,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Blocks;
 
+import com.astro.core.AstroCore;
 import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
 import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
+import com.astro.core.common.machine.multiblock.steam.SteamGrinder;
+import com.astro.core.common.machine.multiblock.steam.SteamWasher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,8 +140,10 @@ public class AGEMultiMachines {
                     .where("@", controller(blocks(definition.get())))
                     .where('X', blocks(CASING_BRONZE_BRICKS.get()).setMinGlobalLimited(14)
                             .or(abilities(STEAM).setExactLimit(1).setPreviewCount(1))
-                            .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(2))
-                            .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(2)))
+                            .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(2))
+                            .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(2)))
                     .where(" ", air())
                     .where("G", blocks(AstroBlocks.BRONZE_CRUSHING_WHEELS.get()))
                     .build())
@@ -164,11 +166,13 @@ public class AGEMultiMachines {
                     .where("@", controller(blocks(definition.get())))
                     .where('X', blocks(CASING_BRONZE_BRICKS.get()).setMinGlobalLimited(14)
                             .or(abilities(STEAM).setExactLimit(1).setPreviewCount(1))
-                            .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(2))
-                            .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(2)))
+                            .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(2))
+                            .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(2)))
                     .where(" ", any())
                     .where("#", air())
-            .build())
+                    .build())
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
                     AstroCore.id("block/multiblock/compressor"))
             .register();
@@ -190,8 +194,10 @@ public class AGEMultiMachines {
                     .where("P", blocks(CASING_BRONZE_GEARBOX.get()))
                     .where("X", blocks(CASING_INDUSTRIAL_STEAM.get()).setMinGlobalLimited(40)
                             .or(abilities(STEAM).setExactLimit(1).setPreviewCount(1))
-                            .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                            .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(3)))
+                            .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(3))
+                            .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(3)))
                     .where("A", air())
                     .where("#", any())
                     .build())
@@ -217,10 +223,12 @@ public class AGEMultiMachines {
                     .where("@", controller(blocks(definition.get())))
                     .where("P", blocks(CASING_BRONZE_PIPE.get()))
                     .where("X", blocks(CASING_INDUSTRIAL_STEAM.get()).setMinGlobalLimited(55)
-                        .or(abilities(STEAM).setExactLimit(1).setPreviewCount(1))
-                        .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                        .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1).setMaxGlobalLimited(3))
-                        .or(blocks(WATER_HATCH.get()).setPreviewCount(1).setMaxGlobalLimited(2)))
+                            .or(abilities(STEAM).setExactLimit(1).setPreviewCount(1))
+                            .or(abilities(STEAM_IMPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(3))
+                            .or(abilities(STEAM_EXPORT_ITEMS).setPreviewCount(1).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(3))
+                            .or(blocks(WATER_HATCH.get()).setPreviewCount(1).setMaxGlobalLimited(2)))
                     .where("#", air())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)

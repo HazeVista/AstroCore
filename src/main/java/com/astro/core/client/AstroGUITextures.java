@@ -1,6 +1,7 @@
 package com.astro.core.client;
 
 import com.gregtechceu.gtceu.api.gui.SteamTexture;
+
 import com.lowdragmc.lowdraglib.gui.texture.ResourceTexture;
 
 public class AstroGUITextures {

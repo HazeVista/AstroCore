@@ -20,10 +20,11 @@ import net.minecraft.world.entity.player.Player;
 
 import com.google.common.collect.Tables;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

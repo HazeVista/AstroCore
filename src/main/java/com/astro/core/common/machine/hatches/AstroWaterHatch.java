@@ -11,10 +11,12 @@ import com.gregtechceu.gtceu.common.item.IntCircuitBehaviour;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
+
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
 import com.lowdragmc.lowdraglib.gui.texture.IGuiTexture;
 import com.lowdragmc.lowdraglib.gui.widget.ImageWidget;
 import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
+
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -100,7 +102,8 @@ public class AstroWaterHatch extends FluidHatchPartMachine {
         }
 
         private int getNextValue(boolean increment) {
-            int currentValue = IntCircuitBehaviour.getCircuitConfiguration(this.getCircuitInventory().getStackInSlot(0));
+            int currentValue = IntCircuitBehaviour
+                    .getCircuitConfiguration(this.getCircuitInventory().getStackInSlot(0));
             if (increment) {
                 if (currentValue == IntCircuitBehaviour.CIRCUIT_MAX) {
                     return 0;

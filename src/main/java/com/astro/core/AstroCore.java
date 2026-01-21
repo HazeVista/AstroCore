@@ -1,7 +1,5 @@
 package com.astro.core;
 
-import com.astro.core.client.AstroClient;
-import com.astro.core.common.machine.singleblocks.AstroSteamMachines;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -13,6 +11,7 @@ import com.gregtechceu.gtceu.api.sound.SoundEntry;
 import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
 
 import com.lowdragmc.lowdraglib.Platform;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,6 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import com.astro.core.client.AstroClient;
 import com.astro.core.client.AstroSoundEntries;
 import com.astro.core.common.data.AstroItems;
 import com.astro.core.common.data.AstroRecipeTypes;
@@ -35,6 +35,7 @@ import com.astro.core.common.machine.integration.AstroAEMachines;
 import com.astro.core.common.machine.multiblock.AGEMultiMachines;
 import com.astro.core.common.machine.multiblock.generator.AetherEngine;
 import com.astro.core.common.machine.multiblock.generator.ManaBoilers;
+import com.astro.core.common.machine.singleblocks.AstroSteamMachines;
 import com.astro.core.datagen.AstroDatagen;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.apache.logging.log4j.LogManager;

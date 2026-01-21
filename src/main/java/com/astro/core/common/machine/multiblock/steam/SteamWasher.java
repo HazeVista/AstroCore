@@ -13,21 +13,25 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
+
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.RequireRerender;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-import lombok.Getter;
-import lombok.Setter;
+
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("all")
 @ParametersAreNonnullByDefault
@@ -123,7 +127,8 @@ public class SteamWasher extends SteamParallelMultiblockMachine implements IFlui
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (RecipeHelper.getRecipeEUtTier(recipe) > GTValues.LV) return ModifierFunction.IDENTITY;
-        int parallel = ParallelLogic.getParallelAmount(machine, recipe, ConfigHolder.INSTANCE.machines.steamMultiParallelAmount);
+        int parallel = ParallelLogic.getParallelAmount(machine, recipe,
+                ConfigHolder.INSTANCE.machines.steamMultiParallelAmount);
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(parallel))
                 .outputModifier(ContentModifier.multiplier(parallel))
