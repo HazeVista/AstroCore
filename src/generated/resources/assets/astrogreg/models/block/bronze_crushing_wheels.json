@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "gtceu:block/casings/gcym/industrial_steam_casing",
+    "east": "gtceu:block/casings/gcym/industrial_steam_casing",
+    "north": "gtceu:block/casings/gcym/industrial_steam_casing",
+    "particle": "gtceu:block/casings/gcym/industrial_steam_casing",
+    "south": "gtceu:block/casings/gcym/industrial_steam_casing",
+    "up": "astrogreg:block/casings/functional_casings/bronze_crushing_wheels",
+    "west": "gtceu:block/casings/gcym/industrial_steam_casing"
+  }
+}

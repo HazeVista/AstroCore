@@ -25,7 +25,8 @@ public class MultiblockInfoEmiCategoryMixin {
             GTCEu.id("coke_oven"),
             GTCEu.id("mv_bedrock_ore_miner"),
             GTCEu.id("hv_bedrock_ore_miner"),
-            GTCEu.id("ev_bedrock_ore_miner"));
+            GTCEu.id("ev_bedrock_ore_miner"),
+            GTCEu.id("steam_grinder"));
 
     @Inject(method = "registerDisplays", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void setAstro$excludedMultis$registerDisplays(EmiRegistry registry, CallbackInfo ci) {

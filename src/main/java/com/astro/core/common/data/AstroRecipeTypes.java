@@ -12,8 +12,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import com.astro.core.client.AstroClient.AstroGUITextures;
-import com.astro.core.client.AstroClient.AstroSoundEntries;
+import com.astro.core.client.AstroGUITextures;
+import com.astro.core.client.AstroSoundEntries;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.DOWN_TO_UP;

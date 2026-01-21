@@ -1,4 +1,4 @@
-package com.astro.core.client.AstroClient;
+package com.astro.core.client;
 
 import com.gregtechceu.gtceu.api.sound.SoundEntry;
 

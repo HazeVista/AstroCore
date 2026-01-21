@@ -47,6 +47,8 @@ public class AstroBlocks {
     public static BlockEntry<Block> PIPE_CASING_RHODIUM_PLATED_PALLADIUM;
     public static BlockEntry<Block> GEARBOX_CASING_RHODIUM_PLATED_PALLADIUM;
 
+    public static BlockEntry<ActiveBlock> BRONZE_CRUSHING_WHEELS;
+
     public static BlockEntry<Block> SOLAR_CELL;
     public static BlockEntry<Block> SOLAR_CELL_ETRIUM;
     public static BlockEntry<Block> SOLAR_CELL_VESNIUM;
@@ -115,7 +117,10 @@ public class AstroBlocks {
                 AstroCore.id("block/generators/machine_casing_turbine_alfsteel"),
                 AstroCore.id("block/generators/machine_casing_firebox_alfsteel")), "§dAlfsteel§r Firebox Casing");
 
-        // 5. Solar Cells
+        //5. Functional Casings
+        BRONZE_CRUSHING_WHEELS = createFunctionalCasing("bronze_crushing_wheels", "gcym/industrial_steam_casing", "Bronze Crushing Wheels");
+
+        // 6. Solar Cells
         SOLAR_CELL = createSolar("solar_cell_silver", "Solar Cell MK I");
         SOLAR_CELL_ETRIUM = createSolar("solar_cell_etrium", "Solar Cell MK II");
         SOLAR_CELL_VESNIUM = createSolar("solar_cell_vesnium", "Solar Cell MK III");
@@ -135,22 +140,22 @@ public class AstroBlocks {
                 .item(func).build().register();
     }
 
-    private static BlockEntry<Block> createStone(String id, String name, String tex, MapColor color, float strength) {
+    private static BlockEntry<Block> createStone(String id, String name, String texture, MapColor color, float strength) {
         return REGISTRATE.block(id, Block::new)
                 .initialProperties(() -> Blocks.STONE)
                 .properties(
                         p -> p.mapColor(color).strength(strength).sound(SoundType.STONE).requiresCorrectToolForDrops())
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/" + tex))))
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/" + texture))))
                 .lang(name)
                 .item(BlockItem::new).build().register();
     }
 
-    private static BlockEntry<Block> createCasing(String id, String tex, String lang) {
+    private static BlockEntry<Block> createCasing(String id, String texture, String lang) {
         return REGISTRATE.block(id, Block::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/" + tex))))
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/" + texture))))
                 .lang(lang)
                 .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
                 .item(BlockItem::new).build().register();
@@ -174,6 +179,28 @@ public class AstroBlocks {
                 })
                 .lang(lang)
                 .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new).build().register();
+    }
+
+    private static BlockEntry<ActiveBlock> createFunctionalCasing(String id, String sideTexture, String name) {
+        ResourceLocation side = new ResourceLocation(sideTexture.contains(":") ? sideTexture.split(":")[0] : "gtceu",
+                "block/casings/" + (sideTexture.contains(":") ? sideTexture.split(":")[1] : sideTexture));
+        return REGISTRATE.block(id, ActiveBlock::new)
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .blockstate((ctx, prov) -> {
+                    ModelFile inactive = prov.models()
+                            .cube(ctx.getName(), side, AstroCore.id("block/casings/functional_casings/" + id), side, side, side, side)
+                            .texture("particle", side);
+                    ModelFile active = prov.models()
+                            .cube(ctx.getName() + "_active", side, AstroCore.id("block/casings/functional_casings/" + id + "_active"), side, side, side, side)
+                            .texture("particle", side);
+                    prov.getVariantBuilder(ctx.getEntry())
+                            .partialState().with(GTBlockStateProperties.ACTIVE, false).modelForState()
+                            .modelFile(inactive).addModel()
+                            .partialState().with(GTBlockStateProperties.ACTIVE, true).modelForState()
+                            .modelFile(active).addModel();
+                })
+                .lang(name)
                 .item(BlockItem::new).build().register();
     }
 

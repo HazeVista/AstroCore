@@ -16,7 +16,7 @@ public class AstroRecipes {
     private static final Logger LOGGER = LoggerFactory.getLogger("AstroSteamBlastFurnaceRecipes");
 
     public static void init(Consumer<FinishedRecipe> provider) {
-        // output, input, base seconds
+        // output, input, duration in seconds
         add(provider, "iron_ingot_to_steel_ingot", "gtceu:steel_ingot", "minecraft:iron_ingot", 90);
         add(provider, "wrought_iron_ingot_to_steel_ingot", "gtceu:steel_ingot", "gtceu:wrought_iron_ingot", 40);
         add(provider, "iron_block_to_steel_block", "gtceu:steel_block", "minecraft:iron_block", 810);
@@ -39,7 +39,7 @@ public class AstroRecipes {
                 // Duration is in ticks. 20 ticks = 1 second.
                 .duration(seconds * 20)
                 // Steam cost is handled at runtime by SteamEnergyRecipeHandler.
-                // With conversionRate=2.0 (HP), EUt=3 results in ~6 mB/t steam usage per parallel.
+                // With conversionRate = 2.0 (HP), EUt = 3 results in ~6 mB/t steam usage per parallel.
                 .EUt(3)
                 .save(provider);
     }

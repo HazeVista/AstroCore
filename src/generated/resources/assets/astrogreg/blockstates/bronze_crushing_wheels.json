@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "astrogreg:block/bronze_crushing_wheels"
+    },
+    "active=true": {
+      "model": "astrogreg:block/bronze_crushing_wheels_active"
+    }
+  }
+}

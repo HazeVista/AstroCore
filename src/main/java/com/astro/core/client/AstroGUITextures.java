@@ -1,5 +1,6 @@
-package com.astro.core.client.AstroClient;
+package com.astro.core.client;
 
+import com.gregtechceu.gtceu.api.gui.SteamTexture;
 import com.lowdragmc.lowdraglib.gui.texture.ResourceTexture;
 
 public class AstroGUITextures {
@@ -20,6 +21,9 @@ public class AstroGUITextures {
             "astrogreg:textures/gui/progress_bar/progress_bar_flower.png");
     public static final ResourceTexture PROGRESS_BAR_CROP = new ResourceTexture(
             "astrogreg:textures/gui/progress_bar/progress_bar_crop.png");
+
+    public static final SteamTexture PROGRESS_BAR_STEAM_MIXER = SteamTexture.fullImage(
+            "astrogreg:textures/gui/progress_bar/progress_bar_steam_mixer_%s.png");
 
     public static final ResourceTexture CATALYST_OVERLAY = new ResourceTexture(
             "astrogreg:textures/gui/overlay/catalyst_overlay.png");
