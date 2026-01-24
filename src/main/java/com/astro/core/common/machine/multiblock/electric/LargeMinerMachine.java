@@ -19,8 +19,6 @@ import com.gregtechceu.gtceu.common.item.PortableScannerBehavior;
 import com.gregtechceu.gtceu.utils.GTTransferUtils;
 import com.gregtechceu.gtceu.utils.GTUtil;
 
-import com.astro.core.common.machine.trait.miner.LargeMinerLogic;
-
 import com.lowdragmc.lowdraglib.gui.util.ClickData;
 import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -37,6 +35,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
+import com.astro.core.common.machine.trait.miner.LargeMinerLogic;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMaps;
 import lombok.Getter;
@@ -54,7 +53,7 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.DrillingFluid;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class LargeMinerMachine extends WorkableElectricMultiblockMachine
-        implements IMiner, IControllable, IDataInfoProvider {
+                               implements IMiner, IControllable, IDataInfoProvider {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(LargeMinerMachine.class,
             WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);

@@ -1,7 +1,5 @@
 package com.astro.core.common.machine.multiblock;
 
-import com.astro.core.common.machine.multiblock.electric.FluidDrillMachine;
-import com.astro.core.common.machine.multiblock.electric.LargeMinerMachine;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -25,16 +23,18 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 
 import com.astro.core.AstroCore;
 import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.block.AstroBlocks;
+import com.astro.core.common.machine.multiblock.electric.FluidDrillMachine;
+import com.astro.core.common.machine.multiblock.electric.LargeMinerMachine;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
 import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 import com.astro.core.common.machine.multiblock.steam.SteamGrinder;
 import com.astro.core.common.machine.multiblock.steam.SteamWasher;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

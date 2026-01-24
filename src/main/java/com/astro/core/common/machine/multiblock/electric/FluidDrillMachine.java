@@ -12,8 +12,6 @@ import com.gregtechceu.gtceu.api.misc.EnergyContainerList;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.gregtechceu.gtceu.utils.GTUtil;
 
-import com.astro.core.common.machine.trait.miner.FluidDrillLogic;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
@@ -21,6 +19,7 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.level.material.Fluid;
 
+import com.astro.core.common.machine.trait.miner.FluidDrillLogic;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 

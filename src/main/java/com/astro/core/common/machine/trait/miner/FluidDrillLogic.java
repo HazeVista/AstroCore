@@ -9,13 +9,12 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
-import com.astro.core.common.machine.multiblock.electric.FluidDrillMachine;
-
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.astro.core.common.machine.multiblock.electric.FluidDrillMachine;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 

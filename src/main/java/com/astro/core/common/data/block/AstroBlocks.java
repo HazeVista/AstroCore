@@ -81,9 +81,11 @@ public class AstroBlocks {
         MACHINE_CASING_RHODIUM_PLATED_PALLADIUM = createSidedCasingBlock(
                 "Pristine Rhodium Plated Palladium Machine Casing", "machine_casing_pristine_rhodium_plated_palladium",
                 "casings/machine_casing_pristine_rhodium_plated_palladium", BlockItem::new);
-        MACHINE_CASING_NAQUADAH_ALLOY = createSidedCasingBlock( "Invariant Naquadah Alloy Machine Casing",
-                "machine_casing_invariant_naquadah_alloy", "casings/machine_casing_invariant_naquadah_alloy", BlockItem::new);
-        MACHINE_CASING_NETHERITE_MESH = createCasing("machine_casing_netherite_mesh", "casings/machine_casing_runic_netherite", "Netherite Mesh Casing");
+        MACHINE_CASING_NAQUADAH_ALLOY = createSidedCasingBlock("Invariant Naquadah Alloy Machine Casing",
+                "machine_casing_invariant_naquadah_alloy", "casings/machine_casing_invariant_naquadah_alloy",
+                BlockItem::new);
+        MACHINE_CASING_NETHERITE_MESH = createCasing("machine_casing_netherite_mesh",
+                "casings/machine_casing_runic_netherite", "Netherite Mesh Casing");
         MACHINE_CASING_PAI = createSidedCasingBlock("Thermochemically Stable PAI Machine Casing",
                 "machine_casing_super_inert_pai", "casings/machine_casing_super_inert_pai", BlockItem::new);
         ALFSTEEL_GEARBOX_CASING = createSidedCasingBlock("§dAlfsteel§r Gearbox", "alfsteel_gearbox_casing",
@@ -91,8 +93,9 @@ public class AstroBlocks {
         GEARBOX_CASING_RHODIUM_PLATED_PALLADIUM = createSidedCasingBlock("Rhodium Plated Palladium Gearbox Casing",
                 "gearbox_casing_rhodium_plated_palladium", "casings/gearbox_casing_pristine_rhodium_plated_palladium",
                 BlockItem::new);
-        GEARBOX_CASING_NAQUADAH_ALLOY = createSidedCasingBlock( "Naquadah Alloy Gearbox Casing",
-         "gearbox_casing_invariant_naquadah_alloy", "casings/gearbox_casing_invariant_naquadah_alloy", BlockItem::new);
+        GEARBOX_CASING_NAQUADAH_ALLOY = createSidedCasingBlock("Naquadah Alloy Gearbox Casing",
+                "gearbox_casing_invariant_naquadah_alloy", "casings/gearbox_casing_invariant_naquadah_alloy",
+                BlockItem::new);
         // EXAMPLE_CASING = createSidedCasingBlock( "", "", "", BlockItem::new);
 
         // 3. Pipe Casings
@@ -105,7 +108,7 @@ public class AstroBlocks {
         PIPE_CASING_RHODIUM_PLATED_PALLADIUM = createSidedCasingBlock("Rhodium Plated Palladium Pipe Casing",
                 "pipe_casing_rhodium_plated_palladium", "casings/pipe_casing_pristine_rhodium_plated_palladium",
                 BlockItem::new);
-        PIPE_CASING_NAQUADAH_ALLOY = createSidedCasingBlock( "Naquadah Alloy Pipe Casing",
+        PIPE_CASING_NAQUADAH_ALLOY = createSidedCasingBlock("Naquadah Alloy Pipe Casing",
                 "pipe_casing_invariant_naquadah_alloy", "casings/pipe_casing_invariant_naquadah_alloy", BlockItem::new);
         PIPE_CASING_PAI = createSidedCasingBlock("PAI Pipe Casing", "pipe_casing_super_inert_pai",
                 "casings/pipe_casing_super_inert_pai", BlockItem::new);
