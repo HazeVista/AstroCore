@@ -1,11 +1,13 @@
 package com.astro.core.common.machine.hatches;
 
-import com.astro.core.common.data.tag.AstroTags;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine;
+
 import net.minecraftforge.fluids.FluidType;
+
+import com.astro.core.common.data.tag.AstroTags;
 
 @SuppressWarnings("all")
 public class AstroManaHatches extends FluidHatchPartMachine {

@@ -10,5 +10,4 @@ public class AstroTags {
 
     public static final TagKey<Fluid> EXOTIC_MATTER = TagKey.create(Registries.FLUID,
             new ResourceLocation("forge", "exotic_matter"));
-
 }
