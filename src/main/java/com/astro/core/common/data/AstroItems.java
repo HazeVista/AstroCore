@@ -8,6 +8,4 @@ public class AstroItems {
     // }
 
     public static void init() {}
-
-    // fuckass item class isn't working
 }

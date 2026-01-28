@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 
 import net.minecraft.world.item.Items;
@@ -398,6 +399,17 @@ public class AstroMaterials {
                 .color(0x61524d).secondaryColor(0xfc6f03)
                 .iconSet(RADIOACTIVE)
                 .buildAndRegister();
+
+        NETHERITE = new Material.Builder(
+                AstroCore.id("netherite"))
+                .langValue("Netherite")
+                .element(AstroElements.NH)
+                .color(0x4b4042).secondaryColor(0x474447)
+                .buildAndRegister();
+
+        Netherite.setComponents(new MaterialStack(AstroMaterials.NETHERITE, 1));
+
+        Glowstone.setComponents(new MaterialStack(Gold, 1), new MaterialStack(Redstone, 1));
 
         // Planet Gases
         PLUTO_AIR = new Material.Builder(

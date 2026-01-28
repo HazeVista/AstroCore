@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "astrogreg:block/casings/functional_casings/machine_casing_ultimate_engine_intake",
+    "east": "astrogreg:block/casings/functional_casings/machine_casing_ultimate_engine_intake",
+    "north": "astrogreg:block/casings/functional_casings/machine_casing_ultimate_engine_intake",
+    "particle": "astrogreg:block/casings/functional_casings/machine_casing_ultimate_engine_intake",
+    "south": "astrogreg:block/casings/functional_casings/machine_casing_ultimate_engine_intake",
+    "up": "astrogreg:block/casings/functional_casings/machine_casing_ultimate_engine_intake",
+    "west": "astrogreg:block/casings/functional_casings/machine_casing_ultimate_engine_intake"
+  }
+}

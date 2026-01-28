@@ -10,6 +10,8 @@ import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.api.sound.SoundEntry;
 import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
 
+import com.lowdragmc.lowdraglib.Platform;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,7 +21,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import com.astro.core.client.AstroClient.AstroSoundEntries;
+import com.astro.core.client.AstroClient;
+import com.astro.core.client.AstroSoundEntries;
 import com.astro.core.common.data.AstroItems;
 import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.block.AstroBlocks;
@@ -27,11 +30,12 @@ import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.common.data.materials.*;
 import com.astro.core.common.machine.crates.AstroCrates;
 import com.astro.core.common.machine.drums.AstroDrums;
-import com.astro.core.common.machine.hatches.AstroParallelHatches;
+import com.astro.core.common.machine.hatches.AstroHatches;
 import com.astro.core.common.machine.integration.AstroAEMachines;
 import com.astro.core.common.machine.multiblock.AGEMultiMachines;
 import com.astro.core.common.machine.multiblock.generator.AetherEngine;
 import com.astro.core.common.machine.multiblock.generator.ManaBoilers;
+import com.astro.core.common.machine.singleblocks.AstroSteamMachines;
 import com.astro.core.datagen.AstroDatagen;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.apache.logging.log4j.LogManager;
@@ -73,6 +77,10 @@ public class AstroCore {
         modEventBus.addListener(this::modifyMaterials);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        if (Platform.isClient()) {
+            AstroClient.init(modEventBus);
+        }
     }
 
     public static void init() {
@@ -103,7 +111,6 @@ public class AstroCore {
     }
 
     private void modifyMaterials(PostMaterialEvent event) {
-        // Netherite.setElement(AstroElements.NH);
         GraniteRed.setMaterialARGB(0xb84a3b);
         Blackstone.setMaterialARGB(0x383c42);
         AstroMaterialFlagAddition.register();
@@ -121,9 +128,10 @@ public class AstroCore {
         AetherEngine.init();
         AstroDrums.register();
         AstroCrates.register();
-        AstroParallelHatches.init();
+        AstroHatches.init();
         AGEMultiMachines.init();
         AstroAEMachines.init();
+        AstroSteamMachines.init();
     }
 
     public void registerSounds(GTCEuAPI.RegisterEvent<ResourceLocation, SoundEntry> event) {

@@ -1,5 +1,5 @@
 {
-  "parent": "gtceu:block/fire_box_active",
+  "parent": "astrogreg:block/mana_fire_box_active",
   "textures": {
     "bottom": "astrogreg:block/generators/machine_casing_turbine_alfsteel",
     "side": "astrogreg:block/generators/machine_casing_firebox_alfsteel",

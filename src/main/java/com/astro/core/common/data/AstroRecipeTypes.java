@@ -12,8 +12,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import com.astro.core.client.AstroClient.AstroGUITextures;
-import com.astro.core.client.AstroClient.AstroSoundEntries;
+import com.astro.core.client.AstroGUITextures;
+import com.astro.core.client.AstroSoundEntries;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.DOWN_TO_UP;
@@ -72,11 +72,21 @@ public class AstroRecipeTypes {
                     }
                 });
 
-        STEAM_BLAST_FURNACE_RECIPES = register("steam_blast_furnace", MULTIBLOCK) // Bgame was also Here
+        STEAM_BLAST_FURNACE_RECIPES = register("steam_blast_furnace", MULTIBLOCK)
                 .setMaxIOSize(1, 1, 0, 0)
                 .setProgressBar(GuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR,
                         ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.FURNACE)
-                .setEUIO(IO.IN);
+                .setEUIO(IO.IN)
+                .setIconSupplier(() -> {
+                    try {
+                        return BuiltInRegistries.ITEM
+                                .getOptional(ResourceLocation.fromNamespaceAndPath("astrogreg", "steam_blast_furnace"))
+                                .map(ItemStack::new)
+                                .orElse(new ItemStack(Items.PAPER));
+                    } catch (Exception e) {
+                        return new ItemStack(Items.PAPER);
+                    }
+                });
     }
 }

@@ -7,6 +7,7 @@ import dev.toma.configuration.config.ConfigHolder;
 import dev.toma.configuration.config.Configurable;
 import dev.toma.configuration.config.format.ConfigFormats;
 
+@SuppressWarnings("all")
 @Config(id = AstroCore.MOD_ID)
 public class AstroConfigs {
 
@@ -66,17 +67,17 @@ public class AstroConfigs {
         @Configurable
         @Configurable.Comment({
                 "The steam output multiplier applied to the Solar Boiler Array with MKII Solar Cells.",
-                "Default: 2.0" })
-        public double etriumSolarSpeed = 2.0;
+                "Default: 2.25" })
+        public double etriumSolarSpeed = 2.25;
         @Configurable
         @Configurable.Comment({
                 "The steam output multiplier applied to the Solar Boiler Array with MKIII Solar Cells.",
-                "Default: 3.0" })
-        public double vesniumSolarSpeed = 3.0;
+                "Default: 5.0" })
+        public double vesniumSolarSpeed = 5.0;
         @Configurable.Comment({
                 "The steam output multiplier applied to the Solar Boiler Array with MKIV Solar Cells.",
-                "Default: 4.0" })
-        public double naqSolarSpeed = 4.0;
+                "Default: 15.0" })
+        public double naqSolarSpeed = 15.0;
         @Configurable
         @Configurable.Comment({ "The amount of Steam produced per 1mB of Water.", "Default: 1.0" })
         public double steamRatio = 1.0;
@@ -130,7 +131,7 @@ public class AstroConfigs {
         @Configurable
         @Configurable.Comment({
                 "The base speed multiplier for the Steam Blast Furnace.", "Works Inversely (e.g. 0.5 = 2x speed)",
-                "Default: 1.0" })
+                "Default: 2.0" })
         public double SBFRecipeSpeed = 2.0;
     }
 }

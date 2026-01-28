@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.common.data.GTMaterials;
 
 import static com.astro.core.common.data.materials.AstroMaterialFlags.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 
 public class AstroModifiedMaterials {
 

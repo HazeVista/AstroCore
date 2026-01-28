@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "astrogreg:block/machine/hp_steam_mixer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astrogreg:block/machine/hp_steam_mixer"
+    },
+    "facing=south": {
+      "model": "astrogreg:block/machine/hp_steam_mixer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astrogreg:block/machine/hp_steam_mixer",
+      "y": 270
+    }
+  }
+}

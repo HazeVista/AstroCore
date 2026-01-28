@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "astrogreg:block/casings/gearbox_casing_invariant_naquadah_alloy"
+  }
+}

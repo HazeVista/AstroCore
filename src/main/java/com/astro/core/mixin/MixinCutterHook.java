@@ -26,7 +26,7 @@ public class MixinCutterHook {
 
     @Inject(method = "onPlayerUseBlock", at = @At("HEAD"), cancellable = true)
     private void astrocore$onPlayerUseBlock(Player player, Level level, InteractionHand hand,
-                                           BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
+                                            BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         if (player.isSpectator() || hand != InteractionHand.MAIN_HAND) return;
 
         ItemStack stack = player.getItemInHand(hand);

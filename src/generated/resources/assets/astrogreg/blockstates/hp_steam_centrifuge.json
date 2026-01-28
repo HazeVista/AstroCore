@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "astrogreg:block/machine/hp_steam_centrifuge",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astrogreg:block/machine/hp_steam_centrifuge"
+    },
+    "facing=south": {
+      "model": "astrogreg:block/machine/hp_steam_centrifuge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astrogreg:block/machine/hp_steam_centrifuge",
+      "y": 270
+    }
+  }
+}

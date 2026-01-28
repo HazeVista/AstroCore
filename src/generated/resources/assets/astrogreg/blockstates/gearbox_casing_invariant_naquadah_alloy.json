@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/gearbox_casing_invariant_naquadah_alloy"
+    }
+  }
+}
