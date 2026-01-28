@@ -8,6 +8,8 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.water_hatch.tooltip", "§eAccepted Fluid:§r Water");
         provider.add("astrogreg.machine.large_miner.zpm.tooltip", "Planetary Depletion Apparatus");
         provider.add("astrogreg.machine.fluid_drilling_rig.iv.tooltip", "Crust Sucker");
+        provider.add("astrogreg.machine.mana_input_hatch", "Exotic Matter Input for Multiblocks");
+        provider.add("astrogreg.machine.mana_output_hatch", "Exotic Matter Output for Multiblocks");
 
         multilineLang(provider, "astrogreg.gui.configurator_slot.tooltip",
                 "§fConfigurator Slot§r\n§7Place a §6Programmed Circuit§7 in this slot to\n§7change its configured value.\n§aA Programmed Circuit in this slot is also valid for recipe inputs.§r");

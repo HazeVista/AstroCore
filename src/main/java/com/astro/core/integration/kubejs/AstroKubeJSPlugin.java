@@ -10,6 +10,7 @@ import com.astro.core.common.data.block.AstroBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.common.data.materials.AstroElements;
 import com.astro.core.common.data.materials.AstroMaterials;
+import com.astro.core.common.machine.trait.AstroPartAbility;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
 import dev.latvian.mods.kubejs.script.BindingsEvent;
 import dev.latvian.mods.kubejs.script.ScriptType;
@@ -45,6 +46,7 @@ public class AstroKubeJSPlugin extends KubeJSPlugin {
         event.add("AstroItems", AstroItems.class);
         event.add("AstroRecipeTypes", AstroRecipeTypes.class);
         event.add("AstroSoundEntries", AstroSoundEntries.class);
+        event.add("AstroPartAbility", AstroPartAbility.class);
 
         event.add("AstroCore", AstroCore.class);
     }

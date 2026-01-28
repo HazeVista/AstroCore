@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "astrogreg:block/machine/ev_mana_output_hatch",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "astrogreg:block/machine/ev_mana_output_hatch",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astrogreg:block/machine/ev_mana_output_hatch"
+    },
+    "facing=south": {
+      "model": "astrogreg:block/machine/ev_mana_output_hatch",
+      "y": 180
+    },
+    "facing=up": {
+      "gtceu:z": 180,
+      "model": "astrogreg:block/machine/ev_mana_output_hatch",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "astrogreg:block/machine/ev_mana_output_hatch",
+      "y": 270
+    }
+  }
+}

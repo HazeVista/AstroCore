@@ -9,7 +9,8 @@
     "MixinMEPatternBufferCustomName",
     "MixinMEPatternBufferPartMachine",
     "MultiblockInfoEmiCategoryMixin",
-    "MixinGTRecipeTypes"
+    "MixinGTRecipeTypes",
+    "FluidHatchesBlacklistMixin"
   ],
   "injectors": {
     "defaultRequire": 1
