@@ -6,8 +6,10 @@ import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.TieredEnergyMachine;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -53,8 +55,7 @@ public class CWUGeneratorMachine extends TieredEnergyMachine {
     public void onLoad() {
         super.onLoad();
         if (!isRemote()) {
-            lubricantTank.setFilter(fluid ->
-                    fluid.getFluid().isSame(GTMaterials.Lubricant.getFluid()));
+            lubricantTank.setFilter(fluid -> fluid.getFluid().isSame(GTMaterials.Lubricant.getFluid()));
             subscription = subscribeServerTick(subscription, this::update);
         }
     }

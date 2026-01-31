@@ -32,7 +32,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class AstroOverdriveTurbines extends WorkableElectricMultiblockMachine implements ITieredMachine, ITurbineMachine {
+public class AstroOverdriveTurbines extends WorkableElectricMultiblockMachine
+                                    implements ITieredMachine, ITurbineMachine {
 
     public static final int MIN_DURABILITY_TO_WARN = 10;
 

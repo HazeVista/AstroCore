@@ -22,10 +22,10 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import com.astro.core.AstroCore;
-import com.astro.core.common.data.AstroRecipeTypes;
-import com.astro.core.common.data.AstroBlocks;
-import com.astro.core.common.registry.AstroRegistry;
 import com.astro.core.client.renderer.machine.AstroBoilerMultiPartRender;
+import com.astro.core.common.data.AstroBlocks;
+import com.astro.core.common.data.AstroRecipeTypes;
+import com.astro.core.common.registry.AstroRegistry;
 
 import java.util.function.Supplier;
 
@@ -63,7 +63,7 @@ public class AstroBoilers {
                 .appearanceBlock(casing)
                 .partAppearance((controller, part,
                                  side) -> controller.self().getPos().below().getY() == part.self().getPos().getY() ?
-                        fireBox.get().defaultBlockState() : casing.get().defaultBlockState())
+                                         fireBox.get().defaultBlockState() : casing.get().defaultBlockState())
                 .pattern((definition) -> {
                     TraceabilityPredicate fireboxPred = blocks(fireBox.get()).setMinGlobalLimited(3)
                             .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1)

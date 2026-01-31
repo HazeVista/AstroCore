@@ -6,8 +6,8 @@ import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
-import com.astro.core.common.data.AstroMachineRecipes;
 import com.astro.core.common.data.AstroBlocks;
+import com.astro.core.common.data.AstroMachineRecipes;
 import com.astro.core.common.data.materials.AstroElements;
 import com.astro.core.common.data.recipe.AstroRecipes;
 import com.astro.core.common.data.recipe.run.AstroSleeveRecipeRunner;

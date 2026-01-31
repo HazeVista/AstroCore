@@ -41,7 +41,7 @@ public class AstroModifiedMaterials {
             { "cobalt_brass", new MaterialFlag[] { GENERATE_FRAME } },
             { "red_steel", new MaterialFlag[] { GENERATE_FRAME } },
             { "vanadium_steel", new MaterialFlag[] { GENERATE_FRAME, DISABLE_ALLOY_PROPERTY } },
-            { "bismuth_bronze", new MaterialFlag[] { GENERATE_FRAME, DISABLE_ALLOY_PROPERTY  } }
+            { "bismuth_bronze", new MaterialFlag[] { GENERATE_FRAME, DISABLE_ALLOY_PROPERTY } }
     };
 
     private static void applyFluidPipeProperties() {

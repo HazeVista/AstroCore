@@ -24,8 +24,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-
-import com.astro.core.common.registry.AstroRegistry;
 import net.minecraftforge.fluids.FluidType;
 
 import java.util.function.Supplier;
@@ -188,18 +186,50 @@ public class AstroGeneratorRegistry {
                 .register();
     }
 
-    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(String id, String lang, int tier, GTRecipeType recipeType, Supplier<Block> casing, Supplier<Block> gear, Material frameMaterial, ResourceLocation casingTexture, ResourceLocation overlayModel) {
-        return registerAstroOverdriveTurbine(REGISTRATE, id, lang, tier, recipeType, casing, gear, frameMaterial, casingTexture, overlayModel);
+    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(String id, String lang, int tier,
+                                                                            GTRecipeType recipeType,
+                                                                            Supplier<Block> casing,
+                                                                            Supplier<Block> gear,
+                                                                            Material frameMaterial,
+                                                                            ResourceLocation casingTexture,
+                                                                            ResourceLocation overlayModel) {
+        return registerAstroOverdriveTurbine(REGISTRATE, id, lang, tier, recipeType, casing, gear, frameMaterial,
+                casingTexture, overlayModel);
     }
 
-    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(GTRegistrate registrate, String id, String lang, int tier, GTRecipeType recipeType, Supplier<Block> casing, Supplier<Block> gear, Material frameMaterial, ResourceLocation casingTexture, ResourceLocation overlayModel) {
-        return registerAstroOverdriveTurbine(registrate, id, lang, tier, recipeType, casing, gear, frameMaterial, casingTexture, overlayModel, true);
+    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(GTRegistrate registrate, String id,
+                                                                            String lang, int tier,
+                                                                            GTRecipeType recipeType,
+                                                                            Supplier<Block> casing,
+                                                                            Supplier<Block> gear,
+                                                                            Material frameMaterial,
+                                                                            ResourceLocation casingTexture,
+                                                                            ResourceLocation overlayModel) {
+        return registerAstroOverdriveTurbine(registrate, id, lang, tier, recipeType, casing, gear, frameMaterial,
+                casingTexture, overlayModel, true);
     }
 
-    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(String id, String lang, int tier, GTRecipeType recipeType, Supplier<Block> casing, Supplier<Block> gear, Material frameMaterial, ResourceLocation casingTexture, ResourceLocation overlayModel, boolean needsMuffler) {
-        return registerAstroOverdriveTurbine(REGISTRATE, id, lang, tier, recipeType, casing, gear, frameMaterial, casingTexture, overlayModel, needsMuffler);
+    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(String id, String lang, int tier,
+                                                                            GTRecipeType recipeType,
+                                                                            Supplier<Block> casing,
+                                                                            Supplier<Block> gear,
+                                                                            Material frameMaterial,
+                                                                            ResourceLocation casingTexture,
+                                                                            ResourceLocation overlayModel,
+                                                                            boolean needsMuffler) {
+        return registerAstroOverdriveTurbine(REGISTRATE, id, lang, tier, recipeType, casing, gear, frameMaterial,
+                casingTexture, overlayModel, needsMuffler);
     }
-    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(GTRegistrate registrate, String id, String lang, int tier, GTRecipeType recipeType, Supplier<Block> casing, Supplier<Block> gear, Material frameMaterial, ResourceLocation casingTexture, ResourceLocation overlayModel, boolean needsMuffler) {
+
+    public static MultiblockMachineDefinition registerAstroOverdriveTurbine(GTRegistrate registrate, String id,
+                                                                            String lang, int tier,
+                                                                            GTRecipeType recipeType,
+                                                                            Supplier<Block> casing,
+                                                                            Supplier<Block> gear,
+                                                                            Material frameMaterial,
+                                                                            ResourceLocation casingTexture,
+                                                                            ResourceLocation overlayModel,
+                                                                            boolean needsMuffler) {
         return registrate.multiblock(id, holder -> new AstroOverdriveTurbines(holder, tier))
                 .langValue(lang)
                 .rotationState(RotationState.ALL)
@@ -220,7 +250,8 @@ public class AstroGeneratorRegistry {
                         .where('X', blocks(casing.get()))
                         .where('R', new TraceabilityPredicate(
                                 new SimplePredicate(
-                                        state -> MetaMachine.getMachine(state.getWorld(), state.getPos()) instanceof IRotorHolderMachine rotorHolder &&
+                                        state -> MetaMachine.getMachine(state.getWorld(),
+                                                state.getPos()) instanceof IRotorHolderMachine rotorHolder &&
                                                 state.getWorld()
                                                         .getBlockState(state.getPos()
                                                                 .relative(rotorHolder.self().getFrontFacing()))
@@ -228,17 +259,19 @@ public class AstroGeneratorRegistry {
                                         () -> PartAbility.ROTOR_HOLDER.getAllBlocks().stream()
                                                 .map(BlockInfo::fromBlock).toArray(BlockInfo[]::new)))
                                 .addTooltips(Component.translatable("gtceu.multiblock.pattern.clear_amount_3"))
-                                .addTooltips(Component.translatable("gtceu.multiblock.pattern.error.limited.1", VN[tier]))
+                                .addTooltips(
+                                        Component.translatable("gtceu.multiblock.pattern.error.limited.1", VN[tier]))
                                 .setExactLimit(1))
                         .where('C', blocks(casing.get())
                                 .or(autoAbilities(definition.getRecipeTypes(), false, true, true, true, true, true))
                                 .or(autoAbilities(true, needsMuffler, false))
-                                /*.or(abilities(PartAbility.OUTPUT_ENERGY)).setExactLimit(1)*/)
+                        /* .or(abilities(PartAbility.OUTPUT_ENERGY)).setExactLimit(1) */)
                         .where('F', frames(frameMaterial))
                         .where(' ', any())
                         .build())
                 .recoveryItems(
-                        () -> new ItemLike[] { GTMaterialItems.MATERIAL_ITEMS.get(TagPrefix.dustTiny, GTMaterials.Ash).get() })
+                        () -> new ItemLike[] {
+                                GTMaterialItems.MATERIAL_ITEMS.get(TagPrefix.dustTiny, GTMaterials.Ash).get() })
                 .workableCasingModel(casingTexture, overlayModel)
                 .tooltips(
                         Component.translatable("gtceu.universal.tooltip.base_production_eut", V[tier] * 8),

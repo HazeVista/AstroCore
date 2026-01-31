@@ -37,16 +37,16 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class AstroBoilerMultiPartRender extends DynamicRender<MultiblockControllerMachine, AstroBoilerMultiPartRender>
-        implements IControllerModelRenderer {
+                                        implements IControllerModelRenderer {
 
     public static final Codec<AstroBoilerMultiPartRender> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockState.CODEC.fieldOf("firebox_idle").forGetter(AstroBoilerMultiPartRender::getFireboxIdle),
             BlockState.CODEC.fieldOf("firebox_active").forGetter(AstroBoilerMultiPartRender::getFireboxActive),
-            BlockState.CODEC.fieldOf("casing_block").forGetter(AstroBoilerMultiPartRender::getCasing)
-    ).apply(instance, AstroBoilerMultiPartRender::new));
+            BlockState.CODEC.fieldOf("casing_block").forGetter(AstroBoilerMultiPartRender::getCasing))
+            .apply(instance, AstroBoilerMultiPartRender::new));
 
-    public static final DynamicRenderType<MultiblockControllerMachine, AstroBoilerMultiPartRender> TYPE =
-            new DynamicRenderType<>(AstroBoilerMultiPartRender.CODEC);
+    public static final DynamicRenderType<MultiblockControllerMachine, AstroBoilerMultiPartRender> TYPE = new DynamicRenderType<>(
+            AstroBoilerMultiPartRender.CODEC);
 
     @Getter
     private final BlockState fireboxIdle, fireboxActive;

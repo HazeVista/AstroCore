@@ -3,11 +3,11 @@ package com.astro.core.common.machine.multiblock.generator;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 
 import com.astro.core.AstroCore;
 import com.astro.core.common.data.AstroRecipeTypes;
-import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 
 import static com.astro.core.common.data.AstroBlocks.*;
 import static com.astro.core.common.machine.multiblock.generator.AstroGeneratorRegistry.*;
@@ -39,7 +39,8 @@ public class AstroGeneratorMultiMachines {
         OVERDRIVE_STEAM_TURBINE = registerAstroOverdriveTurbine(
                 "overdrive_steam_turbine", "Overdrive Steam Turbine",
                 GTValues.ZPM, GTRecipeTypes.STEAM_TURBINE_FUELS,
-                TURBINE_CASING_RHODIUM_PLATED_PALLADIUM, GEARBOX_CASING_RHODIUM_PLATED_PALLADIUM, GTMaterials.RhodiumPlatedPalladium,
+                TURBINE_CASING_RHODIUM_PLATED_PALLADIUM, GEARBOX_CASING_RHODIUM_PLATED_PALLADIUM,
+                GTMaterials.RhodiumPlatedPalladium,
                 AstroCore.id("block/generators/machine_casing_turbine_rhodium_plated_palladium"),
                 GTCEu.id("block/multiblock/generator/large_plasma_turbine"), false);
 

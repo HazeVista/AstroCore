@@ -26,8 +26,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 
 import com.astro.core.AstroCore;
-import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.AstroBlocks;
+import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.machine.multiblock.electric.FluidDrillMachine;
 import com.astro.core.common.machine.multiblock.electric.LargeMinerMachine;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;

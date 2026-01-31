@@ -1,6 +1,5 @@
 package com.astro.core.client;
 
-import com.astro.core.client.renderer.machine.AstroBoilerMultiPartRender;
 import com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -8,6 +7,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 
 import com.astro.core.AstroCore;
+import com.astro.core.client.renderer.machine.AstroBoilerMultiPartRender;
 import com.astro.core.client.renderer.machine.AstroFluidRender;
 
 @SuppressWarnings("all")

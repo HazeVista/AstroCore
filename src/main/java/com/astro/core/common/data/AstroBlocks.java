@@ -98,30 +98,33 @@ public class AstroBlocks {
                 "Solid §2Terrasteel§r Casing");
         ALFSTEEL_MACHINE_CASING = createCasing("machine_casing_alfsteel",
                 "generators/machine_casing_solid_alfsteel", "Solid §dAlfsteel§r Casing");
-        MACHINE_CASING_VANADIUM_STEEL = createCasing( "industrial_vanadium_steel_casing",
+        MACHINE_CASING_VANADIUM_STEEL = createCasing("industrial_vanadium_steel_casing",
                 "casings/industrial_casings/machine_casing_vanadium_steel", "Industrial Vanadium Steel Casing");
-        MACHINE_CASING_ULTIMET = createCasing( "industrial_ultimet_casing",
+        MACHINE_CASING_ULTIMET = createCasing("industrial_ultimet_casing",
                 "casings/industrial_casings/machine_casing_ultimet", "Industrial Ultimet Casing");
-        MACHINE_CASING_ROSE_GOLD = createCasing( "industrial_rose_gold_casing",
+        MACHINE_CASING_ROSE_GOLD = createCasing("industrial_rose_gold_casing",
                 "casings/industrial_casings/machine_casing_rose_gold", "Industrial Rose Gold Casing");
-        MACHINE_CASING_BLACK_STEEL = createCasing( "industrial_black_steel_casing",
+        MACHINE_CASING_BLACK_STEEL = createCasing("industrial_black_steel_casing",
                 "casings/industrial_casings/machine_casing_black_steel", "Industrial Black Steel Casing");
-        MACHINE_CASING_RED_STEEL = createCasing( "industrial_red_steel_casing",
+        MACHINE_CASING_RED_STEEL = createCasing("industrial_red_steel_casing",
                 "casings/industrial_casings/machine_casing_red_steel", "Industrial Red Steel Casing");
-        MACHINE_CASING_BLUE_STEEL = createCasing( "industrial_blue_steel_casing",
+        MACHINE_CASING_BLUE_STEEL = createCasing("industrial_blue_steel_casing",
                 "casings/industrial_casings/machine_casing_blue_steel", "Industrial Blue Steel Casing");
-        MACHINE_CASING_BISMUTH_BRONZE = createCasing( "industrial_bismuth_bronze_casing",
+        MACHINE_CASING_BISMUTH_BRONZE = createCasing("industrial_bismuth_bronze_casing",
                 "casings/industrial_casings/machine_casing_bismuth_bronze", "Industrial Bismuth Bronze Casing");
-        MACHINE_CASING_COBALT_BRASS = createCasing( "industrial_cobalt_brass_casing",
+        MACHINE_CASING_COBALT_BRASS = createCasing("industrial_cobalt_brass_casing",
                 "casings/industrial_casings/machine_casing_cobalt_brass", "Industrial Cobalt Brass Casing");
-        MACHINE_CASING_CARBON_FIBER_MESH = createCasing( "industrial_carbon_fiber_casing",
+        MACHINE_CASING_CARBON_FIBER_MESH = createCasing("industrial_carbon_fiber_casing",
                 "casings/industrial_casings/machine_casing_carbon_fiber_mesh", "Industrial Carbon Fiber Mesh Casing");
-        MACHINE_CASING_POLYVINYL_CHLORIDE = createCasing( "industrial_polyvinyl_chloride_casing",
-                "casings/industrial_casings/machine_casing_polyvinyl_chloride", "Industrial Polyvinyl Chloride Coated Casing");
-        MACHINE_CASING_SILICONE_RUBBER = createCasing( "industrial_silicone_rubber_casing",
-                "casings/industrial_casings/machine_casing_silicone_rubber", "Industrial Silicone Rubber Coated Casing");
-        MACHINE_CASING_STYRENE_BUTADIENE = createCasing( "industrial_styrene_butadiene_rubber_casing",
-                "casings/industrial_casings/machine_casing_styrene_butadiene_rubber", "Industrial Styrene Butadiene Rubber Coated Casing");
+        MACHINE_CASING_POLYVINYL_CHLORIDE = createCasing("industrial_polyvinyl_chloride_casing",
+                "casings/industrial_casings/machine_casing_polyvinyl_chloride",
+                "Industrial Polyvinyl Chloride Coated Casing");
+        MACHINE_CASING_SILICONE_RUBBER = createCasing("industrial_silicone_rubber_casing",
+                "casings/industrial_casings/machine_casing_silicone_rubber",
+                "Industrial Silicone Rubber Coated Casing");
+        MACHINE_CASING_STYRENE_BUTADIENE = createCasing("industrial_styrene_butadiene_rubber_casing",
+                "casings/industrial_casings/machine_casing_styrene_butadiene_rubber",
+                "Industrial Styrene Butadiene Rubber Coated Casing");
         MACHINE_CASING_RHODIUM_PLATED_PALLADIUM = createSidedCasingBlock(
                 "Pristine Rhodium Plated Palladium Machine Casing", "machine_casing_pristine_rhodium_plated_palladium",
                 "casings/machine_casing_pristine_rhodium_plated_palladium", BlockItem::new);
@@ -148,7 +151,7 @@ public class AstroBlocks {
         TURBINE_CASING_NAQUADAH_ALLOY = createSidedCasingBlock("Naquadah Alloy Turbine Casing",
                 "machine_casing_turbine_naquadah_alloy", "generators/machine_casing_turbine_naquadah_alloy",
                 BlockItem::new);
-//         EXAMPLE_CASING = createCasing( "", "", "");
+        // EXAMPLE_CASING = createCasing( "", "", "");
 
         // 3. Pipe Casings
         MANASTEEL_PIPE_CASING = createSidedCasingBlock("§9Manasteel§r Pipe Casing", "manasteel_pipe_casing",
