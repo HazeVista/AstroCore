@@ -1,5 +1,6 @@
 package com.astro.core.common.machine.hatches;
 
+import com.astro.core.common.data.machine.AstroMachineUtils;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
@@ -95,6 +96,20 @@ public class AstroHatches {
                         .register();
             },
             LV, MV, HV, EV, IV, LuV, ZPM, UV, UHV);
+
+//    public static final MachineDefinition[] CWU_INPUT_HATCH = AstroMachineUtils.registerTieredMachines(
+//            "cwu_input_hatch",
+//            CWUInputHatch::new,
+//            (tier, builder) -> builder
+//                    .langValue("Simple Data Reception Hatch")
+//                    .abilities(AstroPartAbility.IMPORT_CWU)
+//                    .tooltips(Component.translatable("astrogreg.machine.cwu_input_hatch.tooltip"),
+//                            Component.translatable("gtceu.part_sharing.disabled"))
+//                    .rotationState(RotationState.ALL)
+//                    .modelProperty(IS_FORMED, false)
+//                    .overlayTieredHullModel("optical_data_hatch")
+//                    .register(),
+//            HV);
 
     public static void init() {}
 }
