@@ -41,7 +41,11 @@ public class AstroModifiedMaterials {
             { "cobalt_brass", new MaterialFlag[] { GENERATE_FRAME } },
             { "red_steel", new MaterialFlag[] { GENERATE_FRAME } },
             { "vanadium_steel", new MaterialFlag[] { GENERATE_FRAME, DISABLE_ALLOY_PROPERTY } },
-            { "bismuth_bronze", new MaterialFlag[] { GENERATE_FRAME, DISABLE_ALLOY_PROPERTY } }
+            { "bismuth_bronze", new MaterialFlag[] { GENERATE_FRAME, DISABLE_ALLOY_PROPERTY } },
+            { "sbr", new MaterialFlag[] { GENERATE_FRAME } },
+            { "silicone", new MaterialFlag[] { GENERATE_FRAME } },
+            { "pvc", new MaterialFlag[] { GENERATE_FRAME } }
+
     };
 
     private static void applyFluidPipeProperties() {
@@ -112,6 +116,9 @@ public class AstroModifiedMaterials {
             case "rose_gold" -> RoseGold;
             case "cobalt_brass" -> Cobalt;
             case "bismuth_bronze" -> BismuthBronze;
+            case "sbr" -> StyreneButadieneRubber;
+            case "pvc" -> PolyvinylChloride;
+            case "silicone" -> SiliconeRubber;
             default -> null;
         };
     }
