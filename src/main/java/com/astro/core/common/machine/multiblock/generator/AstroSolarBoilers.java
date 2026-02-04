@@ -328,7 +328,7 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         }
         double intensity = getDimensionMultiplier() * 100;
         textList.add(Component.translatable("astrogreg.machine.solar_boiler_array.solar_intensity",
-                        String.format("%.1f", intensity))
+                String.format("%.1f", intensity))
                 .withStyle(ChatFormatting.GOLD));
 
         ChatFormatting tempColor = temperature >= EXPLOSION_THRESHOLD ? ChatFormatting.DARK_RED :
@@ -340,11 +340,11 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
         double currentEff = temperature <= startTemp ? 0 :
                 (double) (temperature - startTemp) / (MAX_TEMP - startTemp) * 100;
         textList.add(Component.translatable("astrogreg.machine.solar_boiler_array.thermal_efficiency",
-                        String.format("%.1f", currentEff))
+                String.format("%.1f", currentEff))
                 .withStyle(ChatFormatting.AQUA));
 
         textList.add(Component.translatable("astrogreg.machine.solar_boiler_array.cell_quality",
-                        String.format("%.2f", cellMultiplier))
+                String.format("%.2f", cellMultiplier))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         textList.add(Component.translatable("astrogreg.machine.solar_boiler_array.sunlit_cells", sunlit)

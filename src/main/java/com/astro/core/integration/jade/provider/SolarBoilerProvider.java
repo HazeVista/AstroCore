@@ -1,19 +1,21 @@
 package com.astro.core.integration.jade.provider;
 
 import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
-import com.astro.core.AstroCore;
-import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
-import com.astro.core.common.data.configs.AstroConfigs;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+
+import com.astro.core.AstroCore;
+import com.astro.core.common.data.configs.AstroConfigs;
+import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
+import org.lwjgl.glfw.GLFW;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import org.lwjgl.glfw.GLFW;
 
 public class SolarBoilerProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
@@ -57,7 +59,7 @@ public class SolarBoilerProvider implements IBlockComponentProvider, IServerData
 
         // Solar Intensity: 100.0%
         tooltip.add(Component.translatable("astrogreg.machine.solar_boiler_array.solar_intensity",
-                        String.format("%.1f", intensity))
+                String.format("%.1f", intensity))
                 .withStyle(ChatFormatting.GOLD));
 
         // Temperature: 1000°C
@@ -68,12 +70,12 @@ public class SolarBoilerProvider implements IBlockComponentProvider, IServerData
 
         // Thermal Efficiency: 100.0%
         tooltip.add(Component.translatable("astrogreg.machine.solar_boiler_array.thermal_efficiency",
-                        String.format("%.1f", efficiency))
+                String.format("%.1f", efficiency))
                 .withStyle(ChatFormatting.AQUA));
 
         // Cell Quality: 15.00x
         tooltip.add(Component.translatable("astrogreg.machine.solar_boiler_array.cell_quality",
-                        String.format("%.2f", cellMultiplier))
+                String.format("%.2f", cellMultiplier))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         // Sunlit Cells: 49

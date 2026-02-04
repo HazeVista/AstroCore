@@ -6,18 +6,23 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 public class AstroLangHandler {
 
     public static void init(RegistrateLangProvider provider) {
-
         // multiblock tooltips
-        provider.add("astrogreg.machine.coke_oven_description.tooltip", "Making better fuels for Steel and Power Generation");
-        provider.add("astrogreg.machine.coke_oven_parallels.tooltip", "Gains Parallels for each layer in length added for up to 16 Parallels total");
+        provider.add("astrogreg.machine.coke_oven_description.tooltip",
+                "Making better fuels for Steel and Power Generation");
+        provider.add("astrogreg.machine.coke_oven_parallels.tooltip",
+                "Gains Parallels for each layer in length added for up to 16 Parallels total");
 
         provider.add("astrogreg.machine.steam_blast_furnace.steam_usage", "Using %s mB/t Steam (%s mB/t x %s)");
         provider.add("astrogreg.machine.steam_blast_furnace.parallels", "Parallels: %s (active: %s)");
 
-        provider.add("astrogreg.machine.solar_boiler_array_sunlit_info.tooltip", "Cells must be exposed to direct sunlight to work properly.");
-        provider.add("astrogreg.machine.solar_boiler_array_heat_speed.tooltip", "Heating speed scales with distance from the Sun.");
-        provider.add("astrogreg.machine.solar_boiler_array_heat_scaling.tooltip", "Heat scaling: §e−1 K/s per Cell below 40 or +1% heating speed per sunlit Cell above 40");
-        provider.add("astrogreg.machine.solar_boiler_array_max_cells.tooltip", "Max Cell Count: §e33 x 33 (1089 Cells)");
+        provider.add("astrogreg.machine.solar_boiler_array_sunlit_info.tooltip",
+                "Cells must be exposed to direct sunlight to work properly.");
+        provider.add("astrogreg.machine.solar_boiler_array_heat_speed.tooltip",
+                "Heating speed scales with distance from the Sun.");
+        provider.add("astrogreg.machine.solar_boiler_array_heat_scaling.tooltip",
+                "Heat scaling: §e−1 K/s per Cell below 40 or +1% heating speed per sunlit Cell above 40");
+        provider.add("astrogreg.machine.solar_boiler_array_max_cells.tooltip",
+                "Max Cell Count: §e33 x 33 (1089 Cells)");
         provider.add("astrogreg.machine.solar_boiler_array.not_formed", "STRUCTURE NOT FORMED");
         provider.add("astrogreg.machine.solar_boiler_array.solar_intensity", "Solar Intensity: %s%%");
         provider.add("astrogreg.machine.solar_boiler_array.temperature", "Temperature: %s°C");
@@ -30,7 +35,8 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.solar_boiler_array.danger_cool_first", "Wait for the array to cool first.");
         provider.add("astrogreg.machine.solar_boiler_array.hold_shift", "§o§7Hold Shift for details");
 
-        provider.add("astrogreg.machine.industrial_core.tooltip", "Maximum EU/t for this machine is limited by the tier of its §bIndustrial Processing Core§r.");
+        provider.add("astrogreg.machine.industrial_core.tooltip",
+                "Maximum EU/t for this machine is limited by the tier of its §bIndustrial Processing Core§r.");
         provider.add("astrogreg.machine.processing_core.core", "§aProcessing Core:§r §6%s");
         provider.add("astrogreg.machine.processing_core.max_eut", "§aMax EU/t:§r §f%s (%s§r)");
         provider.add("config.jade.plugin_astrogreg.processing_core_info", "§aIndustrial Processing Core Info§r");
@@ -46,9 +52,12 @@ public class AstroLangHandler {
 
         provider.add("astrogreg.machine.cwu_input_hatch.tooltip", "Accepts CWU from adjacent CWU Generators");
 
-        provider.add("astrogreg.machine.expanded_me_pattern_buffer.tooltip.0", "§fAllows expanded direct §6AE2 pattern storage §ffor GregTech Multiblocks.");
-        provider.add("astrogreg.machine.expanded_me_pattern_buffer.tooltip.1", "§fLink §6Expanded Pattern Buffer Proxies §fwith a §bdatastick §fto link machines together!");
-        provider.add("astrogreg.machine.expanded_me_pattern_buffer_proxy.tooltip.0", "§fAllows linking many machines to a singular §6Expanded ME Pattern Buffer§f.");
+        provider.add("astrogreg.machine.expanded_me_pattern_buffer.tooltip.0",
+                "§fAllows expanded direct §6AE2 pattern storage §ffor GregTech Multiblocks.");
+        provider.add("astrogreg.machine.expanded_me_pattern_buffer.tooltip.1",
+                "§fLink §6Expanded Pattern Buffer Proxies §fwith a §bdatastick §fto link machines together!");
+        provider.add("astrogreg.machine.expanded_me_pattern_buffer_proxy.tooltip.0",
+                "§fAllows linking many machines to a singular §6Expanded ME Pattern Buffer§f.");
         provider.add("astrogreg.machine.me_tag_input_bus.tooltip.0", "§6Tag‑based AE2 Item Import");
         provider.add("astrogreg.machine.me_tag_input_bus.tooltip.1", "§7Matches items via tag expressions");
         provider.add("astrogreg.machine.me_tag_input_hatch.tooltip.0", "§6Tag‑based AE2 Fluid Import");

@@ -1,6 +1,5 @@
 package com.astro.core.common.machine.multiblock;
 
-import com.astro.core.common.machine.multiblock.electric.ProcessingCoreMachine;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -27,6 +26,7 @@ import com.astro.core.AstroCore;
 import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.machine.multiblock.electric.FluidDrillMachine;
 import com.astro.core.common.machine.multiblock.electric.LargeMinerMachine;
+import com.astro.core.common.machine.multiblock.electric.ProcessingCoreMachine;
 import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
 import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
@@ -315,7 +315,8 @@ public class AGEMultiMachines {
                     Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                             Component.translatable("gtceu.autoclave")),
                     Component.translatable("gtceu.multiblock.exact_hatch_1.tooltip"))
-            .workableCasingModel(AstroCore.id("block/casings/industrial_casings/machine_casing_styrene_butadiene_rubber"),
+            .workableCasingModel(
+                    AstroCore.id("block/casings/industrial_casings/machine_casing_styrene_butadiene_rubber"),
                     AstroCore.id("block/multiblock/autoclave"))
             .register();
 

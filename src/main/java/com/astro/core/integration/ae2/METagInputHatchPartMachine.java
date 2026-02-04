@@ -54,7 +54,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class METagInputHatchPartMachine extends MEHatchPartMachine
-        implements IDataStickInteractable, IMachineLife {
+                                        implements IDataStickInteractable, IMachineLife {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             METagInputHatchPartMachine.class,
@@ -296,7 +296,7 @@ public class METagInputHatchPartMachine extends MEHatchPartMachine
             blacklistExpr = "";
             updateConfigurationFromTags();
         }).setTexture(new GuiTextureGroup(GuiTextures.VANILLA_BUTTON,
-                        new TextTexture("astrogreg.gui.me_tag.clear")),
+                new TextTexture("astrogreg.gui.me_tag.clear")),
                 new GuiTextureGroup(GuiTextures.VANILLA_BUTTON,
                         new TextTexture("astrogreg.gui.me_tag.clear"))));
 

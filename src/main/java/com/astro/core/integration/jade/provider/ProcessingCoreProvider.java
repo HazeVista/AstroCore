@@ -2,12 +2,14 @@ package com.astro.core.integration.jade.provider;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
-import com.astro.core.AstroCore;
-import com.astro.core.common.machine.multiblock.electric.ProcessingCoreMachine;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+
+import com.astro.core.AstroCore;
+import com.astro.core.common.machine.multiblock.electric.ProcessingCoreMachine;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;

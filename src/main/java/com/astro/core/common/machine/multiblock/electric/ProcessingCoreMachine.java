@@ -8,8 +8,10 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
+
 import org.jetbrains.annotations.NotNull;
 
 import static com.astro.core.common.data.AstroBlocks.*;

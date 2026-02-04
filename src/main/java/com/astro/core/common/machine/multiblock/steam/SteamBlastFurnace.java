@@ -85,8 +85,11 @@ public class SteamBlastFurnace extends SteamParallelMultiblockMachine {
         int p = Math.max(1, this.activeParallels);
         int perParallel = 6;
         int total = perParallel * p;
-        textList.add(Component.translatable("astrogreg.machine.steam_blast_furnace.steam_usage", total, perParallel, p));
-        textList.add(Component.translatable("astrogreg.machine.steam_blast_furnace.parallels", clampTargetParallel(this.targetParallel), p)
+        textList.add(
+                Component.translatable("astrogreg.machine.steam_blast_furnace.steam_usage", total, perParallel, p));
+        textList.add(Component
+                .translatable("astrogreg.machine.steam_blast_furnace.parallels",
+                        clampTargetParallel(this.targetParallel), p)
                 .append(ComponentPanelWidget.withButton(Component.literal(" [-] "), "parallelSub"))
                 .append(ComponentPanelWidget.withButton(Component.literal("[+]"), "parallelAdd")));
     }

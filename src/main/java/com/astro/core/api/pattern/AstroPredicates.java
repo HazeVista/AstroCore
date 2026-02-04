@@ -2,10 +2,13 @@ package com.astro.core.api.pattern;
 
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.common.block.LampBlock;
+
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
-import com.tterrag.registrate.util.entry.BlockEntry;
+
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockState;
+
+import com.tterrag.registrate.util.entry.BlockEntry;
 
 import java.util.*;
 
@@ -13,6 +16,7 @@ import static com.gregtechceu.gtceu.common.data.GTBlocks.BORDERLESS_LAMPS;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.LAMPS;
 
 public class AstroPredicates {
+
     @SafeVarargs
     public static TraceabilityPredicate lamps(BlockEntry<LampBlock>... lampEntries) {
         return new TraceabilityPredicate(blockWorldState -> {
@@ -25,6 +29,7 @@ public class AstroPredicates {
                 .map(entry -> new BlockInfo(entry.get().defaultBlockState(), null))
                 .toArray(BlockInfo[]::new));
     }
+
     public static TraceabilityPredicate anyLamp() {
         List<BlockEntry<LampBlock>> all = new ArrayList<>();
         all.addAll(LAMPS.values());

@@ -42,7 +42,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class METagInputBusPartMachine extends MEBusPartMachine
-        implements IDataStickInteractable, IMachineLife, IHasCircuitSlot {
+                                      implements IDataStickInteractable, IMachineLife, IHasCircuitSlot {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             METagInputBusPartMachine.class, MEBusPartMachine.MANAGED_FIELD_HOLDER);
@@ -189,7 +189,7 @@ public class METagInputBusPartMachine extends MEBusPartMachine
             blacklistExpr = "";
             updateConfigurationFromTags();
         }).setTexture(new GuiTextureGroup(GuiTextures.VANILLA_BUTTON,
-                        new TextTexture("astrogreg.gui.me_tag.clear")),
+                new TextTexture("astrogreg.gui.me_tag.clear")),
                 new GuiTextureGroup(GuiTextures.VANILLA_BUTTON,
                         new TextTexture("astrogreg.gui.me_tag.clear"))));
 
@@ -231,6 +231,7 @@ public class METagInputBusPartMachine extends MEBusPartMachine
     }
 
     private static class LargeAmountPreviewWidget extends Widget {
+
         private final int index;
         private final METagInputBusPartMachine machine;
 
