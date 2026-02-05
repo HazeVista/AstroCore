@@ -25,6 +25,9 @@ public class MixinGTRecipeTypes {
     public static GTRecipeType CENTRIFUGE_RECIPES;
     @Shadow
     @Final
+    public static GTRecipeType MACERATOR_RECIPES;
+    @Shadow
+    @Final
     public static GTRecipeType MIXER_RECIPES;
 
     @Inject(method = "init", at = @At(value = "TAIL"), remap = false)
@@ -33,6 +36,8 @@ public class MixinGTRecipeTypes {
 
         CENTRIFUGE_RECIPES.setSteamProgressBar(GuiTextures.PROGRESS_BAR_EXTRACT_STEAM, FillDirection.LEFT_TO_RIGHT);
         CENTRIFUGE_RECIPES.setMaxIOSize(2, 6, 1, 3);
+
+        MACERATOR_RECIPES.setMaxIOSize(1, 6, 0, 0);
 
         MIXER_RECIPES.setSteamProgressBar(AstroGUITextures.PROGRESS_BAR_STEAM_MIXER, FillDirection.LEFT_TO_RIGHT);
     }

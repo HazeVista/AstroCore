@@ -114,7 +114,7 @@ public class AstroModifiedMaterials {
             case "red_steel" -> RedSteel;
             case "vanadium_steel" -> VanadiumSteel;
             case "rose_gold" -> RoseGold;
-            case "cobalt_brass" -> Cobalt;
+            case "cobalt_brass" -> CobaltBrass;
             case "bismuth_bronze" -> BismuthBronze;
             case "sbr" -> StyreneButadieneRubber;
             case "pvc" -> PolyvinylChloride;
