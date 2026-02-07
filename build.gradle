@@ -232,8 +232,10 @@ dependencies {
     modImplementation("owmii.powah:Powah-${powah_version}")
     modImplementation("me.shedaniel:cloth-config-${cloth_version}-forge")
 
+    //Flux Networks
+    modImplementation("curse.maven:flux-networks-248020:5234697")
 
-//    Apply Mixin AP
+    //Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 

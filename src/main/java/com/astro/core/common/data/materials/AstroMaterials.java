@@ -21,6 +21,7 @@ import com.simibubi.create.AllItems;
 import earth.terrarium.adastra.common.registry.ModItems;
 import owmii.powah.block.Blcks;
 import owmii.powah.item.Itms;
+import sonar.fluxnetworks.register.RegistryItems;
 
 import static com.astro.core.common.data.materials.AstroMaterialSet.DULL_MAGNETIC;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
@@ -50,6 +51,7 @@ public class AstroMaterials {
     public static Material KRONALIUM;
     public static Material ENERGIZED_STEEL;
     public static Material DIELECTRIC;
+    public static Material FLUX;
     public static Material SKY_STONE;
     public static Material FLUIX;
     public static Material FLUIX_PEARL;
@@ -57,6 +59,10 @@ public class AstroMaterials {
     public static Material POLYAMIDE_IMIDE;
     public static Material BLAZING_ETRIUM;
     public static Material NIOTIC_CALORITE;
+    public static Material SPIRITED_URANIUM;
+    public static Material NITRO_FLUX;
+    public static Material RADIANT_ZEPHYRON;
+    public static Material THALASSIUM;
     public static Material DEIONIZED_WATER;
     public static Material DIVINYLBENZENE;
     public static Material DIETHYLBENZENE;
@@ -254,6 +260,16 @@ public class AstroMaterials {
                 .components(Carbon, 3, Blaze, 1, Clay, 2)
                 .buildAndRegister();
 
+        // Flux Networks
+        FLUX = new Material.Builder(
+                AstroCore.id("flux"))
+                .langValue("Flux")
+                .ingot()
+                .color(0x222422).iconSet(ROUGH)
+                .flags(GENERATE_ROD, GENERATE_FRAME, GENERATE_PLATE)
+                .components(DIELECTRIC, 4, Obsidian, 3, Silicon, 3)
+                .buildAndRegister();
+
         // Applied Energistics
         SKY_STONE = new Material.Builder(
                 AstroCore.id("sky_stone"))
@@ -314,7 +330,6 @@ public class AstroMaterials {
                 .components(Carbon, 22, Hydrogen, 14, Nitrogen, 2, Oxygen, 3)
                 .fluidPipeProperties(1400, 1000, true, true, true, true)
                 .color(0xd9ac37).secondaryColor(0x54301a).iconSet(DULL)
-                // .components().formula()
                 .buildAndRegister();
 
         BLAZING_ETRIUM = new Material.Builder(
@@ -347,8 +362,69 @@ public class AstroMaterials {
                         GENERATE_FINE_WIRE, GENERATE_RING, GENERATE_FRAME, DISABLE_ALLOY_BLAST)
                 .cableProperties(V[GTValues.HV], 16, 0, true)
                 .rotorStats(220, 170, 3, 16000)
-                // .components()
-                // .formula("")
+                .components(CALORITE, 3, EnderPearl, 2)
+                .buildAndRegister();
+
+        SPIRITED_URANIUM = new Material.Builder(
+                AstroCore.id("spirited_uranium"))
+                .ingot()
+                .liquid(2178)
+                .cableProperties(V[GTValues.EV], 24, 0, true)
+                .blastTemp(3500, BlastProperty.GasTier.LOW, 7680, 1200)
+                .rotorStats(300, 190, 3, 18000)
+                .color(0xcb74cc).secondaryColor(0xffebff).iconSet(RADIOACTIVE)
+                .flags(GENERATE_FOIL, GENERATE_GEAR, GENERATE_LONG_ROD,
+                        GENERATE_PLATE, GENERATE_SMALL_GEAR, GENERATE_ROD,
+                        GENERATE_SMALL_GEAR, GENERATE_ROTOR, DISABLE_ALLOY_PROPERTY,
+                        GENERATE_FINE_WIRE, GENERATE_RING, GENERATE_FRAME, DISABLE_ALLOY_BLAST)
+                // .components(ENERGIZED_STEEL, , Uranium235)
+                .buildAndRegister();
+
+        NITRO_FLUX = new Material.Builder(
+                AstroCore.id("nitro_flux"))
+                .langValue("Nitro-Flux")
+                .ingot()
+                .liquid(2856)
+                .cableProperties(V[GTValues.IV], 32, 0, true)
+                .blastTemp(4400, BlastProperty.GasTier.MID, 30720, 1400)
+                .rotorStats(450, 220, 3, 20000)
+                .color(0x332f94).secondaryColor(0x110c9c).iconSet(SHINY)
+                .flags(GENERATE_FOIL, GENERATE_GEAR, GENERATE_LONG_ROD,
+                        GENERATE_PLATE, GENERATE_SMALL_GEAR, GENERATE_ROD,
+                        GENERATE_SMALL_GEAR, GENERATE_ROTOR, DISABLE_ALLOY_PROPERTY,
+                        GENERATE_FINE_WIRE, GENERATE_RING, GENERATE_FRAME, DISABLE_ALLOY_BLAST)
+                .components(FLUX, 5, ManganesePhosphide, 2, Platinum, 2)
+                .buildAndRegister();
+
+        RADIANT_ZEPHYRON = new Material.Builder(
+                AstroCore.id("radiant_zephyron"))
+                .ingot()
+                .liquid(3744)
+                .cableProperties(V[GTValues.LuV], 48, 0, true)
+                .blastTemp(5300, BlastProperty.GasTier.MID, 122880, 1600)
+                .rotorStats(700, 260, 3, 24000)
+                .color(0xf66999).secondaryColor(0xfa3779).iconSet(BRIGHT)
+                .flags(GENERATE_FOIL, GENERATE_GEAR, GENERATE_LONG_ROD,
+                        GENERATE_PLATE, GENERATE_SMALL_GEAR, GENERATE_ROD,
+                        GENERATE_SMALL_GEAR, GENERATE_ROTOR, DISABLE_ALLOY_PROPERTY,
+                        GENERATE_FINE_WIRE, GENERATE_RING, GENERATE_FRAME, DISABLE_ALLOY_BLAST)
+                // .components(NIOTIC_CALORITE, )
+                .buildAndRegister();
+
+        THALASSIUM = new Material.Builder(
+                AstroCore.id("neptunium_molybdenum_selenide"))
+                .langValue("Thalassium")
+                .ingot()
+                .liquid(3920)
+                .cableProperties(V[GTValues.UV], 96, 0, true)
+                .blastTemp(10000, BlastProperty.GasTier.HIGHER, 1966080, 2000)
+                .rotorStats(2000, 550, 3, 48000)
+                .color(0x088a5c).secondaryColor(0x65f4fc).iconSet(RADIOACTIVE)
+                .flags(GENERATE_FOIL, GENERATE_GEAR, GENERATE_LONG_ROD,
+                        GENERATE_PLATE, GENERATE_SMALL_GEAR, GENERATE_ROD,
+                        GENERATE_SMALL_GEAR, GENERATE_ROTOR, DISABLE_ALLOY_PROPERTY,
+                        GENERATE_FINE_WIRE, GENERATE_RING, GENERATE_FRAME, DISABLE_ALLOY_BLAST)
+                .components(Neptunium, 1, Molybdenum, 3, Selenium, 4)
                 .buildAndRegister();
 
         DEIONIZED_WATER = new Material.Builder(
@@ -573,7 +649,6 @@ public class AstroMaterials {
                 .buildAndRegister();
 
         createComponentDusts();
-        createSuperConductors();
     }
 
     public static void init() {
@@ -629,6 +704,9 @@ public class AstroMaterials {
 
         dust.setIgnored(DIELECTRIC, () -> Itms.DIELECTRIC_PASTE.get());
 
+        // flux
+        dust.setIgnored(FLUX, () -> RegistryItems.FLUX_DUST.get());
+
         // ae2
         dust.setIgnored(SKY_STONE, AEItems.SKY_DUST);
 
@@ -674,27 +752,6 @@ public class AstroMaterials {
                     new MaterialFlag[] { DISABLE_DECOMPOSITION } },
     };
 
-    // SuperCons: ID, Name, Color 1, Color 2, Icon Set, Blast Properties, Cable Properties, Rotor Properties
-    private static final Object[][] SUPERCONDUCTORS = {
-            { "spirited_uranium", "Spirited Uranium", 0xcb74cc, 0xffebff, RADIOACTIVE,
-                    new Object[] { 3500, BlastProperty.GasTier.LOW, 7680, 1200 },
-                    new Object[] { V[GTValues.EV], 24, 0, true },
-                    new Object[] { 300, 190, 3, 18000 } },
-            { "nitro_flux", "Nitro-Flux", 0x332f94, 0x110c9c, SHINY,
-                    new Object[] { 4400, BlastProperty.GasTier.MID, 30720, 1400 },
-                    new Object[] { V[GTValues.IV], 32, 0, true },
-                    new Object[] { 450, 220, 3, 20000 } },
-            { "juperiosaturlytide", "Juperio-Saturlytide", 0xf66999, 0xfa3779, BRIGHT,
-                    new Object[] { 5300, BlastProperty.GasTier.MID, 122880, 1600 },
-                    new Object[] { V[GTValues.LuV], 48, 0, true },
-                    new Object[] { 700, 260, 3, 24000 } },
-            { "neptunium_molybdenum_selenide", "Neptunium Molybdenum Selenide", 0x088a5c, 0x65f4fc,
-                    RADIOACTIVE,
-                    new Object[] { 10000, BlastProperty.GasTier.HIGHER, 1966080, 2000 },
-                    new Object[] { V[GTValues.UV], 96, 0, true },
-                    new Object[] { 2000, 550, 3, 48000 } }
-    };
-
     private static void createComponentDusts() {
         for (Object[] dust : COMPONENT_DUSTS) {
             String name = (String) dust[0];
@@ -727,42 +784,6 @@ public class AstroMaterials {
                 case "livingclay" -> LIVINGCLAY = material;
                 case "acorn" -> ACORN = material;
             }
-        }
-    }
-
-    private static void createSuperConductors() {
-        MaterialFlag[] superConductorFlags = new MaterialFlag[] {
-                GENERATE_PLATE, GENERATE_ROD, GENERATE_FRAME, DISABLE_DECOMPOSITION,
-                GENERATE_GEAR, GENERATE_LONG_ROD, GENERATE_FOIL, GENERATE_RING,
-                GENERATE_SMALL_GEAR, GENERATE_FINE_WIRE, GENERATE_ROTOR
-        };
-
-        for (Object[] sc : SUPERCONDUCTORS) {
-            String id = (String) sc[0];
-            String name = (String) sc[1];
-            int color = (int) sc[2];
-            int secColor = (int) sc[3];
-            MaterialIconSet icon = (MaterialIconSet) sc[4];
-            Object[] blast = (Object[]) sc[5];
-            Object[] cable = (Object[]) sc[6];
-            Object[] rotor = (Object[]) sc[7];
-
-            Material material = new Material.Builder(AstroCore.id(id))
-                    .langValue(name)
-                    .ingot()
-                    .fluid()
-                    .color(color)
-                    .secondaryColor(secColor)
-                    .iconSet(icon)
-                    .blastTemp((int) blast[0], (BlastProperty.GasTier) blast[1], (int) blast[2], (int) blast[3])
-                    .cableProperties((long) cable[0], (int) cable[1], (int) cable[2], (boolean) cable[3])
-                    .rotorStats(
-                            ((Number) rotor[0]).intValue(),
-                            ((Number) rotor[1]).intValue(),
-                            ((Number) rotor[2]).intValue(),
-                            ((Number) rotor[3]).intValue())
-                    .flags(superConductorFlags)
-                    .buildAndRegister();
         }
     }
 }
