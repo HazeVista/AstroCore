@@ -47,6 +47,7 @@ public class AstroModifiedMaterials {
             { "silicone", new MaterialFlag[] { GENERATE_FRAME } },
             { "pvc", new MaterialFlag[] { GENERATE_FRAME } },
             { "magneo", new MaterialFlag[] { GENERATE_PLATE } },
+            { "samarium", new MaterialFlag[] { GENERATE_PLATE } },
             { "magsam", new MaterialFlag[] { GENERATE_PLATE } }
 
     };
@@ -123,6 +124,7 @@ public class AstroModifiedMaterials {
             case "pvc" -> PolyvinylChloride;
             case "silicone" -> SiliconeRubber;
             case "magneo" -> NeodymiumMagnetic;
+            case "samarium" -> Samarium;
             case "magsam" -> SamariumMagnetic;
             default -> null;
         };

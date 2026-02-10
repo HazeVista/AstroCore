@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import com.astro.core.common.data.AstroRecipeTypes;
 import com.astro.core.common.data.materials.AstroMaterials;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;

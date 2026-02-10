@@ -40,6 +40,11 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.processing_core.max_eut", "§aMax EU/t:§r §f%s (%s§r)");
         provider.add("config.jade.plugin_astrogreg.processing_core_info", "§aIndustrial Processing Core Info§r");
 
+        provider.add("astrogreg.machine.faraday_generator_description.tooltip", "§fConverts rotational force into EU");
+        provider.add("astrogreg.machine.faraday_generator_expanding.tooltip", "§eBase Production:§r§f 4096 EU/t (2A §5EV§r) per Coil Row.");
+        provider.add("astrogreg.machine.faraday_generator_magnets.tooltip", "Higher tiers of §bFaraday Generator Magnet§r rows multiply EU output by 4x for that row.");
+        provider.add("astrogreg.machine.faraday_generator_max_length.tooltip", "§aMax Length:§r§e 64 Coil Rows");
+
         provider.add("astrogreg.machine.large_miner.zpm.tooltip", "Planetary Depletion Apparatus");
         provider.add("astrogreg.machine.fluid_drilling_rig.iv.tooltip", "Crust Sucker");
 

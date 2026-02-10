@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.Block;
 import com.astro.core.AstroCore;
 import com.astro.core.client.renderer.machine.AstroBoilerMultiPartRender;
 import com.astro.core.common.data.AstroBlocks;
-import com.astro.core.common.data.AstroRecipeTypes;
+import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import com.astro.core.common.registry.AstroRegistry;
 
 import java.util.function.Supplier;

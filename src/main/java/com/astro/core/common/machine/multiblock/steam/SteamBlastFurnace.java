@@ -16,7 +16,7 @@ import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
 import net.minecraft.network.chat.Component;
 
-import com.astro.core.common.data.AstroRecipeTypes;
+import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import com.astro.core.common.data.configs.AstroConfigs;
 import org.jetbrains.annotations.Nullable;
 

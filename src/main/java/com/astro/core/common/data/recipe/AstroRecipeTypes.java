@@ -1,4 +1,4 @@
-package com.astro.core.common.data;
+package com.astro.core.common.data.recipe;
 
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
@@ -25,6 +25,7 @@ public class AstroRecipeTypes {
     public static GTRecipeType DEIONIZATION_RECIPES;
     public static GTRecipeType RUNE_INSCRIPTION_RECIPES;
     public static GTRecipeType STEAM_BLAST_FURNACE_RECIPES;
+    public static GTRecipeType FARADAY_GENERATOR_RECIPES;
 
     public static void init() {
         AETHER_ENGINE_RECIPES = register("aether_engine", MULTIBLOCK)
@@ -88,5 +89,11 @@ public class AstroRecipeTypes {
                         return new ItemStack(Items.PAPER);
                     }
                 });
+
+        FARADAY_GENERATOR_RECIPES = register("faraday_generator", MULTIBLOCK)
+                .setMaxIOSize(2, 1, 2, 0)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MAGNET, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setSound(GTSoundEntries.REPLICATOR)
+                .setEUIO(IO.OUT);
     }
 }

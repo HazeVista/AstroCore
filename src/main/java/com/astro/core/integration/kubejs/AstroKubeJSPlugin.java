@@ -6,7 +6,7 @@ import com.astro.core.client.AstroMachines;
 import com.astro.core.client.AstroSoundEntries;
 import com.astro.core.common.data.AstroBlocks;
 import com.astro.core.common.data.AstroItems;
-import com.astro.core.common.data.AstroRecipeTypes;
+import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.common.data.materials.AstroElements;
 import com.astro.core.common.data.materials.AstroMaterials;
