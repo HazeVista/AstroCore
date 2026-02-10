@@ -147,7 +147,8 @@ public class AstroBlocks {
         ALFSTEEL_ENGINE_CASING = createCasing("machine_casing_turbine_alfsteel",
                 "generators/machine_casing_turbine_alfsteel", "§dAlfsteel§r Engine Casing");
         TURBINE_CASING_RHODIUM_PLATED_PALLADIUM = createCasing("machine_casing_rhodium_plated_palladium",
-                "generators/machine_casing_turbine_rhodium_plated_palladium", "Rhodium Plated Palladium Turbine Casing");
+                "generators/machine_casing_turbine_rhodium_plated_palladium",
+                "Rhodium Plated Palladium Turbine Casing");
         TURBINE_CASING_NAQUADAH_ALLOY = createCasing("machine_casing_turbine_naquadah_alloy",
                 "generators/machine_casing_turbine_naquadah_alloy", "Naquadah Alloy Turbine Casing");
         // EXAMPLE_CASING = createCasing( "", "", "");
@@ -209,7 +210,6 @@ public class AstroBlocks {
                 "generators/neutronium_feg_magnet", "§cFaraday Generator Magnet MK III");
         FARADAY_GENERATOR_COIL = createBloomCoilBlock("faraday_generator_coil",
                 "generators/faraday_generator_coil", "Faraday Generator Coil");
-
     }
 
     // --- Helpers ---
