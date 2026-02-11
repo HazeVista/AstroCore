@@ -44,7 +44,7 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.faraday_generator_expanding.tooltip",
                 "§eBase Production:§r§f 4096 EU/t (§a2A§r §5EV§r) §7per§r §eMagnet Ring§r.");
         provider.add("astrogreg.machine.faraday_generator_magnets.tooltip",
-                "Higher tiers of §bFaraday Generator Magnet§r rows multiply EU/t by 4 for that §r§Magnet Ring§r.");
+                "Higher tiers of §bFaraday Generator Magnet§r rows multiply EU/t by 4 for that §r§eMagnet Ring§r.");
         provider.add("astrogreg.machine.faraday_generator_fluids.tooltip",
                 "Consumes 1mB §6Lubricant§r §7and either§r§f 100mB §r§bLiquid Oxygen§r§7 or§r 25mB §eLiquid Helium§r per second for each §eMagnet Ring§r.");
         provider.add("astrogreg.machine.faraday_generator_returns.tooltip",
