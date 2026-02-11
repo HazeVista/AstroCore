@@ -41,6 +41,7 @@ import static com.astro.core.common.machine.hatches.AstroHatches.WATER_HATCH;
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
+import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
 import static com.gregtechceu.gtceu.common.data.GTMachines.COKE_OVEN_HATCH;
@@ -58,10 +59,10 @@ public class AGEMultiMachines {
             .recipeType(COKE_OVEN_RECIPES)
             .appearanceBlock(CASING_COKE_BRICKS)
             .recipeModifier(CokeOvenMachine::recipeModifier)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle("AAA", "AAA", "AAA")
-                    .aisle("AAA", "A#A", "AAA").setRepeatable(1, 16)
+            .pattern(definition -> FactoryBlockPattern.start(LEFT, UP, BACK)
                     .aisle("AAA", "A@A", "AAA")
+                    .aisle("AAA", "A#A", "AAA").setRepeatable(1, 16)
+                    .aisle("AAA", "AAA", "AAA")
                     .where("@", controller(blocks(definition.get())))
                     .where("A", blocks(CASING_COKE_BRICKS.get())
                             .or(blocks(COKE_OVEN_HATCH.get())))

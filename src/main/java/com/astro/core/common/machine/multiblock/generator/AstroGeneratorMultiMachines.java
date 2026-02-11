@@ -29,6 +29,7 @@ import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.data.RotationState.ALL;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.controller;
+import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.common.data.GTMachines.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
 
@@ -53,18 +54,23 @@ public class AstroGeneratorMultiMachines {
                 .multiblock("faraday_electromagnetic_generator",
                         /* FaradayGeneratorMachine */WorkableElectricMultiblockMachine::new)
                 .rotationState(ALL)
+                .allowExtendedFacing(true)
                 .recipeType(AstroRecipeTypes.FARADAY_GENERATOR_RECIPES)
                 // .recipeModifiers(FaradayGeneratorMachine::recipeModifier, BATCH_MODE)
                 .recipeModifier(BATCH_MODE)
                 .appearanceBlock(GCYMBlocks.CASING_NONCONDUCTING)
-                .pattern(definition -> FactoryBlockPattern.start()
-                        .aisle(" XXXXX ", "XXXXXXX", "XXGXGXX", "XXGDGXX", "XXGXGXX", "XXXXXXX", " XXXXX ")
+                .pattern(definition -> FactoryBlockPattern.start(LEFT, UP, BACK) // BACK and not FRONT, start.() by
+                                                                                 // default is LEFT, UP, FRONT.
+                        .aisle(" XXXXX ", "XXXXXXX", "XXGXGXX", "XXG@GXX", "XXGXGXX", "XXXXXXX", " XXXXX ")  // Controller
+                                                                                                             // first
                         .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
                         .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
                         .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
                         .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
                         .setRepeatable(1, 61)
-                        .aisle(" XXXXX ", "XXXXXXX", "XXGXGXX", "XXG@GXX", "XXGXGXX", "XXXXXXX", " XXXXX ")
+                        .aisle(" XXXXX ", "XXXXXXX", "XXGXGXX", "XXGDGXX", "XXGXGXX", "XXXXXXX", " XXXXX ") // Energy
+                                                                                                            // hatch
+                                                                                                            // last
                         .where('@', controller(blocks(definition.get())))
                         .where('X', Predicates.blocks(GCYMBlocks.CASING_NONCONDUCTING.get()).setMinGlobalLimited(140)
                                 .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
@@ -90,7 +96,7 @@ public class AstroGeneratorMultiMachines {
                     tooltip.add(Component.translatable("astrogreg.machine.faraday_generator_returns.tooltip"));
                     tooltip.add(Component.translatable("astrogreg.machine.faraday_generator_max_length.tooltip"));
                 })
-                .shapeInfos(definition -> {
+                .shapeInfos(definition -> { // Nothing to change here, it works.
                     List<MultiblockShapeInfo> shapeInfos = new ArrayList<>();
 
                     for (int length = 1; length <= 61; length++) {
