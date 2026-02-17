@@ -34,16 +34,16 @@ public class ProcessingCoreProvider implements IBlockComponentProvider, IServerD
 
         switch (coreTier) {
             case GTValues.HV -> {
-                mkLevel = "MK I";
-                tierName = "HV";
+                mkLevel = "§6MK I§r";
+                tierName = "§6HV§r";
             }
             case GTValues.EV -> {
-                mkLevel = "MK II";
-                tierName = "EV";
+                mkLevel = "§5MK II§r";
+                tierName = "§5EV§r";
             }
             case GTValues.IV -> {
-                mkLevel = "MK III";
-                tierName = "IV";
+                mkLevel = "§9MK III§r";
+                tierName = "§9IV§r";
             }
             default -> {
                 return;

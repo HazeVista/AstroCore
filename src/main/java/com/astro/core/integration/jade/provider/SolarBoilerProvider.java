@@ -26,6 +26,11 @@ public class SolarBoilerProvider implements IBlockComponentProvider, IServerData
 
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+        if (!(accessor.getBlockEntity() instanceof MetaMachineBlockEntity metaMachineBE &&
+                metaMachineBE.getMetaMachine() instanceof AstroSolarBoilers)) {
+            return;
+        }
+
         CompoundTag data = accessor.getServerData();
 
         if (!data.contains("formed")) return;

@@ -36,8 +36,8 @@ public class AstroLangHandler {
 
         provider.add("astrogreg.machine.industrial_core.tooltip",
                 "Maximum EU/t for this machine is limited by the tier of its §bIndustrial Processing Core§r.");
-        provider.add("astrogreg.machine.processing_core.core", "§aProcessing Core:§r §6%s");
-        provider.add("astrogreg.machine.processing_core.max_eut", "§aMax EU/t:§r §f%s (%s§r)");
+        provider.add("astrogreg.machine.processing_core.core", "§aProcessing Core:§r %s");
+        provider.add("astrogreg.machine.processing_core.max_eut", "§aMax EU/t:§r §f%s (%s)");
         provider.add("config.jade.plugin_astrogreg.processing_core_info", "§aIndustrial Processing Core Info§r");
 
         provider.add("astrogreg.machine.faraday_generator_description.tooltip", "§fConverts rotational force into EU");
@@ -50,6 +50,16 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.faraday_generator_returns.tooltip",
                 "Returns 40%§7 of §rCoolant§7 back in§r Gaseous §7form.");
         provider.add("astrogreg.machine.faraday_generator_max_length.tooltip", "§aMax Length:§r§e 64 Magnet Rings");
+        provider.add("astrogreg.machine.faraday_generator.magnet_rows", "Magnet Rings: %s");
+        provider.add("astrogreg.machine.faraday_generator.hold_shift", "§o§7Hold Shift for details");
+        provider.add("astrogreg.machine.faraday_generator.total_output", "Total Output: %s EU/t");
+        provider.add("astrogreg.machine.faraday_generator.lubricant_usage", "Lubricant Usage: %s mB/s");
+        provider.add("astrogreg.machine.faraday_generator.coolant_usage", "Coolant Usage: %s mB/s %s");
+        provider.add("config.jade.plugin_astrogreg.faraday_generator_info", "§aFaraday Generator Info§r");
+        provider.add("astrogreg.machine.faraday_generator.rotation_speed", "Rotational Speed: %s / %s RPM");
+        provider.add("astrogreg.machine.faraday_generator.max_eu_per_tick", "Max EU/t: %s (%s)");
+        provider.add("astrogreg.machine.faraday_generator.max_recipe_tier", "Max Recipe Tier: %s");
+        provider.add("astrogreg.machine.faraday_generator.energy_output", "Energy Output: %s / %s EU/t");
 
         provider.add("astrogreg.machine.large_miner.zpm.tooltip", "Planetary Depletion Apparatus");
         provider.add("astrogreg.machine.fluid_drilling_rig.iv.tooltip", "Crust Sucker");

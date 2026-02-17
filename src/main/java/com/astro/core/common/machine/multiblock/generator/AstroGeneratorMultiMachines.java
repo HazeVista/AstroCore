@@ -51,26 +51,24 @@ public class AstroGeneratorMultiMachines {
                 AstroCore.id("block/multiblock/aether_engine"), false);
 
         FARADAY_GENERATOR = REGISTRATE
-                .multiblock("faraday_electromagnetic_generator",
-                        /* FaradayGeneratorMachine */WorkableElectricMultiblockMachine::new)
+                .multiblock("faraday_electromagnetic_generator", FaradayGeneratorMachine::new)
                 .rotationState(ALL)
                 .allowExtendedFacing(true)
                 .recipeType(AstroRecipeTypes.FARADAY_GENERATOR_RECIPES)
-                // .recipeModifiers(FaradayGeneratorMachine::recipeModifier, BATCH_MODE)
-                .recipeModifier(BATCH_MODE)
+                .recipeModifiers(FaradayGeneratorMachine::recipeModifier, BATCH_MODE)
                 .appearanceBlock(GCYMBlocks.CASING_NONCONDUCTING)
-                .pattern(definition -> FactoryBlockPattern.start(LEFT, UP, BACK) // BACK and not FRONT, start.() by
-                                                                                 // default is LEFT, UP, FRONT.
-                        .aisle(" XXXXX ", "XXXXXXX", "XXGXGXX", "XXG@GXX", "XXGXGXX", "XXXXXXX", " XXXXX ")  // Controller
-                                                                                                             // first
-                        .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
-                        .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
-                        .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
-                        .aisle(" XXXXX ", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", " XXXXX ")
+                .pattern(definition -> FactoryBlockPattern.start(LEFT, UP, BACK)
+
+                        .aisle("#XXXXX#", "XXXXXXX", "XXGXGXX", "XXG@GXX", "XXGXGXX", "XXXXXXX", "#XXXXX#")
+
+                        .aisle("#XXXXX#", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", "#XXXXX#")
+                        .aisle("#XXXXX#", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", "#XXXXX#")
+                        .aisle("#XXXXX#", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", "#XXXXX#")
+                        .aisle("#XXXXX#", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", "#XXXXX#")
                         .setRepeatable(1, 61)
-                        .aisle(" XXXXX ", "XXXXXXX", "XXGXGXX", "XXGDGXX", "XXGXGXX", "XXXXXXX", " XXXXX ") // Energy
-                                                                                                            // hatch
-                                                                                                            // last
+                        .aisle("#XXXXX#", "XXXXXXX", "XXGXGXX", "XXGDGXX", "XXGXGXX", "XXXXXXX", "#XXXXX#")
+
+
                         .where('@', controller(blocks(definition.get())))
                         .where('X', Predicates.blocks(GCYMBlocks.CASING_NONCONDUCTING.get()).setMinGlobalLimited(140)
                                 .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
@@ -82,8 +80,9 @@ public class AstroGeneratorMultiMachines {
                                 .or(Predicates.blocks(ELECTROMAGNET_MK2.get()))
                                 .or(Predicates.blocks(ELECTROMAGNET_MK3.get())))
                         .where('C', Predicates.blocks(FARADAY_GENERATOR_COIL.get()))
-                        .where('D', Predicates.abilities(PartAbility.INPUT_ENERGY))
+                        .where('D', Predicates.abilities(PartAbility.OUTPUT_ENERGY))
                         .where('G', Predicates.blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
+                        .where('#', Predicates.any())
                         .where(' ', Predicates.air())
                         .build())
                 .workableCasingModel(GTCEu.id("block/casings/gcym/nonconducting_casing"),
@@ -96,7 +95,7 @@ public class AstroGeneratorMultiMachines {
                     tooltip.add(Component.translatable("astrogreg.machine.faraday_generator_returns.tooltip"));
                     tooltip.add(Component.translatable("astrogreg.machine.faraday_generator_max_length.tooltip"));
                 })
-                .shapeInfos(definition -> { // Nothing to change here, it works.
+                .shapeInfos(definition -> {
                     List<MultiblockShapeInfo> shapeInfos = new ArrayList<>();
 
                     for (int length = 1; length <= 61; length++) {
@@ -105,7 +104,7 @@ public class AstroGeneratorMultiMachines {
                                 .where('X', GCYMBlocks.CASING_NONCONDUCTING.getDefaultState())
                                 .where('M', ELECTROMAGNET_MK1.getDefaultState())
                                 .where('C', FARADAY_GENERATOR_COIL.getDefaultState())
-                                .where('D', ENERGY_INPUT_HATCH[GTValues.LV], Direction.SOUTH)
+                                .where('D', ENERGY_OUTPUT_HATCH[GTValues.LV], Direction.SOUTH)
                                 .where('G', GTBlocks.CASING_LAMINATED_GLASS.getDefaultState())
                                 .where('I', ITEM_IMPORT_BUS[GTValues.LV], Direction.NORTH)
                                 .where('O', ITEM_EXPORT_BUS[GTValues.LV], Direction.NORTH)
