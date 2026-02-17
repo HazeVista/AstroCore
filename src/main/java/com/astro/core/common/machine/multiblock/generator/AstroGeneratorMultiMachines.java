@@ -4,7 +4,6 @@ import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
@@ -67,7 +66,6 @@ public class AstroGeneratorMultiMachines {
                         .aisle("#XXXXX#", "X MMM X", "XM   MX", "XM C MX", "XM   MX", "X MMM X", "#XXXXX#")
                         .setRepeatable(1, 61)
                         .aisle("#XXXXX#", "XXXXXXX", "XXGXGXX", "XXGDGXX", "XXGXGXX", "XXXXXXX", "#XXXXX#")
-
 
                         .where('@', controller(blocks(definition.get())))
                         .where('X', Predicates.blocks(GCYMBlocks.CASING_NONCONDUCTING.get()).setMinGlobalLimited(140)

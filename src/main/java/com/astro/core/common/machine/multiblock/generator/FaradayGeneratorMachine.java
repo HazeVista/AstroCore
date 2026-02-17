@@ -20,6 +20,7 @@ import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.gregtechceu.gtceu.utils.GTUtil;
+
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -145,11 +146,11 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
             BlockPos layerCenter = getPos().relative(facing.getOpposite(), depth);
 
             int[][] magnetOffsets = {
-                    {-1, 2}, {0, 2}, {1, 2},
-                    {-2, 1}, {2, 1},
-                    {-2, 0}, {2, 0},
-                    {-2, -1}, {2, -1},
-                    {-1, -2}, {0, -2}, {1, -2}
+                    { -1, 2 }, { 0, 2 }, { 1, 2 },
+                    { -2, 1 }, { 2, 1 },
+                    { -2, 0 }, { 2, 0 },
+                    { -2, -1 }, { 2, -1 },
+                    { -1, -2 }, { 0, -2 }, { 1, -2 }
             };
 
             for (int[] offset : magnetOffsets) {
@@ -321,19 +322,19 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
             }
 
             textList.add(Component.translatable("astrogreg.machine.faraday_generator.max_eu_per_tick",
-                            FormattingUtil.formatNumbers(maxHatchOutput), GTValues.VNF[displayTier])
+                    FormattingUtil.formatNumbers(maxHatchOutput), GTValues.VNF[displayTier])
                     .withStyle(ChatFormatting.GRAY));
 
             textList.add(Component.translatable("astrogreg.machine.faraday_generator.max_recipe_tier",
-                            GTValues.VNF[displayTier])
+                    GTValues.VNF[displayTier])
                     .withStyle(ChatFormatting.GRAY));
 
             textList.add(Component.translatable("astrogreg.machine.faraday_generator.energy_output",
-                            FormattingUtil.formatNumbers(currentOutput), FormattingUtil.formatNumbers(maxOutput))
+                    FormattingUtil.formatNumbers(currentOutput), FormattingUtil.formatNumbers(maxOutput))
                     .withStyle(ChatFormatting.WHITE));
 
             textList.add(Component.translatable("astrogreg.machine.faraday_generator.rotation_speed",
-                            FormattingUtil.formatNumbers(currentRPM), FormattingUtil.formatNumbers(MAX_RPM))
+                    FormattingUtil.formatNumbers(currentRPM), FormattingUtil.formatNumbers(MAX_RPM))
                     .withStyle(ChatFormatting.WHITE));
 
             textList.add(Component.translatable("astrogreg.machine.faraday_generator.magnet_rows", magnetRows)

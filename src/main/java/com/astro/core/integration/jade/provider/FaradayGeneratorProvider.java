@@ -46,7 +46,8 @@ public class FaradayGeneratorProvider implements IBlockComponentProvider, IServe
             tooltip.add(Component.translatable("astrogreg.machine.faraday_generator.lubricant_usage", magnetRows)
                     .withStyle(ChatFormatting.GOLD));
 
-            tooltip.add(Component.translatable("astrogreg.machine.faraday_generator.coolant_usage", coolantUsage, coolantType)
+            tooltip.add(Component
+                    .translatable("astrogreg.machine.faraday_generator.coolant_usage", coolantUsage, coolantType)
                     .withStyle(ChatFormatting.AQUA));
         }
     }
@@ -63,7 +64,8 @@ public class FaradayGeneratorProvider implements IBlockComponentProvider, IServe
                 compoundTag.putBoolean("isActive", machine.isActive());
 
                 boolean usingHelium = RecipeHelper.matchRecipe(machine,
-                        GTRecipeBuilder.ofRaw().inputFluids(GTMaterials.Helium.getFluid(1)).buildRawRecipe()).isSuccess();
+                        GTRecipeBuilder.ofRaw().inputFluids(GTMaterials.Helium.getFluid(1)).buildRawRecipe())
+                        .isSuccess();
 
                 int coolantAmount = usingHelium ? machine.getMagnetRows() * 25 : machine.getMagnetRows() * 100;
                 String coolantName = usingHelium ? "Liquid Helium" : "Liquid Oxygen";
