@@ -36,7 +36,7 @@
   "astrogreg.machine.faraday_generator.total_output": "Общий выход: %s EU/т",
   "astrogreg.machine.faraday_generator_expanding.tooltip": "§eБазовая выработка:§r§f 4096 EU/т (§a2A§r §5EV§r) §7за§r §eМагнитное кольцо§r.",
   "astrogreg.machine.faraday_generator_fluids.tooltip": "Потребляет 1 мВ §6Смазки§r §7и либо§r§f 100 мВ §r§bЖидкого кислорода§r§7, либо§r 25 мВ §eЖидкого гелия§r в секунду на каждое §eМагнитное кольцо§r.",
-  "astrogreg.machine.faraday_generator_magnets.tooltip": "Более высокие уровни рядов §bМагнитов генератора Фарадея§r умножают EU/т на 4 для этого §r§eМагнитного кольца§r.",
+  "astrogreg.machine.faraday_generator_magnets.tooltip": "Более высокие уровни рядов §bМагнитов генератора Фарадея§r §7увеличивают§r выход EU/t на §a400%§r для этого §r§eМагнитного кольца§r.",
   "astrogreg.machine.faraday_generator_max_length.tooltip": "§aМакс. длина:§r§e 64 Магнитных кольца",
   "astrogreg.machine.faraday_generator_returns.tooltip": "Возвращает 40%§7 от §rХладагента§7 обратно в§r газообразной §7форме.",
   "astrogreg.machine.faraday_generator_springs.tooltip": "§dСжатые сверхпроводниковые пружины§r выше §9IV§r §7увеличивают§r выход EU/т на §a5%§r за уровень.",
