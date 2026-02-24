@@ -29,7 +29,7 @@
   "astrogreg.machine.faraday_generator_fluids.tooltip": "Verbraucht 1mB §6Schmiermittel§r §7und entweder§r§f 100mB §r§bFlüssigsauerstoff§r§7 oder§r 25mB §eFlüssighelium§r pro Sekunde für jeden §eMagnetring§r.",
   "astrogreg.machine.faraday_generator_magnets.tooltip": "Höhere Stufen von §bFaraday-Generator-Magneten§r vervierfachen die EU/t für diesen §r§eMagnetring§r.",
   "astrogreg.machine.faraday_generator_max_length.tooltip": "§aMax. Länge:§r§e 64 Magnetringe",
-  "astrogreg.machine.faraday_generator_returns.tooltip": "Gibt 40%§7 des §rKühlmittels§7 in§r gasförmiger §7Form zurück.",
+  "astrogreg.machine.faraday_generator_returns.tooltip": "Gibt §a40%§r§7 des §rKühlmittels§7 in§r gasförmiger §7Form zurück.",
   "astrogreg.machine.fluid_drilling_rig.iv.tooltip": "Krustensauger",
   "astrogreg.machine.industrial_core.tooltip": "Maximale EU/t für diese Maschine ist durch die Stufe ihres §bIndustriellen Prozessorkerns§r begrenzt.",
   "astrogreg.machine.large_miner.zpm.tooltip": "Planetarer Ausbeutungsapparat",

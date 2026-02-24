@@ -24,6 +24,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+@SuppressWarnings("all")
 public class SteamBlastFurnace extends SteamParallelMultiblockMachine {
 
     public static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(

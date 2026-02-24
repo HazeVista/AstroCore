@@ -10,9 +10,12 @@ import com.gregtechceu.gtceu.common.machine.multiblock.part.ParallelHatchPartMac
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import com.astro.core.AstroCore;
 import com.astro.core.common.machine.trait.AstroPartAbility;
+import com.astro.core.integration.create.AstroKineticMachineDefinition;
+import com.astro.core.integration.create.AstroKineticMachineUtils;
 
 import static com.astro.core.common.AstroMachineUtils.registerTieredMachines;
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
@@ -23,23 +26,6 @@ import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWor
 @SuppressWarnings("all")
 public class AstroHatches {
 
-    public static final MachineDefinition[] PARALLEL_HATCH = registerTieredMachines("parallel_hatch",
-            ParallelHatchPartMachine::new,
-            (tier, builder) -> builder
-                    .rotationState(RotationState.ALL)
-                    .abilities(PartAbility.PARALLEL_HATCH)
-                    .modelProperty(IS_FORMED, false)
-                    .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-                    .model(createWorkableTieredHullMachineModel(
-                            AstroCore.id("block/machines/hatches/parallel_hatch_mk" + (tier - 4)))
-                            .andThen((ctx, prov, model) -> {
-                                model.addReplaceableTextures("bottom", "top", "side");
-                            }))
-                    .tooltips(Component.translatable("astrogreg.machine.parallel_hatch_mk" + tier + ".tooltip"),
-                            Component.translatable("gtceu.part_sharing.disabled"))
-                    .register(),
-            UHV);
-
     public static final MachineDefinition WATER_HATCH = REGISTRATE
             .machine("water_input_hatch", AstroWaterHatch::new)
             .rotationState(RotationState.ALL)
@@ -49,6 +35,38 @@ public class AstroHatches {
                     AstroWaterHatch.INITIAL_TANK_CAPACITY),
                     Component.translatable("astrogreg.machine.water_hatch.tooltip"))
             .allowCoverOnFront(true)
+            .register();
+
+    public static final AstroKineticMachineDefinition KINETIC_INPUT_HATCH = AstroKineticMachineUtils
+            .registerKineticMachine(
+                    "kinetic_input_hatch",
+                    id -> new AstroKineticMachineDefinition(id, false, 4f).setFrontRotation(true),
+                    holder -> new KineticInputHatch(holder, 0))
+            .rotationState(RotationState.ALL)
+            .langValue("Kinetic Input Box")
+            // .modelProperty(IS_FORMED, false)
+            .abilities(AstroPartAbility.KINETIC_INPUT)
+            .blockProp(BlockBehaviour.Properties::dynamicShape)
+            .blockProp(BlockBehaviour.Properties::noOcclusion)
+            .overlaySteamHullModel("kinetic_input_hatch")
+            .hasBER(true)
+            .onBlockEntityRegister(AstroKineticMachineUtils::setupFlywheelRender)
+            .register();
+
+    public static final AstroKineticMachineDefinition KINETIC_OUTPUT_HATCH = AstroKineticMachineUtils
+            .registerKineticMachine(
+                    "kinetic_output_hatch",
+                    id -> new AstroKineticMachineDefinition(id, false, 4f).setFrontRotation(true),
+                    holder -> new KineticOutputHatch(holder, 0))
+            .rotationState(RotationState.ALL)
+            .langValue("Kinetic Output Box")
+            .abilities(AstroPartAbility.KINETIC_OUTPUT)
+            // .modelProperty(IS_FORMED, false)
+            .blockProp(BlockBehaviour.Properties::dynamicShape)
+            .blockProp(BlockBehaviour.Properties::noOcclusion)
+            .overlaySteamHullModel("kinetic_output_hatch")
+            .hasBER(true)
+            .onBlockEntityRegister(AstroKineticMachineUtils::setupFlywheelRender)
             .register();
 
     public static final MachineDefinition[] MANA_INPUT_HATCH = registerTieredMachines("mana_input_hatch",
@@ -108,6 +126,23 @@ public class AstroHatches {
     // .overlayTieredHullModel("optical_data_hatch")
     // .register(),
     // HV);
+
+    public static final MachineDefinition[] PARALLEL_HATCH = registerTieredMachines("parallel_hatch",
+            ParallelHatchPartMachine::new,
+            (tier, builder) -> builder
+                    .rotationState(RotationState.ALL)
+                    .abilities(PartAbility.PARALLEL_HATCH)
+                    .modelProperty(IS_FORMED, false)
+                    .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+                    .model(createWorkableTieredHullMachineModel(
+                            AstroCore.id("block/machines/hatches/parallel_hatch_mk" + (tier - 4)))
+                            .andThen((ctx, prov, model) -> {
+                                model.addReplaceableTextures("bottom", "top", "side");
+                            }))
+                    .tooltips(Component.translatable("astrogreg.machine.parallel_hatch_mk" + tier + ".tooltip"),
+                            Component.translatable("gtceu.part_sharing.disabled"))
+                    .register(),
+            UHV);
 
     public static void init() {}
 }

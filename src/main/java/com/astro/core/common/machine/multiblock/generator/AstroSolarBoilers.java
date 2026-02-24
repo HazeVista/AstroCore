@@ -148,8 +148,10 @@ public class AstroSolarBoilers extends WorkableMultiblockMachine implements IDis
                                 GTRecipeBuilder.ofRaw().outputFluids(steamStack).buildRawRecipe(),
                                 IO.OUT, getRecipeLogic().getChanceCaches());
                         lastSteamOutput = steamTarget;
+                        recipeLogic.setStatus(RecipeLogic.Status.WORKING);
                     } else {
                         lastSteamOutput = 0;
+                        recipeLogic.setStatus(RecipeLogic.Status.IDLE);
                         if (temperature >= cfg.boilingPoint) this.hasNoWater = true;
                     }
                 }

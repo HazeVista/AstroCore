@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/machine_casing_kinetic"
+    }
+  }
+}

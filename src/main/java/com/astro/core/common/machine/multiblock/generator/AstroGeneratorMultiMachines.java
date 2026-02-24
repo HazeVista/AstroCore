@@ -2,16 +2,15 @@ package com.astro.core.common.machine.multiblock.generator;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
-import com.gregtechceu.gtceu.common.data.GCYMBlocks;
-import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.common.data.*;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Blocks;
@@ -26,8 +25,9 @@ import static com.astro.core.common.data.AstroBlocks.*;
 import static com.astro.core.common.machine.multiblock.generator.AstroGeneratorRegistry.*;
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.data.RotationState.ALL;
-import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
-import static com.gregtechceu.gtceu.api.pattern.Predicates.controller;
+import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
+import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
+import static com.gregtechceu.gtceu.api.pattern.Predicates.abilities;
 import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.common.data.GTMachines.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
@@ -35,6 +35,7 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
 @SuppressWarnings("unused")
 public class AstroGeneratorMultiMachines {
 
+    public static MultiblockMachineDefinition SOLAR_BOILER_ARRAY;
     public static MultiblockMachineDefinition AETHER_ENGINE;
     public static MultiblockMachineDefinition FARADAY_GENERATOR;
     public static MultiblockMachineDefinition OVERDRIVE_COMBUSTION_ENGINE;
@@ -42,6 +43,51 @@ public class AstroGeneratorMultiMachines {
     public static MultiblockMachineDefinition OVERDRIVE_GAS_TURBINE;
 
     public static void init() {
+        SOLAR_BOILER_ARRAY = REGISTRATE
+                .multiblock("solar_boiler_array", AstroSolarBoilers::new)
+                .rotationState(RotationState.NON_Y_AXIS)
+                .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+                .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+                .pattern(definition -> FactoryBlockPattern.start()
+                        .aisle("AAA")
+                        .aisle("ABA")
+                        .aisle("A@A")
+                        .where('@', controller(blocks(definition.get())))
+                        .where('A', blocks(GTBlocks.CASING_STEEL_SOLID.get())
+                                .or(abilities(IMPORT_FLUIDS)).setMaxGlobalLimited(2)
+                                .or(abilities(EXPORT_FLUIDS)).setMaxGlobalLimited(2)
+                                .or(abilities(MAINTENANCE)).setExactLimit(1))
+                        .where('B', blocks(SOLAR_CELL.get())
+                                .or(blocks(SOLAR_CELL_ETRIUM.get()))
+                                .or(blocks(SOLAR_CELL_VESNIUM.get())))
+                        .build())
+                .shapeInfos(definition -> {
+                    var shapes = new java.util.ArrayList<MultiblockShapeInfo>();
+                    for (int size = 5; size <= 35; size += 2) {
+                        shapes.add(createSolarBoilerShape(definition, size));
+                    }
+
+                    return shapes;
+                })
+                .allowFlip(false)
+                .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
+                        AstroCore.id("block/multiblock/solar_boiler_array"))
+                .tooltipBuilder((stack, tooltip) -> {
+                    tooltip.add(Component
+                            .translatable("astrogreg.machine.solar_boiler_array_sunlit_info.tooltip")
+                            .withStyle(ChatFormatting.WHITE));
+                    tooltip.add(Component
+                            .translatable("astrogreg.machine.solar_boiler_array_heat_speed.tooltip")
+                            .withStyle(ChatFormatting.WHITE));
+                    tooltip.add(Component
+                            .translatable(
+                                    "astrogreg.machine.solar_boiler_array_heat_scaling.tooltip")
+                            .withStyle(ChatFormatting.AQUA));
+                    tooltip.add(Component.translatable("astrogreg.machine.solar_boiler_array_max_cells.tooltip")
+                            .withStyle(ChatFormatting.AQUA));
+                })
+                .register();
+
         AETHER_ENGINE = registerAstroTurbine(
                 "aether_turbine", "§3Æther§r Engine",
                 GTValues.EV, AstroRecipeTypes.AETHER_ENGINE_RECIPES,
@@ -149,5 +195,36 @@ public class AstroGeneratorMultiMachines {
                 TURBINE_CASING_NAQUADAH_ALLOY, GEARBOX_CASING_NAQUADAH_ALLOY, GTMaterials.NaquadahAlloy,
                 AstroCore.id("block/generators/machine_casing_turbine_naquadah_alloy"),
                 GTCEu.id("block/multiblock/generator/large_plasma_turbine"), true);
+    }
+
+    // Methods
+    private static MultiblockShapeInfo createSolarBoilerShape(MultiblockMachineDefinition definition, int size) {
+        var builder = MultiblockShapeInfo.builder();
+        int center = size / 2;
+        for (int z = 0; z < size; z++) {
+            var layer = new StringBuilder();
+            for (int x = 0; x < size; x++) {
+                if (z == 0) {
+                    if (x == center - 1) layer.append('D');
+                    else if (x == center) layer.append('@');
+                    else if (x == center + 1) layer.append('C');
+                    else if (x == 0) layer.append('E');
+                    else layer.append('A');
+                } else if (z == size - 1 || x == 0 || x == size - 1) {
+                    layer.append('A');
+                } else {
+                    layer.append('B');
+                }
+            }
+            builder.aisle(layer.toString());
+        }
+        return builder
+                .where('@', definition, Direction.NORTH)
+                .where('A', GTBlocks.CASING_STEEL_SOLID.getDefaultState())
+                .where('B', SOLAR_CELL.get().defaultBlockState())
+                .where('C', GTMachines.FLUID_EXPORT_HATCH[GTValues.LV], Direction.NORTH)
+                .where('D', GTMachines.FLUID_IMPORT_HATCH[GTValues.LV], Direction.NORTH)
+                .where('E', GTMachines.MAINTENANCE_HATCH, Direction.NORTH)
+                .build();
     }
 }

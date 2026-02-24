@@ -16,7 +16,6 @@ import com.gregtechceu.gtceu.common.block.BoilerFireboxType;
 import com.gregtechceu.gtceu.common.data.*;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Blocks;
@@ -27,17 +26,19 @@ import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import com.astro.core.common.machine.multiblock.electric.FluidDrillMachine;
 import com.astro.core.common.machine.multiblock.electric.LargeMinerMachine;
 import com.astro.core.common.machine.multiblock.electric.ProcessingCoreMachine;
-import com.astro.core.common.machine.multiblock.generator.AstroSolarBoilers;
+import com.astro.core.common.machine.multiblock.kinetic.KineticMixerMachine;
+import com.astro.core.common.machine.multiblock.kinetic.KineticSteamEngineMachine;
 import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 import com.astro.core.common.machine.multiblock.steam.SteamGrinder;
 import com.astro.core.common.machine.multiblock.steam.SteamWasher;
+import com.astro.core.common.machine.trait.AstroPartAbility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.astro.core.common.data.AstroBlocks.*;
-import static com.astro.core.common.machine.hatches.AstroHatches.WATER_HATCH;
+import static com.astro.core.common.machine.hatches.AstroHatches.*;
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
@@ -45,6 +46,7 @@ import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
 import static com.gregtechceu.gtceu.common.data.GTMachines.COKE_OVEN_HATCH;
+import static com.gregtechceu.gtceu.common.data.GTMachines.STEAM_HATCH;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.COKE_OVEN_RECIPES;
 import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWorkableCasingMachineModel;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.formatNumbers;
@@ -243,49 +245,97 @@ public class AGEMultiMachines {
                     .andThen(b -> b.addDynamicRenderer(DynamicRenderHelper::makeRecipeFluidAreaRender)))
             .register();
 
-    public static final MultiblockMachineDefinition SOLAR_BOILER_ARRAY = REGISTRATE
-            .multiblock("solar_boiler_array", AstroSolarBoilers::new)
-            .rotationState(RotationState.NON_Y_AXIS)
+    // Kinetic Machines
+    public static final MultiblockMachineDefinition KINETIC_STEAM_ENGINE = REGISTRATE
+            .multiblock("kinetic_steam_engine", KineticSteamEngineMachine::new)
+            .langValue("Kinetic Steam Engine")
+            .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
-            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle("AAA")
-                    .aisle("ABA")
-                    .aisle("A@A")
+            .appearanceBlock(CASING_BRONZE_BRICKS)
+            .pattern(definition -> FactoryBlockPattern.start(LEFT, UP, FRONT)
+                    .aisle("FFF", "TOT", "GGG", " C ")
+                    .aisle("FFF", "TBT", "GPG", " C ").setRepeatable(1, 16)
+                    .aisle("FFF", "TIT", "GGG", " @ ")
                     .where('@', controller(blocks(definition.get())))
-                    .where('A', blocks(GTBlocks.CASING_STEEL_SOLID.get())
-                            .or(abilities(IMPORT_FLUIDS)).setMaxGlobalLimited(2)
-                            .or(abilities(EXPORT_FLUIDS)).setMaxGlobalLimited(2)
-                            .or(abilities(MAINTENANCE)).setExactLimit(1))
-                    .where('B', blocks(SOLAR_CELL.get())
-                            .or(blocks(SOLAR_CELL_ETRIUM.get()))
-                            .or(blocks(SOLAR_CELL_VESNIUM.get())))
+                    .where('F', blocks(FIREBOX_BRONZE.get()))
+                    .where('T', blocks(CASING_TEMPERED_GLASS.get())
+                            .or(blocks(CASING_BRONZE_BRICKS.get())))
+                    .where('B', Predicates.blocks(CASING_BRONZE_GEARBOX.get())
+                            .or(Predicates.blocks(CASING_STEEL_GEARBOX.get())))
+                    .where('I', abilities(STEAM))
+                    .where('O', abilities(AstroPartAbility.KINETIC_OUTPUT))
+                    .where('G', blocks(STEAM_ENGINE_GRATING.get()))
+                    .where('C', blocks(CASING_BRONZE_BRICKS.get()))
+                    .where('P', blocks(CASING_BRONZE_PIPE.get()))
+                    .where(' ', any())
                     .build())
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
+                    AstroCore.id("block/multiblock/steam_engine"))
             .shapeInfos(definition -> {
-                var shapes = new java.util.ArrayList<MultiblockShapeInfo>();
-                for (int size = 5; size <= 35; size += 2) {
-                    shapes.add(createSolarBoilerShape(definition, size));
+                List<MultiblockShapeInfo> shapeInfos = new ArrayList<>();
+
+                for (int length = 1; length <= 16; length++) {
+                    MultiblockShapeInfo.ShapeInfoBuilder builder = MultiblockShapeInfo.builder()
+                            .where('@', definition, Direction.NORTH)
+                            .where('F', FIREBOX_BRONZE.getDefaultState())
+                            .where('T', CASING_TEMPERED_GLASS.getDefaultState())
+                            .where('B', CASING_BRONZE_GEARBOX.getDefaultState())
+                            .where('I', STEAM_HATCH, Direction.NORTH)
+                            .where('O', KINETIC_OUTPUT_HATCH, Direction.SOUTH)
+                            .where('G', STEAM_ENGINE_GRATING.getDefaultState())
+                            .where('C', CASING_BRONZE_BRICKS.getDefaultState())
+                            .where('P', CASING_BRONZE_PIPE.getDefaultState())
+                            .where(' ', Blocks.AIR.defaultBlockState());
+
+                    builder.aisle("FFF", "TIT", "GGG", " @ ");
+                    builder.aisle("FFF", "TBT", "GPG", " C ");
+
+                    for (int i = 0; i < length - 1; i++) {
+                        builder.aisle("FFF", "TBT", "GPG", " C ");
+                    }
+
+                    builder.aisle("FFF", "TOT", "GGG", " C ");
+                    shapeInfos.add(builder.build());
                 }
 
-                return shapes;
+                return shapeInfos;
             })
-            .allowFlip(false)
-            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
-                    GTCEu.id("block/multiblock/generator/large_steel_boiler"))
-            .tooltipBuilder((stack, tooltip) -> {
-                tooltip.add(Component
-                        .translatable("astrogreg.machine.solar_boiler_array_sunlit_info.tooltip")
-                        .withStyle(ChatFormatting.WHITE));
-                tooltip.add(Component
-                        .translatable("astrogreg.machine.solar_boiler_array_heat_speed.tooltip")
-                        .withStyle(ChatFormatting.WHITE));
-                tooltip.add(Component
-                        .translatable(
-                                "astrogreg.machine.solar_boiler_array_heat_scaling.tooltip")
-                        .withStyle(ChatFormatting.AQUA));
-                tooltip.add(Component.translatable("astrogreg.machine.solar_boiler_array_max_cells.tooltip")
-                        .withStyle(ChatFormatting.AQUA));
-            })
+            .tooltips(Component.translatable("astrogreg.machine.kinetic_steam_engine_production.tooltip"),
+                    Component.translatable("astrogreg.machine.kinetic_steam_engine_steel_gearbox.tooltips"),
+                    Component.translatable("astrogreg.machine.kinetic_steam_engine_max_layers.tooltip"))
+            .register();
+
+    public static final MultiblockMachineDefinition KINETIC_MIXING_VESSEL = REGISTRATE
+            .multiblock("large_kinetic_mixer", KineticMixerMachine::new)
+            .langValue("Kinetic Mixing Vessel")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.MIXER_RECIPES)
+            .appearanceBlock(MACHINE_CASING_KINETIC)
+            .recipeModifier(KineticMixerMachine::recipeModifier, true)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("#XXX#", "#XXX#", "#XXX#", "#XXX#", "#XXX#", "##F##")
+                    .aisle("XXXXX", "XAPAX", "XAAAX", "XAPAX", "XAAAX", "##F##")
+                    .aisle("XXXXX", "XPPPX", "XAPAX", "XPPPX", "XAGAX", "FFGFF")
+                    .aisle("XXXXX", "XAPAX", "XAAAX", "XAPAX", "XAAAX", "##F##")
+                    .aisle("#XXX#", "#X@X#", "#XXX#", "#XXX#", "#XXX#", "##F##")
+                    .where('@', controller(blocks(definition.get())))
+                    .where('X', blocks(MACHINE_CASING_KINETIC.get()).setMinGlobalLimited(50)
+                            .or(abilities(EXPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(abilities(IMPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(abilities(EXPORT_FLUIDS).setMaxGlobalLimited(2))
+                            .or(abilities(IMPORT_FLUIDS).setMaxGlobalLimited(2))
+                            .or(abilities(AstroPartAbility.KINETIC_INPUT).setExactLimit(1)))
+                    .where('F', frames(GTMaterials.Bronze))
+                    .where('G', blocks(CASING_BRONZE_GEARBOX.get()))
+                    .where('P', blocks(CASING_BRONZE_PIPE.get()))
+                    .where('A', Predicates.air())
+                    .where('#', Predicates.any())
+                    .build())
+            .tooltips(Component.translatable("astrogreg.machine.large_kinetic_machine_parallels.tooltip"),
+                    Component.translatable("astrogreg.machine.large_kinetic_machine_recipes.tooltip"))
+            .model(createWorkableCasingMachineModel(AstroCore.id("block/casings/machine_casing_kinetic"),
+                    AstroCore.id("block/multiblock/mixer"))
+                    .andThen(b -> b.addDynamicRenderer(DynamicRenderHelper::makeRecipeFluidAreaRender)))
             .register();
 
     // Industrial Processing Machines
@@ -754,37 +804,6 @@ public class AGEMultiMachines {
                         GTValues.VNF[GTValues.UV], GTValues.VNF[GTValues.UHV]));
             })
             .register();
-
-    // Methods
-    private static MultiblockShapeInfo createSolarBoilerShape(MultiblockMachineDefinition definition, int size) {
-        var builder = MultiblockShapeInfo.builder();
-        int center = size / 2;
-        for (int z = 0; z < size; z++) {
-            var layer = new StringBuilder();
-            for (int x = 0; x < size; x++) {
-                if (z == 0) {
-                    if (x == center - 1) layer.append('D');
-                    else if (x == center) layer.append('@');
-                    else if (x == center + 1) layer.append('C');
-                    else if (x == 0) layer.append('E');
-                    else layer.append('A');
-                } else if (z == size - 1 || x == 0 || x == size - 1) {
-                    layer.append('A');
-                } else {
-                    layer.append('B');
-                }
-            }
-            builder.aisle(layer.toString());
-        }
-        return builder
-                .where('@', definition, Direction.NORTH)
-                .where('A', GTBlocks.CASING_STEEL_SOLID.getDefaultState())
-                .where('B', SOLAR_CELL.get().defaultBlockState())
-                .where('C', GTMachines.FLUID_EXPORT_HATCH[GTValues.LV], Direction.NORTH)
-                .where('D', GTMachines.FLUID_IMPORT_HATCH[GTValues.LV], Direction.NORTH)
-                .where('E', GTMachines.MAINTENANCE_HATCH, Direction.NORTH)
-                .build();
-    }
 
     public static void init() {}
 }

@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
 import net.minecraft.world.level.block.Block;
 
 import com.astro.core.integration.jade.provider.FaradayGeneratorProvider;
+import com.astro.core.integration.jade.provider.KineticSteamEngineProvider;
 import com.astro.core.integration.jade.provider.ProcessingCoreProvider;
 import com.astro.core.integration.jade.provider.SolarBoilerProvider;
 import snownee.jade.api.IWailaClientRegistration;
@@ -21,6 +22,7 @@ public class AstroJadePlugin implements IWailaPlugin {
         registration.registerBlockDataProvider(new ProcessingCoreProvider(), MetaMachineBlockEntity.class);
         registration.registerBlockDataProvider(new SolarBoilerProvider(), MetaMachineBlockEntity.class);
         registration.registerBlockDataProvider(new FaradayGeneratorProvider(), MetaMachineBlockEntity.class);
+        registration.registerBlockDataProvider(new KineticSteamEngineProvider(), MetaMachineBlockEntity.class);
     }
 
     @Override
@@ -28,5 +30,6 @@ public class AstroJadePlugin implements IWailaPlugin {
         registration.registerBlockComponent(new ProcessingCoreProvider(), Block.class);
         registration.registerBlockComponent(new SolarBoilerProvider(), Block.class);
         registration.registerBlockComponent(new FaradayGeneratorProvider(), Block.class);
+        registration.registerBlockComponent(new KineticSteamEngineProvider(), Block.class);
     }
 }

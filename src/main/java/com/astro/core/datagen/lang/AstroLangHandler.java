@@ -7,13 +7,16 @@ public class AstroLangHandler {
 
     public static void init(RegistrateLangProvider provider) {
         // multiblock tooltips
+        provider.add("astrogreg.machine.recipe_progress.tooltip", "Progress: %1$ss / %2$ss (%3$s%%)");
+        provider.add("astrogreg.machine.parallels", "Active Parallels: %s");
+
         provider.add("astrogreg.machine.coke_oven_description.tooltip",
                 "Making better fuels for Steel and Power Generation");
         provider.add("astrogreg.machine.coke_oven_parallels.tooltip",
                 "Gains Parallels for each layer in length added for up to 16 Parallels total");
 
         provider.add("astrogreg.machine.steam_blast_furnace.steam_usage", "Using %s mB/t Steam (%s mB/t x %s)");
-        provider.add("astrogreg.machine.steam_blast_furnace.parallels", "Parallels: %s (active: %s)");
+        provider.add("astrogreg.machine.steam_blast_furnace.parallels", "Parallels: %s");
 
         provider.add("astrogreg.machine.solar_boiler_array_sunlit_info.tooltip",
                 "Cells must be exposed to direct sunlight to work properly.");
@@ -33,6 +36,7 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.solar_boiler_array.danger_no_water", "DO NOT ADD WATER!");
         provider.add("astrogreg.machine.solar_boiler_array.danger_cool_first", "Wait for the array to cool first.");
         provider.add("astrogreg.machine.solar_boiler_array.hold_shift", "§o§7Hold Shift for details");
+        provider.add("config.jade.plugin_astrogreg.solar_boiler_info", "Solar Boiler Array Info");
 
         provider.add("astrogreg.machine.industrial_core.tooltip",
                 "Maximum EU/t for this machine is limited by the tier of its §bIndustrial Processing Core§r.");
@@ -43,11 +47,11 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.faraday_generator_expanding.tooltip",
                 "§eBase Production:§r§f 4096 EU/t (§a2A§r §5EV§r) §7per§r §eMagnet Ring§r.");
         provider.add("astrogreg.machine.faraday_generator_magnets.tooltip",
-                "Higher tiers of §bFaraday Generator Magnet§r rows multiply EU/t by 4 for that §r§eMagnet Ring§r.");
+                "Higher tiers of §bFaraday Generator Magnet§r rows §7increase§r EU/t by §a400%§r for that §r§eMagnet Ring§r.");
         provider.add("astrogreg.machine.faraday_generator_fluids.tooltip",
                 "Consumes 1mB §6Lubricant§r §7and either§r§f 100mB §r§bLiquid Oxygen§r§7 or§r 25mB §eLiquid Helium§r per second for each §eMagnet Ring§r.");
         provider.add("astrogreg.machine.faraday_generator_returns.tooltip",
-                "Returns 40%§7 of §rCoolant§7 back in§r Gaseous §7form.");
+                "Returns §a40%§r§7 of §rCoolant§7 back in§r Gaseous §7form.");
         provider.add("astrogreg.machine.faraday_generator_springs.tooltip",
                 "§dCompressed Superconductor Springs§r above §9IV§r §7increase§r the EU/t output by §a5%§r per tier.");
         provider.add("astrogreg.machine.faraday_generator_max_length.tooltip", "§aMax Length:§r§e 64 Magnet Rings");
@@ -61,9 +65,29 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.faraday_generator.max_eu_per_tick", "Max EU/t: %s (%s)");
         provider.add("astrogreg.machine.faraday_generator.max_recipe_tier", "Max Recipe Tier: %s");
         provider.add("astrogreg.machine.faraday_generator.energy_output", "Energy Output: %s / %s EU/t");
+        provider.add("astrogreg.machine.faraday_generator.conflicting_coils_1", "CONFLICTING MAGNET STRENGTHS");
+        provider.add("astrogreg.machine.faraday_generator.conflicting_coils_2", "Machine will not operate");
+        provider.add("astrogreg.machine.faraday_generator.superconductor_bonus", "Spring Multiplier: 1.%sx");
 
         provider.add("astrogreg.machine.large_miner.zpm.tooltip", "Planetary Depletion Apparatus");
         provider.add("astrogreg.machine.fluid_drilling_rig.iv.tooltip", "Crust Sucker");
+
+        provider.add("astrogreg.machine.kinetic_steam_engine_production.tooltip",
+                "Produces 25,000 §6Stress Units§r and consumes 25mB/t §bSteam§r per middle layer.");
+        provider.add("astrogreg.machine.kinetic_steam_engine_steel_gearbox.tooltips",
+                "Layers with §7Steel Gearboxes§r will consume §a20%§r more §bSteam§r and produce §a50%§r more §6Stress Units§r.");
+        provider.add("astrogreg.machine.kinetic_steam_engine_max_layers.tooltip", "§aMax Length:§r§e 16 Middle Layers");
+        provider.add("astrogreg.machine.kinetic_steam_engine.layer", "§eLength: %s Middle Layer");
+        provider.add("astrogreg.machine.kinetic_steam_engine.layers", "§eLength: %s Middle Layers");
+        provider.add("astrogreg.machine.kinetic_steam_engine.su_output", "§bStress Output: %s SU");
+        provider.add("astrogreg.machine.kinetic_steam_engine.steam_usage", "§6Steam Demand: %s mB/t");
+
+        provider.add("astrogreg.machine.large_kinetic_machine_parallels.tooltip",
+                "Performs up to 8 §aParallel Recipes§r at a cost of 1024 §6Stress Units§r and 32 RPM per Parallel");
+        provider.add("astrogreg.machine.large_kinetic_machine_recipes.tooltip", "Only performs §8ULV§r Recipes");
+        provider.add("astrogreg.machine.kinetic_machine.no_su", "§cInsufficient Stress Units");
+        provider.add("astrogreg.machine.kinetic_machine.su_input", "Stress Demand: %s / %s Available");
+        provider.add("config.jade.plugin_astrogreg.kinetic_steam_engine_info", "Kinetic Steam Engine Info");
 
         // custom hatch tooltips
         provider.add("astrogreg.machine.water_hatch.tooltip", "§eAccepted Fluid:§r Water");
@@ -93,7 +117,9 @@ public class AstroLangHandler {
         provider.add("astrogreg.gui.me_tag.datastick_name", "ME Tag Input Bus Configuration Data");
         provider.add("astrogreg.gui.me_tag.fluid_preview", "Fluid Preview (Read Only)");
         provider.add("astrogreg.gui.me_tag.settings_copied_hatch", "Tag Fluid Hatch settings copied");
-        provider.add("config.jade.plugin_astrogreg.solar_boiler_info", "Solar Boiler Array Info");
+
+        provider.add("astrogreg.machine.kinetic_input_hatch.tooltip", "Kinetic Stress Input for Multiblocks");
+        provider.add("astrogreg.machine.kinetic_output_hatch.tooltip", "Kinetic Stress Output for Multiblocks");
 
         // cwu generator tooltips
         provider.add("astrogreg.machine.cwu_generator.tooltip.0", "Generates Computational Work Units");

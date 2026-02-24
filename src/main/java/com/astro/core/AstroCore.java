@@ -38,6 +38,7 @@ import com.astro.core.common.machine.multiblock.generator.ManaBoilers;
 import com.astro.core.common.machine.singleblock.AstroSingleBlocks;
 import com.astro.core.common.machine.singleblock.AstroSteamMachines;
 import com.astro.core.datagen.AstroDatagen;
+import com.astro.core.integration.create.AstroKineticMachineUtils;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,7 +60,7 @@ public class AstroCore {
                                     REGISTRATE))
                             .title(REGISTRATE.addLang("itemGroup", AstroCore.id("creative_tab"),
                                     "AstroCore"))
-                            .icon(AGEMultiMachines.COKE_OVEN::asStack)
+                            .icon(AGEMultiMachines.KINETIC_STEAM_ENGINE::asStack)
                             .build())
             .register();
 
@@ -93,7 +94,9 @@ public class AstroCore {
         AstroDatagen.init();
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {}
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(AstroKineticMachineUtils::registerAllStressValues);
+    }
 
     private void clientSetup(final FMLClientSetupEvent event) {}
 

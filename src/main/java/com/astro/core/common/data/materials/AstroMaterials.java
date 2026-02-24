@@ -129,6 +129,7 @@ public class AstroMaterials {
                 .langValue("Andesite Alloy")
                 .ingot()
                 .components(Iron, 1, UNKNOWN, 1).formula("Fe?")
+                .flags(GENERATE_PLATE)
                 .color(0xa6a08f).iconSet(ROUGH)
                 .flags(DISABLE_DECOMPOSITION)
                 .buildAndRegister();

@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
 import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
+import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
@@ -32,7 +33,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
 
-import com.astro.core.AstroCore;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,6 +53,7 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
 
     private static final int MAX_RPM = 5000;
     private static final int BASE_SPINUP_TIME = 60;
+    private static final int SPINUP_UPDATE_INTERVAL = 5;
 
     @Getter
     @DescSynced
@@ -82,9 +83,12 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
     @Persisted
     private long currentOutput = 0;
 
+    @DescSynced
+    @Persisted
+    private double currentSpringBonus = 1.0;
+
     private int tickCounter = 0;
     private int targetSpinupTicks = 0;
-    private static final int SPINUP_UPDATE_INTERVAL = 5;
 
     public FaradayGeneratorMachine(IMachineBlockEntity holder) {
         super(holder);
@@ -93,18 +97,27 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-
-        currentRPM = 0;
-        currentOutput = 0;
-        tickCounter = 0;
+        boolean firstForm = (magnetRows == 0);
 
         calculateMagnetRows();
         detectDynamoTier();
         targetSpinupTicks = (BASE_SPINUP_TIME + magnetRows) * 20;
 
-        AstroCore.LOGGER.info("Structure formed: magnetRows={}, maxOutput={}, targetSpinupTicks={}",
-                magnetRows, maxOutput, targetSpinupTicks);
+        if (firstForm) {
+            currentRPM = 0;
+            currentOutput = 0;
+            tickCounter = 0;
+        }
     }
+
+    // I think this is useless
+    // public void onStructureInvalidated() {
+    // super.onStructureInvalid();
+    // currentRPM = 0;
+    // currentOutput = 0;
+    // currentSpringBonus = 1.0;
+    // magnetRows = 0;
+    // }
 
     private void detectDynamoTier() {
         int detectedTier = GTValues.ULV;
@@ -236,7 +249,13 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
     }
 
     private void updateCurrentOutput() {
-        currentOutput = (long) ((double) currentRPM / MAX_RPM * maxOutput);
+        currentOutput = (long) ((double) currentRPM / MAX_RPM * maxOutput * currentSpringBonus);
+    }
+
+    private int getSpinupIncrement() {
+        int totalSeconds = BASE_SPINUP_TIME + magnetRows;
+        int incrementsPerSecond = 20 / SPINUP_UPDATE_INTERVAL;
+        return MAX_RPM / (totalSeconds * incrementsPerSecond);
     }
 
     @Override
@@ -248,23 +267,15 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
         }
     }
 
-    private int getSpinupIncrement() {
-        int totalSeconds = BASE_SPINUP_TIME + magnetRows;
-        int incrementsPerSecond = 20 / SPINUP_UPDATE_INTERVAL;
-        return MAX_RPM / (totalSeconds * incrementsPerSecond);
-    }
-
     @Override
     public boolean beforeWorking(@Nullable GTRecipe recipe) {
         if (recipe == null) return false;
 
         if (!RecipeHelper.matchRecipe(this, getLubricantRecipe()).isSuccess()) {
-            AstroCore.LOGGER.info("beforeWorking: No lubricant - preventing recipe start");
             return false;
         }
 
         if (!RecipeHelper.matchRecipe(this, getCoolantRecipe()).isSuccess()) {
-            AstroCore.LOGGER.info("beforeWorking: No coolant - preventing recipe start");
             return false;
         }
 
@@ -274,11 +285,6 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
     @Override
     public boolean onWorking() {
         boolean value = super.onWorking();
-
-        if (recipeLogic.getLastRecipe() != null) {
-            AstroCore.LOGGER.info("onWorking: Last recipe EU = {}",
-                    recipeLogic.getLastRecipe().getOutputEUt().getTotalEU());
-        }
 
         if (tickCounter % SPINUP_UPDATE_INTERVAL == 0) {
             boolean usingLiquidHelium = RecipeHelper.matchRecipe(this, GTRecipeBuilder.ofRaw()
@@ -290,7 +296,6 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
             if (tickCounter % 20 == 0) {
                 if (!RecipeHelper.handleRecipeIO(this, getLubricantRecipe(), IO.IN,
                         this.recipeLogic.getChanceCaches()).isSuccess()) {
-                    AstroCore.LOGGER.info("Lubricant consumption failed during recipe");
                     currentRPM = Math.max(0, currentRPM - getSpinupIncrement());
                     updateCurrentOutput();
                     return false;
@@ -298,7 +303,6 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
 
                 if (!RecipeHelper.handleRecipeIO(this, getCoolantRecipe(), IO.IN,
                         this.recipeLogic.getChanceCaches()).isSuccess()) {
-                    AstroCore.LOGGER.info("Coolant consumption failed during recipe");
                     currentRPM = Math.max(0, currentRPM - getSpinupIncrement());
                     updateCurrentOutput();
                     return false;
@@ -355,6 +359,19 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
             return ModifierFunction.IDENTITY;
         }
 
+        double springBonus = 1.0;
+        var inputs = recipe.getInputContents(ItemRecipeCapability.CAP);
+        if (!inputs.isEmpty()) {
+            String recipeId = recipe.id.getPath();
+            int springTier = getSpringTierFromRecipe(recipeId);
+            if (springTier >= 5) {
+                springBonus = 1.0 + (0.05 * (springTier - 4));
+            }
+        }
+
+        generatorMachine.currentSpringBonus = springBonus;
+        generatorMachine.updateCurrentOutput();
+
         double multiplier = (double) generatorMachine.currentOutput / recipeEU;
 
         return ModifierFunction.builder()
@@ -362,14 +379,45 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
                 .build();
     }
 
+    private static int getSpringTierFromRecipe(String recipeId) {
+        if (recipeId.contains("energized_steel")) return 1;
+        if (recipeId.contains("blazing_etrium")) return 2;
+        if (recipeId.contains("niotic_calorite")) return 3;
+        if (recipeId.contains("spirited_uranium")) return 4;
+        if (recipeId.contains("nitro_flux")) return 5;
+        if (recipeId.contains("radiant_zephyron")) return 6;
+        if (recipeId.contains("gaiaforged_naquadah")) return 8;
+        if (recipeId.contains("thalassium")) return 9;
+        if (recipeId.contains("electrolyte")) return 10;
+        return 0;
+    }
+
     @Override
     public long getOverclockVoltage() {
-        long voltage = currentOutput;
-        if (voltage > 0) {
-            AstroCore.LOGGER.info("getOverclockVoltage returning: {}", voltage);
-        }
-        return voltage;
+        return currentOutput;
     }
+
+    // GUI I need to finish. I just kinda hate doign them.
+    // @Override
+    // public ModularUI createUI(Player player) {
+    // var screen = new DraggableScrollableWidgetGroup(7, 4, 194, 117)
+    // .setBackground(getScreenTexture());
+    // screen.addWidget(new LabelWidget(4, 5,
+    // self().getBlockState().getBlock().getDescriptionId()));
+    // screen.addWidget(new ComponentPanelWidget(4, 17, this::addDisplayText)
+    // .setMaxWidthLimit(186)
+    // .clickHandler(this::handleDisplayClick));
+    // return new ModularUI(211, 208, this, player)
+    // .background(GuiTextures.BACKGROUND)
+    // .widget(screen)
+    // .widget(UITemplate.bindPlayerInventory(player.getInventory(),
+    // GuiTextures.SLOT, 22, 126, true));
+    // }
+    //
+    // @Override
+    // public IGuiTexture getScreenTexture() {
+    // return GuiTextures.DISPLAY;
+    // }
 
     @Override
     public void addDisplayText(List<Component> textList) {
@@ -382,7 +430,9 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
                 .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive());
 
         if (magnetRows == 0) {
-            textList.add(Component.translatable("astrogreg.machine.faraday_generator.conflicting_coils")
+            textList.add(Component.translatable("astrogreg.machine.faraday_generator.conflicting_coils_1")
+                    .withStyle(ChatFormatting.RED));
+            textList.add(Component.translatable("astrogreg.machine.faraday_generator.conflicting_coils_2")
                     .withStyle(ChatFormatting.RED));
         }
 
@@ -405,13 +455,25 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
                 GTValues.VNF[displayTier])
                 .withStyle(ChatFormatting.GRAY));
 
+        long displayMaxOutput = (long) (maxOutput * currentSpringBonus);
         textList.add(Component.translatable("astrogreg.machine.faraday_generator.energy_output",
-                FormattingUtil.formatNumbers(currentOutput), FormattingUtil.formatNumbers(maxOutput))
+                FormattingUtil.formatNumbers(currentOutput), FormattingUtil.formatNumbers(displayMaxOutput))
                 .withStyle(ChatFormatting.WHITE));
 
         textList.add(Component.translatable("astrogreg.machine.faraday_generator.rotation_speed",
                 FormattingUtil.formatNumbers(currentRPM), FormattingUtil.formatNumbers(MAX_RPM))
                 .withStyle(ChatFormatting.WHITE));
+
+        if (isActive() && recipeLogic.getLastRecipe() != null) {
+            int duration = recipeLogic.getLastRecipe().duration;
+            int progress = recipeLogic.getProgress();
+            int progressPercent = duration > 0 ? (progress * 100 / duration) : 0;
+            textList.add(Component.translatable("astrogreg.machine.recipe_progress.tooltip",
+                    String.format("%.2f", progress / 20.0),
+                    String.format("%.2f", duration / 20.0),
+                    String.valueOf(progressPercent))
+                    .withStyle(ChatFormatting.WHITE));
+        }
 
         textList.add(Component.translatable("astrogreg.machine.faraday_generator.magnet_rows", magnetRows)
                 .withStyle(ChatFormatting.YELLOW));
@@ -431,6 +493,13 @@ public class FaradayGeneratorMachine extends WorkableElectricMultiblockMachine i
             textList.add(Component
                     .translatable("astrogreg.machine.faraday_generator.coolant_usage", coolantAmount, coolantType)
                     .withStyle(ChatFormatting.AQUA));
+
+            if (currentSpringBonus > 1.0) {
+                int bonusPercent = (int) ((currentSpringBonus - 1.0) * 100);
+                textList.add(
+                        Component.translatable("astrogreg.machine.faraday_generator.superconductor_bonus", bonusPercent)
+                                .withStyle(ChatFormatting.LIGHT_PURPLE));
+            }
         }
 
         builder.addWorkingStatusLine();

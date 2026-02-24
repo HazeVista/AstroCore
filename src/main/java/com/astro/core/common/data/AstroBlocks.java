@@ -26,6 +26,8 @@ public class AstroBlocks {
     public static BlockEntry<Block> ASTEROID_STONE;
     public static BlockEntry<Block> HARD_ASTEROID_STONE;
 
+    public static BlockEntry<Block> MACHINE_CASING_KINETIC;
+
     public static BlockEntry<Block> STEAM_ENGINE_GRATING;
 
     public static BlockEntry<Block> MANASTEEL_MACHINE_CASING;
@@ -97,6 +99,8 @@ public class AstroBlocks {
                 MapColor.TERRACOTTA_PURPLE, 4.0F);
 
         // 2. Machine Casings & Gearboxes
+        MACHINE_CASING_KINETIC = createCasing("machine_casing_kinetic",
+                "casings/machine_casing_kinetic", "Kinetic Machine Casing");
         STEAM_ENGINE_GRATING = createCasing("steam_engine_grating",
                 "casings/machine_casing_steam_grate", "Steam Engine Grating");
         MANASTEEL_MACHINE_CASING = createCasing("manasteel_brick_machine_casing",
