@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import net.minecraft.data.recipes.FinishedRecipe;
 
 import com.astro.core.common.data.AstroBlocks;
+import com.astro.core.common.data.machine.AstroRecipeConditions;
 import com.astro.core.common.data.materials.AstroElements;
 import com.astro.core.common.data.recipe.AstroRecipes;
 import com.astro.core.common.data.recipe.generated.AstroGeneratorRecipeHandler;
@@ -32,6 +33,7 @@ public class AstroGregGTAddon implements IGTAddon {
     @Override
     public void initializeAddon() {
         AstroBlocks.init();
+        AstroRecipeConditions.init();
     }
 
     @Override
@@ -39,7 +41,6 @@ public class AstroGregGTAddon implements IGTAddon {
         AstroTagPrefix.init();
     }
 
-    @Override
     public String addonModId() {
         return AstroCore.MOD_ID;
     }
@@ -68,7 +69,7 @@ public class AstroGregGTAddon implements IGTAddon {
      * CustomRecipeCapabilities.PRESSURE, false);
      * public static final ContentJS<Double> PRESSURE_OUT = new ContentJS<>(NumberComponent.ANY_DOUBLE,
      * CustomRecipeCapabilities.PRESSURE, true);
-     * 
+     *
      * @Override
      * public void registerRecipeKeys(KJSRecipeKeyEvent event) {
      * event.registerKey(CustomRecipeCapabilities.PRESSURE, Pair.of(PRESSURE_IN, PRESSURE_OUT));

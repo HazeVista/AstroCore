@@ -132,6 +132,9 @@ public class AstroLangHandler {
         // miscellaneous
         multilineLang(provider, "astrogreg.gui.configurator_slot.tooltip",
                 "§fConfigurator Slot§r\n§7Place a §6Programmed Circuit§7 in this slot to\n§7change its configured value.\n§aA Programmed Circuit in this slot is also valid for recipe inputs.§r");
+
+        provider.add("astrogreg.recipe_condition.oxygenated.requires", "Requires Oxygenated Environment.");
+        provider.add("astrogreg.recipe_condition.oxygenated.requires_not", "Requires Unoxygenated Environment.");
     }
 
     protected static void multilineLang(RegistrateLangProvider provider, String key, String multiline) {

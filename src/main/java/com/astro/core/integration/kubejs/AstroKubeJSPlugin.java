@@ -1,5 +1,7 @@
 package com.astro.core.integration.kubejs;
 
+import com.gregtechceu.gtceu.api.registry.GTRegistries;
+
 import com.astro.core.AstroCore;
 import com.astro.core.client.AstroGUITextures;
 import com.astro.core.client.AstroMachines;
@@ -12,6 +14,7 @@ import com.astro.core.common.data.materials.AstroMaterials;
 import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import com.astro.core.common.machine.trait.AstroPartAbility;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
 import dev.latvian.mods.kubejs.script.BindingsEvent;
 import dev.latvian.mods.kubejs.script.ScriptType;
 import dev.latvian.mods.kubejs.util.ClassFilter;
@@ -35,6 +38,13 @@ public class AstroKubeJSPlugin extends KubeJSPlugin {
     }
 
     @Override
+    public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
+        for (var entry : GTRegistries.RECIPE_TYPES.entries()) {
+            event.register(entry.getKey(), AstroRecipeSchema.SCHEMA);
+        }
+    }
+
+    @Override
     public void registerBindings(BindingsEvent event) {
         super.registerBindings(event);
         event.add("AstroMaterials", AstroMaterials.class);
@@ -49,5 +59,7 @@ public class AstroKubeJSPlugin extends KubeJSPlugin {
         event.add("AstroPartAbility", AstroPartAbility.class);
 
         event.add("AstroCore", AstroCore.class);
+
+        event.add("AstroRecipeSchemaBindings", AstroRecipeSchemaBindings.class);
     }
 }
