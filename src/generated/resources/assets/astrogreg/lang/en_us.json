@@ -212,6 +212,8 @@
   "config.jade.plugin_astrogreg.kinetic_steam_engine_info": "Kinetic Steam Engine Info",
   "config.jade.plugin_astrogreg.processing_core_info": "§aIndustrial Processing Core Info§r",
   "config.jade.plugin_astrogreg.solar_boiler_info": "Solar Boiler Array Info",
+  "item.astrogreg.rune_tablet": "Rune Tablet",
+  "item.astrogreg.unfired_rune_tablet": "Unfired Rune Tablet",
   "itemGroup.astrogreg.creative_tab": "AstroCore",
   "material.astrogreg.abyssalloy_239": "Abyssalloy-239",
   "material.astrogreg.acorn": "Acorn",

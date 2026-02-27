@@ -4,13 +4,18 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [
+    "accessor.BotaniaEmiRecipeAccessor",
+    "accessor.RunicAltarBlockEntityAccessor",
     "MixinContainerRenamer",
     "MixinCutterHook",
     "MixinMEPatternBufferCustomName",
     "MixinMEPatternBufferPartMachine",
     "MultiblockInfoEmiCategoryMixin",
     "MixinGTRecipeTypes",
-    "FluidHatchesBlacklistMixin"
+    "FluidHatchesBlacklistMixin",
+    "RunicAltarBlockEntityMixin",
+    "RunicAltarEmiRecipeMixin",
+    "RunicAltarHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
