@@ -8,36 +8,16 @@ import lombok.experimental.Accessors;
 
 import static com.gregtechceu.gtceu.integration.kjs.recipe.GTRecipeSchema.*;
 
-/**
- * KubeJS RecipeSchema extension for AstroGreg.
- * Provides a fluent API for adding custom recipe conditions in KubeJS scripts:
- * 
- * <pre>
- *   event.recipes.gtceu.aether_engine("my_recipe_id")
- *       .isOxygenated(true)
- *       ...
- * </pre>
- *
- */
 public interface AstroRecipeSchema {
 
     @SuppressWarnings({ "unused", "UnusedReturnValue" })
     @Accessors(chain = true, fluent = true)
     class AstroRecipeJS extends GTRecipeSchema.GTRecipeJS {
 
-        /**
-         * Requires the machine to be adjacent to an oxygenated block.
-         *
-         * @param requiresOxygen true = must have oxygen nearby; false = must not have oxygen nearby.
-         */
         public GTRecipeSchema.GTRecipeJS isOxygenated(boolean requiresOxygen) {
             return this.addCondition(new OxygenatedCondition(false, requiresOxygen));
         }
 
-        /**
-         * @param requiresOxygen true = must have oxygen nearby; false = must not have oxygen nearby.
-         * @param reverse        if true, inverts the result.
-         */
         public GTRecipeSchema.GTRecipeJS isOxygenated(boolean requiresOxygen, boolean reverse) {
             return this.addCondition(new OxygenatedCondition(reverse, requiresOxygen));
         }

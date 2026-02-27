@@ -18,6 +18,8 @@ and [JuiceyBean](https://github.com/JuiceyBeans)'s [GT Addon Template](https://g
 
 Mod would not be possible without heavily referencing [PhoenixVine](https://github.com/Phoenixvine32908)'s [PhoenixCore](https://github.com/Phoenixvine32908/PhoenixCore/) for  file structure.
 
+Ad Astra Compat & Integration heavily inspired by [TerraFirmaGreg](https://github.com/TerraFirmaGreg-Team)
+
 If you are looking for our mod pack, we have a separate repository for that on [this page](https://github.com/HazeVista/AstroGregExsilium).
 
 Thanks for checking it out! -Haze Vista

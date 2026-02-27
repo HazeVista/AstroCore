@@ -6,16 +6,22 @@
   "mixins": [
     "accessor.BotaniaEmiRecipeAccessor",
     "accessor.RunicAltarBlockEntityAccessor",
+    "FluidHatchesBlacklistMixin",
+    "GasTankItemMixin",
     "MixinContainerRenamer",
     "MixinCutterHook",
     "MixinMEPatternBufferCustomName",
     "MixinMEPatternBufferPartMachine",
     "MultiblockInfoEmiCategoryMixin",
+    "OxygenDistributorMixin",
+    "OxygenLoaderMixin",
     "MixinGTRecipeTypes",
-    "FluidHatchesBlacklistMixin",
+    "RocketFuelMixin",
     "RunicAltarBlockEntityMixin",
     "RunicAltarEmiRecipeMixin",
-    "RunicAltarHudMixin"
+    "RunicAltarHudMixin",
+    "SlidingDoorBlockMixin",
+    "SpaceSuitItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

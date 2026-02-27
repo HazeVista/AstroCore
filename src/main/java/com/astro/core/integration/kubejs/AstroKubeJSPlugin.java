@@ -2,6 +2,8 @@ package com.astro.core.integration.kubejs;
 
 import com.gregtechceu.gtceu.api.registry.GTRegistries;
 
+import net.minecraft.resources.ResourceLocation;
+
 import com.astro.core.AstroCore;
 import com.astro.core.client.AstroGUITextures;
 import com.astro.core.client.AstroMachines;
@@ -19,6 +21,7 @@ import dev.latvian.mods.kubejs.script.BindingsEvent;
 import dev.latvian.mods.kubejs.script.ScriptType;
 import dev.latvian.mods.kubejs.util.ClassFilter;
 
+@SuppressWarnings("all")
 public class AstroKubeJSPlugin extends KubeJSPlugin {
 
     @Override
@@ -42,6 +45,9 @@ public class AstroKubeJSPlugin extends KubeJSPlugin {
         for (var entry : GTRegistries.RECIPE_TYPES.entries()) {
             event.register(entry.getKey(), AstroRecipeSchema.SCHEMA);
         }
+        event.register(ResourceLocation.parse("gtceu:greenhouse_trees"), AstroRecipeSchema.SCHEMA);
+        event.register(ResourceLocation.parse("gtceu:greenhouse_crops"), AstroRecipeSchema.SCHEMA);
+        event.register(ResourceLocation.parse("gtceu:greenhouse_flowers"), AstroRecipeSchema.SCHEMA);
     }
 
     @Override
