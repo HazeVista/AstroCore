@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "gtceu:machine",
+  "machine": "astrogreg:hv_cwu_generator",
+  "replaceable_textures": [
+    "bottom",
+    "top",
+    "side"
+  ],
+  "variants": {
+    "recipe_logic_status=idle": {
+      "model": {
+        "parent": "gtceu:block/casings/voltage/hv",
+        "textures": {
+          "overlay_front": "astrogreg:block/machines/cwu_generator/overlay_front",
+          "overlay_side": "astrogreg:block/machines/cwu_generator/overlay_side",
+          "overlay_side_emissive": "astrogreg:block/machines/cwu_generator/overlay_side_emissive"
+        }
+      }
+    },
+    "recipe_logic_status=suspend": {
+      "model": {
+        "parent": "gtceu:block/casings/voltage/hv",
+        "textures": {
+          "overlay_front": "astrogreg:block/machines/cwu_generator/overlay_front",
+          "overlay_side": "astrogreg:block/machines/cwu_generator/overlay_side",
+          "overlay_side_emissive": "astrogreg:block/machines/cwu_generator/overlay_side_emissive"
+        }
+      }
+    },
+    "recipe_logic_status=waiting": {
+      "model": {
+        "parent": "gtceu:block/casings/voltage/hv",
+        "textures": {
+          "overlay_front": "astrogreg:block/machines/cwu_generator/overlay_front_active",
+          "overlay_front_emissive": "astrogreg:block/machines/cwu_generator/overlay_front_active_emissive",
+          "overlay_side": "astrogreg:block/machines/cwu_generator/overlay_side_active",
+          "overlay_side_emissive": "astrogreg:block/machines/cwu_generator/overlay_side_active_emissive"
+        }
+      }
+    },
+    "recipe_logic_status=working": {
+      "model": {
+        "parent": "gtceu:block/casings/voltage/hv",
+        "textures": {
+          "overlay_front": "astrogreg:block/machines/cwu_generator/overlay_front_active",
+          "overlay_front_emissive": "astrogreg:block/machines/cwu_generator/overlay_front_active_emissive",
+          "overlay_side": "astrogreg:block/machines/cwu_generator/overlay_side_active",
+          "overlay_side_emissive": "astrogreg:block/machines/cwu_generator/overlay_side_active_emissive"
+        }
+      }
+    }
+  }
+}

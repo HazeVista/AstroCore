@@ -17,20 +17,26 @@ import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWor
 @SuppressWarnings("all")
 public class AstroSingleBlocks {
 
+    private static final String[] TIER_COLOR = { "§8", "§7", "§b", "§6", "§5", "§9", "§d", "§c", "§3", "§4" };
+
+    private static String tieredName(int tier) {
+        return TIER_COLOR[tier] + VN[tier] + " Research Computer§r";
+    }
+
     public static final MachineDefinition[] CWU_GENERATOR = registerTieredMachines(
             "cwu_generator",
             (holder, tier) -> new CWUGeneratorMachine(holder, tier),
             (tier, builder) -> builder
-                    .langValue(VN[tier] + " Research Computer")
+                    .langValue(tieredName(tier))
                     .tooltips(
                             Component.translatable("gtceu.universal.tooltip.voltage_in",
                                     CWUGeneratorMachine.getEUtForTier(tier), VNF[tier]),
-                            Component.translatable("astrogreg.machine.cwu_generator.tooltip.0"),
                             Component.translatable("astrogreg.machine.cwu_generator.tooltip.1",
                                     CWUGeneratorMachine.getCWUForTier(tier)),
                             Component.translatable("astrogreg.machine.cwu_generator.tooltip.2",
-                                    CWUGeneratorMachine.getLubricantForTier(tier)))
-                    .modelProperty(IS_FORMED, false)
+                                    CWUGeneratorMachine.getLubricantForTier(tier)),
+                            Component.translatable("astrogreg.machine.cwu_generator.tooltip.3",
+                                    CWUGeneratorMachine.getTankCapacityForTier(tier)))
                     .rotationState(RotationState.NON_Y_AXIS)
                     .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
                     .model(createWorkableTieredHullMachineModel(

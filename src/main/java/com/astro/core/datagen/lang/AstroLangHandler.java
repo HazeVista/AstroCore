@@ -126,12 +126,16 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.kinetic_output_hatch.tooltip", "Kinetic Stress Output for Multiblocks");
 
         // cwu generator tooltips
-        provider.add("astrogreg.machine.cwu_generator.tooltip.0", "Generates Computational Work Units");
-        provider.add("astrogreg.machine.cwu_generator.tooltip.1", "Produces %s CWU/t");
-        provider.add("astrogreg.machine.cwu_generator.tooltip.2", "Consumes %s mB/t Lubricant");
-        provider.add("astrogreg.machine.cwu_generator.producing", "Producing: %s CWU/t");
-        provider.add("astrogreg.machine.cwu_generator.lubricant", "Lubricant: %s mB/t");
-        provider.add("astrogreg.machine.cwu_generator.available", "Available: %s CWU");
+        provider.add("astrogreg.machine.cwu_generator.tooltip.0", "§7Generates Computational Work Units");
+        provider.add("astrogreg.machine.cwu_generator.tooltip.1", "§9Computation:§r %s CWU/t");
+        provider.add("astrogreg.machine.cwu_generator.tooltip.2", "§cRequires:§r %s mB/t Lubricant");
+        provider.add("astrogreg.machine.cwu_generator.tooltip.3", "§9Fluid Capacity:§r %s mB");
+        provider.add("astrogreg.machine.cwu_generator.producing", "§9Computation:§r %s CWU/t");
+        provider.add("astrogreg.machine.cwu_generator.lubricant", "§6Lubricant Demand:§r %s mB/t");
+        provider.add("astrogreg.machine.cwu_generator.stored_lubricant", "§bStored Lubricant:§r %s / %s mB");
+        provider.add("astrogreg.machine.cwu_generator.inactive.no_power_lube", "§cInactive:§r No Power & No Lubricant");
+        provider.add("astrogreg.machine.cwu_generator.inactive.no_power", "§cInactive:§r Insufficient Power");
+        provider.add("astrogreg.machine.cwu_generator.inactive.no_lube", "§cInactive:§r No Lubricant");
 
         // miscellaneous
         multilineLang(provider, "astrogreg.gui.configurator_slot.tooltip",
