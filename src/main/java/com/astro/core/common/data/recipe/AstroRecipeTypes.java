@@ -2,16 +2,26 @@ package com.astro.core.common.data.recipe;
 
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
+import com.gregtechceu.gtceu.api.gui.widget.SlotWidget;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
+import com.gregtechceu.gtceu.utils.ResearchManager;
+
+import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.items.ItemStackHandler;
 
 import com.astro.core.client.AstroGUITextures;
 import com.astro.core.client.AstroSoundEntries;
+import com.astro.core.common.data.machine.conditions.PlanetaryResearchCondition;
+
+import java.util.function.BiConsumer;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.DOWN_TO_UP;
@@ -29,9 +39,11 @@ public class AstroRecipeTypes {
     public static GTRecipeType KINETIC_COMBUSTION_RECIPES;
     public static GTRecipeType CONCRETE_PLANT;
     public static GTRecipeType INSCRIPTION;
+    public static GTRecipeType ASTROPORT_RECIPES;
+    public static GTRecipeType OBSERVATORY_RECIPES;
 
     public static void init() {
-        AETHER_ENGINE_RECIPES = register("aether_engine", MULTIBLOCK)
+        AETHER_ENGINE_RECIPES = register("aether_engine", ELECTRIC)
                 .setMaxIOSize(0, 0, 1, 1)
                 .setSlotOverlay(false, false, GuiTextures.BOX_OVERLAY)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, LEFT_TO_RIGHT)
@@ -44,7 +56,7 @@ public class AstroRecipeTypes {
                 .setMaxTooltips(1)
                 .setSound(GTSoundEntries.FURNACE);
 
-        DEIONIZATION_RECIPES = register("deionization", MULTIBLOCK)
+        DEIONIZATION_RECIPES = register("deionization", ELECTRIC)
                 .setMaxIOSize(2, 0, 1, 1)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.BATH)
@@ -60,7 +72,7 @@ public class AstroRecipeTypes {
                     }
                 });
 
-        RUNE_INSCRIPTION_RECIPES = register("rune_inscription", MULTIBLOCK) // Bgame was Here
+        RUNE_INSCRIPTION_RECIPES = register("rune_inscription", ELECTRIC)
                 .setEUIO(IO.IN)
                 .setMaxIOSize(9, 1, 3, 0)
                 .setProgressBar(AstroGUITextures.PROGRESS_BAR_RUNE, LEFT_TO_RIGHT)
@@ -78,8 +90,7 @@ public class AstroRecipeTypes {
 
         STEAM_BLAST_FURNACE_RECIPES = register("steam_blast_furnace", MULTIBLOCK)
                 .setMaxIOSize(1, 1, 0, 0)
-                .setProgressBar(GuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR,
-                        LEFT_TO_RIGHT)
+                .setProgressBar(GuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR, LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.FURNACE)
                 .setEUIO(IO.IN)
                 .setIconSupplier(() -> {
@@ -93,7 +104,7 @@ public class AstroRecipeTypes {
                     }
                 });
 
-        FARADAY_GENERATOR_RECIPES = register("faraday_generator", MULTIBLOCK)
+        FARADAY_GENERATOR_RECIPES = register("faraday_generator", ELECTRIC)
                 .setMaxIOSize(1, 1, 0, 0)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MAGNET, LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.REPLICATOR)
@@ -106,16 +117,51 @@ public class AstroRecipeTypes {
                 .setSound(GTSoundEntries.COMBUSTION)
                 .setEUIO(IO.OUT);
 
-        CONCRETE_PLANT = register("concrete_plant", MULTIBLOCK)
+        CONCRETE_PLANT = register("concrete_plant", ELECTRIC)
                 .setMaxIOSize(6, 1, 2, 1)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MIXER, LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.MIXER)
                 .setEUIO(IO.IN);
 
-        INSCRIPTION = register("inscription", MULTIBLOCK)
+        INSCRIPTION = register("inscription", ELECTRIC)
                 .setEUIO(IO.IN)
                 .setMaxIOSize(6, 1, 3, 0)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
                 .setSound(GTSoundEntries.REPLICATOR);
+
+        ASTROPORT_RECIPES = register("astroport", ELECTRIC)
+                .setEUIO(IO.IN)
+                .setMaxIOSize(16, 1, 4, 0)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+                .setSound(GTSoundEntries.ASSEMBLER)
+                .setHasResearchSlot(true)
+                .setUiBuilder(buildPlanetaryResearchSlot());
+
+        OBSERVATORY_RECIPES = register("observatory", ELECTRIC)
+                .setMaxIOSize(2, 1, 0, 0)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+                .setSlotOverlay(false, false, GuiTextures.SCANNER_OVERLAY)
+                .setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY)
+                .setScanner(true)
+                .setMaxTooltips(4)
+                .setSound(GTSoundEntries.COMPUTATION);
+    }
+
+    private static BiConsumer<GTRecipe, WidgetGroup> buildPlanetaryResearchSlot() {
+        return (recipe, group) -> {
+            String planetId = recipe.data.getString(PlanetaryResearchCondition.RECIPE_DATA_KEY);
+            if (planetId.isEmpty()) return;
+
+            ItemStackHandler phantom = new ItemStackHandler(1);
+            phantom.setStackInSlot(0, ResearchManager.getDefaultScannerItem());
+
+            SlotWidget planetarySlot = new SlotWidget(phantom, 0, 152, 36, false, false)
+                    .setBackgroundTexture(GuiTextures.SLOT)
+                    .setOnAddedTooltips((w, tooltips) -> tooltips.add(Component.translatable(
+                            "astrogreg.recipe.condition.planetary_research_slot.tooltip",
+                            planetId)));
+
+            group.addWidget(planetarySlot);
+        };
     }
 }

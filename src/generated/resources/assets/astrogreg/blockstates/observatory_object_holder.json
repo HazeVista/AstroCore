@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "astrogreg:block/machine/observatory_object_holder",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "astrogreg:block/machine/observatory_object_holder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astrogreg:block/machine/observatory_object_holder"
+    },
+    "facing=south": {
+      "model": "astrogreg:block/machine/observatory_object_holder",
+      "y": 180
+    },
+    "facing=up": {
+      "gtceu:z": 180,
+      "model": "astrogreg:block/machine/observatory_object_holder",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "astrogreg:block/machine/observatory_object_holder",
+      "y": 270
+    }
+  }
+}

@@ -31,11 +31,17 @@ public class KineticSteamEngineProvider implements IBlockComponentProvider, ISer
 
         int steamDemand = data.getInt("steamDemand");
         int suOutput = data.getInt("suOutput");
+        boolean working = data.getBoolean("working");
 
         tooltip.add(Component.translatable("astrogreg.machine.kinetic_steam_engine.steam_usage", steamDemand)
                 .withStyle(ChatFormatting.GOLD));
         tooltip.add(Component.translatable("astrogreg.machine.kinetic_steam_engine.su_output", suOutput)
                 .withStyle(ChatFormatting.AQUA));
+
+        if (!working) {
+            tooltip.add(Component.translatable("gtceu.multiblock.large_miner.steam")
+                    .withStyle(ChatFormatting.RED));
+        }
     }
 
     @Override
@@ -46,9 +52,10 @@ public class KineticSteamEngineProvider implements IBlockComponentProvider, ISer
             compoundTag.putBoolean("formed", machine.isFormed());
 
             if (machine.isFormed()) {
+                boolean working = machine.getRecipeLogic().isWorking();
+                compoundTag.putBoolean("working", working);
                 compoundTag.putInt("steamDemand", machine.calculateSteamPerTick());
-                compoundTag.putInt("suOutput",
-                        machine.getRecipeLogic().isActive() ? (int) machine.calculateTotalSU() : 0);
+                compoundTag.putInt("suOutput", working ? (int) machine.calculateTotalSU() : 0);
             }
         }
     }

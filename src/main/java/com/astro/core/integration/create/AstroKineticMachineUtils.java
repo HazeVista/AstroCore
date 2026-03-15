@@ -17,7 +17,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import com.astro.core.client.renderer.machine.KineticHatchBER;
-import com.astro.core.common.machine.hatches.AstroHatches;
+import com.astro.core.common.machine.part.AstroHatches;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
 import com.tterrag.registrate.util.OneTimeEventReceiver;

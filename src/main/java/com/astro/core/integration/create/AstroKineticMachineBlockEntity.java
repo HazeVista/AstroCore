@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
+import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.client.model.machine.MachineRenderState;
 
 import com.lowdragmc.lowdraglib.gui.texture.ResourceTexture;
@@ -26,17 +27,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 
-import com.astro.core.common.machine.hatches.AstroHatches;
+import com.astro.core.common.machine.part.AstroHatches;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("all")
 public class AstroKineticMachineBlockEntity extends GeneratingKineticBlockEntity
-                                            implements IMachineBlockEntity, IManaged {
+        implements IMachineBlockEntity, IManaged {
 
     public final MultiManagedStorage managedStorage = new MultiManagedStorage();
     @Getter
@@ -50,6 +53,9 @@ public class AstroKineticMachineBlockEntity extends GeneratingKineticBlockEntity
     private MachineRenderState renderState;
     private final long offset = GTValues.RNG.nextInt(20);
     private float workingSpeed;
+
+    private final List<TickableSubscription> serverTicks = new ArrayList<>();
+    private final List<TickableSubscription> waitingToAdd = new ArrayList<>();
 
     public AstroKineticMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -81,6 +87,66 @@ public class AstroKineticMachineBlockEntity extends GeneratingKineticBlockEntity
         workingSpeed = Math.min(256f, su / capacityPerRPM);
         updateGeneratedRotation();
     }
+
+    public float scheduleWorking(float su, boolean simulate) {
+        float speed = Math.min(256f, su / 1562.5f);
+        float actualSU = speed * 1562.5f;
+        if (!simulate) {
+            workingSpeed = speed;
+            updateGeneratedRotation();
+        }
+        return actualSU;
+    }
+
+    public void stopWorking() {
+        if (getDefinition().isSource()) {
+            workingSpeed = 0;
+            updateGeneratedRotation();
+        }
+    }
+
+    @Override
+    public float getGeneratedSpeed() {
+        return workingSpeed;
+    }
+
+    @Override
+    public float calculateAddedStressCapacity() {
+        var block = getBlockState().getBlock();
+        if (block != AstroHatches.KINETIC_OUTPUT_HATCH.getBlock()) return 0;
+        if (workingCapacityPerRPM == 0) return 0;
+        this.lastCapacityProvided = workingCapacityPerRPM;
+        return workingCapacityPerRPM;
+    }
+
+    // ======== Tick Subscription ========
+
+    public TickableSubscription subscribeServerTick(Runnable runnable) {
+        var subscription = new TickableSubscription(runnable);
+        waitingToAdd.add(subscription);
+        return subscription;
+    }
+
+    public void unsubscribe(@Nullable TickableSubscription current) {
+        if (current != null) current.unsubscribe();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (level == null || level.isClientSide) return;
+        if (!waitingToAdd.isEmpty()) {
+            serverTicks.addAll(waitingToAdd);
+            waitingToAdd.clear();
+        }
+        for (var iter = serverTicks.iterator(); iter.hasNext();) {
+            var tickable = iter.next();
+            if (tickable.isStillSubscribed()) tickable.run();
+            if (!tickable.isStillSubscribed()) iter.remove();
+        }
+    }
+
+    // ======== Misc ========
 
     @Override
     public AstroKineticMachineDefinition getDefinition() {
@@ -147,44 +213,6 @@ public class AstroKineticMachineBlockEntity extends GeneratingKineticBlockEntity
             return true;
         }
         return false;
-    }
-
-    // ======== Create Source Logic ========
-
-    public float scheduleWorking(float su, boolean simulate) {
-        float speed = Math.min(256f, su / 1562.5f);
-        float actualSU = speed * 1562.5f;
-        if (!simulate) {
-            workingSpeed = speed;
-            updateGeneratedRotation();
-        }
-        return actualSU;
-    }
-
-    @Override
-    public float calculateAddedStressCapacity() {
-        var block = getBlockState().getBlock();
-        if (block != AstroHatches.KINETIC_OUTPUT_HATCH.getBlock()) return 0;
-        if (workingCapacityPerRPM == 0) return 0;
-        this.lastCapacityProvided = workingCapacityPerRPM;
-        return workingCapacityPerRPM;
-    }
-
-    public void scheduleWorking(float su) {
-        workingSpeed = Math.min(256f, su / 1562.5f);
-        updateGeneratedRotation();
-    }
-
-    public void stopWorking() {
-        if (getDefinition().isSource() && getGeneratedSpeed() != 0) {
-            workingSpeed = 0;
-            updateGeneratedRotation();
-        }
-    }
-
-    @Override
-    public float getGeneratedSpeed() {
-        return workingSpeed;
     }
 
     // ======== NBT ========

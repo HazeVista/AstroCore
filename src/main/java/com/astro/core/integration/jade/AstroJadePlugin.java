@@ -21,6 +21,7 @@ public class AstroJadePlugin implements IWailaPlugin {
         registration.registerBlockDataProvider(new FaradayGeneratorProvider(), MetaMachineBlockEntity.class);
         registration.registerBlockDataProvider(new KineticSteamEngineProvider(), MetaMachineBlockEntity.class);
         registration.registerBlockDataProvider(new KineticCombustionEngineProvider(), MetaMachineBlockEntity.class);
+        registration.registerBlockDataProvider(new KineticAlternatorProvider(), MetaMachineBlockEntity.class);
     }
 
     @Override
@@ -30,5 +31,6 @@ public class AstroJadePlugin implements IWailaPlugin {
         registration.registerBlockComponent(new FaradayGeneratorProvider(), Block.class);
         registration.registerBlockComponent(new KineticSteamEngineProvider(), Block.class);
         registration.registerBlockComponent(new KineticCombustionEngineProvider(), Block.class);
+        registration.registerBlockComponent(new KineticAlternatorProvider(), Block.class);
     }
 }

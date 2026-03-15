@@ -15,7 +15,7 @@ import com.astro.core.common.data.recipe.run.AstroWireRecipeRunner;
 import com.astro.core.common.data.tag.AstroTagPrefix;
 import com.astro.core.common.machine.crates.AstroCrateRecipes;
 import com.astro.core.common.machine.drums.AstroDrumRecipes;
-import com.astro.core.common.machine.hatches.AstroHatchesAndBuses;
+import com.astro.core.common.machine.part.AstroHatchesAndBuses;
 import com.astro.core.common.registry.AstroRegistry;
 
 import java.util.function.Consumer;

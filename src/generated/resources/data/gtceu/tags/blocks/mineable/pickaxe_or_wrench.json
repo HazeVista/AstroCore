@@ -36,6 +36,8 @@
     "astrogreg:manasteel_firebox_casing",
     "astrogreg:terrasteel_firebox_casing",
     "astrogreg:alfsteel_firebox_casing",
+    "astrogreg:steel_control_casing",
+    "astrogreg:tungstensteel_control_casing",
     "astrogreg:iv_faraday_magnet",
     "astrogreg:luv_faraday_magnet",
     "astrogreg:zpm_faraday_magnet",

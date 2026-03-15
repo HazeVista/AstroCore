@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
+import com.astro.core.common.data.item.DataDiskItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,9 +33,14 @@ public class AstroItems {
             .lang("Rune Tablet")
             .register();
 
-    public static ItemEntry<AstroItem> DATA_DISK = REGISTRATE
-            .item("data_disk", AstroItem::new)
+    public static ItemEntry<DataDiskItem> DATA_DISK = REGISTRATE
+            .item("data_disk", DataDiskItem::new)
             .lang("Data Disk")
+            .register();
+
+    public static ItemEntry<AstroItem> FLUIX_CORE = REGISTRATE
+            .item("fluix_arithmetic_core", AstroItem::new)
+            .lang("Fluix Arithmetic Core")
             .register();
 
     public static ItemEntry<AstroItem> FLUIX_BOULE = REGISTRATE
@@ -52,14 +58,39 @@ public class AstroItems {
             .lang("AE Wafer")
             .register();
 
+    public static ItemEntry<AstroItem> MANA_SSOC_WAFER = REGISTRATE
+            .item("mana_simple_soc_wafer", AstroItem::new)
+            .lang("§bMana-Imbued Simple SoC Wafer")
+            .register();
+
+    public static ItemEntry<AstroItem> MANA_SOC_WAFER = REGISTRATE
+            .item("mana_soc_wafer", AstroItem::new)
+            .lang("§bMana-Imbued SoC Wafer")
+            .register();
+
+    public static ItemEntry<AstroItem> AETHER_ASOC_WAFER = REGISTRATE
+            .item("aetherized_advanced_soc_wafer", AstroItem::new)
+            .lang("§3Ætherized ASoC Wafer")
+            .register();
+
+    public static ItemEntry<AstroItem> AETHER_HASOC_WAFER = REGISTRATE
+            .item("aetherized_highly_advanced_soc_wafer", AstroItem::new)
+            .lang("§3Ætherized HASoC Wafer")
+            .register();
+
+    public static ItemEntry<AstroItem> ARC_WAFER = REGISTRATE
+            .item("arc_wafer", AstroItem::new)
+            .lang("ARC Wafer")
+            .register();
+
     public static ItemEntry<AstroItem> AE_CHIP = REGISTRATE
             .item("ae_chip", AstroItem::new)
             .lang("AE Chip")
             .register();
 
-    public static ItemEntry<AstroItem> FLUIX_CORE = REGISTRATE
-            .item("fluix_arithmetic_core", AstroItem::new)
-            .lang("Fluix Arithmetic Core")
+    public static ItemEntry<AstroItem> ARC_CHIP = REGISTRATE
+            .item("arc_chip", AstroItem::new)
+            .lang("ARC Chip")
             .register();
 
     public static class AstroItem extends Item {

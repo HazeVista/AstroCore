@@ -6,7 +6,6 @@ import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.gui.UITemplate;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.feature.IUIMachine;
 import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableEnergyContainer;
@@ -15,8 +14,11 @@ import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
+import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
+import com.lowdragmc.lowdraglib.gui.widget.DraggableScrollableWidgetGroup;
 import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -34,8 +36,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvider, IUIMachine {
 
     private static final int[] CWU_PER_TICK = { 0, 0, 1, 2, 4 };
-    private static final int[] LUBE_PER_CYCLE = { 0, 0, 20, 80, 160 };
     private static final int[] LUBE_TANK_MB = { 0, 0, 12000, 16000, 32000 };
+    private static final int[] LUBE_PER_CYCLE = { 0, 0, 20, 40, 80 };
 
     private static final String[] TIER_COLOR = { "§8", "§7", "§b", "§6", "§5", "§9", "§d", "§c", "§3", "§4" };
 
@@ -62,7 +64,6 @@ public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvide
 
     private final int tier;
     private final int cwuPerTick;
-    private final int lubePerCycle;
     private final long euPerTick;
 
     private int tickBudget = 0;
@@ -71,7 +72,7 @@ public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvide
     private boolean providerActive = false;
 
     @Nullable
-    private TickableSubscription tickSub;
+    private com.gregtechceu.gtceu.api.machine.TickableSubscription tickSub;
 
     private final NotifiableEnergyContainer energyContainer;
     private final NotifiableFluidTank lubeTank;
@@ -80,7 +81,6 @@ public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvide
         super(holder);
         this.tier = tier;
         this.cwuPerTick = getCWUForTier(tier);
-        this.lubePerCycle = tier < LUBE_PER_CYCLE.length ? LUBE_PER_CYCLE[tier] : 0;
         this.euPerTick = GTValues.VA[tier];
 
         this.energyContainer = NotifiableEnergyContainer.receiverContainer(
@@ -122,29 +122,21 @@ public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvide
     private void tickMachine() {
         if (isRemote()) return;
 
-        tickBudget = providerActive ? cwuPerTick : 0;
+        FluidStack inTank = lubeTank.getFluidInTank(0);
+        int lubePerTick = getLubricantForTier(tier);
+        boolean hasEnergy = energyContainer.getEnergyStored() >= euPerTick;
+        boolean hasLube = !inTank.isEmpty() &&
+                inTank.isFluidEqual(new FluidStack(GTMaterials.Lubricant.getFluid(), 1)) &&
+                inTank.getAmount() >= lubePerTick;
 
-        if (getOffsetTimer() % 20 == 0) {
-            boolean hasEnergy = energyContainer.getEnergyStored() >= euPerTick * 20L;
-            FluidStack inTank = lubeTank.getFluidInTank(0);
-            boolean hasLube = !inTank.isEmpty() &&
-                    inTank.isFluidEqual(new FluidStack(GTMaterials.Lubricant.getFluid(), 1)) &&
-                    inTank.getAmount() >= lubePerCycle;
-
-            System.out.println("[CWU] energy=" + energyContainer.getEnergyStored() + " needed=" + (euPerTick * 20L) +
-                    " hasEnergy=" + hasEnergy + " lubeAmt=" + inTank.getAmount() + " lubeFluid=" +
-                    (inTank.isEmpty() ? "empty" : inTank.getFluid().toString()) + " hasLube=" + hasLube);
-
-            if (hasEnergy && hasLube) {
-                energyContainer.removeEnergy(euPerTick * 20L);
-                lubeTank.drain(new FluidStack(inTank.getFluid(), lubePerCycle), IFluidHandler.FluidAction.EXECUTE);  // <--
-                                                                                                                     // fix
-                setActive(true);
-                tickBudget = cwuPerTick;
-            } else {
-                setActive(false);
-                tickBudget = 0;
-            }
+        if (hasEnergy && hasLube) {
+            energyContainer.removeEnergy(euPerTick);
+            lubeTank.drainInternal(new FluidStack(inTank.getFluid(), lubePerTick), IFluidHandler.FluidAction.EXECUTE);
+            setActive(true);
+            tickBudget = cwuPerTick;
+        } else {
+            setActive(false);
+            tickBudget = 0;
         }
     }
 
@@ -164,44 +156,48 @@ public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvide
     @Override
     public ModularUI createUI(Player player) {
         int tankCapacity = getTankCapacityForTier(tier);
-        String color = tierColor(tier);
+
+        var screen = new DraggableScrollableWidgetGroup(7, 4, 162, 76)
+                .setBackground(GuiTextures.DISPLAY);
+        screen.addWidget(new LabelWidget(4, 5,
+                "Research Computer (" + tierColor(tier) + GTValues.VN[tier] + "§r)"));
+        screen.addWidget(new ComponentPanelWidget(4, 17, textList -> {
+            int stored = lubeTank.getFluidInTank(0).getAmount();
+            textList.add(Component.translatable(
+                    "astrogreg.machine.cwu_generator.stored_lubricant", stored, tankCapacity));
+
+            if (providerActive) {
+                textList.add(Component.translatable(
+                        "astrogreg.machine.cwu_generator.producing", cwuPerTick)
+                        .withStyle(ChatFormatting.AQUA));
+            } else {
+                boolean noEnergy = energyContainer.getEnergyStored() < euPerTick;
+                FluidStack tank = lubeTank.getFluidInTank(0);
+                boolean noLube = tank.isEmpty() ||
+                        !tank.isFluidEqual(new FluidStack(GTMaterials.Lubricant.getFluid(), 1)) || tank.getAmount() < 1;
+
+                if (noEnergy && noLube)
+                    textList.add(Component.translatable("astrogreg.machine.cwu_generator.inactive.no_power_lube")
+                            .withStyle(ChatFormatting.RED));
+                else if (noEnergy)
+                    textList.add(Component.translatable("astrogreg.machine.cwu_generator.inactive.no_power")
+                            .withStyle(ChatFormatting.RED));
+                else if (noLube)
+                    textList.add(Component.translatable("astrogreg.machine.cwu_generator.inactive.no_lube")
+                            .withStyle(ChatFormatting.RED));
+                else
+                    textList.add(Component.translatable("gtceu.multiblock.idling")
+                            .withStyle(ChatFormatting.GOLD));
+            }
+
+            textList.add(Component.translatable(
+                    "astrogreg.machine.cwu_generator.lubricant", getLubricantForTier(tier))
+                    .withStyle(ChatFormatting.GOLD));
+        }).setMaxWidthLimit(154));
 
         return new ModularUI(176, 166, this, player)
                 .background(GuiTextures.BACKGROUND)
-                .widget(new LabelWidget(8, 8,
-                        "Research Computer (" + color + GTValues.VN[tier] + "§r)"))
-                .widget(new LabelWidget(8, 20, () -> {
-                    int stored = lubeTank.getFluidInTank(0).getAmount();
-                    return Component.translatable(
-                            "astrogreg.machine.cwu_generator.stored_lubricant", stored, tankCapacity).getString();
-                }))
-                .widget(new LabelWidget(8, 32, () -> {
-                    if (providerActive) {
-                        return Component.translatable(
-                                "astrogreg.machine.cwu_generator.producing", cwuPerTick).getString();
-                    } else {
-                        boolean noEnergy = energyContainer.getEnergyStored() < euPerTick * 20L;
-                        FluidStack tank = lubeTank.getFluidInTank(0);
-                        boolean noLube = tank.isEmpty() ||
-                                !tank.isFluidEqual(new FluidStack(
-                                        com.gregtechceu.gtceu.common.data.GTMaterials.Lubricant.getFluid(), 1)) ||
-                                tank.getAmount() < lubePerCycle;
-                        if (noEnergy && noLube)
-                            return Component.translatable("astrogreg.machine.cwu_generator.inactive.no_power_lube")
-                                    .getString();
-                        if (noEnergy)
-                            return Component.translatable("astrogreg.machine.cwu_generator.inactive.no_power")
-                                    .getString();
-                        if (noLube)
-                            return Component.translatable("astrogreg.machine.cwu_generator.inactive.no_lube")
-                                    .getString();
-                        return Component.translatable("gtceu.multiblock.idling").getString();
-                    }
-                }))
-                .widget(new LabelWidget(8, 44,
-                        Component.translatable(
-                                "astrogreg.machine.cwu_generator.lubricant",
-                                getLubricantForTier(tier)).getString()))
-                .widget(UITemplate.bindPlayerInventory(player.getInventory(), GuiTextures.SLOT, 8, 84, true));
+                .widget(screen)
+                .widget(UITemplate.bindPlayerInventory(player.getInventory(), GuiTextures.SLOT, 7, 84, true));
     }
 }

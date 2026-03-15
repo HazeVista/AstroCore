@@ -31,9 +31,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.astro.core.common.machine.hatches.KineticOutputHatch;
+import com.astro.core.common.machine.part.KineticOutputHatch;
 import lombok.Getter;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -59,8 +58,10 @@ public class KineticSteamEngineMachine extends WorkableMultiblockMachine impleme
     @Persisted
     private int layerCount = 0;
 
-    @Nullable
-    private NotifiableFluidTank steamTank = null;
+    @Persisted
+    private int bronzeLayerCount = 0;
+    @Persisted
+    private int steelLayerCount = 0;
 
     public KineticSteamEngineMachine(IMachineBlockEntity holder, Object... args) {
         super(holder);
@@ -78,41 +79,16 @@ public class KineticSteamEngineMachine extends WorkableMultiblockMachine impleme
     public void onStructureFormed() {
         super.onStructureFormed();
         layerCount = calculateLayerCount();
-
-        steamTank = null;
-        for (var part : getParts()) {
-            if (!PartAbility.STEAM.isApplicable(part.self().getDefinition().getBlock())) continue;
-            for (var hl : part.getRecipeHandlers()) {
-                if (!hl.isValid(IO.IN)) continue;
-                for (var handler : hl.getCapability(FluidRecipeCapability.CAP)) {
-                    if (!(handler instanceof NotifiableFluidTank nft)) continue;
-                    if (nft.isFluidValid(0, GTMaterials.Steam.getFluid(1))) {
-                        steamTank = nft;
-                        break;
-                    }
-                }
-                if (steamTank != null) break;
-            }
-            if (steamTank != null) break;
-        }
-
-        if (steamTank == null) {
-            onStructureInvalid();
-        }
     }
 
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();
         stopKineticOutput();
-        steamTank = null;
         layerCount = 0;
+        bronzeLayerCount = 0;
+        steelLayerCount = 0;
     }
-
-    @Persisted
-    private int bronzeLayerCount = 0;
-    @Persisted
-    private int steelLayerCount = 0;
 
     private int calculateLayerCount() {
         BlockPos controllerPos = getHolder().getSelf().getBlockPos();
@@ -136,21 +112,44 @@ public class KineticSteamEngineMachine extends WorkableMultiblockMachine impleme
         return Math.max(MIN_LAYERS, bronzeLayerCount + steelLayerCount);
     }
 
+    // ======== Steam Tank ========
+
+    private NotifiableFluidTank findSteamTank() {
+        for (var part : getParts()) {
+            if (!PartAbility.STEAM.isApplicable(part.self().getDefinition().getBlock())) continue;
+            for (var hl : part.getRecipeHandlers()) {
+                if (!hl.isValid(IO.IN)) continue;
+                for (var handler : hl.getCapability(FluidRecipeCapability.CAP)) {
+                    if (!(handler instanceof NotifiableFluidTank nft)) continue;
+                    if (nft.isFluidValid(0, GTMaterials.Steam.getFluid(1))) {
+                        return nft;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     // ======== Tick ========
 
     private void kineticTick() {
-        if (!isFormed() || !isWorkingEnabled() || steamTank == null) {
+        if (!isFormed() || !isWorkingEnabled()) {
             stopKineticOutput();
-            if (recipeLogic.isActive()) recipeLogic.setWaiting(null);
+            recipeLogic.setStatus(RecipeLogic.Status.IDLE);
+            return;
+        }
+
+        NotifiableFluidTank steamTank = findSteamTank();
+        if (steamTank == null) {
+            stopKineticOutput();
+            recipeLogic.setStatus(RecipeLogic.Status.IDLE);
             return;
         }
 
         int steamNeeded = calculateSteamPerTick();
-        FluidStack steamInTank = steamTank.getFluidInTank(0);
-
-        if (steamInTank.isEmpty() || steamInTank.getAmount() < steamNeeded) {
+        if (steamTank.getFluidInTank(0).getAmount() < steamNeeded) {
             stopKineticOutput();
-            if (recipeLogic.isActive()) recipeLogic.setWaiting(null);
+            recipeLogic.setStatus(RecipeLogic.Status.IDLE);
             return;
         }
 
@@ -163,7 +162,7 @@ public class KineticSteamEngineMachine extends WorkableMultiblockMachine impleme
             recipeLogic.setStatus(RecipeLogic.Status.WORKING);
         } else {
             stopKineticOutput();
-            recipeLogic.setWaiting(null);
+            recipeLogic.setStatus(RecipeLogic.Status.IDLE);
         }
     }
 
@@ -224,23 +223,21 @@ public class KineticSteamEngineMachine extends WorkableMultiblockMachine impleme
     @Override
     public void addDisplayText(List<Component> textList) {
         IDisplayUIMachine.super.addDisplayText(textList);
-        if (isFormed()) {
-            textList.add(Component.translatable(
-                    layerCount == 1 ? "astrogreg.machine.kinetic_steam_engine.layer" :
-                            "astrogreg.machine.kinetic_steam_engine.layers",
-                    layerCount));
-            textList.add(Component.translatable("astrogreg.machine.kinetic_steam_engine.steam_usage",
-                    calculateSteamPerTick()));
-            textList.add(Component.translatable(
-                    "astrogreg.machine.kinetic_steam_engine.su_output",
-                    recipeLogic.isActive() ? (int) calculateTotalSU() : 0));
-        }
         if (!isFormed()) {
             textList.add(Component.translatable("gtceu.multiblock.invalid_structure")
                     .withStyle(ChatFormatting.RED));
             return;
         }
-        if (recipeLogic.isActive()) {
+        textList.add(Component.translatable(
+                layerCount == 1 ? "astrogreg.machine.kinetic_steam_engine.layer" :
+                        "astrogreg.machine.kinetic_steam_engine.layers",
+                layerCount));
+        textList.add(Component.translatable("astrogreg.machine.kinetic_steam_engine.steam_usage",
+                calculateSteamPerTick()));
+        textList.add(Component.translatable(
+                "astrogreg.machine.kinetic_steam_engine.su_output",
+                recipeLogic.isWorking() ? (int) calculateTotalSU() : 0));
+        if (recipeLogic.isWorking()) {
             textList.add(Component.translatable("gtceu.multiblock.running")
                     .withStyle(ChatFormatting.GREEN));
         } else {

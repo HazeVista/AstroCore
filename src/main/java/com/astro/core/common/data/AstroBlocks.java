@@ -44,6 +44,9 @@ public class AstroBlocks {
     public static BlockEntry<Block> ALFSTEEL_GEARBOX_CASING;
     public static BlockEntry<ActiveBlock> FIREBOX_ALFSTEEL;
 
+    public static BlockEntry<Block> STEEL_CONTROL_CASING;
+    public static BlockEntry<Block> TUNGSTENSTEEL_CONTROL_CASING;
+
     public static BlockEntry<Block> MACHINE_CASING_SILICONE_RUBBER;
     public static BlockEntry<Block> MACHINE_CASING_POLYVINYL_CHLORIDE;
     public static BlockEntry<Block> MACHINE_CASING_CARBON_FIBER_MESH;
@@ -193,19 +196,25 @@ public class AstroBlocks {
                 AstroCore.id("block/generators/machine_casing_solid_alfsteel"),
                 AstroCore.id("block/generators/machine_casing_firebox_alfsteel")), "§dAlfsteel§r Firebox Casing");
 
-        // 5. Functional Casings
+        // 5. Control Casings
+        STEEL_CONTROL_CASING = createCasing("steel_control_casing",
+                "casings/steel_control_casing", "Steel Control Casing");
+        TUNGSTENSTEEL_CONTROL_CASING = createCasing("tungstensteel_control_casing",
+                "casings/tungstensteel_control_casing", "Tungstensteel Control Casing");
+
+        // 6. Functional Casings
         BRONZE_CRUSHING_WHEELS = createFunctionalCasing("bronze_crushing_wheels", "gcym/industrial_steam_casing",
                 "Bronze Crushing Wheels");
         ULTIMATE_INTAKE_CASING = createFunctionalCasing("machine_casing_ultimate_engine_intake",
                 "astrogreg:functional_casings/machine_casing_ultimate_engine_intake", "Ultimate Engine Intake Casing");
 
-        // 6. Solar Cells
+        // 7. Solar Cells
         SOLAR_CELL = createSolar("solar_cell_silver", "Solar Cell MK I");
         SOLAR_CELL_ETRIUM = createSolar("solar_cell_etrium", "Solar Cell MK II");
         SOLAR_CELL_VESNIUM = createSolar("solar_cell_vesnium", "Solar Cell MK III");
         SOLAR_CELL_NAQ = createSolar("solar_cell_enriched_naquadah", "Solar Cell MK IV");
 
-        // 7. Industrial Processing Cores
+        // 8. Industrial Processing Cores
         INDUSTRIAL_PROCESSING_CORE_MK1 = createCoreBlock("hv_industrial_processing_core",
                 "industrial_processing_core_1", "§6Industrial Processing Core MK I");
         INDUSTRIAL_PROCESSING_CORE_MK2 = createCoreBlock("ev_industrial_processing_core",
@@ -213,7 +222,7 @@ public class AstroBlocks {
         INDUSTRIAL_PROCESSING_CORE_MK3 = createCoreBlock("iv_industrial_processing_core",
                 "industrial_processing_core_3", "§9Industrial Processing Core MK III");
 
-        // 8. Electromagnetic Generator Blocks
+        // 9. Electromagnetic Generator Blocks
         ELECTROMAGNET_MK1 = createCasing("iv_faraday_magnet",
                 "generators/neodymium_feg_magnet", "§9Faraday Generator Magnet MK I");
         ELECTROMAGNET_MK2 = createCasing("luv_faraday_magnet",

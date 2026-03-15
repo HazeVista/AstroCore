@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "astrogreg:item/aetherized_highly_advanced_soc_wafer"
+  }
+}

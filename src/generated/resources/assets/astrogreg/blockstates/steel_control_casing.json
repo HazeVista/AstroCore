@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/steel_control_casing"
+    }
+  }
+}

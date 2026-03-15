@@ -83,14 +83,14 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.kinetic_steam_engine_max_layers.tooltip", "§aMax Length:§r§e 16 Middle Layers");
         provider.add("astrogreg.machine.kinetic_steam_engine.layer", "§eLength: %s Middle Layer");
         provider.add("astrogreg.machine.kinetic_steam_engine.layers", "§eLength: %s Middle Layers");
-        provider.add("astrogreg.machine.kinetic_steam_engine.su_output", "§bStress Output: %s SU");
+        provider.add("astrogreg.machine.kinetic_steam_engine.su_output", "§bStress Capacity: %s SU");
         provider.add("astrogreg.machine.kinetic_steam_engine.steam_usage", "§6Steam Demand: %s mB/t");
 
         provider.add("astrogreg.machine.large_kinetic_machine_parallels.tooltip",
                 "Performs up to 8 §aParallel Recipes§r at a cost of 1024 §6Stress Units§r and 32 RPM per Parallel");
         provider.add("astrogreg.machine.large_kinetic_machine_recipes.tooltip", "Only performs §8ULV§r Recipes");
         provider.add("astrogreg.machine.kinetic_machine.no_su", "§cInsufficient Stress Units");
-        provider.add("astrogreg.machine.kinetic_machine.su_input", "Stress Demand: %s / %s Available");
+        provider.add("astrogreg.machine.kinetic_machine.su_input", "Stress Impact: %s / %s Available");
         provider.add("config.jade.plugin_astrogreg.kinetic_steam_engine_info", "Kinetic Steam Engine Info");
 
         provider.add("astrogreg.machine.kinetic_combustion_engine.tooltip_0", "Combustion Torque Generator");
@@ -99,6 +99,13 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.kinetic_combustion_engine.tooltip_2",
                 "Supply 20mB/s §7of Oxygen to produce up to§r 1,000,000 §6Stress Units§r§7 at§r 2x §7fuel consumption.");
         provider.add("config.jade.plugin_astrogreg.kinetic_combustion_engine_info", "Kinetic Combustion Engine Info");
+
+        provider.add("astrogreg.machine.large_kinetic_alternator.tooltip", "Converts §6Stress Units§r into EU/t");
+        provider.add("astrogreg.machine.large_kinetic_alternator_production.tooltip",
+                "Costs 1024 SU at 32 RPM §7and produces§r 6 EU/t §7per§r Parallel Recipe");
+        provider.add("astrogreg.machine.large_kinetic_alternator_max_production.tooltip",
+                "§aMax Output:§r 48 EU/t at 8 Parallels");
+        provider.add("config.jade.plugin_astrogreg.kinetic_alternator_info", "Large Kinetic Alternator Info");
 
         provider.add("astrogreg.machine.overdrive_combustion_engine.tooltip", "Overdriven Chemical Ignition Manifold");
 
@@ -134,6 +141,8 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.kinetic_input_hatch.tooltip", "Kinetic Stress Input for Multiblocks");
         provider.add("astrogreg.machine.kinetic_output_hatch.tooltip", "Kinetic Stress Output for Multiblocks");
 
+        provider.add("astrogreg.machine.observatory_object_holder.tooltip", "Holding Mechanism for Observatories");
+
         // cwu generator tooltips
         provider.add("astrogreg.machine.cwu_generator.tooltip.0", "§7Generates Computational Work Units");
         provider.add("astrogreg.machine.cwu_generator.tooltip.1", "§9Computation:§r %s CWU/t");
@@ -141,7 +150,7 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.cwu_generator.tooltip.3", "§9Fluid Capacity:§r %s mB");
         provider.add("astrogreg.machine.cwu_generator.producing", "§9Computation:§r %s CWU/t");
         provider.add("astrogreg.machine.cwu_generator.lubricant", "§6Lubricant Demand:§r %s mB/t");
-        provider.add("astrogreg.machine.cwu_generator.stored_lubricant", "§bStored Lubricant:§r %s / %s mB");
+        provider.add("astrogreg.machine.cwu_generator.stored_lubricant", "§bLubricant:§r %s / %s mB");
         provider.add("astrogreg.machine.cwu_generator.inactive.no_power_lube", "§cInactive:§r No Power & No Lubricant");
         provider.add("astrogreg.machine.cwu_generator.inactive.no_power", "§cInactive:§r Insufficient Power");
         provider.add("astrogreg.machine.cwu_generator.inactive.no_lube", "§cInactive:§r No Lubricant");
@@ -155,6 +164,15 @@ public class AstroLangHandler {
 
         provider.add("item.astrogreg.unfired_rune_tablet.tooltip", "§7Shaped Livingclay");
         provider.add("item.astrogreg.rune_tablet.tooltip", "§7Mystical Frisbee");
+
+        provider.add("item.astrogreg.mana_simple_soc_wafer.tooltip", "§7Arcane-Enchanced Simple Circuit");
+        provider.add("item.astrogreg.mana_soc_wafer.tooltip", "§7Arcane-Enchanced Basic Circuit");
+        provider.add("item.astrogreg.aetherized_advanced_soc_wafer.tooltip", "§7Arcane-Enchanced Advanced Circuit");
+        provider.add("item.astrogreg.aetherized_highly_advanced_soc_wafer.tooltip",
+                "§7Arcane-Enchanced Highly Advanced Circuit");
+
+        provider.add("item.astrogreg.arc_chip.tooltip", "Acausal Recursive Circuit");
+        provider.add("item.astrogreg.arc_wafer.tooltip", "Raw Paradox Circuit");
 
         // miscellaneous
         multilineLang(provider, "astrogreg.gui.configurator_slot.tooltip",

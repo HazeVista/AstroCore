@@ -29,7 +29,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
-import com.astro.core.common.machine.hatches.KineticInputHatch;
+import com.astro.core.common.machine.part.KineticInputHatch;
 import com.astro.core.common.machine.trait.create.KineticRecipeLogic;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "astrogreg:block/casings/tungstensteel_control_casing"
+  }
+}

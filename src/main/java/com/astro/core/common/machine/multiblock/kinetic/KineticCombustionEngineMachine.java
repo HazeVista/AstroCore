@@ -32,7 +32,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.astro.core.common.machine.hatches.KineticOutputHatch;
+import com.astro.core.common.machine.part.KineticOutputHatch;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 

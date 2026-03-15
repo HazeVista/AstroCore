@@ -11,7 +11,7 @@ public class AstroCapabilities {
 
     /**
      * Capability for {@link ILocalCWUProvider}.
-     * Used by {@link com.astro.core.common.machine.hatches.CWUInputHatch}
+     * Used by {@link com.astro.core.common.machine.part.CWUInputHatch}
      * to discover an adjacent {@link com.astro.core.common.machine.singleblock.CWUGeneratorMachine}.
      * Intentionally separated from GTCapability.CAPABILITY_COMPUTATION_PROVIDER
      * so that optical pipes can't pick this up.
