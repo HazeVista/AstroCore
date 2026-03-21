@@ -21,7 +21,8 @@
     "RunicAltarEmiRecipeMixin",
     "RunicAltarHudMixin",
     "SlidingDoorBlockMixin",
-    "SpaceSuitItemMixin"
+    "SpaceSuitItemMixin",
+    "MixinPatternProviderLogicImpl"
   ],
   "injectors": {
     "defaultRequire": 1
