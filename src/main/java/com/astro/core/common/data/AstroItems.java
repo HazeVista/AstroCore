@@ -23,6 +23,7 @@ public class AstroItems {
         REGISTRATE.creativeModeTab(() -> ASTRO_CREATIVE_TAB);
     }
 
+    // misc
     public static ItemEntry<AstroItem> KUIPER_SLIME_BALL = REGISTRATE
             .item("kuiper_slime_ball", AstroItem::new)
             .lang("Kuiper Slime Ball")
@@ -58,6 +59,7 @@ public class AstroItems {
             .lang("Fluix-doped Monocrystalline Silicon Boule")
             .register();
 
+    // wafers
     public static ItemEntry<AstroItem> FLUIX_WAFER = REGISTRATE
             .item("fluix_wafer", AstroItem::new)
             .lang("Fluix-doped Wafer")
@@ -93,6 +95,7 @@ public class AstroItems {
             .lang("ARC Wafer")
             .register();
 
+    // chips
     public static ItemEntry<AstroItem> AE_CHIP = REGISTRATE
             .item("ae_chip", AstroItem::new)
             .lang("AE Chip")
@@ -101,6 +104,12 @@ public class AstroItems {
     public static ItemEntry<AstroItem> ARC_CHIP = REGISTRATE
             .item("arc_chip", AstroItem::new)
             .lang("ARC Chip")
+            .register();
+
+    // hidden items
+    public static ItemEntry<AstroItem> PLUTO = REGISTRATE
+            .item("pluto", AstroItem::new)
+            .lang("Pluto")
             .register();
 
     public static class AstroItem extends Item {

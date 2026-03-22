@@ -1,0 +1,5 @@
+{
+  "ldlib": {
+    "connection": "astrogreg:block/generators/machine_casing_firebox_gaiasteel_ctm"
+  }
+}

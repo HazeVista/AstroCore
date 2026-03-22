@@ -1,0 +1,9 @@
+{
+    "ldlib": {
+        "connection": "astrogreg:block/casings/machine_casing_gaiasteel_bricks_ctm"
+    },
+  "animation": {
+    "frametime": 10,
+    "interpolate": true
+  }
+}

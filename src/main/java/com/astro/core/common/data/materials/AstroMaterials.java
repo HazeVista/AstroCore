@@ -39,6 +39,7 @@ public class AstroMaterials {
     public static Material UNKNOWN;
     public static Material NETHERITE;
     public static Material ANCIENT_DEBRIS;
+    public static Material GAIA_ICHOR;
     public static Material ANDESITE_ALLOY;
     public static Material DESH;
     public static Material CALORITE;
@@ -121,6 +122,14 @@ public class AstroMaterials {
                 .flags(NO_ORE_SMELTING, NO_SMELTING)
                 .iconSet(ROUGH)
                 .ore()
+                .buildAndRegister();
+
+        GAIA_ICHOR = new Material.Builder(AstroCore.id(
+                "gaia_ichor"))
+                .langValue("Gaia Ichor")
+                .liquid(new FluidBuilder().customStill())
+                .element(AstroElements.GA)
+                .color(0xf2a5ee)
                 .buildAndRegister();
 
         // Create

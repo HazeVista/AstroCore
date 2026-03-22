@@ -4,27 +4,28 @@ import com.gregtechceu.gtceu.api.item.IComponentItem;
 import com.gregtechceu.gtceu.api.item.component.IDataItem;
 import com.gregtechceu.gtceu.api.item.component.IItemComponent;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@SuppressWarnings("all")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class AstroPlanetaryDataItem extends Item implements IComponentItem {
 
     public static final String NBT_PLANET_ID = "PlanetResearchId";
+
+    private static final Map<String, AstroPlanetaryDataItem> REGISTRY = new HashMap<>();
 
     private final String planetId;
     private final String planetName;
@@ -34,7 +35,13 @@ public class AstroPlanetaryDataItem extends Item implements IComponentItem {
         super(properties.stacksTo(1));
         this.planetId = planetId;
         this.planetName = planetName;
-        attachComponents(new PlanetDataItemComponent());
+        REGISTRY.put(planetId, this);
+        attachComponents(new PlanetDataItemComponent(this));
+    }
+
+    @Nullable
+    public static AstroPlanetaryDataItem getForPlanet(String planetId) {
+        return REGISTRY.get(planetId);
     }
 
     @Override
@@ -44,9 +51,7 @@ public class AstroPlanetaryDataItem extends Item implements IComponentItem {
 
     @Override
     public void attachComponents(IItemComponent... newComponents) {
-        for (IItemComponent component : newComponents) {
-            components.add(component);
-        }
+        components.addAll(List.of(newComponents));
     }
 
     public ItemStack createResearched() {
@@ -67,26 +72,13 @@ public class AstroPlanetaryDataItem extends Item implements IComponentItem {
         return null;
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level,
-                                List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
-        if (net.minecraft.client.gui.screens.Screen.hasShiftDown()) {
-            tooltip.add(Component.translatable("astrogreg.item.planetary_data.shift_header")
-                    .withStyle(ChatFormatting.AQUA));
-            tooltip.add(Component.literal(" - ")
-                    .append(Component.literal(planetName)
-                            .withStyle(ChatFormatting.WHITE)));
-        } else {
-            tooltip.add(Component.translatable("astrogreg.item.planetary_data.hold_shift")
-                    .withStyle(ChatFormatting.GRAY));
-        }
-    }
-
     public static class PlanetDataItemComponent implements IDataItem, IItemComponent {
 
-        @Override
-        public void onAttached(Item item) {}
+        private final AstroPlanetaryDataItem owner;
+
+        public PlanetDataItemComponent(AstroPlanetaryDataItem owner) {
+            this.owner = owner;
+        }
 
         @Override
         public boolean requireDataBank() {
@@ -97,5 +89,7 @@ public class AstroPlanetaryDataItem extends Item implements IComponentItem {
         public int getCapacity() {
             return 1;
         }
+
+
     }
 }

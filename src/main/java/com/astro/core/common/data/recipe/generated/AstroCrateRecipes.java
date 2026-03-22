@@ -1,11 +1,12 @@
 package com.astro.core.common.data.recipe.generated;
 
-import com.astro.core.common.machine.crates.AstroCrates;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialEntry;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+
+import com.astro.core.common.machine.crates.AstroCrates;
 
 import java.util.function.Consumer;
 

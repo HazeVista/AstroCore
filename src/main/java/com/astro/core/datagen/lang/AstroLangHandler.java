@@ -6,7 +6,6 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 public class AstroLangHandler {
 
     public static void init(RegistrateLangProvider provider) {
-
         // recipe types
         provider.add("gtceu.kinetic_combustion_generator", "Kinetic Combustion");
         provider.add("gtceu.concrete_plant", "Concrete Plant");
@@ -183,7 +182,13 @@ public class AstroLangHandler {
 
         provider.add("astrogreg.recipe_condition.oxygenated.requires", "Requires Oxygenated Environment.");
         provider.add("astrogreg.recipe_condition.oxygenated.requires_not", "Requires Unoxygenated Environment.");
-    }
+
+        provider.add("astrogreg.recipe_condition.planetary_research", "Requires Planet Data");
+        provider.add("astrogreg.item.planetary_data.title", "Planetary Research Data:");
+        provider.add("astrogreg.item.planetary_data.entry", " - [%s]");
+        provider.add("astrogreg.item.planetary_data.hold_shift", "§o§8Hold [§7Shift§8] for planet info");
+        provider.add("astrogreg.item.planetary_data.shift_header", "Planetary Research Item:");
+        provider.add("astrogreg.recipe.condition.planetary_research_slot.tooltip", "Requires Planetary Research Data");    }
 
     protected static void multilineLang(RegistrateLangProvider provider, String key, String multiline) {
         var lines = multiline.split("\n");

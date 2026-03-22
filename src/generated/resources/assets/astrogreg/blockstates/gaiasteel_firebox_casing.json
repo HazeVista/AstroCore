@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "astrogreg:block/gaiasteel_firebox_casing"
+    },
+    "active=true": {
+      "model": "astrogreg:block/gaiasteel_firebox_casing_active"
+    }
+  }
+}

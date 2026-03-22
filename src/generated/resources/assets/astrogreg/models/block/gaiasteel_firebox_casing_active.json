@@ -1,0 +1,8 @@
+{
+  "parent": "astrogreg:block/mana_fire_box_active",
+  "textures": {
+    "bottom": "astrogreg:block/casings/machine_casing_gaiasteel",
+    "side": "astrogreg:block/generators/machine_casing_firebox_gaiasteel",
+    "top": "astrogreg:block/casings/machine_casing_gaiasteel"
+  }
+}

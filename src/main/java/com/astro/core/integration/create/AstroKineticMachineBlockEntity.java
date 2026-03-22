@@ -39,7 +39,7 @@ import java.util.Set;
 
 @SuppressWarnings("all")
 public class AstroKineticMachineBlockEntity extends GeneratingKineticBlockEntity
-        implements IMachineBlockEntity, IManaged {
+                                            implements IMachineBlockEntity, IManaged {
 
     public final MultiManagedStorage managedStorage = new MultiManagedStorage();
     @Getter

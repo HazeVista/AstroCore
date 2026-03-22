@@ -1,19 +1,17 @@
 package com.astro.core.common.machine.multiblock.kinetic;
 
-import com.astro.core.common.machine.part.KineticInputHatch;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
-import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
-import com.gregtechceu.gtceu.api.machine.trait.NotifiableEnergyContainer;
-
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.gui.UITemplate;
-import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
+import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.machine.trait.NotifiableEnergyContainer;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
+import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
@@ -29,6 +27,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
+
+import com.astro.core.common.machine.part.KineticInputHatch;
 
 import java.util.List;
 
@@ -212,22 +212,22 @@ public class KineticAlternatorMachine extends WorkableMultiblockMachine implemen
         int tier = getOutputTier();
 
         textList.add(Component.translatable("gtceu.multiblock.max_energy_per_tick",
-                        FormattingUtil.formatNumbers(maxEUt), GTValues.VNF[tier])
+                FormattingUtil.formatNumbers(maxEUt), GTValues.VNF[tier])
                 .withStyle(ChatFormatting.GRAY));
 
         textList.add(Component.translatable("gtceu.multiblock.max_recipe_tier",
-                        GTValues.VNF[GTValues.ULV])
+                GTValues.VNF[GTValues.ULV])
                 .withStyle(ChatFormatting.GRAY));
 
         textList.add(Component.translatable("astrogreg.machine.kinetic_machine.su_input",
-                        availableSU, maxSU)
+                availableSU, maxSU)
                 .withStyle(ChatFormatting.AQUA));
 
         textList.add(Component.translatable("gtceu.multiblock.turbine.energy_per_tick",
                 FormattingUtil.formatNumbers(currentEUt), FormattingUtil.formatNumbers(maxEUt)));
 
         textList.add(Component.translatable("astrogreg.machine.steam_blast_furnace.parallels",
-                        clampParallel(targetParallel), parallels)
+                clampParallel(targetParallel), parallels)
                 .append(ComponentPanelWidget.withButton(Component.literal(" [-] "), "parallelSub"))
                 .append(ComponentPanelWidget.withButton(Component.literal("[+]"), "parallelAdd")));
 

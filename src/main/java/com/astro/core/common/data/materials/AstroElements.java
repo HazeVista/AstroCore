@@ -15,6 +15,7 @@ public class AstroElements {
     public static final Element UK = createAndRegister(0, 98, -1, null, "unknown", "?", false);
     public static final Element AD = createAndRegister(0, 500, -1, null, "debris", "An*", false);
     public static final Element NH = createAndRegister(0, 800, -1, null, "netherite", "An", false);
+    public static final Element GA = createAndRegister(0, 3000, -1, null, "gaia", "✨", false);
 
     public static Element createAndRegister(long protons, long neutrons, long halfLifeSeconds, String decayTo,
                                             String name, String symbol, boolean isIsotope) {
