@@ -212,6 +212,7 @@ dependencies {
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modImplementation("dev.toma.configuration:configuration-forge-${minecraft_version}:${configuration_version}")
     modImplementation("com.rubenverg.gtmoldraw:gtmoldraw-${gtmoldraw_version}")
+    compileOnly("curse.maven:programmed-circuit-card-1150540:7733175")
 
     //KubeJS
     modImplementation("dev.latvian.mods:kubejs-forge:${kubejs_version}")
