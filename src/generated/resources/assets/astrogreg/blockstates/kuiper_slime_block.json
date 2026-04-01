@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/kuiper_slime_block"
+    }
+  }
+}

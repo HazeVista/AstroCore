@@ -1,21 +1,23 @@
 package com.astro.core.common.machine.part;
 
 import com.gregtechceu.gtceu.api.capability.IOpticalComputationProvider;
+import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredPartMachine;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableComputationContainer;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 
-import com.astro.core.api.capabilities.AstroCapabilities;
-import com.astro.core.common.machine.trait.cwu.ILocalCWUProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -45,7 +47,7 @@ public class CWUInputHatch extends TieredPartMachine {
                                @NotNull Collection<IOpticalComputationProvider> seen) {
             if (seen.contains(this)) return 0;
             seen.add(this);
-            ILocalCWUProvider provider = findAdjacentProvider();
+            IOpticalComputationProvider provider = findAdjacentProvider();
             if (provider == null) return 0;
             return provider.requestCWUt(cwut, simulate);
         }
@@ -54,9 +56,9 @@ public class CWUInputHatch extends TieredPartMachine {
         public int getMaxCWUt(@NotNull Collection<IOpticalComputationProvider> seen) {
             if (seen.contains(this)) return 0;
             seen.add(this);
-            ILocalCWUProvider provider = findAdjacentProvider();
+            IOpticalComputationProvider provider = findAdjacentProvider();
             if (provider == null) return 0;
-            return provider.isProviderActive() ? provider.getMaxCWUt() : 0;
+            return provider.getMaxCWUt();
         }
 
         @Override
@@ -64,8 +66,7 @@ public class CWUInputHatch extends TieredPartMachine {
             return false;
         }
 
-        @SuppressWarnings("NullableProblems")
-        public ILocalCWUProvider findAdjacentProvider() {
+        public IOpticalComputationProvider findAdjacentProvider() {
             Level level = hatch.self().getLevel();
             if (level == null) return null;
             BlockPos pos = hatch.self().getPos();
@@ -75,12 +76,23 @@ public class CWUInputHatch extends TieredPartMachine {
                 if (blockEntity == null) continue;
 
                 var cap = blockEntity.getCapability(
-                        AstroCapabilities.LOCAL_CWU_PROVIDER, face.getOpposite());
+                        GTCapability.CAPABILITY_COMPUTATION_PROVIDER, face.getOpposite());
                 if (cap.isPresent()) {
                     return cap.resolve().orElse(null);
                 }
             }
             return null;
+        }
+
+        @Override
+        public List<Integer> handleRecipeInner(IO io, GTRecipe recipe, List<Integer> left, boolean simulate) {
+            if (io != IO.IN) return left;
+            IOpticalComputationProvider provider = findAdjacentProvider();
+            if (provider == null) return left;
+            int sum = left.stream().mapToInt(Integer::intValue).sum();
+            int provided = provider.requestCWUt(sum, simulate);
+            sum -= provided;
+            return sum <= 0 ? null : Collections.singletonList(sum);
         }
     }
 }

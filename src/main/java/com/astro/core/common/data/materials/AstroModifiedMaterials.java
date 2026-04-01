@@ -127,6 +127,7 @@ public class AstroModifiedMaterials {
             case "magneo" -> NeodymiumMagnetic;
             case "samarium" -> Samarium;
             case "magsam" -> SamariumMagnetic;
+            case "radium" -> Radium;
             default -> null;
         };
     }
@@ -147,7 +148,8 @@ public class AstroModifiedMaterials {
     private static final Object[][] PERIODIC_ELEMENTS = {
             { "neptunium", new String[] { "ingot", "fluid" } },
             { "selenium", new String[] { "dust" } },
-            { "netherite", new String[] { "fluid" } }
+            { "netherite", new String[] { "fluid" } },
+            { "radium", new String[] { "dust" } }
     };
 
     private static void modifyPeriodicElements() {

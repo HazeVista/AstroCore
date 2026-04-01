@@ -118,7 +118,7 @@ public class AstroHatches {
             CWUInputHatch::new,
             (tier, builder) -> builder
                     .langValue("Basic Data Reception Hatch")
-                    .abilities(AstroPartAbility.IMPORT_CWU)
+                    .abilities(PartAbility.COMPUTATION_DATA_RECEPTION)
                     .tooltips(Component.translatable("astrogreg.machine.cwu_input_hatch.tooltip"),
                             Component.translatable("gtceu.part_sharing.disabled"))
                     .rotationState(RotationState.ALL)

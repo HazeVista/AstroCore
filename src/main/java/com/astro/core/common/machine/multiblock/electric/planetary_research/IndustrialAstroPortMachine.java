@@ -1,6 +1,5 @@
 package com.astro.core.common.machine.multiblock.electric.planetary_research;
 
-import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.IRecipeHandler;
@@ -113,8 +112,7 @@ public class IndustrialAstroPortMachine extends AstroPortMachine {
             if (handler != null) {
                 buses.add(handler);
             } else {
-                GTCEu.LOGGER.warn("AstroPort: no import bus found at expected hatch position {}", hatchPos);
-                buses.add(null); // keep slot index alignment
+                buses.add(null);
             }
         }
         this.orderedInputBuses = buses;
@@ -195,7 +193,6 @@ public class IndustrialAstroPortMachine extends AstroPortMachine {
             Ingredient required = ItemRecipeCapability.CAP.of(itemInputs.get(i).content);
             var left = bus.handleRecipeInner(IO.IN, recipe, new ArrayList<>(List.of(required)), false);
             if (!(left == null || left.isEmpty())) {
-                GTCEu.LOGGER.error("AstroPort: simulate succeeded but consume failed at slot {}", i);
                 return ActionResult.FAIL_NO_REASON;
             }
         }

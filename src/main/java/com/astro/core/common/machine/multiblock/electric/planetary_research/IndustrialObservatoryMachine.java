@@ -3,13 +3,14 @@ package com.astro.core.common.machine.multiblock.electric.planetary_research;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
 
@@ -20,6 +21,13 @@ import java.util.List;
 import static com.astro.core.common.data.AstroBlocks.*;
 
 public class IndustrialObservatoryMachine extends ObservatoryMachine {
+
+    private static final int[][] CORE_OFFSETS = {
+            { 1, 6, 1 },
+            { 1, 6, -1 },
+            { -1, 6, 1 },
+            { -1, 6, -1 },
+    };
 
     private int coreTier = -1;
 
@@ -43,19 +51,34 @@ public class IndustrialObservatoryMachine extends ObservatoryMachine {
         coreTier = -1;
         var level = getLevel();
         if (level == null) return;
-        for (var pos : getMultiblockState().getCache()) {
-            Block block = level.getBlockState(pos).getBlock();
-            if (block == INDUSTRIAL_PROCESSING_CORE_MK3.get()) {
-                coreTier = GTValues.IV;
-                return;
-            } else if (block == INDUSTRIAL_PROCESSING_CORE_MK2.get()) {
-                coreTier = GTValues.EV;
-                return;
-            } else if (block == INDUSTRIAL_PROCESSING_CORE_MK1.get()) {
-                coreTier = GTValues.HV;
-                return;
+
+        int lowestTier = Integer.MAX_VALUE;
+        boolean foundAny = false;
+        for (int[] offset : CORE_OFFSETS) {
+            BlockPos corePos = resolveOffset(getPos(), getFrontFacing(), offset[0], offset[1], offset[2]);
+            Block block = level.getBlockState(corePos).getBlock();
+            int tier = getCoreBlockTier(block);
+            if (tier != -1) {
+                foundAny = true;
+                lowestTier = Math.min(lowestTier, tier);
             }
         }
+        this.coreTier = foundAny ? lowestTier : -1;
+    }
+
+    private static BlockPos resolveOffset(BlockPos origin, Direction facing, int forward, int up, int right) {
+        Direction rightDir = facing.getClockWise();
+        return origin
+                .relative(facing, forward)
+                .above(up)
+                .relative(rightDir, right);
+    }
+
+    private static int getCoreBlockTier(Block block) {
+        if (block == INDUSTRIAL_PROCESSING_CORE_MK3.get()) return GTValues.IV;
+        if (block == INDUSTRIAL_PROCESSING_CORE_MK2.get()) return GTValues.EV;
+        if (block == INDUSTRIAL_PROCESSING_CORE_MK1.get()) return GTValues.HV;
+        return -1;
     }
 
     public static @NotNull ModifierFunction recipeModifier(@NotNull MetaMachine machine,
@@ -71,23 +94,10 @@ public class IndustrialObservatoryMachine extends ObservatoryMachine {
     }
 
     @Override
-    public void addDisplayText(List<Component> textList) {
-        MultiblockDisplayText.builder(textList, isFormed())
-                .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
-                .addCustom(tl -> {
-                    if (isFormed() && coreTier != -1) {
-                        tl.add(Component.translatable("astrogreg.machine.processing_core.core",
-                                GTValues.VNF[coreTier])
-                                .withStyle(ChatFormatting.AQUA));
-                    }
-                })
-                .setWorkingStatusKeys(
-                        "gtceu.multiblock.idling",
-                        "gtceu.multiblock.work_paused",
-                        "gtceu.multiblock.research_station.researching")
-                .addEnergyUsageLine(energyContainer)
-
-                .addWorkingStatusLine()
-                .addProgressLineOnlyPercent(recipeLogic.getProgressPercent());
+    protected void addExtraDisplayInfo(List<Component> tl) {
+        if (isFormed() && coreTier != -1) {
+            tl.add(Component.translatable("astrogreg.machine.processing_core.core",
+                    GTValues.VNF[coreTier]).withStyle(ChatFormatting.AQUA));
+        }
     }
 }

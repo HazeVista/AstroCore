@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/slime_block",
+  "textures": {
+    "particle": "astrogreg:block/misc/kuiper_slime_block",
+    "texture": "astrogreg:block/misc/kuiper_slime_block"
+  }
+}

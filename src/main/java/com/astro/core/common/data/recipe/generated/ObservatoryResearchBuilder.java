@@ -1,10 +1,11 @@
 package com.astro.core.common.data.recipe.generated;
 
-import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
 import net.minecraft.world.item.ItemStack;
+
+import com.astro.core.common.data.recipe.AstroRecipeTypes;
 
 import java.util.function.UnaryOperator;
 
@@ -17,6 +18,8 @@ public class ObservatoryResearchBuilder {
     private long eut = GTValues.VA[GTValues.HV];
     private String planetName = "";
     private String planetDisplayItem = "";
+    // "orb" (default), "stick", "disk", "module"
+    private String researchItemType = "orb";
 
     public ObservatoryResearchBuilder researchStack(ItemStack stack) {
         this.researchStack = stack;
@@ -54,6 +57,12 @@ public class ObservatoryResearchBuilder {
         return this;
     }
 
+    /** Set the research item type: "orb" (default), "stick", "disk", "module" */
+    public ObservatoryResearchBuilder researchItemType(String type) {
+        this.researchItemType = type;
+        return this;
+    }
+
     public void apply(GTRecipeBuilder builder) {
         if (!researchStack.isEmpty()) {
             builder.addData(AstroRecipeTypes.OBSERVATORY_SCAN_ITEM_KEY,
@@ -62,6 +71,7 @@ public class ObservatoryResearchBuilder {
         builder.addData(AstroRecipeTypes.OBSERVATORY_CWUT_KEY, cwut);
         builder.addData(AstroRecipeTypes.OBSERVATORY_TOTAL_CWU_KEY, totalCWU);
         builder.addData(AstroRecipeTypes.OBSERVATORY_EUT_KEY, eut);
+        builder.addData(AstroRecipeTypes.OBSERVATORY_RESEARCH_ITEM_TYPE_KEY, researchItemType);
         if (!planetName.isEmpty()) {
             builder.addData(AstroRecipeTypes.OBSERVATORY_PLANET_NAME_KEY, planetName);
         }

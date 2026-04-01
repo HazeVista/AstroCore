@@ -230,8 +230,8 @@ dependencies {
     compileOnly("curse.maven:glodium-957920:5226922")
 
     //Powah and dependencies
-    modImplementation("owmii.powah:Powah-${powah_version}")
     modImplementation("me.shedaniel:cloth-config-${cloth_version}-forge")
+    modImplementation("owmii.powah:Powah-${powah_version}")
 
     //Flux Networks
     modImplementation("curse.maven:flux-networks-248020:5234697")
@@ -247,7 +247,7 @@ dependencies {
 
 // See com.example.examplemod.mixin.DummyMixin for information about mixins
 mixin {
-    add sourceSets.main, 'mixins.astrocore.refmap.json'
+    add sourceSets.main, 'astrocore.refmap.json'
     config 'astrocore.mixins.json'
 }
 

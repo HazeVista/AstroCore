@@ -89,7 +89,5 @@ public class AstroPlanetaryDataItem extends Item implements IComponentItem {
         public int getCapacity() {
             return 1;
         }
-
-
     }
 }

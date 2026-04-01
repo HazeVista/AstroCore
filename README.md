@@ -7,8 +7,7 @@ mostly for our high quality inter-mod integration.
 
 ### Is it compatible with other projects?
 It isn't advisable, but with some of your own KubeJS work to give the casings and other items their
-own recipes you *could* make it work. Currently there aren't any mixins or anything crazy like that
-but overall it still isn't intended for use in other projects.
+own recipes you *could* make it work. Overall it still isn't intended for use in other projects.
 If you would like specific features to be made into a "standalone" GT addon, you can always request
 it from our team for consideration.
 
@@ -19,8 +18,6 @@ and [JuiceyBean](https://github.com/JuiceyBeans)'s [GT Addon Template](https://g
 Mod would not be possible without heavily referencing [PhoenixVine](https://github.com/Phoenixvine32908)'s [PhoenixCore](https://github.com/Phoenixvine32908/PhoenixCore/) for  file structure.
 
 Ad Astra Compat & Integration inspired by [TerraFirmaGreg](https://github.com/TerraFirmaGreg-Team)
-
-Industrial Observatory structure is inspired by a multiblock from [Gregicality Rocketry](https://github.com/Argent-Matter/gcyr?tab=LGPL-3.0-1-ov-file)
 
 If you are looking for our mod pack, we have a separate repository for that on [this page](https://github.com/HazeVista/AstroGregExsilium).
 

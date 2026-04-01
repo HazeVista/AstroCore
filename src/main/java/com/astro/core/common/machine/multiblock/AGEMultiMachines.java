@@ -34,9 +34,11 @@ import com.astro.core.common.machine.multiblock.electric.ProcessingCoreMachine;
 import com.astro.core.common.machine.multiblock.electric.planetary_research.IndustrialAstroPortMachine;
 import com.astro.core.common.machine.multiblock.electric.planetary_research.IndustrialObservatoryMachine;
 import com.astro.core.common.machine.multiblock.kinetic.*;
+import com.astro.core.common.machine.multiblock.kinetic.KineticMinerMachine;
 import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 import com.astro.core.common.machine.multiblock.steam.SteamGrinder;
+import com.astro.core.common.machine.multiblock.steam.SteamMinerMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamWasher;
 import com.astro.core.common.machine.trait.AstroPartAbility;
 import earth.terrarium.adastra.common.registry.ModBlocks;
@@ -257,6 +259,57 @@ public class AGEMultiMachines {
                     .andThen(b -> b.addDynamicRenderer(DynamicRenderHelper::makeRecipeFluidAreaRender)))
             .register();
 
+    public static final MultiblockMachineDefinition STEAM_MINER = REGISTRATE
+            .multiblock("large_steam_miner", SteamMinerMachine::new)
+            .langValue("Large Steam Miner")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .appearanceBlock(CASING_BRONZE_BRICKS)
+            .allowExtendedFacing(true)
+            .allowFlip(false)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("XXX", "#F#", "#F#", "#F#", "###", "###", "###")
+                    .aisle("XXX", "FCF", "FCF", "FCF", "#F#", "#F#", "#F#")
+                    .aisle("XSX", "#F#", "#F#", "#F#", "###", "###", "###")
+                    .where('S', controller(blocks(definition.get())))
+                    .where('X', blocks(CASING_BRONZE_BRICKS.get())
+                            .or(abilities(STEAM_EXPORT_ITEMS).setExactLimit(1).setPreviewCount(1))
+                            .or(blocks(WATER_HATCH.get()).setExactLimit(1).setPreviewCount(1))
+                            .or(abilities(STEAM).setExactLimit(1).setPreviewCount(1)))
+                    .where('C', blocks(CASING_BRONZE_BRICKS.get()))
+                    .where('F', frames(GTMaterials.Bronze))
+                    .where('#', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(
+                    GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
+                    AstroCore.id("block/multiblock/miner"))
+                    .andThen((ctx, prov, modelBuilder) -> {
+                        modelBuilder.replaceForAllStates((state, models) -> {
+                            if (!state.getValue(GTMachineModelProperties.IS_FORMED)) {
+                                return models;
+                            }
+                            var parentModel = prov.models()
+                                    .getExistingFile(GTCEu.id("block/machine/large_miner_active"));
+                            for (var model : models) {
+                                ((BlockModelBuilder) model.model).parent(parentModel);
+                            }
+                            return models;
+                        });
+                    }))
+            .tooltipBuilder((stack, tooltip) -> {
+                tooltip.add(Component.translatable("astrogreg.machine.steam_miner.tooltip.description"));
+                tooltip.add(Component.translatable("gtceu.machine.miner.multi.description"));
+                tooltip.add(Component.translatable("gtceu.machine.miner.multi.modes"));
+                tooltip.add(Component.translatable("astrogreg.machine.miner.tooltip.bonus"));
+                tooltip.add(Component.translatable("astrogreg.machine.miner.tooltip.fluids"));
+                tooltip.add(Component.translatable("astrogreg.machine.steam_miner.tooltip.steam"));
+                tooltip.add(Component.translatable("gtceu.universal.tooltip.working_area_chunks",
+                        SteamMinerMachine.CHUNK_RADIUS * 2 + 1,
+                        SteamMinerMachine.CHUNK_RADIUS * 2 + 1));
+            })
+            .register();
+
     // Kinetic Machines
     public static final MultiblockMachineDefinition KINETIC_STEAM_ENGINE = REGISTRATE
             .multiblock("kinetic_steam_engine", KineticSteamEngineMachine::new)
@@ -402,6 +455,57 @@ public class AGEMultiMachines {
                     Component.translatable("astrogreg.machine.large_kinetic_alternator_max_production.tooltip"))
             .workableCasingModel(AstroCore.id("block/casings/machine_casing_kinetic"),
                     AstroCore.id("block/multiblock/kinetic_alternator"))
+            .register();
+
+    public static final MultiblockMachineDefinition KINETIC_MINER = REGISTRATE
+            .multiblock("large_kinetic_miner", KineticMinerMachine::new)
+            .langValue("Large Kinetic Miner")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .appearanceBlock(MACHINE_CASING_KINETIC)
+            .allowExtendedFacing(true)
+            .allowFlip(false)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("XXX", "#F#", "#F#", "#F#", "###", "###", "###")
+                    .aisle("XXX", "FCF", "FCF", "FCF", "#F#", "#F#", "#F#")
+                    .aisle("XSX", "#F#", "#F#", "#F#", "###", "###", "###")
+                    .where('S', controller(blocks(definition.get())))
+                    .where('X', blocks(MACHINE_CASING_KINETIC.get())
+                            .or(abilities(EXPORT_ITEMS).setExactLimit(1).setPreviewCount(1))
+                            .or(abilities(IMPORT_FLUIDS).setExactLimit(1).setPreviewCount(1))
+                            .or(abilities(AstroPartAbility.KINETIC_INPUT).setExactLimit(1).setPreviewCount(1)))
+                    .where('C', blocks(MACHINE_CASING_KINETIC.get()))
+                    .where('F', frames(GTMaterials.Bronze))
+                    .where('#', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(
+                    AstroCore.id("block/casings/machine_casing_kinetic"),
+                    AstroCore.id("block/multiblock/miner"))
+                    .andThen((ctx, prov, modelBuilder) -> {
+                        modelBuilder.replaceForAllStates((state, models) -> {
+                            if (!state.getValue(GTMachineModelProperties.IS_FORMED)) {
+                                return models;
+                            }
+                            var parentModel = prov.models()
+                                    .getExistingFile(GTCEu.id("block/machine/large_miner_active"));
+                            for (var model : models) {
+                                ((BlockModelBuilder) model.model).parent(parentModel);
+                            }
+                            return models;
+                        });
+                    }))
+            .tooltipBuilder((stack, tooltip) -> {
+                tooltip.add(Component.translatable("astrogreg.machine.kinetic_miner.tooltip.description"));
+                tooltip.add(Component.translatable("gtceu.machine.miner.multi.description"));
+                tooltip.add(Component.translatable("gtceu.machine.miner.multi.modes"));
+                tooltip.add(Component.translatable("astrogreg.machine.miner.tooltip.bonus"));
+                tooltip.add(Component.translatable("astrogreg.machine.miner.tooltip.fluids"));
+                tooltip.add(Component.translatable("astrogreg.machine.kinetic_miner.tooltip.rpm"));
+                tooltip.add(Component.translatable("gtceu.universal.tooltip.working_area_chunks",
+                        KineticMinerMachine.CHUNK_RADIUS * 2 + 1,
+                        KineticMinerMachine.CHUNK_RADIUS * 2 + 1));
+            })
             .register();
 
     public static final MultiblockMachineDefinition KINETIC_COMBUSTION_ENGINE = REGISTRATE
@@ -880,7 +984,7 @@ public class AGEMultiMachines {
                             .or(abilities(MAINTENANCE).setExactLimit(1))
                             .or(abilities(INPUT_ENERGY).setPreviewCount(2).setMinGlobalLimited(1)
                                     .setMaxGlobalLimited(2))
-                            .or(abilities(AstroPartAbility.IMPORT_CWU).setExactLimit(1)))
+                            .or(abilities(COMPUTATION_DATA_RECEPTION).setExactLimit(1)))
                     .where("Y", blocks(CASING_STAINLESS_CLEAN.get()))
                     .where("E", blocks(Blocks.EMERALD_BLOCK))
                     .where("F", frames(GTMaterials.Steel))
@@ -892,7 +996,10 @@ public class AGEMultiMachines {
                     .where("O", blocks(OBSERVATORY_DATA_HOLDER.get()))
                     .where(" ", any())
                     .build())
-            .tooltips(Component.translatable("astrogreg.machine.industrial_core.tooltip"))
+            .tooltips(Component.translatable("astrogreg.machine.observatory.tooltip.cwu"),
+                    Component.translatable("astrogreg.machine.observatory.tooltip.research_items"),
+                    Component.translatable("astrogreg.machine.processing_cores_uniform.tooltip"),
+                    Component.translatable("astrogreg.machine.industrial_core.tooltip"))
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
                     AstroCore.id("block/multiblock/observatory"))
             .register();
@@ -1138,7 +1245,10 @@ public class AGEMultiMachines {
                     .where(" ", any())
                     .where("#", air())
                     .build())
-            .tooltips(Component.translatable("astrogreg.machine.industrial_core.tooltip"))
+            .tooltips(Component.translatable("astrogreg.machine.astroport.tooltip.research"),
+                    Component.translatable("astrogreg.machine.astroport.tooltip.inputs"),
+                    Component.translatable("astrogreg.machine.processing_cores_uniform.tooltip"),
+                    Component.translatable("astrogreg.machine.industrial_core.tooltip"))
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
                     AstroCore.id("block/multiblock/astroport"))
             .shapeInfos(definition -> List.of(MultiblockShapeInfo.builder()

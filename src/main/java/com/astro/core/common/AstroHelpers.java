@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Random;
 
+@SuppressWarnings("all")
 public class AstroHelpers {
 
     public static final Random RANDOM = new Random();

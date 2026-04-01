@@ -5,23 +5,23 @@ import com.gregtechceu.gtceu.api.capability.IOpticalComputationReceiver;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.CWURecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
+import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IDisplayUIMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
+import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.recipe.ActionResult;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
-import com.gregtechceu.gtceu.utils.ResearchManager;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
-import com.astro.core.common.data.item.AstroPlanetaryDataItem;
 import com.astro.core.common.data.recipe.AstroRecipeTypes;
+import com.astro.core.common.machine.part.CWUInputHatch;
 import com.astro.core.common.machine.part.ObservatoryObjectHolderMachine;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +31,7 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@SuppressWarnings("all")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class ObservatoryMachine extends WorkableElectricMultiblockMachine
@@ -63,9 +64,14 @@ public abstract class ObservatoryMachine extends WorkableElectricMultiblockMachi
             if (part instanceof ObservatoryObjectHolderMachine observatoryHolder) {
                 this.dataHolder = observatoryHolder;
             }
-            part.self().holder.self()
-                    .getCapability(GTCapability.CAPABILITY_COMPUTATION_PROVIDER)
-                    .ifPresent(provider -> this.computationProvider = provider);
+            if (this.computationProvider == null) {
+                part.self().holder.self()
+                        .getCapability(GTCapability.CAPABILITY_COMPUTATION_PROVIDER)
+                        .ifPresent(provider -> this.computationProvider = provider);
+            }
+            if (this.computationProvider == null && part instanceof CWUInputHatch cwuHatch) {
+                this.computationProvider = cwuHatch.computationTrait;
+            }
         }
         if (computationProvider == null || dataHolder == null) {
             onStructureInvalid();
@@ -87,8 +93,21 @@ public abstract class ObservatoryMachine extends WorkableElectricMultiblockMachi
         return false;
     }
 
+    protected void addExtraDisplayInfo(List<Component> tl) {}
+
     @Override
-    public void addDisplayText(List<Component> textList) {}
+    public void addDisplayText(List<Component> textList) {
+        MultiblockDisplayText.builder(textList, isFormed())
+                .setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
+                .setWorkingStatusKeys(
+                        "gtceu.multiblock.idling",
+                        "gtceu.multiblock.work_paused",
+                        "gtceu.multiblock.research_station.researching")
+                .addEnergyUsageLine(energyContainer)
+                .addCustom(tl -> addExtraDisplayInfo(tl))
+                .addProgressLineOnlyPercent(recipeLogic.getProgressPercent())
+                .addWorkingStatusLine();
+    }
 
     public static class ObservatoryRecipeLogic extends RecipeLogic {
 
@@ -163,21 +182,19 @@ public abstract class ObservatoryMachine extends WorkableElectricMultiblockMachi
                 return ActionResult.SUCCESS;
             }
 
-            CompoundTag data = lastRecipe.data;
-            if (data != null && data.contains(AstroPlanetaryDataItem.NBT_PLANET_ID)) {
-                String planetId = data.getString(AstroPlanetaryDataItem.NBT_PLANET_ID);
-
-                holder.setHeldItem(ItemStack.EMPTY);
-
-                ItemStack dataItem = holder.getDataItem(false);
-                if (!dataItem.isEmpty()) {
-                    CompoundTag tag = dataItem.getOrCreateTag();
-                    ResearchManager.writeResearchToNBT(tag, planetId, AstroRecipeTypes.OBSERVATORY_RECIPES);
-                    tag.putString(AstroPlanetaryDataItem.NBT_PLANET_ID, planetId);
-                    holder.setDataItem(dataItem);
-                }
+            holder.setHeldItem(ItemStack.EMPTY);
+            ItemStack outputItem = ItemStack.EMPTY;
+            var contents = lastRecipe.getOutputContents(ItemRecipeCapability.CAP);
+            if (!contents.isEmpty()) {
+                outputItem = ItemRecipeCapability.CAP.of(contents.get(contents.size() - 1).content).getItems()[0];
             }
-
+            if (!outputItem.isEmpty()) {
+                String planetItemId = lastRecipe.data.getString(AstroRecipeTypes.OBSERVATORY_PLANET_ITEM_KEY);
+                if (!planetItemId.isEmpty()) {
+                    outputItem.getOrCreateTag().putString(AstroRecipeTypes.OBSERVATORY_PLANET_ITEM_KEY, planetItemId);
+                }
+                holder.setDataItem(outputItem.copy());
+            }
             holder.setLocked(false);
             return ActionResult.SUCCESS;
         }
@@ -188,6 +205,20 @@ public abstract class ObservatoryMachine extends WorkableElectricMultiblockMachi
                 return super.handleTickRecipeIO(recipe, io);
             }
             return ActionResult.SUCCESS;
+        }
+
+        @Override
+        public void onRecipeFinish() {
+            super.onRecipeFinish();
+            ObservatoryObjectHolderMachine holder = getMachine().getDataHolder();
+            if (holder != null) holder.setLocked(false);
+        }
+
+        @Override
+        public void interruptRecipe() {
+            super.interruptRecipe();
+            ObservatoryObjectHolderMachine holder = getMachine().getDataHolder();
+            if (holder != null) holder.setLocked(false);
         }
     }
 }

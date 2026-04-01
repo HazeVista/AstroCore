@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import com.astro.core.AstroCore;
+import com.astro.core.common.data.block.KuiperSlimeBlock;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
@@ -25,6 +26,7 @@ public class AstroBlocks {
 
     public static BlockEntry<Block> ASTEROID_STONE;
     public static BlockEntry<Block> HARD_ASTEROID_STONE;
+    public static BlockEntry<KuiperSlimeBlock> KUIPER_SLIME;
     public static BlockEntry<Block> LIVINGBRICKS;
     public static BlockEntry<Block> SHIMMERBRICKS;
 
@@ -104,11 +106,24 @@ public class AstroBlocks {
 
     public static void init() {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
-        // 1. Stones
+        // 1. Misc
         ASTEROID_STONE = createStone("asteroid_stone", "Asteroid Stone", "rocks/asteroid_stone",
                 MapColor.TERRACOTTA_PURPLE, 2.0F);
         HARD_ASTEROID_STONE = createStone("hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
                 MapColor.TERRACOTTA_PURPLE, 4.0F);
+
+        KUIPER_SLIME = REGISTRATE.block("kuiper_slime_block", KuiperSlimeBlock::new)
+                .initialProperties(() -> Blocks.SLIME_BLOCK)
+                .addLayer(() -> RenderType::translucent)
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models()
+                                .withExistingParent(ctx.getName(),
+                                        new ResourceLocation("minecraft", "block/slime_block"))
+                                .texture("particle", AstroCore.id("block/misc/kuiper_slime_block"))
+                                .texture("texture", AstroCore.id("block/misc/kuiper_slime_block"))))
+                .lang("Kuiper Slime Block")
+                .item(BlockItem::new).build().register();
+
         LIVINGBRICKS = createStone("livingbricks", "Livingbricks", "casings/livingbricks",
                 MapColor.TERRACOTTA_LIGHT_GRAY, 1.2F);
         SHIMMERBRICKS = createStone("shimmerbricks", "Shimmerbricks", "casings/shimmerbricks",
@@ -221,9 +236,9 @@ public class AstroBlocks {
 
         // 5. Control Casings
         STEEL_CONTROL_CASING = createCasing("steel_control_casing",
-                "casings/steel_control_casing", "Steel Control Casing");
+                "casings/steel_control_casing", "Basic Control Casing");
         TUNGSTENSTEEL_CONTROL_CASING = createCasing("tungstensteel_control_casing",
-                "casings/tungstensteel_control_casing", "Tungstensteel Control Casing");
+                "casings/tungstensteel_control_casing", "Advanced Control Casing");
 
         // 6. Functional Casings
         BRONZE_CRUSHING_WHEELS = createFunctionalCasing("bronze_crushing_wheels", "gcym/industrial_steam_casing",

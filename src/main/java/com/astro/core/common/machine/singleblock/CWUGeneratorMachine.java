@@ -1,6 +1,7 @@
 package com.astro.core.common.machine.singleblock;
 
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.capability.IOpticalComputationProvider;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.gui.UITemplate;
@@ -25,15 +26,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import com.astro.core.common.machine.trait.cwu.ILocalCWUProvider;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@SuppressWarnings("all")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvider, IUIMachine {
+public class CWUGeneratorMachine extends MetaMachine implements IOpticalComputationProvider, IUIMachine {
 
     private static final int[] CWU_PER_TICK = { 0, 0, 1, 2, 4 };
     private static final int[] LUBE_TANK_MB = { 0, 0, 12000, 16000, 32000 };
@@ -56,6 +60,28 @@ public class CWUGeneratorMachine extends MetaMachine implements ILocalCWUProvide
 
     public static int getTankCapacityForTier(int tier) {
         return tier < LUBE_TANK_MB.length ? LUBE_TANK_MB[tier] : 8000;
+    }
+
+    @Override
+    public int requestCWUt(int cwut, boolean simulate, @NotNull Collection<IOpticalComputationProvider> seen) {
+        if (seen.contains(this)) return 0;
+        seen.add(this);
+        if (!providerActive) return 0;
+        int provided = Math.min(cwut, tickBudget);
+        if (!simulate) tickBudget -= provided;
+        return provided;
+    }
+
+    @Override
+    public int getMaxCWUt(@NotNull Collection<IOpticalComputationProvider> seen) {
+        if (seen.contains(this)) return 0;
+        seen.add(this);
+        return providerActive ? cwuPerTick : 0;
+    }
+
+    @Override
+    public boolean canBridge(@NotNull Collection<IOpticalComputationProvider> seen) {
+        return false;
     }
 
     private static String tierColor(int tier) {

@@ -24,6 +24,22 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.steam_blast_furnace.steam_usage", "Using %s mB/t Steam (%s mB/t x %s)");
         provider.add("astrogreg.machine.steam_blast_furnace.parallels", "Parallels: %s");
 
+        provider.add("astrogreg.machine.steam_miner.water_usage", "§bWater Demand: %s mB/t");
+        provider.add("astrogreg.machine.steam_miner.tooltip.description", "Steam-Powered Multiblock Ore Miner.");
+        provider.add("astrogreg.machine.steam_miner.tooltip.steam",
+                "Uses 16mB/t §bSteam§r §7per§r Parallel §7and takes§r 12s§7 per block, divided by the number of§r Active Parallels");
+
+        provider.add("astrogreg.machine.kinetic_miner.tooltip.description", "Stress-Powered Multiblock Ore Miner");
+        provider.add("astrogreg.machine.kinetic_miner.tooltip.rpm",
+                "Uses 1024 §6Stress Units§r§7 at§r 32 RPM §7per§r Parallel§7 and takes§r 24s§7 per block, divided by the number of§r Active Parallels");
+
+        provider.add("astrogreg.machine.miner.tooltip.bonus",
+                "Produces 2x§7 more crushed ore than a§r Macerator §7when provided with§r Drilling Fluid.");
+        provider.add("astrogreg.machine.miner.tooltip.fluids",
+                "Uses 6mB/t §7of§r Water §7or§r Drilling Fluid §7per§r Parallel");
+        provider.add("astrogreg.machine.miner.drilling_fluid_usage", "Drilling Fluid Usage: %s mB");
+        provider.add("astrogreg.machine.miner.fluid_conflict", "Remove Water or Drilling Fluid — cannot use both!");
+
         provider.add("astrogreg.machine.solar_boiler_array_sunlit_info.tooltip",
                 "Cells must be exposed to direct sunlight to work properly.");
         provider.add("astrogreg.machine.solar_boiler_array_heat_speed.tooltip",
@@ -49,6 +65,20 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.processing_core.core", "§bProcessing Core:§r %s");
         provider.add("astrogreg.machine.processing_core.max_eut", "§eMax EU/t:§r§f %s (%s)");
         provider.add("config.jade.plugin_astrogreg.processing_core_info", "§aIndustrial Processing Core Info§r");
+
+        provider.add("astrogreg.machine.processing_cores_uniform.tooltip",
+                "All four §bIndustrial Processing Cores§r must be of the same tier in order to operate.");
+
+        provider.add("astrogreg.machine.observatory.tooltip.cwu",
+                "Accepts CWU from §bResearch Computers§r adjacent to §aComputation Input Hatches§r.");
+        provider.add("astrogreg.machine.observatory.tooltip.research_items",
+                "Insert §6Data Storage§r and §dResearch Subject§r items into the §9Observatory Research Panel§r.");
+        provider.add("config.jade.plugin_astrogreg.observatory_info", "Observatory Info");
+
+        provider.add("astrogreg.machine.astroport.tooltip.inputs",
+                "Requires ordered item inputs starting with the top left input bus, proceeding downwards, then continuing on the right column.");
+        provider.add("astrogreg.machine.astroport.tooltip.research",
+                "Requires §6Planetary Research Data§r from an §9Observatory§r.");
 
         provider.add("astrogreg.machine.faraday_generator_expanding.tooltip",
                 "§eBase Production:§r§f 4096 EU/t (§a2A§r §5EV§r) §7per§r §eMagnet Ring§r.");
@@ -89,7 +119,7 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.kinetic_steam_engine.steam_usage", "§6Steam Demand: %s mB/t");
 
         provider.add("astrogreg.machine.large_kinetic_machine_parallels.tooltip",
-                "Performs up to 8 §aParallel Recipes§r at a cost of 1024 §6Stress Units§r and 32 RPM per Parallel");
+                "Performs up to 8 §aParallel Recipes§r at a cost of 1024 §6Stress Units§r at 32 RPM per Parallel");
         provider.add("astrogreg.machine.large_kinetic_machine_recipes.tooltip", "Only performs §8ULV§r Recipes");
         provider.add("astrogreg.machine.kinetic_machine.no_su", "§cInsufficient Stress Units");
         provider.add("astrogreg.machine.kinetic_machine.su_input", "Stress Impact: %s / %s Available");
@@ -104,7 +134,7 @@ public class AstroLangHandler {
 
         provider.add("astrogreg.machine.large_kinetic_alternator.tooltip", "Converts §6Stress Units§r into EU/t");
         provider.add("astrogreg.machine.large_kinetic_alternator_production.tooltip",
-                "Costs 1024 SU §7at§r 32 RPM §7and produces§r 6 EU/t §7per§r Parallel Recipe");
+                "Uses 1024 SU §7at§r 32 RPM §7and produces§r 6 EU/t §7per§r Parallel Recipe");
         provider.add("astrogreg.machine.large_kinetic_alternator_max_production.tooltip",
                 "§aMax Output:§r 48 EU/t at 8 Parallels");
         provider.add("config.jade.plugin_astrogreg.kinetic_alternator_info", "Large Kinetic Alternator Info");
@@ -117,7 +147,7 @@ public class AstroLangHandler {
         provider.add("astrogreg.machine.mana_input_hatch.tooltip", "Exotic Matter Input for Multiblocks");
         provider.add("astrogreg.machine.mana_output_hatch.tooltip", "Exotic Matter Output for Multiblocks");
 
-        provider.add("astrogreg.machine.cwu_input_hatch.tooltip", "Accepts CWU from adjacent CWU Generators");
+        provider.add("astrogreg.machine.cwu_input_hatch.tooltip", "Accepts CWU from adjacent Research Computers");
 
         provider.add("astrogreg.machine.expanded_me_pattern_buffer.tooltip.0",
                 "§fAllows expanded direct §6AE2 pattern storage §ffor GregTech Multiblocks.");
@@ -167,6 +197,8 @@ public class AstroLangHandler {
         provider.add("item.astrogreg.unfired_rune_tablet.tooltip", "§7Shaped Livingclay");
         provider.add("item.astrogreg.rune_tablet.tooltip", "§7Mystical Frisbee");
 
+        provider.add("item.astrogreg.data_disk.tooltip", "§o§7An Ultra-Low Capacity Data Storage");
+
         provider.add("item.astrogreg.mana_simple_soc_wafer.tooltip", "§7Arcane-Enchanced Simple Circuit");
         provider.add("item.astrogreg.mana_soc_wafer.tooltip", "§7Arcane-Enchanced Basic Circuit");
         provider.add("item.astrogreg.aetherized_advanced_soc_wafer.tooltip", "§7Arcane-Enchanced Advanced Circuit");
@@ -182,13 +214,15 @@ public class AstroLangHandler {
 
         provider.add("astrogreg.recipe_condition.oxygenated.requires", "Requires Oxygenated Environment.");
         provider.add("astrogreg.recipe_condition.oxygenated.requires_not", "Requires Unoxygenated Environment.");
+        provider.add("recipe.capability.cwu.name", "Requires CWU Input");
 
         provider.add("astrogreg.recipe_condition.planetary_research", "Requires Planet Data");
         provider.add("astrogreg.item.planetary_data.title", "Planetary Research Data:");
         provider.add("astrogreg.item.planetary_data.entry", " - [%s]");
         provider.add("astrogreg.item.planetary_data.hold_shift", "§o§8Hold [§7Shift§8] for planet info");
         provider.add("astrogreg.item.planetary_data.shift_header", "Planetary Research Item:");
-        provider.add("astrogreg.recipe.condition.planetary_research_slot.tooltip", "Requires Planetary Research Data");    }
+        provider.add("astrogreg.recipe.condition.planetary_research_slot.tooltip", "Requires Planetary Research Data");
+    }
 
     protected static void multilineLang(RegistrateLangProvider provider, String key, String multiline) {
         var lines = multiline.split("\n");
