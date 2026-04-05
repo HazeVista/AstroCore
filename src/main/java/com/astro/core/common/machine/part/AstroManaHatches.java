@@ -7,7 +7,7 @@ import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachin
 
 import net.minecraftforge.fluids.FluidType;
 
-import com.astro.core.common.data.tag.AstroTags;
+import com.astro.core.common.data.tag.AstroFluidTags;
 
 @SuppressWarnings("all")
 public class AstroManaHatches extends FluidHatchPartMachine {
@@ -30,6 +30,6 @@ public class AstroManaHatches extends FluidHatchPartMachine {
     protected NotifiableFluidTank createTank(int initialCapacity, int slots, Object... args) {
         int tierCapacity = getTankCapacity(this.getTier());
         return super.createTank(tierCapacity, slots)
-                .setFilter(fluidStack -> fluidStack.getFluid().is(AstroTags.EXOTIC_MATTER));
+                .setFilter(fluidStack -> fluidStack.getFluid().is(AstroFluidTags.EXOTIC_MATTER));
     }
 }

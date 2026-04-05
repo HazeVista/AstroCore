@@ -6,7 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 
 @SuppressWarnings("all")
-public class AstroTags {
+public class AstroFluidTags {
 
     public static final TagKey<Fluid> EXOTIC_MATTER = TagKey.create(Registries.FLUID,
             new ResourceLocation("forge", "exotic_matter"));

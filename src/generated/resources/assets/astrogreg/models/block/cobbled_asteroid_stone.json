@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "astrogreg:block/rocks/cobbled_asteroid_stone"
+  }
+}

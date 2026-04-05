@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "astrogreg:block/resinwort_stage0"
+    },
+    "age=1": {
+      "model": "astrogreg:block/resinwort_stage1"
+    },
+    "age=2": {
+      "model": "astrogreg:block/resinwort_stage2"
+    },
+    "age=3": {
+      "model": "astrogreg:block/resinwort_stage3"
+    },
+    "age=4": {
+      "model": "astrogreg:block/resinwort_stage4"
+    },
+    "age=5": {
+      "model": "astrogreg:block/resinwort_stage5"
+    }
+  }
+}

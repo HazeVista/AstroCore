@@ -3,7 +3,7 @@ package com.astro.core.mixin;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine;
 
-import com.astro.core.common.data.tag.AstroTags;
+import com.astro.core.common.data.tag.AstroFluidTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +20,7 @@ public class FluidHatchesBlacklistMixin {
         tank.setFilter(fluidStack -> {
             String fluidId = net.minecraftforge.registries.ForgeRegistries.FLUIDS.getKey(fluidStack.getFluid())
                     .toString();
-            if (fluidId.equals(AstroTags.EXOTIC_MATTER)) {
+            if (fluidId.equals(AstroFluidTags.EXOTIC_MATTER)) {
                 return false;
             }
 

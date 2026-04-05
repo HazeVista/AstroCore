@@ -8,6 +8,7 @@
     "accessor.RunicAltarBlockEntityAccessor",
     "DataItemBehaviorMixin",
     "DataItemRenderMixin",
+    "EnvironmentEffectsMixin",
     "FluidHatchesBlacklistMixin",
     "GasTankItemMixin",
     "MixinContainerRenamer",

@@ -8,6 +8,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import com.astro.core.common.data.item.DataDiskItem;
+import com.astro.core.common.data.item.ResinwortSeedsItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,6 +25,16 @@ public class AstroItems {
     }
 
     // misc
+    public static ItemEntry<AstroItem> RESINWORT_POD = REGISTRATE
+            .item("resinwort_pod", AstroItem::new)
+            .lang("Resinwort Pod")
+            .register();
+
+    public static ItemEntry<ResinwortSeedsItem> RESINWORT_SEEDS = REGISTRATE
+            .item("resinwort_seeds", ResinwortSeedsItem::new)
+            .lang("Resinwort Seeds")
+            .register();
+
     public static ItemEntry<AstroItem> KUIPER_SLIME_BALL = REGISTRATE
             .item("kuiper_slime_ball", AstroItem::new)
             .lang("Kuiper Slime Ball")

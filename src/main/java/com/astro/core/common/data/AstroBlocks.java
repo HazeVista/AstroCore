@@ -4,17 +4,28 @@ import com.gregtechceu.gtceu.api.block.ActiveBlock;
 import com.gregtechceu.gtceu.api.block.property.GTBlockStateProperties;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.Tags;
 
 import com.astro.core.AstroCore;
+import com.astro.core.common.data.block.AstroFallingBlock;
 import com.astro.core.common.data.block.KuiperSlimeBlock;
+import com.astro.core.common.data.block.ResinwortBlock;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
@@ -26,6 +37,11 @@ public class AstroBlocks {
 
     public static BlockEntry<Block> ASTEROID_STONE;
     public static BlockEntry<Block> HARD_ASTEROID_STONE;
+    public static BlockEntry<AstroFallingBlock> ASTEROID_SAND;
+    public static BlockEntry<AstroFallingBlock> ASTEROID_GRAVEL;
+    public static BlockEntry<Block> COBBLED_ASTEROID_STONE;
+    public static BlockEntry<Block> SMOOTH_ASTEROID_STONE;
+
     public static BlockEntry<KuiperSlimeBlock> KUIPER_SLIME;
     public static BlockEntry<Block> LIVINGBRICKS;
     public static BlockEntry<Block> SHIMMERBRICKS;
@@ -104,6 +120,8 @@ public class AstroBlocks {
     public static BlockEntry<Block> ELECTROMAGNET_MK2;
     public static BlockEntry<Block> ELECTROMAGNET_MK3;
 
+    public static BlockEntry<ResinwortBlock> RESINWORT;
+
     public static void init() {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
         // 1. Misc
@@ -111,6 +129,46 @@ public class AstroBlocks {
                 MapColor.TERRACOTTA_PURPLE, 2.0F);
         HARD_ASTEROID_STONE = createStone("hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
                 MapColor.TERRACOTTA_PURPLE, 4.0F);
+
+        ASTEROID_SAND = REGISTRATE.block("asteroid_sand", p -> new AstroFallingBlock(p, 0x8B7355))
+                .initialProperties(() -> Blocks.SAND)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
+                        .strength(0.8F).sound(SoundType.SAND))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_sand"))))
+                .tag(BlockTags.SAND)
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .lang("Asteroid Sand")
+                .item(BlockItem::new).build().register();
+
+        ASTEROID_GRAVEL = REGISTRATE.block("asteroid_gravel", p -> new AstroFallingBlock(p, 0x7A6E6E))
+                .initialProperties(() -> Blocks.GRAVEL)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
+                        .strength(0.8F).sound(SoundType.GRAVEL))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_gravel"))))
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .lang("Asteroid Gravel")
+                .item(BlockItem::new).build().register();
+
+        COBBLED_ASTEROID_STONE = REGISTRATE.block("cobbled_asteroid_stone", Block::new)
+                .initialProperties(() -> Blocks.COBBLESTONE)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/cobbled_asteroid_stone"))))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .tag(Tags.Blocks.STONE)
+                .lang("Cobbled Asteroid Stone")
+                .item(BlockItem::new).build().register();
+
+        SMOOTH_ASTEROID_STONE = REGISTRATE.block("smooth_asteroid_stone", Block::new)
+                .initialProperties(() -> Blocks.STONE)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/polished_asteroid_stone"))))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .lang("Smooth Asteroid Stone")
+                .item(BlockItem::new).build().register();
 
         KUIPER_SLIME = REGISTRATE.block("kuiper_slime_block", KuiperSlimeBlock::new)
                 .initialProperties(() -> Blocks.SLIME_BLOCK)
@@ -269,6 +327,36 @@ public class AstroBlocks {
                 "generators/neutronium_feg_magnet", "§cFaraday Generator Magnet MK III");
         FARADAY_GENERATOR_COIL = createBloomCoilBlock("faraday_generator_coil",
                 "generators/faraday_generator_coil", "Faraday Generator Coil");
+
+        // 10. Crops
+        RESINWORT = REGISTRATE.block("resinwort", p -> new ResinwortBlock(p, () -> AstroItems.RESINWORT_SEEDS.get()))
+                .initialProperties(() -> Blocks.WHEAT)
+                .blockstate((ctx, prov) -> {
+                    for (int i = 0; i <= 5; i++) {
+                        final int age = i;
+                        prov.getVariantBuilder(ctx.get())
+                                .partialState().with(ResinwortBlock.AGE, age).modelForState()
+                                .modelFile(prov.models()
+                                        .withExistingParent("resinwort_stage" + age, AstroCore.id("block/crop_cross"))
+                                        .texture("crop", AstroCore.id("block/crops/resinwort_" + age))
+                                        .renderType("cutout"))
+                                .addModel();
+                    }
+                })
+                .loot((tables, block) -> {
+                    tables.add(block, LootTable.lootTable()
+                            .withPool(LootPool.lootPool()
+                                    .when(LootItemBlockStatePropertyCondition
+                                            .hasBlockStateProperties(block)
+                                            .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                    .hasProperty(ResinwortBlock.AGE, 5)))
+                                    .add(LootItem.lootTableItem(AstroItems.RESINWORT_POD.get())
+                                            .apply(SetItemCountFunction.setCount(
+                                                    UniformGenerator.between(2, 4))))));
+                })
+                .addLayer(() -> RenderType::cutout)
+                .lang("Resinwort")
+                .register();
     }
 
     // --- Helpers ---

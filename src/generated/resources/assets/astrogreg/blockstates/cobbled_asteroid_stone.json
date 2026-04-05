@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/cobbled_asteroid_stone"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrogreg:block/smooth_asteroid_stone"
+    }
+  }
+}
