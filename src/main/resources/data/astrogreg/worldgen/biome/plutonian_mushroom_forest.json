@@ -1,0 +1,77 @@
+{
+  "temperature": 0.5,
+  "has_precipitation": false,
+  "downfall": 0.0,
+  "effects": {
+    "sky_color": 8026756,
+    "fog_color": 7036269,
+    "water_color": 6250335,
+    "water_fog_color": 5272890,
+    "grass_color": 9936229,
+    "foliage_color": 9936229,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "carvers": {
+    "air": [
+      "astrogreg:pluto_cave",
+      "astrogreg:pluto_cave_extra"
+    ]
+  },
+  "features": [
+    [],
+    [
+      "astrogreg:topaz_geode",
+      "astrogreg:pluto_boulder_mycelite"
+    ],
+    [], [], [],
+    [
+      "astrogreg:plutonian_shrub",
+      "astrogreg:scorch_grass_patch",
+      "astrogreg:strophar_mushroom_patch",
+      "astrogreg:aeronos_mushroom_patch"
+    ],
+    [],
+    [
+      "astrogreg:aeronos_mushroom_configured",
+      "astrogreg:strophar_mushroom_configured",
+      "astrogreg:aeronos_mushroom_large_configured",
+      "astrogreg:strophar_mushroom_large_configured"
+    ],
+    [], [], []
+  ],
+  "spawners": {
+    "creature": [
+      {
+        "type": "astrogreg:glaciodillo",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "ad_astra:glacian_ram",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "monster": [
+      {
+        "type": "astrogreg:spig",
+        "weight": 15,
+        "minCount": 2,
+        "maxCount": 5
+      }
+    ],
+    "ambient": [],
+    "water_creature": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {}
+}

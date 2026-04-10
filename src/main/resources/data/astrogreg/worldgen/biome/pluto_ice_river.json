@@ -1,0 +1,52 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.5,
+  "downfall": 0.0,
+  "effects": {
+    "sky_color": 8026756,
+    "fog_color": 7036269,
+    "water_color": 6250335,
+    "water_fog_color": 5272890,
+    "grass_color": 9936229,
+    "foliage_color": 9936229,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "carvers": {
+    "air": [
+      "astrogreg:pluto_cave",
+      "astrogreg:pluto_cave_extra"
+    ]
+  },
+  "features": [
+    [],
+    ["astrogreg:topaz_geode"],
+    [], [], [],
+    [
+      "astrogreg:pluto_ice_river_surface",
+      "astrogreg:dead_bush"
+    ],
+    [], [], [], [], []
+  ],
+  "spawners": {
+    "creature": [],
+    "monster": [
+      {
+        "type": "astrogreg:spig",
+        "weight": 20,
+        "minCount": 2,
+        "maxCount": 5
+      }
+    ],
+    "ambient": [],
+    "water_creature": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {}
+}

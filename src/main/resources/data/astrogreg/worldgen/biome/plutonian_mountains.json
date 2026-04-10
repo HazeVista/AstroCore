@@ -1,0 +1,53 @@
+{
+  "temperature": -2.0,
+  "has_precipitation": false,
+  "downfall": 0.0,
+  "effects": {
+    "sky_color": 8026756,
+    "fog_color": 7036269,
+    "water_color": 6250335,
+    "water_fog_color": 5272890,
+    "grass_color": 9936229,
+    "foliage_color": 9936229,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "carvers": {
+    "air": [
+      "astrogreg:pluto_cave",
+      "astrogreg:pluto_cave_extra",
+      "astrogreg:pluto_canyon"
+    ]
+  },
+  "features": [
+    [],
+    ["astrogreg:topaz_geode"],
+    [], [], [],
+    [
+      "astrogreg:plutonian_shrub",
+      "astrogreg:scorch_grass_patch"
+    ],
+    [], [], [], [], []
+  ],
+  "spawners": {
+    "creature": [
+      {
+        "type": "ad_astra:glacian_ram",
+        "weight": 12,
+        "minCount": 2,
+        "maxCount": 4
+      }
+    ],
+    "monster": [],
+    "ambient": [],
+    "water_creature": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {}
+}

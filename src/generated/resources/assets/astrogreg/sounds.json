@@ -17,6 +17,96 @@
     ],
     "subtitle": "astrogreg.subtitle.culinary_fabricator"
   },
+  "entity.glaciodillo.ambient": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.ambient"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.ambient"
+  },
+  "entity.glaciodillo.death": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.death"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.death"
+  },
+  "entity.glaciodillo.eat": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.eat"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.eat"
+  },
+  "entity.glaciodillo.hurt": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.hurt"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.hurt"
+  },
+  "entity.glaciodillo.hurt_reduced": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.hurt_reduced"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.hurt_reduced"
+  },
+  "entity.glaciodillo.peek": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.peek"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.peek"
+  },
+  "entity.glaciodillo.roll": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.roll"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.roll"
+  },
+  "entity.glaciodillo.step": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.step"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.step"
+  },
+  "entity.glaciodillo.unroll_finish": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.unroll_finish"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.unroll_finish"
+  },
+  "entity.glaciodillo.unroll_start": {
+    "sounds": [
+      {
+        "type": "file",
+        "name": "astrogreg:entity.glaciodillo.unroll_start"
+      }
+    ],
+    "subtitle": "astrogreg.subtitle.entity.glaciodillo.unroll_start"
+  },
   "manafield_simulator": {
     "sounds": [
       {

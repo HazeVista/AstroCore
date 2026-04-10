@@ -1,5 +1,9 @@
 package com.astro.core.client;
 
+import com.astro.core.client.model.GlaciodilloModel;
+import com.astro.core.client.renderer.entity.GlaciodilloModelLayers;
+import com.astro.core.client.renderer.entity.GlaciodilloRenderer;
+import com.astro.core.client.renderer.entity.SpigRenderer;
 import com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,5 +34,13 @@ public class AstroClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(AstroEntities.KUIPER_SLIME.get(), KuiperSlimeRenderer::new);
+        event.registerEntityRenderer(AstroEntities.SPIG.get(), SpigRenderer::new);
+        event.registerEntityRenderer(AstroEntities.GLACIODILLO.get(), GlaciodilloRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(GlaciodilloModelLayers.GLACIODILLO,
+                GlaciodilloModel::createBodyLayer);
     }
 }

@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "astrogreg:block/crop_cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "astrogreg:block/crops/resinwort_4"
+    "crop": "astrogreg:block/crops/resinwort_4"
   }
 }

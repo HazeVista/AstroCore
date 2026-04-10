@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "astrogreg:plutonian_mountains",
+    "astrogreg:plutonian_rocky_plains",
+    "astrogreg:plutonian_deep_canyons",
+    "astrogreg:plutonian_mushroom_forest",
+    "astrogreg:pluto_ice_river"
+  ]
+}

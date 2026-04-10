@@ -1,0 +1,72 @@
+{
+  "type": "ad_extendra:pluto_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "astrogreg:pluto",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "astrogreg:pluto_ice_river",
+          "parameters": {
+            "temperature":     [ -1.0,  1.0 ],
+            "humidity":        [ -1.0,  1.0 ],
+            "continentalness": [ -0.11, 1.0 ],
+            "erosion":         [ 0.45,  1.0 ],
+            "weirdness":       [ -0.05, 0.05 ],
+            "depth":           [  0.0,  0.0 ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "astrogreg:plutonian_deep_canyons",
+          "parameters": {
+            "temperature":     [ -1.0,  1.0 ],
+            "humidity":        [ -1.0,  1.0 ],
+            "continentalness": [ -0.11, 0.3 ],
+            "erosion":         [  0.55, 1.0 ],
+            "weirdness":       [ -1.0,  1.0 ],
+            "depth":           [  0.0,  0.0 ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "astrogreg:plutonian_mountains",
+          "parameters": {
+            "temperature":     [ -1.0,  1.0 ],
+            "humidity":        [ -1.0,  0.3 ],
+            "continentalness": [  0.3,  1.0 ],
+            "erosion":         [ -1.0, -0.5 ],
+            "weirdness":       [ -1.0,  1.0 ],
+            "depth":           [  0.0,  0.0 ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "astrogreg:plutonian_mushroom_forest",
+          "parameters": {
+            "temperature":     [ -1.0,  1.0 ],
+            "humidity":        [ -1.0,  1.0 ],
+            "continentalness": [  0.5,  1.0 ],
+            "erosion":         [ -0.5,  0.55 ],
+            "weirdness":       [ -1.0,  1.0 ],
+            "depth":           [  0.0,  0.0 ],
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "astrogreg:plutonian_rocky_plains",
+          "parameters": {
+            "temperature":     [ -1.0,  1.0 ],
+            "humidity":        [ -1.0,  0.3 ],
+            "continentalness": [ -0.1,  0.2 ],
+            "erosion":         [ -0.1,  0.4 ],
+            "weirdness":       [ -1.0,  1.0 ],
+            "depth":           [  0.0,  0.0 ],
+            "offset": 0.0
+          }
+        }
+      ]
+    }
+  }
+}

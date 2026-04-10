@@ -1,13 +1,17 @@
 package com.astro.core.common.data;
 
+import com.astro.core.common.data.block.foliage.PlutonianShrubBlock;
+import com.astro.core.common.data.block.foliage.ScorchGrassBlock;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
 import com.gregtechceu.gtceu.api.block.property.GTBlockStateProperties;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -17,7 +21,10 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
@@ -25,7 +32,7 @@ import net.minecraftforge.common.Tags;
 import com.astro.core.AstroCore;
 import com.astro.core.common.data.block.AstroFallingBlock;
 import com.astro.core.common.data.block.KuiperSlimeBlock;
-import com.astro.core.common.data.block.ResinwortBlock;
+import com.astro.core.common.data.block.foliage.ResinwortBlock;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
 import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
@@ -121,6 +128,8 @@ public class AstroBlocks {
     public static BlockEntry<Block> ELECTROMAGNET_MK3;
 
     public static BlockEntry<ResinwortBlock> RESINWORT;
+    public static BlockEntry<PlutonianShrubBlock> PLUTONIAN_SHRUB;
+    public static BlockEntry<ScorchGrassBlock> SCORCH_GRASS;
 
     public static void init() {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
@@ -129,7 +138,6 @@ public class AstroBlocks {
                 MapColor.TERRACOTTA_PURPLE, 2.0F);
         HARD_ASTEROID_STONE = createStone("hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
                 MapColor.TERRACOTTA_PURPLE, 4.0F);
-
         ASTEROID_SAND = REGISTRATE.block("asteroid_sand", p -> new AstroFallingBlock(p, 0x8B7355))
                 .initialProperties(() -> Blocks.SAND)
                 .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
@@ -140,7 +148,6 @@ public class AstroBlocks {
                 .tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .lang("Asteroid Sand")
                 .item(BlockItem::new).build().register();
-
         ASTEROID_GRAVEL = REGISTRATE.block("asteroid_gravel", p -> new AstroFallingBlock(p, 0x7A6E6E))
                 .initialProperties(() -> Blocks.GRAVEL)
                 .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
@@ -150,7 +157,6 @@ public class AstroBlocks {
                 .tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .lang("Asteroid Gravel")
                 .item(BlockItem::new).build().register();
-
         COBBLED_ASTEROID_STONE = REGISTRATE.block("cobbled_asteroid_stone", Block::new)
                 .initialProperties(() -> Blocks.COBBLESTONE)
                 .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
@@ -160,7 +166,6 @@ public class AstroBlocks {
                 .tag(Tags.Blocks.STONE)
                 .lang("Cobbled Asteroid Stone")
                 .item(BlockItem::new).build().register();
-
         SMOOTH_ASTEROID_STONE = REGISTRATE.block("smooth_asteroid_stone", Block::new)
                 .initialProperties(() -> Blocks.STONE)
                 .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
@@ -356,6 +361,66 @@ public class AstroBlocks {
                 })
                 .addLayer(() -> RenderType::cutout)
                 .lang("Resinwort")
+                .register();
+
+        PLUTONIAN_SHRUB = REGISTRATE.block("plutonian_shrub",
+                        p -> new PlutonianShrubBlock(p, () -> AstroItems.PLUTONIAN_SHRUB_SEEDS.get()))
+                .initialProperties(() -> Blocks.DEAD_BUSH)
+                .blockstate((ctx, prov) -> {
+                    for (int i = 0; i <= 2; i++) {
+                        final int age = i;
+                        prov.getVariantBuilder(ctx.get())
+                                .partialState().with(PlutonianShrubBlock.AGE, age).modelForState()
+                                .modelFile(prov.models()
+                                        .cross("plutonian_shrub_stage" + age,
+                                                AstroCore.id("block/crops/plutonian_shrub_" + age))
+                                        .renderType("cutout"))
+                                .addModel();
+                    }
+                })
+                .addLayer(() -> RenderType::cutout)
+                .loot((tables, block) -> {
+                    tables.add(block, LootTable.lootTable()
+                            .withPool(LootPool.lootPool()
+                                    .when(InvertedLootItemCondition.invert(
+                                            MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                                    .of(Tags.Items.SHEARS))))
+                                    .when(InvertedLootItemCondition.invert(
+                                            MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                                    .of(ItemTags.SHOVELS))))
+                                    .add(LootItem.lootTableItem(AstroItems.PLUTONIAN_SHRUB_SEEDS.get())
+                                            .apply(SetItemCountFunction.setCount(
+                                                    UniformGenerator.between(1, 2)))))
+                            .withPool(LootPool.lootPool()
+                                    .when(LootItemBlockStatePropertyCondition
+                                            .hasBlockStateProperties(block)
+                                            .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                    .hasProperty(PlutonianShrubBlock.AGE, 2)))
+                                    .when(AnyOfCondition.anyOf(
+                                            MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                                    .of(Tags.Items.SHEARS)),
+                                            MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                                    .of(ItemTags.SHOVELS))))
+                                    .add(LootItem.lootTableItem(AstroItems.PLUTONIAN_SHRUB.get()))));
+                })
+                .lang("Plutonian Shrub")
+                .register();
+
+        SCORCH_GRASS = REGISTRATE.block("scorch_grass", ScorchGrassBlock::new)
+                .initialProperties(() -> Blocks.DEAD_BUSH)
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models()
+                                .cross("scorch_grass", AstroCore.id("block/crops/scorch_grass"))
+                                .renderType("cutout")))
+                .addLayer(() -> RenderType::cutout)
+                .loot((tables, block) -> {
+                    tables.add(block, LootTable.lootTable()
+                            .withPool(LootPool.lootPool()
+                                    .when(MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                            .of(net.minecraftforge.common.Tags.Items.SHEARS)))
+                                    .add(LootItem.lootTableItem(AstroItems.SCORCH_GRASS.get()))));
+                })
+                .lang("Scorch Grass")
                 .register();
     }
 

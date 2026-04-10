@@ -1,4 +1,4 @@
-package com.astro.core.common.data.item;
+package com.astro.core.common.data.item.foliage;
 
 import net.minecraft.world.item.ItemNameBlockItem;
 

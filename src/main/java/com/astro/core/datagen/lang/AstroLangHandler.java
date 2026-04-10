@@ -210,6 +210,15 @@ public class AstroLangHandler {
 
         // mobs
         provider.add("entity.astrogreg.kuiper_slime", "Kuiper Slime");
+        provider.add("entity.astrogreg.glaciodillo", "Glaciodillo");
+        provider.add("entity.astrogreg.spig", "Spig");
+
+        // biomes
+        provider.add("biome.astrogreg.plutonian_mountains",       "Plutonian Mountains");
+        provider.add("biome.astrogreg.plutonian_rocky_plains",    "Plutonian Rocky Plains");
+        provider.add("biome.astrogreg.plutonian_deep_canyons",    "Plutonian Deep Canyons");
+        provider.add("biome.astrogreg.plutonian_mushroom_forest", "Plutonian Mushroom Forest");
+        provider.add("biome.astrogreg.pluto_ice_river",           "Plutonian Frozen River");
 
         // miscellaneous
         multilineLang(provider, "astrogreg.gui.configurator_slot.tooltip",

@@ -1,4 +1,4 @@
-package com.astro.core.common.data.item;
+package com.astro.core.common.data.item.research;
 
 import com.gregtechceu.gtceu.api.item.IComponentItem;
 import com.gregtechceu.gtceu.api.item.component.IDataItem;

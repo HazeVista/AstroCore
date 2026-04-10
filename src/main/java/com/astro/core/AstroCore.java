@@ -1,5 +1,7 @@
 package com.astro.core;
 
+import com.astro.core.common.data.worldgen.AstroBiomes;
+import com.astro.core.common.data.worldgen.AstroFeatures;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -15,6 +17,7 @@ import com.lowdragmc.lowdraglib.Platform;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.levelgen.feature.BasaltColumnsFeature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -79,6 +82,8 @@ public class AstroCore {
         modEventBus.addGenericListener(RecipeConditionType.class, this::registerRecipeConditions);
 
         AstroEntities.ENTITY_TYPES.register(modEventBus);
+        AstroBiomes.BIOMES.register(modEventBus);
+        AstroFeatures.FEATURES.register(modEventBus);
 
         modEventBus.addListener(this::addMaterialRegistries);
         modEventBus.addListener(this::addMaterials);
@@ -97,8 +102,10 @@ public class AstroCore {
         AstroBlocks.init();
         AstroItems.init();
         AstroEntities.init();
+        AstroBiomes.init();
         AstroMaterialFlags.init();
         AstroDatagen.init();
+        AstroFeatures.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

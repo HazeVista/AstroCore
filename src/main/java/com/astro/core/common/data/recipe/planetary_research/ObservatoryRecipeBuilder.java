@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 
-import com.astro.core.common.data.item.AstroPlanetaryDataItem;
+import com.astro.core.common.data.item.research.AstroPlanetaryDataItem;
 import com.astro.core.common.data.machine.conditions.PlanetaryResearchCondition;
 import com.astro.core.common.data.recipe.AstroRecipeTypes;
 

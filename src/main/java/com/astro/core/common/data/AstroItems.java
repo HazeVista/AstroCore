@@ -1,5 +1,8 @@
 package com.astro.core.common.data;
 
+import com.astro.core.common.data.item.foliage.PlutonianShrubItem;
+import com.astro.core.common.data.item.foliage.PlutonianShrubSeedsItem;
+import com.astro.core.common.data.item.foliage.ScorchGrassItem;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -7,8 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
-import com.astro.core.common.data.item.DataDiskItem;
-import com.astro.core.common.data.item.ResinwortSeedsItem;
+import com.astro.core.common.data.item.research.DataDiskItem;
+import com.astro.core.common.data.item.foliage.ResinwortSeedsItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,14 +28,29 @@ public class AstroItems {
     }
 
     // misc
+    public static ItemEntry<ResinwortSeedsItem> RESINWORT_SEEDS = REGISTRATE
+            .item("resinwort_seeds", ResinwortSeedsItem::new)
+            .lang("Resinwort Seeds")
+            .register();
+
     public static ItemEntry<AstroItem> RESINWORT_POD = REGISTRATE
             .item("resinwort_pod", AstroItem::new)
             .lang("Resinwort Pod")
             .register();
 
-    public static ItemEntry<ResinwortSeedsItem> RESINWORT_SEEDS = REGISTRATE
-            .item("resinwort_seeds", ResinwortSeedsItem::new)
-            .lang("Resinwort Seeds")
+    public static ItemEntry<PlutonianShrubSeedsItem> PLUTONIAN_SHRUB_SEEDS = REGISTRATE
+            .item("plutonian_shrub_seeds", PlutonianShrubSeedsItem::new)
+            .lang("Plutonian Shrub Seeds")
+            .register();
+
+    public static ItemEntry<PlutonianShrubItem> PLUTONIAN_SHRUB = REGISTRATE
+            .item("plutonian_shrub", PlutonianShrubItem::new)
+            .lang("Plutonian Shrub")
+            .register();
+
+    public static ItemEntry<ScorchGrassItem> SCORCH_GRASS = REGISTRATE
+            .item("scorch_grass", ScorchGrassItem::new)
+            .lang("Scorch Grass")
             .register();
 
     public static ItemEntry<AstroItem> KUIPER_SLIME_BALL = REGISTRATE

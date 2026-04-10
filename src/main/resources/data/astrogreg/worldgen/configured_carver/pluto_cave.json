@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:cave",
+  "config": {
+    "probability": 0.14,
+    "y": {
+      "type": "minecraft:uniform",
+      "min_inclusive": { "absolute": -64 },
+      "max_inclusive": { "absolute": 128 }
+    },
+    "yScale": 0.5,
+    "lava_level": { "absolute": -54 },
+    "replaceable": "#astrogreg:pluto_carver_replaceables",
+    "horizontal_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "value": { "min_inclusive": 0.75, "max_exclusive": 1.0 }
+    },
+    "vertical_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "value": { "min_inclusive": 0.5, "max_exclusive": 1.0 }
+    },
+    "floor_level": {
+      "type": "minecraft:uniform",
+      "value": { "min_inclusive": -1.0, "max_exclusive": -0.4 }
+    }
+  }
+}

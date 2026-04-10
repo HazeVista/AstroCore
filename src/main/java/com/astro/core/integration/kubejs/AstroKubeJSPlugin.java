@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import com.astro.core.AstroCore;
 import com.astro.core.client.AstroGUITextures;
-import com.astro.core.client.AstroMachines;
 import com.astro.core.client.AstroSoundEntries;
 import com.astro.core.common.data.AstroBlocks;
 import com.astro.core.common.data.AstroItems;
@@ -58,7 +57,6 @@ public class AstroKubeJSPlugin extends KubeJSPlugin {
         event.add("AstroGUITextures", AstroGUITextures.class);
         event.add("AstroElements", AstroElements.class);
         event.add("AstroBlocks", AstroBlocks.class);
-        event.add("AstroMachines", AstroMachines.class);
         event.add("AstroItems", AstroItems.class);
         event.add("AstroRecipeTypes", AstroRecipeTypes.class);
         event.add("AstroSoundEntries", AstroSoundEntries.class);

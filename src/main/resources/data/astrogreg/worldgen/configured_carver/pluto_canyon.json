@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:canyon",
+  "config": {
+    "probability": 0.04,
+    "y": {
+      "type": "minecraft:uniform",
+      "min_inclusive": { "absolute": -64 },
+      "max_inclusive": { "absolute": 128 }
+    },
+    "yScale": 1.0,
+    "lava_level": { "absolute": -54 },
+    "replaceable": "#astrogreg:pluto_carver_replaceables",
+    "vertical_rotation": {
+      "type": "minecraft:uniform",
+      "value": { "min_inclusive": -0.1, "max_exclusive": 0.1 }
+    },
+    "shape": {
+      "distance_factor": {
+        "type": "minecraft:uniform",
+        "value": { "min_inclusive": 0.75, "max_exclusive": 1.0 }
+      },
+      "thickness": {
+        "type": "minecraft:uniform",
+        "value": { "min_inclusive": 0.1, "max_exclusive": 0.9 }
+      },
+      "width_smoothness": 3,
+      "horizontal_radius_factor": {
+        "type": "minecraft:uniform",
+        "value": { "min_inclusive": 0.75, "max_exclusive": 1.0 }
+      },
+      "vertical_radius_default_factor": 1.0,
+      "vertical_radius_center_factor": 0.0
+    }
+  }
+}
