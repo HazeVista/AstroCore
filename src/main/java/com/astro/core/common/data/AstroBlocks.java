@@ -4,13 +4,16 @@ import com.gregtechceu.gtceu.api.block.ActiveBlock;
 import com.gregtechceu.gtceu.api.block.property.GTBlockStateProperties;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -136,30 +139,7 @@ public class AstroBlocks {
 
     public static void init() {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
-        // 1. Misc
-        ASTEROID_STONE = createStone("asteroid_stone", "Asteroid Stone", "rocks/asteroid_stone",
-                MapColor.TERRACOTTA_PURPLE, 2.0F);
-        HARD_ASTEROID_STONE = createStone("hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
-                MapColor.TERRACOTTA_PURPLE, 4.0F);
-        ASTEROID_SAND = REGISTRATE.block("asteroid_sand", p -> new AstroFallingBlock(p, 0x8B7355))
-                .initialProperties(() -> Blocks.SAND)
-                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
-                        .strength(0.8F).sound(SoundType.SAND))
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_sand"))))
-                .tag(BlockTags.SAND)
-                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .lang("Asteroid Sand")
-                .item(BlockItem::new).build().register();
-        ASTEROID_GRAVEL = REGISTRATE.block("asteroid_gravel", p -> new AstroFallingBlock(p, 0x7A6E6E))
-                .initialProperties(() -> Blocks.GRAVEL)
-                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
-                        .strength(0.8F).sound(SoundType.GRAVEL))
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_gravel"))))
-                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .lang("Asteroid Gravel")
-                .item(BlockItem::new).build().register();
+        // 1. misc blocks
         COBBLED_ASTEROID_STONE = REGISTRATE.block("cobbled_asteroid_stone", Block::new)
                 .initialProperties(() -> Blocks.COBBLESTONE)
                 .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
@@ -177,6 +157,10 @@ public class AstroBlocks {
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .lang("Smooth Asteroid Stone")
                 .item(BlockItem::new).build().register();
+        ASTEROID_STONE = createStone("asteroid_stone", "Asteroid Stone", "rocks/asteroid_stone",
+                MapColor.TERRACOTTA_PURPLE, 2.0F, COBBLED_ASTEROID_STONE);
+        HARD_ASTEROID_STONE = createStone("hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
+                MapColor.TERRACOTTA_PURPLE, 4.0F, COBBLED_ASTEROID_STONE);
 
         KUIPER_SLIME = REGISTRATE.block("kuiper_slime_block", KuiperSlimeBlock::new)
                 .initialProperties(() -> Blocks.SLIME_BLOCK)
@@ -462,6 +446,32 @@ public class AstroBlocks {
                         p -> p.mapColor(color).strength(strength).sound(SoundType.STONE).requiresCorrectToolForDrops())
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
                         prov.models().cubeAll(ctx.getName(), AstroCore.id("block/" + texture))))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .lang(name)
+                .item(BlockItem::new).build().register();
+    }
+
+    private static BlockEntry<Block> createStone(String id, String name, String texture, MapColor color,
+                                                 float strength, BlockEntry<Block> cobbledDrop) {
+        return REGISTRATE.block(id, Block::new)
+                .initialProperties(() -> Blocks.STONE)
+                .properties(
+                        p -> p.mapColor(color).strength(strength).sound(SoundType.STONE).requiresCorrectToolForDrops())
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/" + texture))))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .loot((tables, block) -> tables.add(block, LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(InvertedLootItemCondition.invert(
+                                        MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                                .hasEnchantment(new EnchantmentPredicate(
+                                                        Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))))))
+                                .add(LootItem.lootTableItem(cobbledDrop.get())))
+                        .withPool(LootPool.lootPool()
+                                .when(MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                        .hasEnchantment(new EnchantmentPredicate(
+                                                Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1)))))
+                                .add(LootItem.lootTableItem(block)))))
                 .lang(name)
                 .item(BlockItem::new).build().register();
     }
