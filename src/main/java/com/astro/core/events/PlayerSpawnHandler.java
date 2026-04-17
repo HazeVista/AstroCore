@@ -135,6 +135,32 @@ public class PlayerSpawnHandler {
         return null;
     }
 
+    @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+
+        MinecraftServer server = player.getServer();
+        if (server == null) return;
+
+        ServerLevel kuiperLevel = server.getLevel(KUIPER_BELT);
+        if (kuiperLevel == null) return;
+
+        StationData stationData = StationData.get(kuiperLevel);
+        if (!stationData.placed) return;
+
+        BlockPos spawnPos = new BlockPos(stationData.spawnX, stationData.spawnY, stationData.spawnZ);
+
+        player.changeDimension(kuiperLevel, new ITeleporter() {
+            @Override
+            public Entity placeEntity(Entity entity, ServerLevel currentLevel, ServerLevel destLevel,
+                                      float yaw, Function<Boolean, Entity> repositionEntity) {
+                entity = repositionEntity.apply(false);
+                entity.teleportTo(spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5);
+                return entity;
+            }
+        });
+    }
+
     private static boolean isClearEnough(ServerLevel level, BlockPos origin) {
         for (int x = 0; x < STRUCT_W; x++) {
             for (int y = 0; y < STRUCT_H; y++) {

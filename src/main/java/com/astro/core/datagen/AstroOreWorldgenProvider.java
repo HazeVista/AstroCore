@@ -41,7 +41,7 @@ public class AstroOreWorldgenProvider implements DataProvider {
                         .ore("gtceu:galena", 5, 20)
                         .ore("gtceu:sulfur", 10, 15)
                         .ore("gtceu:silver", 5, 15)
-                        .ore("gtceu:arsenic", 4, 15)
+                        .ore("gtceu:realgar", 4, 15)
                         .ore("gtceu:garnierite", 7, 10)
                         .ore("gtceu:pyrolusite", 6, 10)
                         .ore("gtceu:ruby", 5, 10)
