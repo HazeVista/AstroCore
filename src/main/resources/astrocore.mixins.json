@@ -32,7 +32,10 @@
     "SolarPanelBlockEntityMixin",
     "SpaceSuitItemMixin",
     "SteamSolarBoilerMixin",
+    "WaterWheelFieldMixin",
     "WaterWheelStressPenaltyMixin",
+    "WaterWheelSyncMixin",
+    "WaterWheelTooltipMixin",
     "WorkableBlockProviderMixin"
   ],
   "injectors": {

@@ -1,5 +1,6 @@
 package com.astro.core.mixin;
 
+import com.astro.core.integration.create.WaterWheelDisplaySU;
 import net.minecraft.world.level.Level;
 
 import com.astro.core.mixin.accessor.TorquePropagatorAccessor;
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
 
+@SuppressWarnings("all")
 @Mixin(value = KineticBlockEntity.class, remap = false)
 public abstract class WaterWheelStressPenaltyMixin {
 
@@ -34,10 +36,15 @@ public abstract class WaterWheelStressPenaltyMixin {
                 .filter(be -> be instanceof WaterWheelBlockEntity)
                 .count();
 
-        if (wheelCount <= 1) return;
+        if (wheelCount <= 1) {
+            ((WaterWheelDisplaySU) self).astrogreg$setPenaltyFactor(1f);
+            return;
+        }
 
         float base = cir.getReturnValue();
         float penalty = (float) Math.pow(0.95, wheelCount - 1);
-        cir.setReturnValue(base * penalty);
+
+        ((WaterWheelDisplaySU) self).astrogreg$setPenaltyFactor(penalty);
+        cir.setReturnValue((float) Math.floor(base * penalty));
     }
 }
