@@ -142,7 +142,8 @@ public class AstroLangHandler {
 
         provider.add("astrogreg.machine.overdrive_combustion_engine.tooltip", "Overdriven Chemical Ignition Manifold");
 
-        provider.add("astrogreg.machine.large_primitive_composter.tooltip", "§o§7A more efficient way to get bone meal.");
+        provider.add("astrogreg.machine.large_primitive_composter.tooltip",
+                "§o§7A more efficient way to get bone meal.");
 
         // custom hatch tooltips
         provider.add("astrogreg.machine.water_hatch.tooltip", "§eAccepted Fluid:§r Water");

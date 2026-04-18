@@ -1,7 +1,5 @@
 package com.astro.core.common.data.recipe.generated;
 
-import com.astro.core.AstroCore;
-import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -16,6 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.ComposterBlock;
 
+import com.astro.core.AstroCore;
+import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 
 @SuppressWarnings("all")
@@ -39,11 +39,12 @@ public class ComposterRecipes {
                         if (!(content instanceof ItemStack stack) || stack.isEmpty()) continue;
                         Float chance = ComposterBlock.COMPOSTABLES.get(stack.getItem());
                         if (chance == null) continue;
-                        int outputCount = Math.max(1, (int)(chance / 0.2f));
+                        int outputCount = Math.max(1, (int) (chance / 0.2f));
                         var itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
                         if (itemId == null) continue;
                         return AstroRecipeTypes.COMPOSTER_RECIPES
-                                .recipeBuilder(AstroCore.id("composter_" + itemId.getNamespace() + "_" + itemId.getPath().replace('/', '_')))
+                                .recipeBuilder(AstroCore.id("composter_" + itemId.getNamespace() + "_" +
+                                        itemId.getPath().replace('/', '_')))
                                 .inputItems(stack.getItem())
                                 .outputItems(TagPrefix.dustTiny, GTMaterials.Bone, outputCount)
                                 .duration(DURATION_TICKS)
@@ -58,11 +59,12 @@ public class ComposterRecipes {
                 for (Object2FloatMap.Entry<ItemLike> entry : ComposterBlock.COMPOSTABLES.object2FloatEntrySet()) {
                     float chance = entry.getFloatValue();
                     if (chance <= 0f) continue;
-                    int outputCount = Math.max(1, (int)(chance / 0.2f));
+                    int outputCount = Math.max(1, (int) (chance / 0.2f));
                     var itemId = BuiltInRegistries.ITEM.getKey(entry.getKey().asItem());
                     if (itemId == null) continue;
                     GTRecipe recipe = AstroRecipeTypes.COMPOSTER_RECIPES
-                            .recipeBuilder(AstroCore.id("composter_" + itemId.getNamespace() + "_" + itemId.getPath().replace('/', '_')))
+                            .recipeBuilder(AstroCore.id(
+                                    "composter_" + itemId.getNamespace() + "_" + itemId.getPath().replace('/', '_')))
                             .inputItems(entry.getKey().asItem())
                             .outputItems(TagPrefix.dustTiny, GTMaterials.Bone, outputCount)
                             .duration(DURATION_TICKS)

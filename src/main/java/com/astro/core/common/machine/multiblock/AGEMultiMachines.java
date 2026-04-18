@@ -1,6 +1,5 @@
 package com.astro.core.common.machine.multiblock;
 
-import com.astro.core.common.machine.multiblock.primitive.PrimitiveComposterMachine;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -24,6 +23,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 
 import com.astro.core.AstroCore;
 import com.astro.core.client.AstroMachineModels;
@@ -37,13 +37,13 @@ import com.astro.core.common.machine.multiblock.electric.planetary_research.Indu
 import com.astro.core.common.machine.multiblock.kinetic.*;
 import com.astro.core.common.machine.multiblock.kinetic.KineticMinerMachine;
 import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
+import com.astro.core.common.machine.multiblock.primitive.PrimitiveComposterMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 import com.astro.core.common.machine.multiblock.steam.SteamGrinder;
 import com.astro.core.common.machine.multiblock.steam.SteamMinerMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamWasher;
 import com.astro.core.common.machine.trait.AstroPartAbility;
 import earth.terrarium.adastra.common.registry.ModBlocks;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -151,6 +151,7 @@ public class PlayerSpawnHandler {
         BlockPos spawnPos = new BlockPos(stationData.spawnX, stationData.spawnY, stationData.spawnZ);
 
         player.changeDimension(kuiperLevel, new ITeleporter() {
+
             @Override
             public Entity placeEntity(Entity entity, ServerLevel currentLevel, ServerLevel destLevel,
                                       float yaw, Function<Boolean, Entity> repositionEntity) {

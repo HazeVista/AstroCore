@@ -1,8 +1,8 @@
 package com.astro.core.mixin;
 
-import com.astro.core.integration.create.WaterWheelDisplaySU;
 import net.minecraft.world.level.Level;
 
+import com.astro.core.integration.create.WaterWheelDisplaySU;
 import com.astro.core.mixin.accessor.TorquePropagatorAccessor;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;

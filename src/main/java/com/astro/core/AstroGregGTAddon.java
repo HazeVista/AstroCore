@@ -1,6 +1,5 @@
 package com.astro.core;
 
-import com.astro.core.common.data.recipe.generated.ComposterRecipes;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -13,6 +12,7 @@ import com.astro.core.common.data.recipe.AstroRecipes;
 import com.astro.core.common.data.recipe.generated.AstroCrateRecipes;
 import com.astro.core.common.data.recipe.generated.AstroDrumRecipes;
 import com.astro.core.common.data.recipe.generated.AstroGeneratorRecipeHandler;
+import com.astro.core.common.data.recipe.generated.ComposterRecipes;
 import com.astro.core.common.data.recipe.planetary_research.AstroPlanetaryRecipes;
 import com.astro.core.common.data.recipe.run.AstroSleeveRecipeRunner;
 import com.astro.core.common.data.recipe.run.AstroWireRecipeRunner;

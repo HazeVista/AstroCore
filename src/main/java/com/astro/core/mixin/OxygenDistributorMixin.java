@@ -26,16 +26,34 @@ public abstract class OxygenDistributorMixin extends OxygenLoaderBlockEntity {
         super(pos, state, containerSize);
     }
 
-    @Shadow private int shutDownTicks;
-    @Shadow protected abstract long calculateFluidPerTick();
-    @Shadow protected abstract boolean canCraftDistribution(long fluidAmount);
-    @Shadow protected abstract void consumeDistribution(long fluidAmount);
-    @Shadow protected abstract void tickOxygen(ServerLevel level, BlockPos pos, BlockState state);
-    @Final @Shadow private Set<BlockPos> lastDistributedBlocks;
-    @Shadow protected abstract void clearOxygenBlocks();
-    @Shadow private long energyPerTick;
-    @Shadow private float fluidPerTick;
-    @Shadow private int distributedBlocksCount;
+    @Shadow
+    private int shutDownTicks;
+
+    @Shadow
+    protected abstract long calculateFluidPerTick();
+
+    @Shadow
+    protected abstract boolean canCraftDistribution(long fluidAmount);
+
+    @Shadow
+    protected abstract void consumeDistribution(long fluidAmount);
+
+    @Shadow
+    protected abstract void tickOxygen(ServerLevel level, BlockPos pos, BlockState state);
+
+    @Final
+    @Shadow
+    private Set<BlockPos> lastDistributedBlocks;
+
+    @Shadow
+    protected abstract void clearOxygenBlocks();
+
+    @Shadow
+    private long energyPerTick;
+    @Shadow
+    private float fluidPerTick;
+    @Shadow
+    private int distributedBlocksCount;
 
     private long nerfedEnergyPerTick() {
         return Math.max(1, lastDistributedBlocks.size() / 500);

@@ -1,9 +1,10 @@
 package com.astro.core.mixin;
 
+import net.minecraft.nbt.CompoundTag;
+
 import com.astro.core.integration.create.WaterWheelDisplaySU;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.waterwheel.WaterWheelBlockEntity;
-import net.minecraft.nbt.CompoundTag;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
