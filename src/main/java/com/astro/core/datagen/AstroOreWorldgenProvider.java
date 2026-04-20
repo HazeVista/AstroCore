@@ -31,7 +31,7 @@ public class AstroOreWorldgenProvider implements DataProvider {
                         .biome("ad_astra:kuiper_asteroids")
                         .predicateBlock("astrogreg:asteroid_stone")
                         .predicateBlock("astrogreg:hard_asteroid_stone")
-                        .ore("gtceu:iron", 12, 65)
+                        .ore("gtceu:iron", 10, 60)
                         .ore("gtceu:copper", 8, 40)
                         .ore("astrogreg:desh", 5, 40)
                         .ore("gtceu:redstone", 9, 30)

@@ -42,7 +42,7 @@ public abstract class WaterWheelStressPenaltyMixin {
         }
 
         float base = cir.getReturnValue();
-        float penalty = (float) Math.pow(0.95, wheelCount - 1);
+        float penalty = (float) Math.pow(0.98, wheelCount - 1);
 
         ((WaterWheelDisplaySU) self).astrogreg$setPenaltyFactor(penalty);
         cir.setReturnValue((float) Math.floor(base * penalty));

@@ -7,6 +7,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -35,6 +36,7 @@ public class KuiperSlimeEntity extends Slime {
     public static boolean checkSlimeSpawnRules(EntityType<KuiperSlimeEntity> type,
                                                ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos,
                                                RandomSource random) {
-        return level.getBlockState(pos.below()).isSolidRender(level, pos.below());
+        return level.getBlockState(pos.below()).isSolidRender(level, pos.below())
+                && Monster.checkMonsterSpawnRules((EntityType<? extends Monster>) (EntityType<?>) type, level, spawnType, pos, random);
     }
 }
