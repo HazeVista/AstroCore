@@ -1,4 +1,4 @@
 {
-  "tagprefix.sleeve": "%s втулка",
-  "tagprefix.compressed_spring": "Сжатая %s пружина"
+  "tagprefix.sleeve": "%s (Втулка)",
+  "tagprefix.compressed_spring": "%s (Сжатая пружина)"
 }
