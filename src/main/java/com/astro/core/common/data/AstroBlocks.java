@@ -140,6 +140,43 @@ public class AstroBlocks {
     public static void init() {
         REGISTRATE.creativeModeTab(() -> AstroCore.ASTRO_CREATIVE_TAB);
         // 1. misc blocks
+        ASTEROID_SAND = REGISTRATE.block("asteroid_sand", p -> new AstroFallingBlock(p, 0x8B7355))
+                .initialProperties(() -> Blocks.SAND)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
+                        .strength(0.8F).sound(SoundType.SAND))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_sand"))))
+                .tag(BlockTags.SAND)
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .lang("Asteroid Sand")
+                .item(BlockItem::new).build().register();
+        COBBLED_ASTEROID_STONE = REGISTRATE.block("cobbled_asteroid_stone", Block::new)
+                .initialProperties(() -> Blocks.COBBLESTONE)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/cobbled_asteroid_stone"))))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .tag(Tags.Blocks.STONE)
+                .lang("Cobbled Asteroid Stone")
+                .item(BlockItem::new).build().register();
+        ASTEROID_GRAVEL = REGISTRATE.block("asteroid_gravel", p -> new AstroFallingBlock(p, 0x7A6E6E))
+                .initialProperties(() -> Blocks.GRAVEL)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F).sound(SoundType.GRAVEL))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_gravel"))))
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .loot((tables, block) -> tables.add(block, LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                        .of(CustomTags.HAMMERS)))
+                                .add(LootItem.lootTableItem(ASTEROID_SAND.get())))
+                        .withPool(LootPool.lootPool()
+                                .when(InvertedLootItemCondition.invert(
+                                        MatchTool.toolMatches(ItemPredicate.Builder.item()
+                                                .of(CustomTags.HAMMERS))))
+                                .add(LootItem.lootTableItem(block)))))
+                .lang("Asteroid Gravel")
+                .item(BlockItem::new).build().register();
         ASTEROID_STONE = REGISTRATE.block("asteroid_stone", Block::new)
                 .initialProperties(() -> Blocks.STONE)
                 .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(2.0F).sound(SoundType.STONE)
@@ -173,82 +210,6 @@ public class AstroBlocks {
                 .item(BlockItem::new).build().register();
         HARD_ASTEROID_STONE = createStone("hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
                 MapColor.TERRACOTTA_PURPLE, 4.0F, COBBLED_ASTEROID_STONE);
-        COBBLED_ASTEROID_STONE = REGISTRATE.block("cobbled_asteroid_stone", Block::new)
-                .initialProperties(() -> Blocks.COBBLESTONE)
-                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/cobbled_asteroid_stone"))))
-                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .tag(Tags.Blocks.STONE)
-                .lang("Cobbled Asteroid Stone")
-                .item(BlockItem::new).build().register();
-        ASTEROID_STONE = REGISTRATE.block("asteroid_stone", Block::new)
-                .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(2.0F).sound(SoundType.STONE)
-                        .requiresCorrectToolForDrops())
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_stone"))))
-                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .loot((tables, block) -> tables.add(block, LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .when(MatchTool.toolMatches(ItemPredicate.Builder.item()
-                                        .of(CustomTags.HAMMERS)))
-                                .add(LootItem.lootTableItem(ASTEROID_GRAVEL.get())))
-                        .withPool(LootPool.lootPool()
-                                .when(InvertedLootItemCondition.invert(
-                                        MatchTool.toolMatches(ItemPredicate.Builder.item()
-                                                .of(CustomTags.HAMMERS))))
-                                .when(InvertedLootItemCondition.invert(
-                                        MatchTool.toolMatches(ItemPredicate.Builder.item()
-                                                .hasEnchantment(new EnchantmentPredicate(
-                                                        Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))))))
-                                .add(LootItem.lootTableItem(COBBLED_ASTEROID_STONE.get())))
-                        .withPool(LootPool.lootPool()
-                                .when(MatchTool.toolMatches(ItemPredicate.Builder.item()
-                                        .hasEnchantment(new EnchantmentPredicate(
-                                                Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1)))))
-                                .when(InvertedLootItemCondition.invert(
-                                        MatchTool.toolMatches(ItemPredicate.Builder.item()
-                                                .of(CustomTags.HAMMERS))))
-                                .add(LootItem.lootTableItem(block)))))
-                .lang("Asteroid Stone")
-                .item(BlockItem::new).build().register();
-        SMOOTH_ASTEROID_STONE = REGISTRATE.block("smooth_asteroid_stone", Block::new)
-                .initialProperties(() -> Blocks.STONE)
-                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/polished_asteroid_stone"))))
-                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .lang("Smooth Asteroid Stone")
-                .item(BlockItem::new).build().register();
-        ASTEROID_SAND = REGISTRATE.block("asteroid_sand", p -> new AstroFallingBlock(p, 0x8B7355))
-                .initialProperties(() -> Blocks.SAND)
-                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE)
-                        .strength(0.8F).sound(SoundType.SAND))
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_sand"))))
-                .tag(BlockTags.SAND)
-                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .lang("Asteroid Sand")
-                .item(BlockItem::new).build().register();
-        ASTEROID_GRAVEL = REGISTRATE.block("asteroid_gravel", p -> new AstroFallingBlock(p, 0x7A6E6E))
-                .initialProperties(() -> Blocks.GRAVEL)
-                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F).sound(SoundType.GRAVEL))
-                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
-                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/asteroid_gravel"))))
-                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .loot((tables, block) -> tables.add(block, LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .when(MatchTool.toolMatches(ItemPredicate.Builder.item()
-                                        .of(CustomTags.HAMMERS)))
-                                .add(LootItem.lootTableItem(ASTEROID_SAND.get())))
-                        .withPool(LootPool.lootPool()
-                                .when(InvertedLootItemCondition.invert(
-                                        MatchTool.toolMatches(ItemPredicate.Builder.item()
-                                                .of(CustomTags.HAMMERS))))
-                                .add(LootItem.lootTableItem(block)))))
-                .lang("Asteroid Gravel")
-                .item(BlockItem::new).build().register();
 
         KUIPER_SLIME = REGISTRATE.block("kuiper_slime_block", KuiperSlimeBlock::new)
                 .initialProperties(() -> Blocks.SLIME_BLOCK)
@@ -566,7 +527,7 @@ public class AstroBlocks {
 
     private static BlockEntry<Block> createCasing(String id, String texture, String lang) {
         return REGISTRATE.block(id, Block::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
                         prov.models().cubeAll(ctx.getName(), AstroCore.id("block/" + texture))))
                 .lang(lang)
@@ -576,7 +537,7 @@ public class AstroBlocks {
 
     private static BlockEntry<ActiveBlock> createManaFirebox(FireboxInfo info, String lang) {
         return REGISTRATE.block(info.name + "_casing", ActiveBlock::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate((ctx, prov) -> {
                     ModelFile inactive = prov.models().cubeBottomTop(ctx.getName(), info.side, info.bottom, info.top);
@@ -597,7 +558,7 @@ public class AstroBlocks {
 
     private static BlockEntry<ActiveBlock> createFirebox(FireboxInfo info, String lang) {
         return REGISTRATE.block(info.name + "_casing", ActiveBlock::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .addLayer(() -> RenderType::cutoutMipped)
                 .addLayer(() -> RenderType::translucent)
                 .blockstate((ctx, prov) -> {
@@ -621,7 +582,7 @@ public class AstroBlocks {
         ResourceLocation side = new ResourceLocation(sideTexture.contains(":") ? sideTexture.split(":")[0] : "gtceu",
                 "block/casings/" + (sideTexture.contains(":") ? sideTexture.split(":")[1] : sideTexture));
         return REGISTRATE.block(id, ActiveBlock::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate((ctx, prov) -> {
                     ModelFile inactive = prov.models()
@@ -651,7 +612,7 @@ public class AstroBlocks {
         ResourceLocation funcTexEmissive = AstroCore.id("block/casings/functional_casings/" + id + "_active_emissive");
 
         return REGISTRATE.block(id, ActiveBlock::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate((ctx, prov) -> {
                     ModelFile inactive = prov.models()
@@ -678,7 +639,7 @@ public class AstroBlocks {
     private static BlockEntry<Block> createSolar(String id, String name) {
         ResourceLocation side = new ResourceLocation("gtceu", "block/casings/solid/machine_casing_solid_steel");
         return REGISTRATE.block(id, Block::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
                         prov.models()
                                 .cube(ctx.getName(), side, AstroCore.id("block/generators/" + id), side, side, side,
@@ -693,7 +654,7 @@ public class AstroBlocks {
         ResourceLocation top = AstroCore.id("block/casings/industrial_casings/" + texture + "_top");
         ResourceLocation bottom = AstroCore.id("block/casings/industrial_casings/" + texture + "_bottom");
         return REGISTRATE.block(id, Block::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
                         prov.models()
                                 .cubeBottomTop(ctx.getName(), side, bottom, top)
@@ -704,7 +665,7 @@ public class AstroBlocks {
 
     private static BlockEntry<ActiveBlock> createBloomCoilBlock(String id, String texture, String lang) {
         return REGISTRATE.block(id, ActiveBlock::new)
-                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .initialProperties(() -> Blocks.STONE)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
                 .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate((ctx, prov) -> {
@@ -720,9 +681,7 @@ public class AstroBlocks {
                 })
                 .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
                 .lang(lang)
-                .item(BlockItem::new)
-                .build()
-                .register();
+                .item(BlockItem::new).build().register();
     }
 
     public static final FireboxInfo MANASTEEL_FIREBOX_REC = new FireboxInfo("manasteel_firebox",

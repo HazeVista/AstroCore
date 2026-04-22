@@ -20,6 +20,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -64,9 +65,11 @@ public class AstroBoilerMultiPartRender extends DynamicRender<MultiblockControll
     }
 
     public AstroBoilerMultiPartRender(Supplier<? extends Block> fireboxBlock, Supplier<? extends Block> casingBlock) {
-        this(fireboxBlock.get().defaultBlockState(),
-                fireboxBlock.get().defaultBlockState().setValue(GTBlockStateProperties.ACTIVE, true),
-                casingBlock.get().defaultBlockState());
+        this(
+                fireboxBlock != null ? fireboxBlock.get().defaultBlockState() : Blocks.AIR.defaultBlockState(),
+                fireboxBlock != null ? fireboxBlock.get().defaultBlockState().setValue(GTBlockStateProperties.ACTIVE, true) : Blocks.AIR.defaultBlockState(),
+                casingBlock != null ? casingBlock.get().defaultBlockState() : Blocks.AIR.defaultBlockState()
+        );
     }
 
     @Override

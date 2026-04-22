@@ -1,9 +1,8 @@
 {
   "values": [
-    "astrogreg:hard_asteroid_stone",
     "astrogreg:cobbled_asteroid_stone",
     "astrogreg:asteroid_stone",
-    "astrogreg:smooth_asteroid_stone",
+    "astrogreg:hard_asteroid_stone",
     "astrogreg:livingbricks",
     "astrogreg:shimmerbricks"
   ]

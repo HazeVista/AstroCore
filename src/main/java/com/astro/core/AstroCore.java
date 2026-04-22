@@ -1,5 +1,6 @@
 package com.astro.core;
 
+import com.astro.core.common.data.AstroBlocks;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -7,7 +8,6 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.condition.RecipeConditionType;
-import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.api.sound.SoundEntry;
 import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
 
@@ -24,7 +24,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import com.astro.core.client.AstroClient;
 import com.astro.core.client.AstroSoundEntries;
-import com.astro.core.common.data.AstroBlocks;
 import com.astro.core.common.data.AstroEntities;
 import com.astro.core.common.data.AstroItems;
 import com.astro.core.common.data.configs.AstroConfigs;
@@ -58,7 +57,6 @@ public class AstroCore {
 
     public static final String MOD_ID = "astrogreg";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static GTRegistrate ASTRO_REGISTRATE = GTRegistrate.create(MOD_ID);
     public static RegistryEntry<CreativeModeTab> ASTRO_CREATIVE_TAB = REGISTRATE
             .defaultCreativeTab(AstroCore.MOD_ID,
                     builder -> builder
@@ -99,8 +97,8 @@ public class AstroCore {
     public static void init() {
         AstroConfigs.init();
         REGISTRATE.registerRegistrate();
-        AstroBlocks.init();
         AstroItems.init();
+        AstroBlocks.init();
         AstroEntities.init();
         AstroMaterialFlags.init();
         AstroDatagen.init();
