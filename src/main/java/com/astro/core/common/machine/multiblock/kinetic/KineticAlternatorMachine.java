@@ -42,7 +42,7 @@ public class KineticAlternatorMachine extends WorkableMultiblockMachine implemen
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             KineticAlternatorMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
-    public static final int EU_PER_PARALLEL = 6;
+    public static final int EU_PER_PARALLEL = 8;
     public static final int MAX_PARALLELS = 8;
     public static final float SU_PER_PARALLEL = KineticInputHatch.SU_PER_PARALLEL;
     public static final float REQUIRED_RPM = KineticInputHatch.REQUIRED_RPM;
