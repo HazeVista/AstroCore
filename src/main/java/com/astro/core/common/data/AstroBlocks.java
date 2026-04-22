@@ -210,6 +210,14 @@ public class AstroBlocks {
                 .item(BlockItem::new).build().register();
         HARD_ASTEROID_STONE = createStone("hard_asteroid_stone", "Hard Asteroid Stone", "rocks/hard_asteroid_stone",
                 MapColor.TERRACOTTA_PURPLE, 4.0F, COBBLED_ASTEROID_STONE);
+        SMOOTH_ASTEROID_STONE = REGISTRATE.block("smooth_asteroid_stone", Block::new)
+                .initialProperties(() -> Blocks.STONE)
+                .properties(p -> p.mapColor(MapColor.TERRACOTTA_PURPLE).strength(0.8F))
+                .blockstate((ctx, prov) -> prov.simpleBlock(ctx.get(),
+                        prov.models().cubeAll(ctx.getName(), AstroCore.id("block/rocks/polished_asteroid_stone"))))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .lang("Smooth Asteroid Stone")
+                .item(BlockItem::new).build().register();
 
         KUIPER_SLIME = REGISTRATE.block("kuiper_slime_block", KuiperSlimeBlock::new)
                 .initialProperties(() -> Blocks.SLIME_BLOCK)
