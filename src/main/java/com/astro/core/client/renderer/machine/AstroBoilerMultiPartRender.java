@@ -67,9 +67,10 @@ public class AstroBoilerMultiPartRender extends DynamicRender<MultiblockControll
     public AstroBoilerMultiPartRender(Supplier<? extends Block> fireboxBlock, Supplier<? extends Block> casingBlock) {
         this(
                 fireboxBlock != null ? fireboxBlock.get().defaultBlockState() : Blocks.AIR.defaultBlockState(),
-                fireboxBlock != null ? fireboxBlock.get().defaultBlockState().setValue(GTBlockStateProperties.ACTIVE, true) : Blocks.AIR.defaultBlockState(),
-                casingBlock != null ? casingBlock.get().defaultBlockState() : Blocks.AIR.defaultBlockState()
-        );
+                fireboxBlock != null ?
+                        fireboxBlock.get().defaultBlockState().setValue(GTBlockStateProperties.ACTIVE, true) :
+                        Blocks.AIR.defaultBlockState(),
+                casingBlock != null ? casingBlock.get().defaultBlockState() : Blocks.AIR.defaultBlockState());
     }
 
     @Override

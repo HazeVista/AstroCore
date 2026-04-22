@@ -1,6 +1,5 @@
 package com.astro.core;
 
-import com.astro.core.common.data.AstroBlocks;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -24,6 +23,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import com.astro.core.client.AstroClient;
 import com.astro.core.client.AstroSoundEntries;
+import com.astro.core.common.data.AstroBlocks;
 import com.astro.core.common.data.AstroEntities;
 import com.astro.core.common.data.AstroItems;
 import com.astro.core.common.data.configs.AstroConfigs;
