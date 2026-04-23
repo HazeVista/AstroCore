@@ -234,6 +234,11 @@ public class AstroLangHandler {
         provider.add("biome.astrogreg.plutonian_mushroom_forest", "Plutonian Mushroom Forest");
         provider.add("biome.astrogreg.pluto_ice_river", "Plutonian Frozen River");
 
+        // flowers
+        provider.add("block.astrogreg.corrupt_daisy", "Corrupt Daisy");
+        provider.add("item.astrogreg.corrupt_daisy.tooltip", "I see a red door and I want it painted black.");
+        provider.add("emi.category.astrogreg.corrupt_daisy", "Corrupt Daisy");
+
         // miscellaneous
         multilineLang(provider, "astrogreg.gui.configurator_slot.tooltip",
                 "§fConfigurator Slot§r\n§7Place a §6Programmed Circuit§7 in this slot to\n§7change its configured value.\n§aA Programmed Circuit in this slot is also valid for recipe inputs.§r");

@@ -1,5 +1,7 @@
 package com.astro.core.common.data.recipe;
 
+import com.astro.core.AstroCore;
+import com.astro.core.common.data.recipe.botania.CorruptDaisyRecipe;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
@@ -15,6 +17,10 @@ import net.minecraft.world.item.Items;
 import com.astro.core.client.AstroGUITextures;
 import com.astro.core.client.AstroSoundEntries;
 import com.astro.core.common.data.AstroItems;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import static com.astro.core.common.data.recipe.planetary_research.ObservatoryRecipeBuilder.buildPlanetaryResearchSlot;
 import static com.astro.core.common.data.recipe.planetary_research.ObservatoryRecipeBuilder.createObservatoryResearchRecipe;
@@ -37,6 +43,7 @@ public class AstroRecipeTypes {
     public static GTRecipeType INSCRIPTION;
     public static GTRecipeType ASTROPORT_RECIPES;
     public static GTRecipeType OBSERVATORY_RECIPES;
+    public static GTRecipeType CORRUPT_DAISY_RECIPES;
 
     public static final String OBSERVATORY_SCAN_ITEM_KEY = "observatory_scan_item";
     public static final String OBSERVATORY_CWUT_KEY = "observatory_cwut";
@@ -181,6 +188,17 @@ public class AstroRecipeTypes {
                     }
                 });
     }
+
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER =
+            DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, AstroCore.MOD_ID);
+
+    public static final RegistryObject<RecipeType<CorruptDaisyRecipe>> CORRUPT_DAISY_TYPE =
+            RECIPE_TYPE_REGISTER.register("corrupt_daisy", () -> new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return AstroCore.MOD_ID + ":corrupt_daisy";
+                }
+            });
 
     public static ItemStack getResearchItemForType(String type, int cwut) {
         return switch (type) {

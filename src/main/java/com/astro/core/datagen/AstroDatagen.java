@@ -10,5 +10,7 @@ public class AstroDatagen {
 
     public static void init() {
         REGISTRATE.addDataGenerator(ProviderType.LANG, AstroLangHandler::init);
+        REGISTRATE.addDataGenerator(ProviderType.BLOCKSTATE, AstroFlowerDatagen::blockstates);
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_MODEL, AstroFlowerDatagen::itemModels);
     }
 }

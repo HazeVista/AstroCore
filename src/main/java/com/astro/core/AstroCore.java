@@ -1,5 +1,7 @@
 package com.astro.core;
 
+import com.astro.core.common.data.block.flower.AstroFlowerBlocks;
+import com.astro.core.common.data.recipe.botania.CorruptDaisyRecipe;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -12,9 +14,12 @@ import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
 
 import com.lowdragmc.lowdraglib.Platform;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -83,6 +88,16 @@ public class AstroCore {
         AstroBiomes.BIOMES.register(modEventBus);
         AstroFeatures.FEATURES.register(modEventBus);
 
+        AstroFlowerBlocks.register(modEventBus);
+        modEventBus.addListener((BuildCreativeModeTabContentsEvent event) -> {
+            if (event.getTabKey() == ASTRO_CREATIVE_TAB.getKey()) {
+                event.accept(AstroFlowerBlocks.CORRUPT_DAISY_ITEM.get());
+            }
+        });
+
+        AstroRecipeTypes.RECIPE_TYPE_REGISTER.register(modEventBus);
+        CorruptDaisyRecipe.register(modEventBus);
+
         modEventBus.addListener(this::addMaterialRegistries);
         modEventBus.addListener(this::addMaterials);
         modEventBus.addListener(this::modifyMaterials);
@@ -111,7 +126,13 @@ public class AstroCore {
         });
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {}
+    private void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(
+                    AstroFlowerBlocks.CORRUPT_DAISY_BLOCK.get(),
+                    RenderType.cutout());
+        });
+    }
 
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MOD_ID, path);

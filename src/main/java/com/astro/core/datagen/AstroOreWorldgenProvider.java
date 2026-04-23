@@ -48,6 +48,7 @@ public class AstroOreWorldgenProvider implements DataProvider {
                         .ore("gtceu:sapphire", 6, 10)
                         .ore("gtceu:gold", 7, 5)
                         .ore("gtceu:diamond", 6, 3)
+                        .ore("gtceu:apatite", 5, 2)
                         .ore("gtceu:emerald", 4, 2));
 
         event.getGenerator().addProvider(event.includeServer(), provider);

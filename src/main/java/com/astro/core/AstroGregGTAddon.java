@@ -1,5 +1,6 @@
 package com.astro.core;
 
+import com.astro.core.common.data.recipe.botania.CorruptDaisyRecipes;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -58,6 +59,7 @@ public class AstroGregGTAddon implements IGTAddon {
         AstroCrateRecipes.init(provider);
         AstroHatchesAndBuses.init(provider);
         AstroRecipes.init(provider);
+        CorruptDaisyRecipes.init(provider);
         AstroPlanetaryRecipes.init(provider);
         AstroGeneratorRecipeHandler.init(provider);
     }
