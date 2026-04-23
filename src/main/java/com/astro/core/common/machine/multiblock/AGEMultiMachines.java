@@ -311,6 +311,7 @@ public class AGEMultiMachines {
                     .where('X', blocks(CASING_BRONZE_BRICKS.get())
                             .or(abilities(STEAM_EXPORT_ITEMS).setExactLimit(1).setPreviewCount(1))
                             .or(blocks(WATER_HATCH.get()).setExactLimit(1).setPreviewCount(1))
+                            .or(abilities(IMPORT_FLUIDS).setMaxGlobalLimited(1).setPreviewCount(0))
                             .or(abilities(STEAM).setExactLimit(1).setPreviewCount(1)))
                     .where('C', blocks(CASING_BRONZE_BRICKS.get()))
                     .where('F', frames(GTMaterials.Bronze))
