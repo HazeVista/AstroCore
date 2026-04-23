@@ -1,9 +1,8 @@
 package com.astro.core.datagen;
 
+import com.astro.core.common.data.block.flower.AstroFlowerBlocks;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
-
-import com.astro.core.common.data.block.flower.AstroFlowerBlocks;
 
 public class AstroFlowerDatagen {
 

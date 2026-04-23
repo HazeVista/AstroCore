@@ -9,16 +9,14 @@ import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
+import com.astro.core.common.data.recipe.AstroRecipeTypes;
 import org.jetbrains.annotations.Nullable;
-
 import vazkii.botania.api.block_entity.RadiusDescriptor;
 import vazkii.botania.api.block_entity.SpecialFlowerBlockEntity;
 import vazkii.botania.api.recipe.PureDaisyRecipe;
 import vazkii.botania.client.fx.SparkleParticleData;
 import vazkii.botania.client.fx.WispParticleData;
 import vazkii.botania.xplat.BotaniaConfig;
-
-import com.astro.core.common.data.recipe.AstroRecipeTypes;
 
 import java.util.Arrays;
 
@@ -30,13 +28,13 @@ public class CorruptDaisyBlockEntity extends SpecialFlowerBlockEntity {
 
     private static final BlockPos[] POSITIONS = {
             new BlockPos(-1, 0, -1),
-            new BlockPos(-1, 0,  0),
-            new BlockPos(-1, 0,  1),
-            new BlockPos( 0, 0,  1),
-            new BlockPos( 1, 0,  1),
-            new BlockPos( 1, 0,  0),
-            new BlockPos( 1, 0, -1),
-            new BlockPos( 0, 0, -1),
+            new BlockPos(-1, 0, 0),
+            new BlockPos(-1, 0, 1),
+            new BlockPos(0, 0, 1),
+            new BlockPos(1, 0, 1),
+            new BlockPos(1, 0, 0),
+            new BlockPos(1, 0, -1),
+            new BlockPos(0, 0, -1),
     };
 
     private int positionAt = 0;
@@ -119,8 +117,7 @@ public class CorruptDaisyBlockEntity extends SpecialFlowerBlockEntity {
         BlockState state = world.getBlockState(coords);
         for (Recipe<?> recipe : world.getRecipeManager()
                 .getAllRecipesFor(AstroRecipeTypes.CORRUPT_DAISY_TYPE.get())) {
-            if (recipe instanceof PureDaisyRecipe daisyRecipe
-                    && daisyRecipe.matches(world, coords, this, state)) {
+            if (recipe instanceof PureDaisyRecipe daisyRecipe && daisyRecipe.matches(world, coords, this, state)) {
                 return daisyRecipe;
             }
         }

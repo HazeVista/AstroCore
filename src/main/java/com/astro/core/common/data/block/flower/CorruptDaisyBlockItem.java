@@ -7,7 +7,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import org.jetbrains.annotations.Nullable;
-
 import vazkii.botania.common.item.block.SpecialFlowerBlockItem;
 
 import java.util.List;
@@ -26,7 +25,6 @@ public class CorruptDaisyBlockItem extends SpecialFlowerBlockItem {
         tooltip.add(
                 Component.translatable("item.astrogreg.corrupt_daisy.tooltip")
                         .withStyle(ChatFormatting.ITALIC)
-                        .withStyle(ChatFormatting.GRAY)
-        );
+                        .withStyle(ChatFormatting.GRAY));
     }
 }

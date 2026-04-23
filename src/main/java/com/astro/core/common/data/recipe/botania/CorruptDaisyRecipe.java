@@ -1,6 +1,5 @@
 package com.astro.core.common.data.recipe.botania;
 
-import com.google.gson.JsonObject;
 import net.minecraft.commands.CommandFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -15,24 +14,23 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import com.astro.core.AstroCore;
+import com.astro.core.common.data.recipe.AstroRecipeTypes;
+import com.google.gson.JsonObject;
 import org.jetbrains.annotations.NotNull;
-
 import vazkii.botania.api.block_entity.SpecialFlowerBlockEntity;
 import vazkii.botania.api.recipe.PureDaisyRecipe;
 import vazkii.botania.api.recipe.StateIngredient;
 import vazkii.botania.common.crafting.StateIngredientHelper;
 
-import com.astro.core.AstroCore;
-import com.astro.core.common.data.recipe.AstroRecipeTypes;
-
 @SuppressWarnings("all")
 public class CorruptDaisyRecipe implements PureDaisyRecipe {
 
-    public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
-            DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AstroCore.MOD_ID);
+    public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister
+            .create(ForgeRegistries.RECIPE_SERIALIZERS, AstroCore.MOD_ID);
 
-    public static final RegistryObject<RecipeSerializer<CorruptDaisyRecipe>> SERIALIZER =
-            SERIALIZERS.register("corrupt_daisy", Serializer::new);
+    public static final RegistryObject<RecipeSerializer<CorruptDaisyRecipe>> SERIALIZER = SERIALIZERS
+            .register("corrupt_daisy", Serializer::new);
 
     private final ResourceLocation id;
     private final StateIngredient input;
@@ -64,11 +62,15 @@ public class CorruptDaisyRecipe implements PureDaisyRecipe {
 
     @Override
     @NotNull
-    public StateIngredient getInput() { return input; }
+    public StateIngredient getInput() {
+        return input;
+    }
 
     @Override
     @NotNull
-    public BlockState getOutputState() { return outputState; }
+    public BlockState getOutputState() {
+        return outputState;
+    }
 
     @Override
     @NotNull
@@ -77,15 +79,21 @@ public class CorruptDaisyRecipe implements PureDaisyRecipe {
     }
 
     @Override
-    public int getTime() { return time; }
+    public int getTime() {
+        return time;
+    }
 
     @Override
     @NotNull
-    public ResourceLocation getId() { return id; }
+    public ResourceLocation getId() {
+        return id;
+    }
 
     @Override
     @NotNull
-    public RecipeSerializer<?> getSerializer() { return SERIALIZER.get(); }
+    public RecipeSerializer<?> getSerializer() {
+        return SERIALIZER.get();
+    }
 
     @Override
     @NotNull

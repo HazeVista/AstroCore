@@ -1,6 +1,5 @@
 package com.astro.core;
 
-import com.astro.core.common.data.recipe.botania.CorruptDaisyRecipes;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -9,6 +8,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 
 import com.astro.core.common.data.materials.AstroElements;
 import com.astro.core.common.data.recipe.AstroRecipes;
+import com.astro.core.common.data.recipe.botania.CorruptDaisyRecipes;
 import com.astro.core.common.data.recipe.generated.AstroCrateRecipes;
 import com.astro.core.common.data.recipe.generated.AstroDrumRecipes;
 import com.astro.core.common.data.recipe.generated.AstroGeneratorRecipeHandler;

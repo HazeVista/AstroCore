@@ -1,7 +1,5 @@
 package com.astro.core;
 
-import com.astro.core.common.data.block.flower.AstroFlowerBlocks;
-import com.astro.core.common.data.recipe.botania.CorruptDaisyRecipe;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -31,10 +29,12 @@ import com.astro.core.client.AstroSoundEntries;
 import com.astro.core.common.data.AstroBlocks;
 import com.astro.core.common.data.AstroEntities;
 import com.astro.core.common.data.AstroItems;
+import com.astro.core.common.data.block.flower.AstroFlowerBlocks;
 import com.astro.core.common.data.configs.AstroConfigs;
 import com.astro.core.common.data.machine.AstroRecipeConditions;
 import com.astro.core.common.data.materials.*;
 import com.astro.core.common.data.recipe.AstroRecipeTypes;
+import com.astro.core.common.data.recipe.botania.CorruptDaisyRecipe;
 import com.astro.core.common.data.worldgen.AstroBiomes;
 import com.astro.core.common.data.worldgen.AstroFeatures;
 import com.astro.core.common.data.worldgen.AstroWorldgen;

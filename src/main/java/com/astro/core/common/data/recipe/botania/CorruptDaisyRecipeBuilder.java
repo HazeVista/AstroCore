@@ -1,17 +1,15 @@
 package com.astro.core.common.data.recipe.botania;
 
-import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.state.BlockState;
 
+import com.google.gson.JsonObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import vazkii.botania.api.recipe.StateIngredient;
 import vazkii.botania.common.crafting.StateIngredientHelper;
-
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Consumer;
 
@@ -59,7 +57,9 @@ public class CorruptDaisyRecipeBuilder {
 
         @Override
         @NotNull
-        public ResourceLocation getId() { return id; }
+        public ResourceLocation getId() {
+            return id;
+        }
 
         @Override
         @NotNull
@@ -69,10 +69,14 @@ public class CorruptDaisyRecipeBuilder {
 
         @Override
         @Nullable
-        public JsonObject serializeAdvancement() { return null; }
+        public JsonObject serializeAdvancement() {
+            return null;
+        }
 
         @Override
         @Nullable
-        public ResourceLocation getAdvancementId() { return null; }
+        public ResourceLocation getAdvancementId() {
+            return null;
+        }
     }
 }

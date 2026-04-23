@@ -1,14 +1,12 @@
 package com.astro.core.common.data.recipe.botania;
 
-import com.gregtechceu.gtceu.common.data.GTBlocks;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
-
 import net.minecraftforge.common.Tags;
-import vazkii.botania.common.crafting.StateIngredientHelper;
 
 import com.astro.core.AstroCore;
+import vazkii.botania.common.crafting.StateIngredientHelper;
 
 import java.util.function.Consumer;
 
@@ -16,7 +14,6 @@ import java.util.function.Consumer;
 public class CorruptDaisyRecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {
-
         conversion(provider, "stone_to_netherrack",
                 StateIngredientHelper.of(Tags.Blocks.COBBLESTONE),
                 Blocks.NETHERRACK.defaultBlockState());

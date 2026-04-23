@@ -1,24 +1,21 @@
 package com.astro.core.client.integration.emi;
 
-import dev.emi.emi.api.EmiEntrypoint;
-import dev.emi.emi.api.EmiPlugin;
-import dev.emi.emi.api.EmiRegistry;
-import dev.emi.emi.api.recipe.EmiRecipeCategory;
-import dev.emi.emi.api.recipe.EmiRecipe;
-import dev.emi.emi.api.stack.EmiIngredient;
-import dev.emi.emi.api.stack.EmiStack;
-import dev.emi.emi.api.widget.WidgetHolder;
-
 import net.minecraft.resources.ResourceLocation;
-
-import vazkii.botania.api.recipe.PureDaisyRecipe;
-import vazkii.botania.client.integration.emi.BlendTextureWidget;
 
 import com.astro.core.AstroCore;
 import com.astro.core.common.data.block.flower.AstroFlowerBlocks;
 import com.astro.core.common.data.recipe.AstroRecipeTypes;
-
+import dev.emi.emi.api.EmiEntrypoint;
+import dev.emi.emi.api.EmiPlugin;
+import dev.emi.emi.api.EmiRegistry;
+import dev.emi.emi.api.recipe.EmiRecipe;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.WidgetHolder;
 import org.jetbrains.annotations.Nullable;
+import vazkii.botania.api.recipe.PureDaisyRecipe;
+import vazkii.botania.client.integration.emi.BlendTextureWidget;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,8 +24,8 @@ import java.util.stream.Collectors;
 @SuppressWarnings("all")
 public class AstroEmiPlugin implements EmiPlugin {
 
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation("botania", "textures/gui/pure_daisy_overlay.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("botania",
+            "textures/gui/pure_daisy_overlay.png");
 
     public static final EmiRecipeCategory CORRUPT_DAISY = new EmiRecipeCategory(
             new ResourceLocation(AstroCore.MOD_ID, "corrupt_daisy"),
