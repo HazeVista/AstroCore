@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 5,
+    "targets": [
+      {
+        "state": {
+          "Name": "gtceu:asteroid_stone_apatite_ore"
+        },
+        "target": {
+          "block": "astrogreg:asteroid_stone",
+          "predicate_type": "minecraft:block_match"
+        }
+      },
+      {
+        "state": {
+          "Name": "gtceu:hard_asteroid_stone_apatite_ore"
+        },
+        "target": {
+          "block": "astrogreg:hard_asteroid_stone",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ]
+  }
+}

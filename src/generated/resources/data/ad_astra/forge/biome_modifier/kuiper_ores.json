@@ -19,6 +19,7 @@
     "ad_astra:kuiper_sapphire_ore",
     "ad_astra:kuiper_gold_ore",
     "ad_astra:kuiper_diamond_ore",
+    "ad_astra:kuiper_apatite_ore",
     "ad_astra:kuiper_emerald_ore"
   ],
   "step": "underground_ores"
