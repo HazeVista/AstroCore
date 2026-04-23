@@ -29,6 +29,9 @@ public class MixinGTRecipeTypes {
     @Shadow
     @Final
     public static GTRecipeType MIXER_RECIPES;
+    @Final
+    @Shadow
+    public static GTRecipeType GAS_COLLECTOR_RECIPES;
 
     @Inject(method = "init", at = @At(value = "TAIL"), remap = false)
     private static void astro$init(CallbackInfo ci) {
@@ -40,5 +43,7 @@ public class MixinGTRecipeTypes {
         MACERATOR_RECIPES.setMaxIOSize(1, 6, 0, 0);
 
         MIXER_RECIPES.setSteamProgressBar(AstroGUITextures.PROGRESS_BAR_STEAM_MIXER, FillDirection.LEFT_TO_RIGHT);
+
+        GAS_COLLECTOR_RECIPES.setMaxIOSize(1, 1, 0, 1);
     }
 }
