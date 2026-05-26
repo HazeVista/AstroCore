@@ -45,6 +45,8 @@ public class AstroRecipeTypes {
     public static GTRecipeType OBSERVATORY_RECIPES;
     public static GTRecipeType CORRUPT_DAISY_RECIPES;
     public static GTRecipeType LARGE_ROCK_CRUSHER_RECIPES;
+    public static GTRecipeType BEVERAGE_PROCESSOR;
+    public static GTRecipeType CULINARY_FABRICATOR;
 
     public static final String OBSERVATORY_SCAN_ITEM_KEY = "observatory_scan_item";
     public static final String OBSERVATORY_CWUT_KEY = "observatory_cwut";
@@ -194,6 +196,19 @@ public class AstroRecipeTypes {
                         return new ItemStack(Items.PAPER);
                     }
                 });
+
+        CULINARY_FABRICATOR = register("culinary_fabricator", ELECTRIC)
+                .setEUIO(IO.IN)
+                .setMaxIOSize(6, 1, 0, 0)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+                .setSound(AstroSoundEntries.CULINARY_FABRICATOR);
+
+        BEVERAGE_PROCESSOR = register("beverage_processor", ELECTRIC)
+                .setEUIO(IO.IN)
+                .setMaxIOSize(6, 1, 3, 0)
+                .setProgressBar(AstroGUITextures.PROGRESS_BAR_BEVERAGE, DOWN_TO_UP)
+                .setSound(AstroSoundEntries.BEVERAGE_PROCESSOR);
+
     }
 
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER = DeferredRegister

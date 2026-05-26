@@ -27,12 +27,14 @@ public class AstroEmiPlugin implements EmiPlugin {
     private static final ResourceLocation TEXTURE = new ResourceLocation("botania",
             "textures/gui/pure_daisy_overlay.png");
 
-    public static final EmiRecipeCategory CORRUPT_DAISY = new EmiRecipeCategory(
-            new ResourceLocation(AstroCore.MOD_ID, "corrupt_daisy"),
-            EmiStack.of(AstroFlowerBlocks.CORRUPT_DAISY_ITEM.get()));
+    public static EmiRecipeCategory CORRUPT_DAISY;
 
     @Override
     public void register(EmiRegistry registry) {
+        CORRUPT_DAISY = new EmiRecipeCategory(
+                new ResourceLocation(AstroCore.MOD_ID, "corrupt_daisy"),
+                EmiStack.of(AstroFlowerBlocks.CORRUPT_DAISY_ITEM.get()));
+
         registry.addCategory(CORRUPT_DAISY);
         registry.addWorkstation(CORRUPT_DAISY, EmiStack.of(AstroFlowerBlocks.CORRUPT_DAISY_BLOCK.get()));
 

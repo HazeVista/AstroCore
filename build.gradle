@@ -243,8 +243,8 @@ dependencies {
     modImplementation("curios:Curios:forge-${curios_version}+${minecraft_version}")
 
     //Waystones
-    modImplementation("curse.maven:balm-531761:7420617")
     modImplementation("curse.maven:waystones-245755:7682270")
+    modImplementation("curse.maven:balm-531761:7420617")
 
     //Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

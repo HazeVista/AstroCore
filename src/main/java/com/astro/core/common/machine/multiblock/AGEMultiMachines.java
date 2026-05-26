@@ -55,8 +55,7 @@ import static com.astro.core.common.registry.AstroRegistry.REGISTRATE;
 import static com.gregtechceu.gtceu.api.machine.multiblock.PartAbility.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
 import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
-import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
-import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_STRESS_PROOF;
+import static com.gregtechceu.gtceu.common.data.GCYMBlocks.*;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
 import static com.gregtechceu.gtceu.common.data.GTMachines.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.*;
@@ -1695,6 +1694,27 @@ public class AGEMultiMachines {
                     .build())
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_sturdy_hsse"),
                     GTCEu.id("block/multiblock/cleanroom"))
+            .register();
+
+    public static final MultiblockMachineDefinition LARGE_PROVISIONING_COMPLEX = REGISTRATE
+            .multiblock("large_provisioning_complex", WorkableElectricMultiblockMachine::new)
+            .rotationState(RotationState.ALL)
+            .langValue("Large Provisioning Unit")
+            .recipeTypes(CULINARY_FABRICATOR, BEVERAGE_PROCESSOR)
+            .recipeModifiers(BATCH_MODE, PARALLEL_HATCH)
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
+                    Component.translatable("gtceu.culinary_fabricator"), Component.translatable("gtceu.beverage_processor")))
+            .appearanceBlock(CASING_CORROSION_PROOF)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle(" XXXXX ", " XGGGX ", " XGGGX ", " XXXXX ", "       ")
+                    .aisle("XXXXXXX", "XG   GX", "XG   GX", " X X X ", "  XXX  ")
+                    .aisle("XXXXXXX", "XP P PX", "XP P PX", " XXPXX ", "  XXX  ")
+                    .aisle("XXXXXXX", "XG   GX", "XG   GX", " X X X ", "  XXX  ")
+                    .aisle(" XX@XX ", " XGGGX ", " XGGGX ", " XXXXX ", "       ")
+                    .build())
+            .workableCasingModel(GTCEu.id("block/casings/gcym/corrosion_proof_casing"),
+                    GTCEu.id("block/multiblock/multiblock_workable"))
             .register();
 
     public static final MultiblockMachineDefinition FLUID_DRILLING_RIG_IV = REGISTRATE
