@@ -208,7 +208,6 @@ public class AstroRecipeTypes {
                 .setMaxIOSize(6, 1, 3, 0)
                 .setProgressBar(AstroGUITextures.PROGRESS_BAR_BEVERAGE, DOWN_TO_UP)
                 .setSound(AstroSoundEntries.BEVERAGE_PROCESSOR);
-
     }
 
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER = DeferredRegister
