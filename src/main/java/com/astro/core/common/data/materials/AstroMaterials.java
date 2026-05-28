@@ -39,6 +39,7 @@ public class AstroMaterials {
     public static Material UNKNOWN;
     public static Material NETHERITE;
     public static Material ANCIENT_DEBRIS;
+    public static Material VARIABLE;
     public static Material GAIA_ICHOR;
     public static Material ANDESITE_ALLOY;
     public static Material DESH;
@@ -107,7 +108,6 @@ public class AstroMaterials {
     public static Material LIQUID_MOON_AIR;
     public static Material LIQUID_VENUS_AIR;
     public static Material LIQUID_MERCURY_AIR;
-    public static Material NUT_MIXTURE;
 
     public static void register() {
         // Misc
@@ -126,6 +126,13 @@ public class AstroMaterials {
                 .flags(NO_ORE_SMELTING, NO_SMELTING)
                 .iconSet(ROUGH)
                 .ore()
+                .buildAndRegister();
+
+        VARIABLE = new Material.Builder(
+                AstroCore.id("variable"))
+                .langValue("Variable")
+                .element(AstroElements.NV)
+                .color(0x9e9e9e)
                 .buildAndRegister();
 
         GAIA_ICHOR = new Material.Builder(AstroCore.id(
@@ -338,7 +345,8 @@ public class AstroMaterials {
                 .liquid(293)
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0xc2d6ff).secondaryColor(0x86bacf)
-                .buildAndRegister().setFormula("SiO2⋅§on§rH2O", true);
+                .components(CertusQuartz, 1, VARIABLE, 1, Hydrogen, 2, Oxygen, 1)
+                .buildAndRegister();
 
         // GregTech
         POLYAMIDE_IMIDE = new Material.Builder(
