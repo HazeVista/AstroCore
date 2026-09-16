@@ -496,7 +496,7 @@ public class AGEMultiMachines {
                     .aisle("FF FF", "FXXXF", "XXXXX", "XX@XX", "XXXXX", " XXX ")
                     .where("@", controller(blocks(definition.get())))
                     .where("K", abilities(AstroPartAbility.KINETIC_INPUT).setExactLimit(1)
-                            .or(MACHINE_CASING_KINETIC.get()))
+                          .or(blocks(MACHINE_CASING_KINETIC.get())))
                     .where("X", blocks(MACHINE_CASING_KINETIC.get()).setMinGlobalLimited(50)
                             .or(abilities(IMPORT_FLUIDS).setMaxGlobalLimited(2).setPreviewCount(1))
                             .or(abilities(IMPORT_ITEMS).setMaxGlobalLimited(2).setPreviewCount(1))
@@ -1705,8 +1705,7 @@ public class AGEMultiMachines {
             .recipeModifiers(BATCH_MODE, PARALLEL_HATCH)
             .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
             .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
-                    Component.translatable("gtceu.culinary_fabricator"),
-                    Component.translatable("gtceu.beverage_processor")))
+                    Component.translatable("gtceu.culinary_fabricator"), Component.translatable("gtceu.beverage_processor")))
             .appearanceBlock(CASING_CORROSION_PROOF)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle(" XXXXX ", " XTTTX ", " XTTTX ", " XXXXX ", "       ")

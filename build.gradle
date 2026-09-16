@@ -70,6 +70,18 @@ repositories {
 		url = "https://maven.terraformersmc.com/"
 	}
     maven {
+        url = "https://maven.shedaniel.me/"
+        content {
+            includeGroup "me.shedaniel.cloth"
+        }
+    }
+    maven {
+        url = "https://modmaven.dev/"
+        content {
+            includeGroup "appeng"
+        }
+    }
+    maven {
         url = "https://thedarkcolour.github.io/KotlinForForge/"
     }
     maven {
@@ -196,7 +208,7 @@ dependencies {
     modImplementation("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${rconfig_version}")
     modImplementation("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${rlib_version}")
     modImplementation("earth.terrarium.botarium:botarium-forge-${minecraft_version}:${botarium_version}")
-    modImplementation("com.drd.ad_extendra:ad_extendra-forge-${minecraft_version}:${ad_extendra_version}")
+    modImplementation("curse.maven:dandi2k8s-ad-extendra-1144277:5921189")
 
     // JEI, EMI, Jade
     modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
@@ -212,7 +224,7 @@ dependencies {
     modImplementation("com.lowdragmc.ldlib:ldlib-forge-${minecraft_version}:${ldlib_version}") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modImplementation("dev.toma.configuration:configuration-forge-${minecraft_version}:${configuration_version}")
-    modImplementation("com.rubenverg.gtmoldraw:gtmoldraw-${gtmoldraw_version}")
+    modImplementation("curse.maven:gregtech-molecule-drawings-1348330:7809039")
     compileOnly("curse.maven:programmed-circuit-card-1150540:7733175")
 
     //KubeJS
@@ -225,22 +237,22 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     //AE2 and dependencies
-    modImplementation("org.appliedenergistics:appliedenergistics2-forge-${ae_version}")
-    modImplementation("org.appliedenergistics:guideme-${guide_version}")
+    modImplementation("appeng:appliedenergistics2-forge:${ae_version}")
+    modImplementation("org.appliedenergistics:guideme:${guide_version}")
     compileOnly("curse.maven:ex-pattern-provider-892005:7986603")
     compileOnly("curse.maven:glodium-957920:5226922")
 
     //Powah and dependencies
-    modImplementation("me.shedaniel:cloth-config-${cloth_version}-forge")
-    modImplementation("owmii.powah:Powah-${powah_version}")
+    modImplementation("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
+    modImplementation("curse.maven:powah-rearchitected-633483:6828054")
 
     //Flux Networks
     modImplementation("curse.maven:flux-networks-248020:5234697")
 
     //Botania, addons and dependencies
     modImplementation("vazkii.botania:Botania:${minecraft_version}-${botania_version}-FORGE")
-    modImplementation("patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE")
-    modImplementation("curios:Curios:forge-${curios_version}+${minecraft_version}")
+    modImplementation("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE")
+    modImplementation("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
 
     //Waystones
     modImplementation("curse.maven:waystones-245755:7682270")
