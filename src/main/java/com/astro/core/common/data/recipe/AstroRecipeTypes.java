@@ -32,6 +32,8 @@ import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection
 public class AstroRecipeTypes {
 
     public static GTRecipeType COMPOSTER_RECIPES;
+    public static GTRecipeType INDUSTRIAL_COMPOSTER_RECIPES;
+    public static GTRecipeType CHARCOAL_KILN_RECIPES;
     public static GTRecipeType AETHER_ENGINE_RECIPES;
     public static GTRecipeType MANA_BOILER_RECIPES;
     public static GTRecipeType DEIONIZATION_RECIPES;
@@ -47,6 +49,8 @@ public class AstroRecipeTypes {
     public static GTRecipeType LARGE_ROCK_CRUSHER_RECIPES;
     public static GTRecipeType BEVERAGE_PROCESSOR;
     public static GTRecipeType CULINARY_FABRICATOR;
+    public static GTRecipeType PRIMITIVE_FERMENTATION_VAT;
+    public static GTRecipeType FERMENTATION_VAT;
 
     public static final String OBSERVATORY_SCAN_ITEM_KEY = "observatory_scan_item";
     public static final String OBSERVATORY_CWUT_KEY = "observatory_cwut";
@@ -62,6 +66,14 @@ public class AstroRecipeTypes {
     public static void init() {
         COMPOSTER_RECIPES = register("composter", MULTIBLOCK)
                 .setMaxIOSize(1, 1, 0, 0)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+
+        INDUSTRIAL_COMPOSTER_RECIPES = register("industrial_composter", MULTIBLOCK)
+                .setMaxIOSize(1, 1, 0, 0)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+
+        CHARCOAL_KILN_RECIPES = register("charcoal_kiln", MULTIBLOCK)
+                .setMaxIOSize(4, 4, 0, 0)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
 
         LARGE_ROCK_CRUSHER_RECIPES = register("large_rock_crusher", MULTIBLOCK)
@@ -208,6 +220,18 @@ public class AstroRecipeTypes {
                 .setMaxIOSize(6, 1, 3, 0)
                 .setProgressBar(AstroGUITextures.PROGRESS_BAR_BEVERAGE, DOWN_TO_UP)
                 .setSound(AstroSoundEntries.BEVERAGE_PROCESSOR);
+
+        PRIMITIVE_FERMENTATION_VAT = register("primitive_fermentation_vat", MULTIBLOCK)
+                .setEUIO(IO.IN)
+                .setMaxIOSize(1, 1, 1, 1)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, LEFT_TO_RIGHT)
+                .setSound(GTSoundEntries.BOILER);
+
+        FERMENTATION_VAT = register("fermentation_vat", MULTIBLOCK)
+                .setEUIO(IO.IN)
+                .setMaxIOSize(1, 1, 1, 1)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, LEFT_TO_RIGHT)
+                .setSound(GTSoundEntries.BOILER);
     }
 
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER = DeferredRegister

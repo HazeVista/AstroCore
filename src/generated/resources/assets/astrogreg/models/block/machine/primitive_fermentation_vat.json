@@ -1,0 +1,108 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "gtceu:machine",
+  "machine": "astrogreg:primitive_fermentation_vat",
+  "texture_overrides": {
+    "bottom": "gtceu:block/casings/pump_deck/bottom",
+    "side": "gtceu:block/casings/pump_deck/side",
+    "top": "gtceu:block/casings/pump_deck/top"
+  },
+  "variants": {
+    "is_formed=false,recipe_logic_status=idle": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    },
+    "is_formed=false,recipe_logic_status=suspend": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    },
+    "is_formed=false,recipe_logic_status=waiting": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    },
+    "is_formed=false,recipe_logic_status=working": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=idle": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=suspend": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=waiting": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=working": {
+      "model": {
+        "parent": "gtceu:block/machine/template/sided/sided",
+        "textures": {
+          "bottom": "gtceu:block/casings/pump_deck/bottom",
+          "overlay_front": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active",
+          "overlay_front_emissive": "astrogreg:block/multiblock/fermentation_vat/overlay_front_active_emissive",
+          "side": "gtceu:block/casings/pump_deck/side",
+          "top": "gtceu:block/casings/pump_deck/top"
+        }
+      }
+    }
+  }
+}

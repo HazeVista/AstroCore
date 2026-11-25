@@ -40,6 +40,7 @@ public class AstroMaterials {
     public static Material NETHERITE;
     public static Material ANCIENT_DEBRIS;
     public static Material VARIABLE;
+    public static Material FRUIT_MASH;
     public static Material GAIA_ICHOR;
     public static Material ANDESITE_ALLOY;
     public static Material DESH;
@@ -133,6 +134,14 @@ public class AstroMaterials {
                 .langValue("Variable")
                 .element(AstroElements.NV)
                 .color(0x9e9e9e)
+                .buildAndRegister();
+
+        FRUIT_MASH = new Material.Builder(
+                AstroCore.id("fruit"))
+                .color(0xdde386)
+                .secondaryColor(0xb3e386)
+                .dust()
+                .iconSet(NETHERSTAR)
                 .buildAndRegister();
 
         GAIA_ICHOR = new Material.Builder(AstroCore.id(

@@ -1,5 +1,7 @@
 package com.astro.core.common.machine.multiblock;
 
+import com.astro.core.common.machine.multiblock.primitive.CharcoalKilnMachine;
+import com.astro.core.common.machine.multiblock.primitive.PrimitiveFermentationVatMachine;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -151,6 +153,60 @@ public class AGEMultiMachines {
             })
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_coke_bricks"),
                     GTCEu.id("block/multiblock/coke_oven"))
+            .register();
+
+    public static final MultiblockMachineDefinition CHARCOAL_KILN = REGISTRATE
+            .multiblock("charcoal_kiln", CharcoalKilnMachine::new)
+            .recipeType(AstroRecipeTypes.CHARCOAL_KILN_RECIPES)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .allowFlip(false)
+            .appearanceBlock(CASING_PRIMITIVE_BRICKS)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("XXX", "XXX", " X ")
+                    .aisle("XXX", "X X", "X X")
+                    .aisle("XXX", "X@X", " X ")
+                    .where("@", controller(blocks(definition.get())))
+                    .where("X", blocks(CASING_PRIMITIVE_BRICKS.get()).setMinGlobalLimited(10)
+                            .or(abilities(IMPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(abilities(EXPORT_ITEMS).setMaxGlobalLimited(2)))
+                    .build())
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_primitive_bricks"),
+                    AstroCore.id("block/multiblock/charcoal_kiln"))
+            .register();
+
+    public static final MultiblockMachineDefinition PRIMITIVE_FERMENTATION_VAT = REGISTRATE
+            .multiblock("primitive_fermentation_vat", PrimitiveFermentationVatMachine::new)
+            .recipeType(AstroRecipeTypes.PRIMITIVE_FERMENTATION_VAT)
+            .rotationState(RotationState.ALL)
+            .appearanceBlock(CASING_PUMP_DECK)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("PPP", "WWW", "WWW", " F ")
+                    .aisle("PPP", "W W", "W W", "FXF")
+                    .aisle("P@P", "WWW", "WWW", " F ")
+                    .where(' ', any())
+                    .where('@', controller(blocks(definition.get())))
+                    .where('P', blocks(CASING_PUMP_DECK.get()).setMinGlobalLimited(1)
+                            .or(abilities(IMPORT_FLUIDS).setMaxGlobalLimited(2))
+                            .or(abilities(IMPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(abilities(EXPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(abilities(EXPORT_FLUIDS).setMaxGlobalLimited(2)))
+                    .where('W', blocks(CASING_WOOD_WALL.get()))
+                    .where('F', frames(GTMaterials.TreatedWood))
+                    .where('X', blocks(TREATED_WOOD_PLANK.get()))
+                    .build())
+            .model(createSidedWorkableCasingMachineModel(GTCEu.id("block/casings/pump_deck"),
+                    AstroCore.id("block/multiblock/fermentation_vat"))
+//                    .andThen(builder -> {
+//                        builder.replaceForAllStates((state, models) -> {
+//                            for (int i = 0; i < models.length; i++) {
+//                                models[i] = ConfiguredModel.builder()
+//                                        .modelFile(models[i].model).uvLock(true)
+//                                        .buildLast();
+//                            }
+//                            return models;
+//                        });
+//                    })
+            )
             .register();
 
     // Steam Machines
@@ -679,6 +735,45 @@ public class AGEMultiMachines {
             .register();
 
     // Industrial Processing Machines
+    public static final MultiblockMachineDefinition INDUSTRIAL_COMPOSTER = REGISTRATE
+            .multiblock("industrial_large_composter", WorkableElectricMultiblockMachine::new)
+            .rotationState(RotationState.ALL)
+            .recipeModifiers(BATCH_MODE, OC_NON_PERFECT_SUBTICK)
+            .recipeType(INDUSTRIAL_COMPOSTER_RECIPES)
+            .appearanceBlock(CASING_PTFE_INERT)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("FXF", "XXX", "FXF")
+                    .aisle("XXX", "XPX", "XXX")
+                    .aisle("FXF", "X@X", "FXF")
+                    .where('@', controller(blocks(definition.get())))
+                    .where('X', blocks(CASING_PTFE_INERT.get()).setMinGlobalLimited(6)
+                            .or(autoAbilities(false, false, true)))
+                    .where('P', blocks(CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('F', frames(GTMaterials.Polytetrafluoroethylene))
+                    .build())
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_inert_ptfe"),
+                    AstroCore.id("block/multiblock/composter"))
+            .register();
+
+    public static final MultiblockMachineDefinition INDUSTRIAL_FERMENTATION_VAT = REGISTRATE
+            .multiblock("industrial_fermentation_vat", WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_PTFE_INERT)
+            .recipeType(FERMENTATION_VAT)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("FFF", "XXX", "XXX", " P ")
+                    .aisle("FFF", "XGX", "XGX", "PXP")
+                    .aisle("FFF", "X@X", "XXX", " P ")
+                    .where('@', controller(blocks(definition.get())))
+                    .where('G', blocks(CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('X', blocks(CASING_PTFE_INERT.get()).setMinGlobalLimited(6)
+                            .or(autoAbilities(false, false, true)))
+                    .where('P', frames(GTMaterials.Polytetrafluoroethylene))
+                    .where('F', blocks(FIREBOX_TITANIUM.get()))
+                    .build())
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_inert_ptfe"),
+                    AstroCore.id("block/multiblock/fermentation_vat"))
+            .register();
+
     public static final MultiblockMachineDefinition INDUSTRIAL_AUTOCLAVE = REGISTRATE
             .multiblock("industrial_autoclave", ProcessingCoreMachine::new)
             .langValue("Industrial Autoclave")

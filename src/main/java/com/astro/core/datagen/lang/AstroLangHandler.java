@@ -13,6 +13,7 @@ public class AstroLangHandler {
         provider.add("gtceu.observatory", "Observatory");
         provider.add("gtceu.composter", "Composting");
         provider.add("gtceu.large_rock_crusher", "Large Rock Crusher");
+        provider.add("gtceu.industrial_composter", "Industrial Composting");
 
         // multiblock tooltips
         provider.add("astrogreg.machine.recipe_progress.tooltip", "Progress: %1$ss / %2$ss (%3$s%%)");
@@ -154,6 +155,8 @@ public class AstroLangHandler {
 
         provider.add("astrogreg.machine.large_primitive_composter.tooltip",
                 "§o§7A more efficient way to get bone meal.");
+        provider.add("astrogreg.machine.large_industrial_composter.tooltip",
+                "§o§7Here for all of your large-scale composting needs.");
 
         // custom hatch tooltips
         provider.add("astrogreg.machine.muffler_hatch.efficiency_bonus",
