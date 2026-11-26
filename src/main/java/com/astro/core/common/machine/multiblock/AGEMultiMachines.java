@@ -1,7 +1,5 @@
 package com.astro.core.common.machine.multiblock;
 
-import com.astro.core.common.machine.multiblock.primitive.CharcoalKilnMachine;
-import com.astro.core.common.machine.multiblock.primitive.PrimitiveFermentationVatMachine;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -38,8 +36,10 @@ import com.astro.core.common.machine.multiblock.electric.planetary_research.Indu
 import com.astro.core.common.machine.multiblock.electric.planetary_research.IndustrialObservatoryMachine;
 import com.astro.core.common.machine.multiblock.kinetic.*;
 import com.astro.core.common.machine.multiblock.kinetic.KineticMinerMachine;
+import com.astro.core.common.machine.multiblock.primitive.CharcoalKilnMachine;
 import com.astro.core.common.machine.multiblock.primitive.CokeOvenMachine;
 import com.astro.core.common.machine.multiblock.primitive.PrimitiveComposterMachine;
+import com.astro.core.common.machine.multiblock.primitive.PrimitiveFermentationVatMachine;
 import com.astro.core.common.machine.multiblock.steam.SteamBlastFurnace;
 import com.astro.core.common.machine.multiblock.steam.SteamGrinder;
 import com.astro.core.common.machine.multiblock.steam.SteamMinerMachine;
@@ -196,16 +196,16 @@ public class AGEMultiMachines {
                     .build())
             .model(createSidedWorkableCasingMachineModel(GTCEu.id("block/casings/pump_deck"),
                     AstroCore.id("block/multiblock/fermentation_vat"))
-//                    .andThen(builder -> {
-//                        builder.replaceForAllStates((state, models) -> {
-//                            for (int i = 0; i < models.length; i++) {
-//                                models[i] = ConfiguredModel.builder()
-//                                        .modelFile(models[i].model).uvLock(true)
-//                                        .buildLast();
-//                            }
-//                            return models;
-//                        });
-//                    })
+            // .andThen(builder -> {
+            // builder.replaceForAllStates((state, models) -> {
+            // for (int i = 0; i < models.length; i++) {
+            // models[i] = ConfiguredModel.builder()
+            // .modelFile(models[i].model).uvLock(true)
+            // .buildLast();
+            // }
+            // return models;
+            // });
+            // })
             )
             .register();
 
@@ -552,7 +552,7 @@ public class AGEMultiMachines {
                     .aisle("FF FF", "FXXXF", "XXXXX", "XX@XX", "XXXXX", " XXX ")
                     .where("@", controller(blocks(definition.get())))
                     .where("K", abilities(AstroPartAbility.KINETIC_INPUT).setExactLimit(1)
-                          .or(blocks(MACHINE_CASING_KINETIC.get())))
+                            .or(blocks(MACHINE_CASING_KINETIC.get())))
                     .where("X", blocks(MACHINE_CASING_KINETIC.get()).setMinGlobalLimited(50)
                             .or(abilities(IMPORT_FLUIDS).setMaxGlobalLimited(2).setPreviewCount(1))
                             .or(abilities(IMPORT_ITEMS).setMaxGlobalLimited(2).setPreviewCount(1))
@@ -1800,7 +1800,8 @@ public class AGEMultiMachines {
             .recipeModifiers(BATCH_MODE, PARALLEL_HATCH)
             .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
             .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
-                    Component.translatable("gtceu.culinary_fabricator"), Component.translatable("gtceu.beverage_processor")))
+                    Component.translatable("gtceu.culinary_fabricator"),
+                    Component.translatable("gtceu.beverage_processor")))
             .appearanceBlock(CASING_CORROSION_PROOF)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle(" XXXXX ", " XTTTX ", " XTTTX ", " XXXXX ", "       ")
